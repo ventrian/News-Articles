@@ -2,7 +2,9 @@
 
 ## Installation
 
-Install the module through Host -> Extensions
+Install the module through Host -> Extensions.
+
+Ready made install files are located in the /installs folder.
 
 ## Token Guide
 
@@ -206,148 +208,168 @@ Install the module through Host -> Extensions
 	
 ### Image.Item.Html
 
-•	[ARTICLEID]
-•	[DESCRIPTION]
-•	[FILENAME]
-•	[HEIGHT]
-•	[IMAGEID]
-•	[IMAGELINK]
-•	[ISITEMINDEX:XXX][/ISITEMINDEX:XXX] -- where XXX is the item position number, e.g. 1
-•	[ISNOTITEMINDEX:XXX][/ISNOTITEMINDEX:XXX] -- where XXX is the item position number, e.g. 2
-•	[ITEMINDEX]
-•	[SIZE]
-•	[SORTORDER]
-•	[TITLE]
-•	[WIDTH]
-•	[IMAGETHUMB:XXX:YYY] where XXX is the max width and YYY is the max height.
-Comment.Item.Html/Rss.Comment.Item.Html/Latest Comments
-•	[ANONYMOUSURL]
-•	[ARTICLEID]
-•	[ARTICLELINK]
-•	[AUTHOR]
-•	[AUTHOR:XXX] where XXX is the profile field name. e.g. [AUTHOR:FirstName]
-•	[AUTHORDISPLAYNAME]
-•	[AUTHOREMAIL]
-•	[AUTHORUSERNAME]
-•	[AUTHORFIRSTNAME]
-•	[AUTHORLASTNAME]
-•	[AUTHORFULLNAME]
-•	[AUTHORID]
-•	[COMMENTID]
-•	[COMMENT]
-•	[COMMENT:XX] where XXX is the maximum number of characters to show (will remove html)
-•	[CREATEDATE]
-•	[CREATEDATE:XXX] where XXX is the date format expression.
-•	[CREATETIME]
-•	[DELETE]
-•	[GRAVATAR]
-•	[GRAVATARURL]
-•	[HASANONYMOUSURL][/HASANONYMOUSURL]
-•	[IPADDRESS]
-•	[ISANONYMOUS][/ISANONYMOUS]
-•	[ISNOTANONYMOUS][/ISNOTANONYMOUS]
-•	[ISAUTHOR][/ISAUTHOR]
-•	[ISCOMMENT][/ISCOMMENT]
-•	[ISINROLE:XXX][/ISINROLE:XXX] (where XXX is the name of a role)
-•	[ISPINGBACK][/ISPINGBACK]
-•	[ISTRACKBACK][/ISTRACKBACK]
-•	[ITEMINDEX]
-•	[MODULEID]
-•	[PINGBACKURL]
-•	[RATING]
-•	[TRACKBACKBLOGNAME]
-•	[TRACKBACKEXCERPT]
-•	[TRACKBACKTITLE]
-•	[TRACKBACKURL]
-Rss.Item.Html (As well as the tokens for View.Item.Html)
-•	[DESCRIPTION]
-•	[ENCLOSURELENGTH]
-•	[ENCLOSURELINK]
-•	[ENCLOSURETYPE]
-•	[GUID]
-•	[HASENCLOSURE][/HASENCLOSURE]
-•	[TRACKBACKLINK]
+	[ARTICLEID]
+	[DESCRIPTION]
+	[FILENAME]
+	[HEIGHT]
+	[IMAGEID]
+	[IMAGELINK]
+	[ISITEMINDEX:XXX][/ISITEMINDEX:XXX] -- where XXX is the item position number, e.g. 1
+	[ISNOTITEMINDEX:XXX][/ISNOTITEMINDEX:XXX] -- where XXX is the item position number, e.g. 2
+	[ITEMINDEX]
+	[SIZE]
+	[SORTORDER]
+	[TITLE]
+	[WIDTH]
+	[IMAGETHUMB:XXX:YYY] where XXX is the max width and YYY is the max height.
+
+### Comment.Item.Html/Rss.Comment.Item.Html/Latest Comments
+
+	[ANONYMOUSURL]
+	[ARTICLEID]
+	[ARTICLELINK]
+	[AUTHOR]
+	[AUTHOR:XXX] where XXX is the profile field name. e.g. [AUTHOR:FirstName]
+	[AUTHORDISPLAYNAME]
+	[AUTHOREMAIL]
+	[AUTHORUSERNAME]
+	[AUTHORFIRSTNAME]
+	[AUTHORLASTNAME]
+	[AUTHORFULLNAME]
+	[AUTHORID]
+	[COMMENTID]
+	[COMMENT]
+	[COMMENT:XX] where XXX is the maximum number of characters to show (will remove html)
+	[CREATEDATE]
+	[CREATEDATE:XXX] where XXX is the date format expression.
+	[CREATETIME]
+	[DELETE]
+	[GRAVATAR]
+	[GRAVATARURL]
+	[HASANONYMOUSURL][/HASANONYMOUSURL]
+	[IPADDRESS]
+	[ISANONYMOUS][/ISANONYMOUS]
+	[ISNOTANONYMOUS][/ISNOTANONYMOUS]
+	[ISAUTHOR][/ISAUTHOR]
+	[ISCOMMENT][/ISCOMMENT]
+	[ISINROLE:XXX][/ISINROLE:XXX] (where XXX is the name of a role)
+	[ISPINGBACK][/ISPINGBACK]
+	[ISTRACKBACK][/ISTRACKBACK]
+	[ITEMINDEX]
+	[MODULEID]
+	[PINGBACKURL]
+	[RATING]
+	[TRACKBACKBLOGNAME]
+	[TRACKBACKEXCERPT]
+	[TRACKBACKTITLE]
+	[TRACKBACKURL]
+
+### Rss.Item.Html (As well as the tokens for View.Item.Html)
+
+	[DESCRIPTION]
+	[ENCLOSURELENGTH]
+	[ENCLOSURELINK]
+	[ENCLOSURETYPE]
+	[GUID]
+	[HASENCLOSURE][/HASENCLOSURE]
+	[TRACKBACKLINK]
+
 Rss.Header.Html/Rss.Footer.Html
-•	[PORTALNAME]
-•	[PORTALURL]
-Category.Html (shown at the top of the view category page)
-•	[ARTICLECOUNT]
-•	[CATEGORYLABEL]
-•	[CATEGORYID]
-•	[CHILDCATEGORIES] - loads the child categories 1 level deep (loads Category.Child.Html for each)
-•	[DESCRIPTION]
-•	[HASCHILDCATEGORIES][/HASCHILDCATEGORIES]
-•	[HASNOCHILDCATEGORIES][/HASNOCHILDCATEGORIES]
-•	[HASNOPARENT][/HASNOPARENT]
-•	[HASPARENT][/HASPARENT]
-•	[LINK]
-•	[NAME]
-•	[PARENTDESCRIPTION]
-•	[PARENTLINK]
-•	[PARENTNAME]
-•	[RSSLINK]
-•	[VIEWS]
-•	[CHILDCATEGORIES:XXX] where XXX is the number of levels deep.
-•	[DESCRIPTION:XXX] where XXX is the number of characters to display.
-•	[ISDEPTHABS:XXX][/ISDEPTHABS:XXX] where XXX is the number of levels deep from the root node.
-•	[ISNOTDEPTHABS:XXX][/ISNOTDEPTHABS:XXX] where XXX is the number of levels deep from the root node.
-•	[PARENTDESCRIPTION:XXX] where XXX is the number of characters to display.
-Category.Child.Html
-•	[ARTICLECOUNT]
-•	[CATEGORYID]
-•	[DEPTHABS] - The depth of the category from the root category.
-•	[DEPTHREL] - The depth of the category in relation to the current category.
-•	[DESCRIPTION]
-•	[LINK]
-•	[NAME]
-•	[RSSLINK]
-•	[ORDER]
-•	[VIEWS]
-•	[DESCRIPTION:XXX] where XXX is the number of characters to display.
-•	[IFORDER:XXX][/IFORDER:XXX] where XXX is the sort order number.
-•	[IFNOTORDER:XXX][/IFNOTORDER:XXX] where XXX is the sort order number.
-•	[ISDEPTHABS:XXX][/ISDEPTHABS:XXX] where XXX is the depth of the category from the root category.
-•	[ISDEPTHREL:XXX][/ISDEPTHREL:XXX] where XXX is the depth of the category relative to the current node.
-•	[ISNOTDEPTHABS:XXX][/ISNOTDEPTHABS:XXX] where XXX is the depth of the category from the root category.
-•	[ISNOTDEPTHREL:XXX][/ISNOTDEPTHREL:XXX] where XXX is the depth of the category relative to the current node.
-File.Item.Html
-•	[ARTICLEID]
-•	[FILEID]
-•	[FILENAME]
-•	[FILELINK]
-•	[SIZE]
-•	[SORTORDER]
-•	[TITLE]
-•	[ISEXTENSION:XXX][/ISEXTENSION:XXX] where XXX is the extension name.
-•	[ISNOTEXTENSION:XXX][/ISNOTEXTENSION:XXX] where XXX is the extension name.
-News Archives (Date)
-•	[COUNT]
-•	[ISSELECTEDMONTH][/ISSELECTEDMONTH]
-•	[ISNOTSELECTEDMONTH][/ISNOTSELECTEDMONTH]
-•	[ISSELECTEDYEAR][/ISSELECTEDYEAR]
-•	[ISNOTSELECTEDYEAR][/ISNOTSELECTEDYEAR]
-•	[LINK]
-•	[MONTH]
-•	[YEAR]
-News Archives (Category)
-•	[DEPTHABS]
-•	[CATEGORY]
-•	[CATEGORYNOTINDENTED]
-•	[COUNT]
-•	[DEPTHREL]
-•	[LINK]
-News Archives (Author)
-•	[AUTHORID]
-•	[AUTHORUSERNAME]
-•	[AUTHORDISPLAYNAME]
-•	[AUTHORFIRSTNAME]
-•	[AUTHORLASTNAME]
-•	[AUTHORFULLNAME]
-•	[COUNT]
-•	[LINK]
-Handout.Cover.Html, Handout.End.Html, Handout.Header.Html, Handout.End.Html
-•	[DESCRIPTION]
-•	[LOGO]
-•	[NAME]
+
+	[PORTALNAME]
+	[PORTALURL]
+
+### Category.Html (shown at the top of the view category page)
+
+	[ARTICLECOUNT]
+	[CATEGORYLABEL]
+	[CATEGORYID]
+	[CHILDCATEGORIES] - loads the child categories 1 level deep (loads Category.Child.Html for each)
+	[DESCRIPTION]
+	[HASCHILDCATEGORIES][/HASCHILDCATEGORIES]
+	[HASNOCHILDCATEGORIES][/HASNOCHILDCATEGORIES]
+	[HASNOPARENT][/HASNOPARENT]
+	[HASPARENT][/HASPARENT]
+	[LINK]
+	[NAME]
+	[PARENTDESCRIPTION]
+	[PARENTLINK]
+	[PARENTNAME]
+	[RSSLINK]
+	[VIEWS]
+	[CHILDCATEGORIES:XXX] where XXX is the number of levels deep.
+	[DESCRIPTION:XXX] where XXX is the number of characters to display.
+	[ISDEPTHABS:XXX][/ISDEPTHABS:XXX] where XXX is the number of levels deep from the root node.
+	[ISNOTDEPTHABS:XXX][/ISNOTDEPTHABS:XXX] where XXX is the number of levels deep from the root node.
+	[PARENTDESCRIPTION:XXX] where XXX is the number of characters to display.
+
+### Category.Child.Html
+
+	[ARTICLECOUNT]
+	[CATEGORYID]
+	[DEPTHABS] - The depth of the category from the root category.
+	[DEPTHREL] - The depth of the category in relation to the current category.
+	[DESCRIPTION]
+	[LINK]
+	[NAME]
+	[RSSLINK]
+	[ORDER]
+	[VIEWS]
+	[DESCRIPTION:XXX] where XXX is the number of characters to display.
+	[IFORDER:XXX][/IFORDER:XXX] where XXX is the sort order number.
+	[IFNOTORDER:XXX][/IFNOTORDER:XXX] where XXX is the sort order number.
+	[ISDEPTHABS:XXX][/ISDEPTHABS:XXX] where XXX is the depth of the category from the root category.
+	[ISDEPTHREL:XXX][/ISDEPTHREL:XXX] where XXX is the depth of the category relative to the current node.
+	[ISNOTDEPTHABS:XXX][/ISNOTDEPTHABS:XXX] where XXX is the depth of the category from the root category.
+	[ISNOTDEPTHREL:XXX][/ISNOTDEPTHREL:XXX] where XXX is the depth of the category relative to the current node.
+
+### File.Item.Html
+
+	[ARTICLEID]
+	[FILEID]
+	[FILENAME]
+	[FILELINK]
+	[SIZE]
+	[SORTORDER]
+	[TITLE]
+	[ISEXTENSION:XXX][/ISEXTENSION:XXX] where XXX is the extension name.
+	[ISNOTEXTENSION:XXX][/ISNOTEXTENSION:XXX] where XXX is the extension name.
+
+### News Archives (Date)
+
+	[COUNT]
+	[ISSELECTEDMONTH][/ISSELECTEDMONTH]
+	[ISNOTSELECTEDMONTH][/ISNOTSELECTEDMONTH]
+	[ISSELECTEDYEAR][/ISSELECTEDYEAR]
+	[ISNOTSELECTEDYEAR][/ISNOTSELECTEDYEAR]
+	[LINK]
+	[MONTH]
+	[YEAR]
+
+### News Archives (Category)
+
+	[DEPTHABS]
+	[CATEGORY]
+	[CATEGORYNOTINDENTED]
+	[COUNT]
+	[DEPTHREL]
+	[LINK]
+
+### News Archives (Author)
+
+	[AUTHORID]
+	[AUTHORUSERNAME]
+	[AUTHORDISPLAYNAME]
+	[AUTHORFIRSTNAME]
+	[AUTHORLASTNAME]
+	[AUTHORFULLNAME]
+	[COUNT]
+	[LINK]
+
+### Handout.Cover.Html, Handout.End.Html, Handout.Header.Html, Handout.End.Html
+
+	[DESCRIPTION]
+	[LOGO]
+	[NAME]
  
 
