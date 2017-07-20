@@ -1,0 +1,204 @@
+﻿DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListBySearchCriteria
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListBySearchCriteria
+	@ModuleID	int,
+	@CurrentDate datetime,
+	@AgedDate datetime,
+	@CategoryID	varchar(255),
+	@CategoryIDCount	int,
+	@MaxCount int, 
+	@PageNumber int, 
+	@PageSize int,
+	@SortBy varchar(50),
+	@SortDirection varchar(50),
+	@IsApproved	bit,
+	@IsDraft	bit,
+	@KeyWords	varchar(255), 
+	@AuthorID	int,
+	@ShowPending bit,
+	@ShowExpired bit,
+	@ShowFeaturedOnly bit,
+	@ShowNotFeaturedOnly bit,
+	@ShowSecuredOnly bit,
+	@ShowNotSecuredOnly bit,
+	@ArticleIDs	varchar(255)
+AS
+
+-- Form Where Query
+
+DECLARE @strWhere	nvarchar(4000)
+SELECT @strWhere = 'Article.ModuleID = ' + convert(nvarchar, @ModuleId)
+
+IF( @CurrentDate is null )
+	SELECT @CurrentDate = GetDate()
+
+IF( @ShowPending is null )
+BEGIN
+	SELECT @strWhere = @strWhere + ' AND (Article.StartDate is null OR (Article.StartDate < ''' + convert(nvarchar, @CurrentDate)  + ''' AND Article.StartDate < GetDate()))'
+	
+	IF( @AgedDate is not null )
+		SELECT @strWhere = @strWhere + ' AND Article.StartDate > ''' + convert(nvarchar, @AgedDate)  + ''''
+END
+
+IF( @ShowExpired is null )
+BEGIN
+	SELECT @strWhere = @strWhere + ' AND (Article.EndDate is null OR Article.EndDate > ''' + convert(nvarchar, @CurrentDate)  + ''')'
+END
+
+IF (@CategoryId is not null)
+	if(@CategoryIDCount is not null)
+		SELECT @strWhere = @strWhere + ' AND Article.ArticleID in ( select ArticleID from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ArticleCategories where {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ArticleCategories.ArticleID = Article.ArticleID and {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ArticleCategories.CategoryID in (' + @CategoryID + ') group by articleID having count(*) > ' + convert(nvarchar, @CategoryIDCount) + ')'
+	else
+		SELECT @strWhere = @strWhere + ' AND Article.ArticleID in ( select ArticleID from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ArticleCategories where {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ArticleCategories.ArticleID = Article.ArticleID and {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ArticleCategories.CategoryID in (' + @CategoryID + '))'
+
+IF (@AuthorID is not null)
+	SELECT @strWhere = @strWhere + ' AND Article.AuthorID = ' + convert(nvarchar, @AuthorID)
+
+IF (@IsApproved = 1 )
+	SELECT @strWhere = @strWhere + ' AND Article.IsApproved = 1'
+
+IF (@IsApproved = 0 )
+	SELECT @strWhere = @strWhere + ' AND Article.IsApproved = 0'
+
+IF (@IsDraft = 0)
+	SELECT @strWhere = @strWhere + ' AND Article.IsDraft = 0'
+
+IF (@IsDraft = 1 )
+	SELECT @strWhere = @strWhere + ' AND Article.IsDraft = 1'
+
+IF (@ShowFeaturedOnly = 1 )
+	SELECT @strWhere = @strWhere + ' AND Article.IsFeatured = 1'
+	
+IF (@ShowNotFeaturedOnly = 1 )
+	SELECT @strWhere = @strWhere + ' AND Article.IsFeatured = 0'
+
+IF (@ShowSecuredOnly = 1 )
+	SELECT @strWhere = @strWhere + ' AND Article.IsSecure = 1'
+	
+IF (@ShowNotSecuredOnly = 1 )
+	SELECT @strWhere = @strWhere + ' AND Article.IsSecure = 0'
+
+IF (@Keywords is not null)
+	SELECT @strWhere = @strWhere + ' AND (Article.Title LIKE ''%' + @Keywords + '%'' OR Article.Summary LIKE ''%' + @Keywords + '%'' OR ((select count(*) from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Page Page where Page.ArticleID = Article.ArticleID and Page.PageText LIKE ''%' + @Keywords + '%'') > 0))'
+
+IF (@ArticleIDs is not null)
+	SELECT @strWhere = @strWhere + ' AND Article.ArticleID in (' + @ArticleIDs + ')'
+	
+IF (@SortBy = 'Title') 
+	SELECT @SortBy = 'Article.Title'
+
+IF (@SortBy = 'IsFeatured DESC, Title') 
+	SELECT @SortBy = 'IsFeatured DESC, Article.Title'
+
+-- Set Paging Options
+
+IF( @PageNumber is null )
+	SET @PageNumber = 1
+
+IF( @PageSize is null )
+	SET @PageSize = 100
+
+SET @PageNumber = @PageNumber - 1
+
+DECLARE @startRowIndex int
+SET @startRowIndex = (@PageNumber * @PageSize)
+
+DECLARE @maxRow int
+SET @maxRow = (@startRowIndex + @PageSize)
+IF( @MaxCount is not null )
+BEGIN
+	IF( @MaxCount < @MaxRow )
+	BEGIN
+		SET ROWCOUNT @MaxCount
+	END
+	ELSE
+	BEGIN
+		SET ROWCOUNT @maxRow
+	END
+END
+ELSE
+BEGIN
+	SET ROWCOUNT @maxRow
+END
+
+-- Create Temporary Table
+
+CREATE TABLE #TempItems 
+(
+   ID int IDENTITY,
+   ArticleID int
+)
+
+EXEC('
+INSERT INTO #TempItems (ArticleID) 
+SELECT 
+	Article.[ArticleID]
+FROM
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article Article LEFT OUTER JOIN 
+    {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Page Page on Page.ArticleID = Article.ArticleID AND Page.SortOrder = 0 LEFT OUTER JOIN 
+	{databaseOwner}{objectQualifier}Users Author ON Article.AuthorID = Author.UserID LEFT OUTER JOIN 
+    {databaseOwner}{objectQualifier}Users Updated ON Article.LastUpdateID = Updated.UserID
+WHERE ' + 
+	@strWhere + '
+ORDER BY 
+	' + @SortBy + ' ' + @SortDirection)
+
+SET ROWCOUNT 0
+
+SELECT 
+	Article.[ArticleID],
+	Article.[AuthorID],
+	Article.[ApproverID],
+	Article.[CreatedDate],
+	Article.[LastUpdate],
+	Article.[Title],
+	Article.[Summary],
+	Article.[IsApproved],
+	Article.[NumberOfViews],
+	Article.[StartDate],
+	Article.[EndDate],
+	Article.[ModuleID],
+	Article.[IsFeatured],
+	Article.[ImageUrl],
+	Article.[LastUpdateID],
+	Article.[IsSecure],
+	Article.[IsNewWindow],
+	Article.[ImageUrl],
+	Article.[Url],
+	Article.[PageCount],
+	Article.[CommentCount],
+	Article.[Rating],
+	Article.[RatingCount],
+	Author.[Email] as AuthorEmail,
+	Author.[UserName] as AuthorUserName,
+	Author.[FirstName] as AuthorFirstName,
+	Author.[LastName] as AuthorLastName,
+	Author.[DisplayName] as AuthorDisplayName,
+	Updated.[Email] as LastUpdateEmail,
+	Updated.[UserName] as LastUpdateUserName,
+	Updated.[FirstName] as LastUpdateFirstName,
+	Updated.[LastName] as LastUpdateLastName,
+	Updated.[DisplayName] as LastUpdateDisplayName,
+	Page.PageText as 'Body'
+
+FROM
+	#TempItems t INNER JOIN 
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article Article ON t.ArticleID = Article.ArticleID LEFT OUTER JOIN 
+    {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Page Page on Page.ArticleID = Article.ArticleID AND Page.SortOrder = 0 LEFT OUTER JOIN 
+	{databaseOwner}{objectQualifier}Users Author ON Article.AuthorID = Author.UserID LEFT OUTER JOIN 
+    {databaseOwner}{objectQualifier}Users Updated ON Article.LastUpdateID = Updated.UserID
+
+WHERE
+	ID > @startRowIndex
+
+DROP TABLE #TempItems 
+
+EXEC('
+SELECT 
+	COUNT(Article.ArticleID) as ''TotalRecords'' 
+FROM
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article Article
+WHERE ' + 
+	@strWhere )
+GO

@@ -1,0 +1,71 @@
+﻿ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_HandoutArticle ADD CONSTRAINT
+	PK_{objectQualifier}DnnForge_NewsArticles_HandoutArticle PRIMARY KEY CLUSTERED 
+	(
+	HandoutID,
+	ArticleID
+	) ON [PRIMARY]
+
+GO
+
+ALTER PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_AddComment 
+	@ArticleID int,
+	@CreatedDate datetime, 
+	@UserID int, 
+	@Comment ntext,
+	@RemoteAddress nvarchar(50) ,
+	@Type int,
+	@TrackbackUrl nvarchar(255),
+	@TrackbackTitle nvarchar(255),
+	@TrackbackBlogName nvarchar(255),
+	@TrackbackExcerpt ntext,
+	@AnonymousName nvarchar(255),
+	@AnonymousEmail nvarchar(255),
+	@AnonymousURL nvarchar(255),
+	@NotifyMe bit,
+	@IsApproved bit,
+	@ApprovedBy int
+AS
+
+INSERT INTO {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment (
+	[ArticleID],
+	[CreatedDate], 
+	[UserID], 
+	[Comment],
+	[RemoteAddress],
+	[Type],
+	[TrackbackUrl],
+	[TrackbackTitle],
+	[TrackbackBlogName],
+	[TrackbackExcerpt],
+	[AnonymousName], 
+	[AnonymousEmail],
+	[AnonymousURL],
+	[NotifyMe],
+	[IsApproved],
+	[ApprovedBy]
+) VALUES (
+	@ArticleID,
+	@CreatedDate, 
+	@UserID, 
+	@Comment,
+	@RemoteAddress,
+	@Type,
+	@TrackbackUrl,
+	@TrackbackTitle,
+	@TrackbackBlogName,
+	@TrackbackExcerpt,
+	@AnonymousName,
+	@AnonymousEmail,
+	@AnonymousURL,
+	@NotifyMe,
+	@IsApproved,
+	@ApprovedBy  
+)
+
+select SCOPE_IDENTITY()
+
+UPDATE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article
+SET [CommentCount] = (select count(*) from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment Comment where Comment.ArticleID = {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article.ArticleID and Comment.IsApproved = 1)
+WHERE ArticleID = @ArticleID
+GO
+

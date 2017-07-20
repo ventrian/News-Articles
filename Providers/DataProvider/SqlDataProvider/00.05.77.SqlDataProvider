@@ -1,0 +1,52 @@
+﻿DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticle
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticle
+	@ArticleID int
+AS
+SELECT
+	Article.[ArticleID],
+	Article.[AuthorID],
+	Article.[ApproverID],
+	Article.[CreatedDate],
+	Article.[LastUpdate],
+	Article.[Title],
+	Article.[Summary],
+	Article.[IsApproved],
+	Article.[NumberOfViews],
+	Article.[IsDraft],
+	Article.[StartDate],
+	Article.[EndDate],
+	Article.[ModuleID],
+	Article.[IsFeatured],
+	Article.[ImageUrl],
+	Article.[LastUpdateID],
+	Article.[IsSecure],
+	Article.[IsNewWindow],
+	Author.[Email] as AuthorEmail,
+	Author.[UserName] as AuthorUserName,
+	Author.[FirstName] as AuthorFirstName,
+	Author.[LastName] as AuthorLastName,
+	Author.[DisplayName] as AuthorDisplayName,
+	Updated.[Email] as LastUpdateEmail,
+	Updated.[UserName] as LastUpdateUserName,
+	Updated.[FirstName] as LastUpdateFirstName,
+	Updated.[LastName] as LastUpdateLastName,
+	Updated.[DisplayName] as LastUpdateDisplayName,
+	(select count(*) from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment where {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment.ArticleID = Article.ArticleID) as 'CommentCount', 
+	(select count(*) from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Page where {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Page.ArticleID = Article.ArticleID) as 'PageCount', 
+	(select AVG(rating) from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Rating where {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Rating.ArticleID = Article.ArticleID) as 'Rating', 
+	(select COUNT(*) from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Rating where {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Rating.ArticleID = Article.ArticleID) as 'RatingCount', 
+	case when Images.FileName is null then '' else Images.Folder + Images.FileName end AS ImageUrlResolved, 
+	case when UrlFiles.FileName is null then Article.URL else UrlFiles.Folder + UrlFiles.FileName end AS URL 
+
+FROM
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article Article LEFT OUTER JOIN 
+		{databaseOwner}{objectQualifier}Users Author ON Article.AuthorID = Author.UserID LEFT OUTER JOIN
+		{databaseOwner}{objectQualifier}Users Updated ON Article.LastUpdateID = Updated.UserID LEFT OUTER JOIN
+		{databaseOwner}{objectQualifier}Files UrlFiles ON Article.URL = 'fileid=' + CONVERT(nvarchar, UrlFiles.FileID) LEFT OUTER JOIN
+        {databaseOwner}{objectQualifier}Files Images ON Article.ImageUrl = 'fileid=' + CONVERT(nvarchar, Images.FileID) 
+
+WHERE	
+	Article.[ArticleID] = @ArticleID
+GO

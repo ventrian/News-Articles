@@ -1,0 +1,1108 @@
+<dotnetnuke type="Package" version="6.0">
+  <packages>
+    <package name="DnnForge - NewsArticles" type="Module" version="00.09.11">
+      <friendlyName>News Articles</friendlyName>
+      <description>Allows you to publish News Articles to your portal.</description>
+      <owner>
+        <name>Scott McCulloch</name>
+        <organization>Ventrian</organization>
+        <url>www.ventrian.com</url>
+        <email>support@ventrian.com</email>
+      </owner>
+      <license>The license for this package is not currently included within the installation file, please check with the vendor for full license details.</license>
+      <releaseNotes>This package has no Release Notes</releaseNotes>
+      <dependencies>
+        <dependency type="CoreVersion">06.02.00</dependency>
+      </dependencies>
+      <components>
+        <component type="Module">
+          <desktopModule>
+            <moduleName>DnnForge - NewsArticles</moduleName>
+            <foldername>DnnForge - NewsArticles</foldername>
+            <businessControllerClass>Ventrian.NewsArticles.ArticleController, Ventrian.NewsArticles</businessControllerClass>
+            <supportedFeatures>
+              <supportedFeature Type="Portable" />
+              <supportedFeature Type="Searchable" />
+            </supportedFeatures>
+            <moduleDefinitions>
+              <moduleDefinition>
+                <friendlyName>DnnForge - NewsArticles</friendlyName>
+                <defaultCacheTime>0</defaultCacheTime>
+                <moduleControls>
+                  <moduleControl>
+                    <controlKey/>
+                    <controlSrc>DesktopModules/DnnForge - NewsArticles/NewsArticles.ascx</controlSrc>
+                    <supportsPopUps>True</supportsPopUps>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>NewsArticles</controlTitle>
+                    <controlType>View</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>Admin</controlKey>
+                    <controlSrc>DesktopModules/DnnForge - NewsArticles/ucViewOptions.ascx</controlSrc>
+                    <supportsPopUps>False</supportsPopUps>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Main Options</controlTitle>
+                    <controlType>View</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>AdminOptions</controlKey>
+                    <controlSrc>DesktopModules/DnnForge - NewsArticles/ucAdminOptions.ascx</controlSrc>
+                    <supportsPopUps>False</supportsPopUps>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Admin Options</controlTitle>
+                    <controlType>Edit</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>ApproveArticles</controlKey>
+                    <controlSrc>DesktopModules/DnnForge - NewsArticles/ucApproveArticles.ascx</controlSrc>
+                    <supportsPopUps>False</supportsPopUps>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Approve Articles</controlTitle>
+                    <controlType>Edit</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>ApproveComments</controlKey>
+                    <controlSrc>DesktopModules/DnnForge - NewsArticles/ucApproveComments.ascx</controlSrc>
+                    <supportsPopUps>False</supportsPopUps>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Approve Comments</controlTitle>
+                    <controlType>View</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>Archives</controlKey>
+                    <controlSrc>DesktopModules/DnnForge - NewsArticles/Archives.ascx</controlSrc>
+                    <supportsPopUps>False</supportsPopUps>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Archives</controlTitle>
+                    <controlType>Anonymous</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>ArchiveView</controlKey>
+                    <controlSrc>DesktopModules/DnnForge - NewsArticles/ViewArchive.ascx</controlSrc>
+                    <supportsPopUps>False</supportsPopUps>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>View Archive</controlTitle>
+                    <controlType>Anonymous</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>ArticleView</controlKey>
+                    <controlSrc>DesktopModules/DnnForge - NewsArticles/ViewArticle.ascx</controlSrc>
+                    <supportsPopUps>False</supportsPopUps>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>View Article</controlTitle>
+                    <controlType>Anonymous</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>AuthorView</controlKey>
+                    <controlSrc>DesktopModules/DnnForge - NewsArticles/ViewAuthor.ascx</controlSrc>
+                    <supportsPopUps>False</supportsPopUps>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>View Author</controlTitle>
+                    <controlType>Anonymous</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>CategoryView</controlKey>
+                    <controlSrc>DesktopModules/DnnForge - NewsArticles/ViewCategory.ascx</controlSrc>
+                    <supportsPopUps>False</supportsPopUps>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>View Category</controlTitle>
+                    <controlType>Anonymous</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>TagView</controlKey>
+                    <controlSrc>DesktopModules/DnnForge - NewsArticles/ViewTag.ascx</controlSrc>
+                    <supportsPopUps>False</supportsPopUps>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>View Tag</controlTitle>
+                    <controlType>Anonymous</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>Edit</controlKey>
+                    <controlSrc>DesktopModules/DnnForge - NewsArticles/ucSubmitNews.ascx</controlSrc>
+                    <supportsPopUps>False</supportsPopUps>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Edit Article</controlTitle>
+                    <controlType>View</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>EditCategories</controlKey>
+                    <controlSrc>DesktopModules/DnnForge - NewsArticles/ucEditCategories.ascx</controlSrc>
+                    <supportsPopUps>False</supportsPopUps>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Edit Categories</controlTitle>
+                    <controlType>Edit</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>EditCategory</controlKey>
+                    <controlSrc>DesktopModules/DnnForge - NewsArticles/ucEditCategory.ascx</controlSrc>
+                    <supportsPopUps>False</supportsPopUps>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Edit Category</controlTitle>
+                    <controlType>Edit</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>EditCustomField</controlKey>
+                    <controlSrc>DesktopModules/DnnForge - NewsArticles/ucEditCustomField.ascx</controlSrc>
+                    <supportsPopUps>False</supportsPopUps>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Edit Custom Field</controlTitle>
+                    <controlType>Edit</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>EditCustomFields</controlKey>
+                    <controlSrc>DesktopModules/DnnForge - NewsArticles/ucEditCustomFields.ascx</controlSrc>
+                    <supportsPopUps>False</supportsPopUps>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Edit Custom Fields</controlTitle>
+                    <controlType>Edit</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>EditComment</controlKey>
+                    <controlSrc>DesktopModules/DnnForge - NewsArticles/ucEditComment.ascx</controlSrc>
+                    <supportsPopUps>False</supportsPopUps>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Edit Comment</controlTitle>
+                    <controlType>Edit</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>EditPage</controlKey>
+                    <controlSrc>DesktopModules/DnnForge - NewsArticles/ucEditPage.ascx</controlSrc>
+                    <supportsPopUps>False</supportsPopUps>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Edit Page</controlTitle>
+                    <controlType>View</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>EditPages</controlKey>
+                    <controlSrc>DesktopModules/DnnForge - NewsArticles/ucEditPages.ascx</controlSrc>
+                    <supportsPopUps>False</supportsPopUps>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Edit Pages</controlTitle>
+                    <controlType>View</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>EditSortOrder</controlKey>
+                    <controlSrc>DesktopModules/DnnForge - NewsArticles/ucEditPageSortOrder.ascx</controlSrc>
+                    <supportsPopUps>False</supportsPopUps>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Edit Sort Order</controlTitle>
+                    <controlType>View</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>EditTags</controlKey>
+                    <controlSrc>DesktopModules/DnnForge - NewsArticles/ucEditTags.ascx</controlSrc>
+                    <supportsPopUps>False</supportsPopUps>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Edit Tags</controlTitle>
+                    <controlType>Edit</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>EditTag</controlKey>
+                    <controlSrc>DesktopModules/DnnForge - NewsArticles/ucEditTag.ascx</controlSrc>
+                    <supportsPopUps>False</supportsPopUps>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Edit Tag</controlTitle>
+                    <controlType>Edit</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>EmailTemplates</controlKey>
+                    <controlSrc>DesktopModules/DnnForge - NewsArticles/ucEmailTemplates.ascx</controlSrc>
+                    <supportsPopUps>False</supportsPopUps>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Edit Email Templates</controlTitle>
+                    <controlType>Edit</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>ImportFeed</controlKey>
+                    <controlSrc>DesktopModules/DnnForge - NewsArticles/ucImportFeed.ascx</controlSrc>
+                    <supportsPopUps>False</supportsPopUps>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Import Feed</controlTitle>
+                    <controlType>Edit</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>ImportFeeds</controlKey>
+                    <controlSrc>DesktopModules/DnnForge - NewsArticles/ucImportFeeds.ascx</controlSrc>
+                    <supportsPopUps>False</supportsPopUps>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Import Feeds</controlTitle>
+                    <controlType>Edit</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>MyArticles</controlKey>
+                    <controlSrc>DesktopModules/DnnForge - NewsArticles/ucMyArticles.ascx</controlSrc>
+                    <supportsPopUps>False</supportsPopUps>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>My Articles</controlTitle>
+                    <controlType>View</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>NotAuthenticated</controlKey>
+                    <controlSrc>DesktopModules/DnnForge - NewsArticles/ucNotAuthenticated.ascx</controlSrc>
+                    <supportsPopUps>False</supportsPopUps>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Not Authenticated</controlTitle>
+                    <controlType>Anonymous</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>NotAuthorized</controlKey>
+                    <controlSrc>DesktopModules/DnnForge - NewsArticles/ucNotAuthorized.ascx</controlSrc>
+                    <supportsPopUps>False</supportsPopUps>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Not Authorized</controlTitle>
+                    <controlType>Anonymous</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>Search</controlKey>
+                    <controlSrc>DesktopModules/DnnForge - NewsArticles/ViewSearch.ascx</controlSrc>
+                    <supportsPopUps>False</supportsPopUps>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Search</controlTitle>
+                    <controlType>Anonymous</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>SubmitNewsComplete</controlKey>
+                    <controlSrc>DesktopModules/DnnForge - NewsArticles/ucSubmitNewsComplete.ascx</controlSrc>
+                    <supportsPopUps>False</supportsPopUps>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Submit Complete</controlTitle>
+                    <controlType>View</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>SiteTemplates</controlKey>
+                    <controlSrc>DesktopModules/DnnForge - NewsArticles/ucTemplateEditor.ascx</controlSrc>
+                    <supportsPopUps>False</supportsPopUps>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Site Templates</controlTitle>
+                    <controlType>View</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                </moduleControls>
+              </moduleDefinition>
+            </moduleDefinitions>
+          </desktopModule>
+        </component>
+        <component type="Assembly">
+          <assemblies>
+            <assembly>
+              <name>Ventrian.NewsArticles.dll</name>
+            </assembly>
+            <assembly>
+              <name>Ventrian.NewsArticles.Secure.dll</name>
+            </assembly>
+            <assembly>
+              <name>Ventrian.NewsArticles.SqlDataProvider.dll</name>
+            </assembly>
+            <assembly>
+              <name>CookComputing.XmlRpc.dll</name>
+            </assembly>
+            <assembly>
+              <name>Ventrian.ImageResizer.dll</name>
+            </assembly>
+            <assembly>
+              <name>Joel.Net.Akismet.dll</name>
+            </assembly>
+          </assemblies>
+        </component>
+        <component type="ResourceFile">
+          <resourceFiles>
+            <basePath>DesktopModules/DnnForge - NewsArticles</basePath>
+            <resourceFile>
+              <name>Resources.zip</name>
+            </resourceFile>
+          </resourceFiles>
+        </component>
+        <component type="Script">
+          <scripts>
+            <basePath>DesktopModules\DnnForge - NewsArticles\SqlDataProvider</basePath>
+            <script type="Install">
+              <name>00.00.01.SqlDataProvider</name>
+              <version>00.00.01</version>
+            </script>
+            <script type="Install">
+              <name>00.00.02.SqlDataProvider</name>
+              <version>00.00.02</version>
+            </script>
+            <script type="Install">
+              <name>00.00.03.SqlDataProvider</name>
+              <version>00.00.03</version>
+            </script>
+            <script type="Install">
+              <name>00.00.04.SqlDataProvider</name>
+              <version>00.00.04</version>
+            </script>
+            <script type="Install">
+              <name>00.00.05.SqlDataProvider</name>
+              <version>00.00.05</version>
+            </script>
+            <script type="Install">
+              <name>00.00.06.SqlDataProvider</name>
+              <version>00.00.06</version>
+            </script>
+            <script type="Install">
+              <name>00.00.07.SqlDataProvider</name>
+              <version>00.00.07</version>
+            </script>
+            <script type="Install">
+              <name>00.00.10.SqlDataProvider</name>
+              <version>00.00.10</version>
+            </script>
+            <script type="Install">
+              <name>00.01.00.SqlDataProvider</name>
+              <version>00.01.00</version>
+            </script>
+            <script type="Install">
+              <name>00.01.01.SqlDataProvider</name>
+              <version>00.01.01</version>
+            </script>
+            <script type="Install">
+              <name>00.01.02.SqlDataProvider</name>
+              <version>00.01.02</version>
+            </script>
+            <script type="Install">
+              <name>00.02.00.SqlDataProvider</name>
+              <version>00.02.00</version>
+            </script>
+            <script type="Install">
+              <name>00.02.05.SqlDataProvider</name>
+              <version>00.02.05</version>
+            </script>
+            <script type="Install">
+              <name>00.02.07.SqlDataProvider</name>
+              <version>00.02.07</version>
+            </script>
+            <script type="Install">
+              <name>00.03.00.SqlDataProvider</name>
+              <version>00.03.00</version>
+            </script>
+            <script type="Install">
+              <name>00.03.02.SqlDataProvider</name>
+              <version>00.03.02</version>
+            </script>
+            <script type="Install">
+              <name>00.04.02.SqlDataProvider</name>
+              <version>00.04.02</version>
+            </script>
+            <script type="Install">
+              <name>00.04.03.SqlDataProvider</name>
+              <version>00.04.03</version>
+            </script>
+            <script type="Install">
+              <name>00.04.08.SqlDataProvider</name>
+              <version>00.04.08</version>
+            </script>
+            <script type="Install">
+              <name>00.04.09.SqlDataProvider</name>
+              <version>00.04.09</version>
+            </script>
+            <script type="Install">
+              <name>00.05.00.SqlDataProvider</name>
+              <version>00.05.00</version>
+            </script>
+            <script type="Install">
+              <name>00.05.02.SqlDataProvider</name>
+              <version>00.05.02</version>
+            </script>
+            <script type="Install">
+              <name>00.05.05.SqlDataProvider</name>
+              <version>00.05.05</version>
+            </script>
+            <script type="Install">
+              <name>00.05.09.SqlDataProvider</name>
+              <version>00.05.09</version>
+            </script>
+            <script type="Install">
+              <name>00.05.11.SqlDataProvider</name>
+              <version>00.05.11</version>
+            </script>
+            <script type="Install">
+              <name>00.05.12.SqlDataProvider</name>
+              <version>00.05.12</version>
+            </script>
+            <script type="Install">
+              <name>00.05.13.SqlDataProvider</name>
+              <version>00.05.13</version>
+            </script>
+            <script type="Install">
+              <name>00.05.17.SqlDataProvider</name>
+              <version>00.05.17</version>
+            </script>
+            <script type="Install">
+              <name>00.05.20.SqlDataProvider</name>
+              <version>00.05.20</version>
+            </script>
+            <script type="Install">
+              <name>00.05.21.SqlDataProvider</name>
+              <version>00.05.21</version>
+            </script>
+            <script type="Install">
+              <name>00.05.22.SqlDataProvider</name>
+              <version>00.05.22</version>
+            </script>
+            <script type="Install">
+              <name>00.05.24.SqlDataProvider</name>
+              <version>00.05.24</version>
+            </script>
+            <script type="Install">
+              <name>00.05.26.SqlDataProvider</name>
+              <version>00.05.26</version>
+            </script>
+            <script type="Install">
+              <name>00.05.28.SqlDataProvider</name>
+              <version>00.05.28</version>
+            </script>
+            <script type="Install">
+              <name>00.05.40.SqlDataProvider</name>
+              <version>00.05.40</version>
+            </script>
+            <script type="Install">
+              <name>00.05.41.SqlDataProvider</name>
+              <version>00.05.41</version>
+            </script>
+            <script type="Install">
+              <name>00.05.46.SqlDataProvider</name>
+              <version>00.05.46</version>
+            </script>
+            <script type="Install">
+              <name>00.05.48.SqlDataProvider</name>
+              <version>00.05.48</version>
+            </script>
+            <script type="Install">
+              <name>00.05.51.SqlDataProvider</name>
+              <version>00.05.51</version>
+            </script>
+            <script type="Install">
+              <name>00.05.55.SqlDataProvider</name>
+              <version>00.05.55</version>
+            </script>
+            <script type="Install">
+              <name>00.05.56.SqlDataProvider</name>
+              <version>00.05.56</version>
+            </script>
+            <script type="Install">
+              <name>00.05.58.SqlDataProvider</name>
+              <version>00.05.58</version>
+            </script>
+            <script type="Install">
+              <name>00.05.66.SqlDataProvider</name>
+              <version>00.05.66</version>
+            </script>
+            <script type="Install">
+              <name>00.05.68.SqlDataProvider</name>
+              <version>00.05.68</version>
+            </script>
+            <script type="Install">
+              <name>00.05.69.SqlDataProvider</name>
+              <version>00.05.69</version>
+            </script>
+            <script type="Install">
+              <name>00.05.74.SqlDataProvider</name>
+              <version>00.05.74</version>
+            </script>
+            <script type="Install">
+              <name>00.05.76.SqlDataProvider</name>
+              <version>00.05.76</version>
+            </script>
+            <script type="Install">
+              <name>00.05.77.SqlDataProvider</name>
+              <version>00.05.77</version>
+            </script>
+            <script type="Install">
+              <name>00.05.78.SqlDataProvider</name>
+              <version>00.05.78</version>
+            </script>
+            <script type="Install">
+              <name>00.06.00.SqlDataProvider</name>
+              <version>00.06.00</version>
+            </script>
+            <script type="Install">
+              <name>00.06.04.SqlDataProvider</name>
+              <version>00.06.04</version>
+            </script>
+            <script type="Install">
+              <name>00.06.07.SqlDataProvider</name>
+              <version>00.06.07</version>
+            </script>
+            <script type="Install">
+              <name>00.06.08.SqlDataProvider</name>
+              <version>00.06.08</version>
+            </script>
+            <script type="Install">
+              <name>00.06.09.SqlDataProvider</name>
+              <version>00.06.09</version>
+            </script>
+            <script type="Install">
+              <name>00.06.11.SqlDataProvider</name>
+              <version>00.06.11</version>
+            </script>
+            <script type="Install">
+              <name>00.06.14.SqlDataProvider</name>
+              <version>00.06.14</version>
+            </script>
+            <script type="Install">
+              <name>00.06.16.SqlDataProvider</name>
+              <version>00.06.16</version>
+            </script>
+            <script type="Install">
+              <name>00.07.00.SqlDataProvider</name>
+              <version>00.07.00</version>
+            </script>
+            <script type="Install">
+              <name>00.07.01.SqlDataProvider</name>
+              <version>00.07.01</version>
+            </script>
+            <script type="Install">
+              <name>00.07.05.SqlDataProvider</name>
+              <version>00.07.05</version>
+            </script>
+            <script type="Install">
+              <name>00.07.06.SqlDataProvider</name>
+              <version>00.07.06</version>
+            </script>
+            <script type="Install">
+              <name>00.07.08.SqlDataProvider</name>
+              <version>00.07.08</version>
+            </script>
+            <script type="Install">
+              <name>00.07.10.SqlDataProvider</name>
+              <version>00.07.10</version>
+            </script>
+            <script type="Install">
+              <name>00.07.13.SqlDataProvider</name>
+              <version>00.07.13</version>
+            </script>
+            <script type="Install">
+              <name>00.07.14.SqlDataProvider</name>
+              <version>00.07.14</version>
+            </script>
+            <script type="Install">
+              <name>00.07.20.SqlDataProvider</name>
+              <version>00.07.20</version>
+            </script>
+            <script type="Install">
+              <name>00.07.32.SqlDataProvider</name>
+              <version>00.07.32</version>
+            </script>
+            <script type="Install">
+              <name>00.07.33.SqlDataProvider</name>
+              <version>00.07.33</version>
+            </script>
+            <script type="Install">
+              <name>00.07.41.SqlDataProvider</name>
+              <version>00.07.41</version>
+            </script>
+            <script type="Install">
+              <name>00.07.44.SqlDataProvider</name>
+              <version>00.07.44</version>
+            </script>
+            <script type="Install">
+              <name>00.07.46.SqlDataProvider</name>
+              <version>00.07.46</version>
+            </script>
+            <script type="Install">
+              <name>00.07.47.SqlDataProvider</name>
+              <version>00.07.47</version>
+            </script>
+            <script type="Install">
+              <name>00.07.48.SqlDataProvider</name>
+              <version>00.07.48</version>
+            </script>
+            <script type="Install">
+              <name>00.07.52.SqlDataProvider</name>
+              <version>00.07.52</version>
+            </script>
+            <script type="Install">
+              <name>00.07.53.SqlDataProvider</name>
+              <version>00.07.53</version>
+            </script>
+            <script type="Install">
+              <name>00.07.55.SqlDataProvider</name>
+              <version>00.07.55</version>
+            </script>
+            <script type="Install">
+              <name>00.07.56.SqlDataProvider</name>
+              <version>00.07.56</version>
+            </script>
+            <script type="Install">
+              <name>00.07.57.SqlDataProvider</name>
+              <version>00.07.57</version>
+            </script>
+            <script type="Install">
+              <name>00.07.58.SqlDataProvider</name>
+              <version>00.07.58</version>
+            </script>
+            <script type="Install">
+              <name>00.07.59.SqlDataProvider</name>
+              <version>00.07.59</version>
+            </script>
+            <script type="Install">
+              <name>00.07.61.SqlDataProvider</name>
+              <version>00.07.61</version>
+            </script>
+            <script type="Install">
+              <name>00.07.63.SqlDataProvider</name>
+              <version>00.07.63</version>
+            </script>
+            <script type="Install">
+              <name>00.07.64.SqlDataProvider</name>
+              <version>00.07.64</version>
+            </script>
+            <script type="Install">
+              <name>00.07.66.SqlDataProvider</name>
+              <version>00.07.66</version>
+            </script>
+            <script type="Install">
+              <name>00.07.67.SqlDataProvider</name>
+              <version>00.07.67</version>
+            </script>
+            <script type="Install">
+              <name>00.07.68.SqlDataProvider</name>
+              <version>00.07.68</version>
+            </script>
+            <script type="Install">
+              <name>00.07.69.SqlDataProvider</name>
+              <version>00.07.69</version>
+            </script>
+            <script type="Install">
+              <name>00.07.71.SqlDataProvider</name>
+              <version>00.07.71</version>
+            </script>
+            <script type="Install">
+              <name>00.07.72.SqlDataProvider</name>
+              <version>00.07.72</version>
+            </script>
+            <script type="Install">
+              <name>00.07.73.SqlDataProvider</name>
+              <version>00.07.73</version>
+            </script>
+            <script type="Install">
+              <name>00.07.74.SqlDataProvider</name>
+              <version>00.07.74</version>
+            </script>
+            <script type="Install">
+              <name>00.07.75.SqlDataProvider</name>
+              <version>00.07.75</version>
+            </script>
+            <script type="Install">
+              <name>00.07.77.SqlDataProvider</name>
+              <version>00.07.77</version>
+            </script>
+            <script type="Install">
+              <name>00.07.81.SqlDataProvider</name>
+              <version>00.07.81</version>
+            </script>
+            <script type="Install">
+              <name>00.07.84.SqlDataProvider</name>
+              <version>00.07.84</version>
+            </script>
+            <script type="Install">
+              <name>00.07.85.SqlDataProvider</name>
+              <version>00.07.85</version>
+            </script>
+            <script type="Install">
+              <name>00.07.87.SqlDataProvider</name>
+              <version>00.07.87</version>
+            </script>
+            <script type="Install">
+              <name>00.07.88.SqlDataProvider</name>
+              <version>00.07.88</version>
+            </script>
+            <script type="Install">
+              <name>00.07.89.SqlDataProvider</name>
+              <version>00.07.89</version>
+            </script>
+            <script type="Install">
+              <name>00.07.96.SqlDataProvider</name>
+              <version>00.07.96</version>
+            </script>
+            <script type="Install">
+              <name>00.07.97.SqlDataProvider</name>
+              <version>00.07.97</version>
+            </script>
+            <script type="Install">
+              <name>00.07.98.SqlDataProvider</name>
+              <version>00.07.98</version>
+            </script>
+            <script type="Install">
+              <name>00.07.99.SqlDataProvider</name>
+              <version>00.07.99</version>
+            </script>
+            <script type="Install">
+              <name>00.08.00.SqlDataProvider</name>
+              <version>00.08.00</version>
+            </script>
+            <script type="Install">
+              <name>00.08.04.SqlDataProvider</name>
+              <version>00.08.04</version>
+            </script>
+            <script type="Install">
+              <name>00.08.05.SqlDataProvider</name>
+              <version>00.08.05</version>
+            </script>
+            <script type="Install">
+              <name>00.08.06.SqlDataProvider</name>
+              <version>00.08.06</version>
+            </script>
+            <script type="Install">
+              <name>00.09.02.SqlDataProvider</name>
+              <version>00.09.02</version>
+            </script>
+            <script type="Install">
+              <name>00.09.05.SqlDataProvider</name>
+              <version>00.09.05</version>
+            </script>
+            <script type="Install">
+              <name>00.09.06.SqlDataProvider</name>
+              <version>00.09.06</version>
+            </script>
+            <script type="Install">
+              <name>00.09.11.SqlDataProvider</name>
+              <version>00.09.11</version>
+            </script>
+            <script type="Uninstall">
+              <name>Uninstall.SqlDataProvider</name>
+              <version>00.09.06</version>
+            </script>
+          </scripts>
+        </component>
+      </components>
+    </package>
+    <package name="DnnForge - LatestArticles" type="Module" version="00.09.11">
+      <friendlyName>News Articles Latest</friendlyName>
+      <description>Allows you to display a list of the latest articles.</description>
+      <iconFile />
+      <owner>
+        <name>Scott McCulloch</name>
+        <organization>Ventrian</organization>
+        <url>www.ventrian.com</url>
+        <email>support@ventrian.com</email>
+      </owner>
+      <license>The license for this package is not currently included within the installation file, please check with the vendor for full license details.</license>
+      <releaseNotes>This package has no Release Notes</releaseNotes>
+      <components>
+        <component type="Module">
+          <desktopModule>
+            <moduleName>DnnForge - LatestArticles</moduleName>
+            <foldername>DnnForge - LatestArticles</foldername>
+            <businessControllerClass>Ventrian.NewsArticles.LatestArticleController, Ventrian.NewsArticles</businessControllerClass>
+            <supportedFeatures />
+            <moduleDefinitions>
+              <moduleDefinition>
+                <friendlyName>DnnForge - LatestArticles</friendlyName>
+                <defaultCacheTime>0</defaultCacheTime>
+                <moduleControls>
+                  <moduleControl>
+                    <controlKey />
+                    <controlSrc>DesktopModules/DnnForge - LatestArticles/LatestArticles.ascx</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle />
+                    <controlType>View</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <supportsPopUps>False</supportsPopUps>
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>Settings</controlKey>
+                    <controlSrc>DesktopModules/DnnForge - LatestArticles/LatestArticlesOptions.ascx</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Latest Articles Options</controlTitle>
+                    <controlType>Edit</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <supportsPopUps>False</supportsPopUps>
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                </moduleControls>
+              </moduleDefinition>
+            </moduleDefinitions>
+          </desktopModule>
+        </component>
+        <component type="ResourceFile">
+          <resourceFiles>
+            <basePath>DesktopModules/DnnForge - LatestArticles</basePath>
+            <resourceFile>
+              <name>ResourcesLatestArticles.zip</name>
+            </resourceFile>
+          </resourceFiles>
+        </component>
+      </components>
+    </package>
+    <package name="DnnForge - LatestComments" type="Module" version="00.09.11">
+      <friendlyName>News Articles Comments</friendlyName>
+      <description>Allows you to display a list of the latest comments.</description>
+      <iconFile />
+      <owner>
+        <name>Scott McCulloch</name>
+        <organization>Ventrian</organization>
+        <url>www.ventrian.com</url>
+        <email>support@ventrian.com</email>
+      </owner>
+      <license>The license for this package is not currently included within the installation file, please check with the vendor for full license details.</license>
+      <releaseNotes>This package has no Release Notes</releaseNotes>
+      <components>
+        <component type="Module">
+          <desktopModule>
+            <moduleName>DnnForge - LatestComments</moduleName>
+            <foldername>DnnForge - LatestComments</foldername>
+            <businessControllerClass />
+            <supportedFeatures />
+            <moduleDefinitions>
+              <moduleDefinition>
+                <friendlyName>DnnForge - LatestComments</friendlyName>
+                <defaultCacheTime>0</defaultCacheTime>
+                <moduleControls>
+                  <moduleControl>
+                    <controlKey />
+                    <controlSrc>DesktopModules/DnnForge - LatestComments/LatestComments.ascx</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle />
+                    <controlType>View</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <supportsPopUps>False</supportsPopUps>
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>Settings</controlKey>
+                    <controlSrc>DesktopModules/DnnForge - LatestComments/LatestCommentsOptions.ascx</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Latest Comments Options</controlTitle>
+                    <controlType>Edit</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <supportsPopUps>False</supportsPopUps>
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                </moduleControls>
+              </moduleDefinition>
+            </moduleDefinitions>
+          </desktopModule>
+        </component>
+        <component type="ResourceFile">
+          <resourceFiles>
+            <basePath>DesktopModules/DnnForge - LatestComments</basePath>
+            <resourceFile>
+              <name>ResourcesLatestComments.zip</name>
+            </resourceFile>
+          </resourceFiles>
+        </component>
+      </components>
+    </package>
+    <package name="DnnForge - NewsArchives" type="Module" version="00.09.11">
+      <friendlyName>News Articles Archives</friendlyName>
+      <description>Allows you to display a list of articles by month.</description>
+      <iconFile />
+      <owner>
+        <name>Scott McCulloch</name>
+        <organization>Ventrian</organization>
+        <url>www.ventrian.com</url>
+        <email>support@ventrian.com</email>
+      </owner>
+      <license>The license for this package is not currently included within the installation file, please check with the vendor for full license details.</license>
+      <releaseNotes>This package has no Release Notes</releaseNotes>
+      <components>
+        <component type="Module">
+          <desktopModule>
+            <moduleName>DnnForge - NewsArchives</moduleName>
+            <foldername>DnnForge - NewsArchives</foldername>
+            <businessControllerClass />
+            <supportedFeatures />
+            <moduleDefinitions>
+              <moduleDefinition>
+                <friendlyName>DnnForge - NewsArchives</friendlyName>
+                <defaultCacheTime>0</defaultCacheTime>
+                <moduleControls>
+                  <moduleControl>
+                    <controlKey />
+                    <controlSrc>DesktopModules/DnnForge - NewsArchives/NewsArchives.ascx</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle />
+                    <controlType>View</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <supportsPopUps>False</supportsPopUps>
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>Settings</controlKey>
+                    <controlSrc>DesktopModules/DnnForge - NewsArchives/NewsArchivesOptions.ascx</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>News Archive Options</controlTitle>
+                    <controlType>Edit</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <supportsPopUps>False</supportsPopUps>
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                </moduleControls>
+              </moduleDefinition>
+            </moduleDefinitions>
+          </desktopModule>
+        </component>
+        <component type="ResourceFile">
+          <resourceFiles>
+            <basePath>DesktopModules/DnnForge - NewsArchives</basePath>
+            <resourceFile>
+              <name>ResourcesNewsArchives.zip</name>
+            </resourceFile>
+          </resourceFiles>
+        </component>
+      </components>
+    </package>
+    <package name="DnnForge - NewsSearch" type="Module" version="00.09.11">
+      <friendlyName>News Articles Search</friendlyName>
+      <description>Allows you to display a list of articles by month.</description>
+      <iconFile />
+      <owner>
+        <name>Scott McCulloch</name>
+        <organization>Ventrian</organization>
+        <url>www.ventrian.com</url>
+        <email>support@ventrian.com</email>
+      </owner>
+      <license>The license for this package is not currently included within the installation file, please check with the vendor for full license details.</license>
+      <releaseNotes>This package has no Release Notes</releaseNotes>
+      <components>
+        <component type="Module">
+          <desktopModule>
+            <moduleName>DnnForge - NewsSearch</moduleName>
+            <foldername>DnnForge - NewsSearch</foldername>
+            <businessControllerClass />
+            <supportedFeatures />
+            <moduleDefinitions>
+              <moduleDefinition>
+                <friendlyName>DnnForge - NewsSearch</friendlyName>
+                <defaultCacheTime>0</defaultCacheTime>
+                <moduleControls>
+                  <moduleControl>
+                    <controlKey />
+                    <controlSrc>DesktopModules/DnnForge - NewsSearch/NewsSearch.ascx</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle />
+                    <controlType>View</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <supportsPopUps>False</supportsPopUps>
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>Settings</controlKey>
+                    <controlSrc>DesktopModules/DnnForge - NewsSearch/NewsSearchOptions.ascx</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>News Search Options</controlTitle>
+                    <controlType>Edit</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <supportsPopUps>False</supportsPopUps>
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                </moduleControls>
+              </moduleDefinition>
+            </moduleDefinitions>
+          </desktopModule>
+        </component>
+        <component type="ResourceFile">
+          <resourceFiles>
+            <basePath>DesktopModules/DnnForge - NewsSearch</basePath>
+            <resourceFile>
+              <name>ResourcesNewsSearch.zip</name>
+            </resourceFile>
+          </resourceFiles>
+        </component>
+      </components>
+    </package>
+  </packages>
+</dotnetnuke>

@@ -1,0 +1,108 @@
+/* Uploader Styles */
+
+.pa_photolist li
+{
+    display: inline;
+    float: left;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.progressWrapper 
+{
+	width: 357px;
+	overflow: hidden;
+	background-color: #000;
+}
+
+.progressContainer {
+	margin: 1px;
+	padding: 4px;
+	
+	border: solid 1px #E8E8E8;
+	background-color: #F7F7F7;
+	
+	overflow: hidden;
+}
+
+.progressBarInProgress,
+.progressBarComplete,
+.progressBarError {
+	font-size: 0px;
+	width: 0%;
+	height: 2px;
+	background-color: blue;
+	text-align: left;
+	margin-top: 2px;
+	float: left;
+}
+.progressBarComplete {
+	width: 100%;
+	background-color: green;
+	visibility: hidden;
+}
+.progressBarError {
+	width: 100%;
+	background-color: red;
+	visibility: hidden;
+}
+.progressBarStatus {
+	margin-top: 2px;
+	text-align: left;
+	white-space: nowrap;
+}
+a.progressCancel,
+a.progressCancel:link,
+a.progressCancel:active,
+a.progressCancel:visited,
+a.progressCancel:hover
+{
+	font-size: 0px;
+	display: block;
+	height: 14px;
+	width: 14px;
+	
+	background-image: url(Images/Uploader/cancelbutton.gif);
+	background-repeat: no-repeat;
+	background-position: -14px 0px;
+	float: right;
+}
+a.progressCancel:hover 
+{
+	background-position: 0px 0px;
+}
+
+#ColorPickerDiv 
+{
+    display: block;
+    display: none;
+    position: relative;
+    border: 1px solid #777;
+    background: #fff
+}
+
+#ColorPickerDiv TD.color
+{
+	cursor: pointer;
+	font-size: xx-small;
+	font-family: 'Arial' , 'Microsoft Sans Serif';
+}
+#ColorPickerDiv TD.color label
+{
+	cursor: pointer;
+}
+
+.ColorPickerDivSample
+{
+	margin: 0px 0px 0px 4px;
+	border: solid 1px #000;
+	padding: 0px 10px;	
+	position: relative;
+	cursor: pointer;
+}
+
+
+#tabs-myarticles
+{
+    padding-top: 10px;
+}

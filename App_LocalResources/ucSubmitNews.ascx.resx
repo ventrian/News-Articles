@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DetailsTab.Text" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="AppearanceTab.Text" xml:space="preserve">
+    <value>Appearance</value>
+  </data>
+  <data name="LinkToTab.Text" xml:space="preserve">
+    <value>Link to</value>
+  </data>
+  <data name="ArticleSummary.Text" xml:space="preserve">
+    <value>Article Summary</value>
+  </data>
+  <data name="ArticleSummary.Description" xml:space="preserve">
+    <value>Enter the details of your article including title (required), categories (if applicable) and summary text (required).&lt;br&gt;Once complete, you can save your article via the buttons above the form.</value>
+  </data>
+  <data name="plTitle.Text" xml:space="preserve">
+    <value>Title:</value>
+  </data>
+  <data name="plTitle.Help" xml:space="preserve">
+    <value>Enter a title for the article here.</value>
+  </data>
+  <data name="valTitle.ErrorMessage" xml:space="preserve">
+    <value>Title is Required</value>
+  </data>
+  <data name="plAuthor.Text" xml:space="preserve">
+    <value>Author:</value>
+  </data>
+  <data name="plAuthor.Help" xml:space="preserve">
+    <value>Select author for the article.</value>
+  </data>
+  <data name="cmdSelectAuthor.Text" xml:space="preserve">
+    <value>(Change Author)</value>
+  </data>
+  <data name="NoAuthor.Text" xml:space="preserve">
+    <value>No Author</value>
+  </data>
+  <data name="plCategories.Text" xml:space="preserve">
+    <value>Categories:</value>
+  </data>
+  <data name="plCategories.Help" xml:space="preserve">
+    <value>Select categories for the article here.</value>
+  </data>
+  <data name="AdvancedSettings.Text" xml:space="preserve">
+    <value>Advanced Settings</value>
+  </data>
+  <data name="ArticleDetails.Text" xml:space="preserve">
+    <value>Article Details</value>
+  </data>
+  <data name="ArticleDetails.Description" xml:space="preserve">
+    <value>Enter the main body of your article (optional).&lt;br&gt;Once complete, you can save your article via the buttons above the form.</value>
+  </data>
+  <data name="Details.Text" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="DetailsHelp.Text" xml:space="preserve">
+    <value>Enter the body of your article here.</value>
+  </data>
+  <data name="ArticleAppearance.Text" xml:space="preserve">
+    <value>Article Appearance</value>
+  </data>
+  <data name="ArticleAppearance.Description" xml:space="preserve">
+    <value>Mark your article as featured or to be associated with an image.&lt;br&gt;Once complete, you can save your article via the buttons above the form.</value>
+  </data>
+  <data name="plImage.Text" xml:space="preserve">
+    <value>Image:</value>
+  </data>
+  <data name="plImage.Help" xml:space="preserve">
+    <value>You can choose an image to associate with this article.</value>
+  </data>
+  <data name="plFeatured.Text" xml:space="preserve">
+    <value>Featured:</value>
+  </data>
+  <data name="plFeatured.Help" xml:space="preserve">
+    <value>Optionally mark the content as featured to highlight it. </value>
+  </data>
+  <data name="plSecure.Text" xml:space="preserve">
+    <value>Secure:</value>
+  </data>
+  <data name="plSecure.Help" xml:space="preserve">
+    <value>If the article is secured, the complete article (except for summary) will only be available to the roles configured in admin options.</value>
+  </data>
+  <data name="ArticleLink.Text" xml:space="preserve">
+    <value>Article Link</value>
+  </data>
+  <data name="ArticleLink.Description" xml:space="preserve">
+    <value>Optionally link your article to another resource.&lt;br&gt;Once complete, you can save your article via the buttons above the form.</value>
+  </data>
+  <data name="plNewWindow.Text" xml:space="preserve">
+    <value>New Window?</value>
+  </data>
+  <data name="plNewWindow.Help" xml:space="preserve">
+    <value>Check to launch the link in a new window.</value>
+  </data>
+  <data name="ArticlePublishing.Text" xml:space="preserve">
+    <value>Article Publishing</value>
+  </data>
+  <data name="ArticlePublishing.Description" xml:space="preserve">
+    <value>Optionally specify a date &amp; time to publish/expire your article.&lt;br&gt;Once complete, you can save your article via the buttons above the form.</value>
+  </data>
+  <data name="plStartDate.Text" xml:space="preserve">
+    <value>Publish Date &amp; Time:</value>
+  </data>
+  <data name="plStartDate.Help" xml:space="preserve">
+    <value>Enter the start date for displaying this article.</value>
+  </data>
+  <data name="valStartDate.ErrorMessage" xml:space="preserve">
+    <value>Publish Date &amp; Time is Invalid</value>
+  </data>
+  <data name="valStartDateRequired.ErrorMessage" xml:space="preserve">
+    <value>Publish Date &amp; Time is Required</value>
+  </data>
+  <data name="plEndDate.Text" xml:space="preserve">
+    <value>Expiry Date &amp; Time:</value>
+  </data>
+  <data name="plEndDate.Help" xml:space="preserve">
+    <value>Enter the end date for displaying this article.</value>
+  </data>
+  <data name="valEndDate.ErrorMessage" xml:space="preserve">
+    <value>Expiry Date &amp; Time is Invalid</value>
+  </data>
+  <data name="Delete.Text" xml:space="preserve">
+    <value>Are You Sure You Wish To Delete This Item ?</value>
+  </data>
+  <data name="PublishArticle.Text" xml:space="preserve">
+    <value>Publish</value>
+  </data>
+  <data name="ApproveArticle.Text" xml:space="preserve">
+    <value>Approve Article</value>
+  </data>
+  <data name="cmdAddEditPages.Text" xml:space="preserve">
+    <value>Add/Edit Pages</value>
+  </data>
+  <data name="DeleteArticle.Text" xml:space="preserve">
+    <value>Delete Article</value>
+  </data>
+  <data name="ControlTitle_edit.Text" xml:space="preserve">
+    <value>Submit Article</value>
+  </data>
+  <data name="ModuleHelp.Text" xml:space="preserve">
+    <value>&lt;h1&gt;Article Management&lt;/h1&gt;&lt;p&gt;Users allowed to submit articles can submit or edit an article on this page. This module allows you to create a new article, modify an existing article, delete an article, add pages to an article or submit an article for approval.&lt;/p&gt;</value>
+  </data>
+  <data name="Attachment.Text" xml:space="preserve">
+    <value>Links</value>
+  </data>
+  <data name="CreateHelp.Text" xml:space="preserve">
+    <value>In this section, you can specify your content.</value>
+  </data>
+  <data name="plBody.Help" xml:space="preserve">
+    <value>Enter the body of your article. </value>
+  </data>
+  <data name="plBody.Text" xml:space="preserve">
+    <value>Body:</value>
+  </data>
+  <data name="Create.Text" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="Organize.Text" xml:space="preserve">
+    <value>Organize</value>
+  </data>
+  <data name="OrganizeHelp.Text" xml:space="preserve">
+    <value>In this section, you can organize your content.</value>
+  </data>
+  <data name="cmdPublish.Text" xml:space="preserve">
+    <value>Publish</value>
+  </data>
+  <data name="PublishHelp.Text" xml:space="preserve">
+    <value>In this section, you can control how and when your content is published.</value>
+  </data>
+  <data name="Excerpt.Text" xml:space="preserve">
+    <value>Summary</value>
+  </data>
+  <data name="plLink.Help" xml:space="preserve">
+    <value>Link the article to a URL/Page/File. </value>
+  </data>
+  <data name="plLink.Text" xml:space="preserve">
+    <value>Link:</value>
+  </data>
+  <data name="valBody.ErrorMessage" xml:space="preserve">
+    <value>Body is Required</value>
+  </data>
+  <data name="Action.Text" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="ActionHelp.Text" xml:space="preserve">
+    <value>In this section, you can perform actions relating to the content.</value>
+  </data>
+  <data name="AwaitingApproval.Text" xml:space="preserve">
+    <value>Awaiting Approval</value>
+  </data>
+  <data name="Draft.Text" xml:space="preserve">
+    <value>Draft</value>
+  </data>
+  <data name="plStatus.Help" xml:space="preserve">
+    <value>Select the status for the content.</value>
+  </data>
+  <data name="plStatus.Text" xml:space="preserve">
+    <value>Status:</value>
+  </data>
+  <data name="Publish.Text" xml:space="preserve">
+    <value>Publish</value>
+  </data>
+  <data name="Published.Text" xml:space="preserve">
+    <value>Published</value>
+  </data>
+  <data name="valCategoriesRequired.ErrorMessage" xml:space="preserve">
+    <value>Category is Required</value>
+  </data>
+  <data name="Meta.Text" xml:space="preserve">
+    <value>Meta Information</value>
+  </data>
+  <data name="plMetaDescription.Help" xml:space="preserve">
+    <value>Optionally overrides the description for the page.</value>
+  </data>
+  <data name="plMetaDescription.Text" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="plMetaKeyWords.Help" xml:space="preserve">
+    <value>Optionally overrides the keywords for the page.</value>
+  </data>
+  <data name="plMetaKeyWords.Text" xml:space="preserve">
+    <value>Keywords</value>
+  </data>
+  <data name="plMetaTitle.Help" xml:space="preserve">
+    <value>Optionally overrides the title for the page.</value>
+  </data>
+  <data name="plMetaTitle.Text" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="plPageHeadText.Help" xml:space="preserve">
+    <value>Enter any tags (i.e. META tags) that should be rendered in the "HEAD" tag of the HTML for this page.</value>
+  </data>
+  <data name="plPageHeadText.Text" xml:space="preserve">
+    <value>Page Header Tags</value>
+  </data>
+  <data name="CustomFields.Text" xml:space="preserve">
+    <value>Custom Fields</value>
+  </data>
+  <data name="SelectValue.Text" xml:space="preserve">
+    <value>&lt;Select [VALUE]&gt;</value>
+  </data>
+  <data name="valFieldCurrency.Text" xml:space="preserve">
+    <value>[CUSTOMFIELD] must be a currency.</value>
+  </data>
+  <data name="valFieldDate.Text" xml:space="preserve">
+    <value>[CUSTOMFIELD] must be a date.</value>
+  </data>
+  <data name="valFieldDecimal.Text" xml:space="preserve">
+    <value>[CUSTOMFIELD] must be a decimal.</value>
+  </data>
+  <data name="valFieldEmail.Text" xml:space="preserve">
+    <value>[CUSTOMFIELD] must be an email address.</value>
+  </data>
+  <data name="valFieldNumber.Text" xml:space="preserve">
+    <value>[CUSTOMFIELD] must be a number.</value>
+  </data>
+  <data name="valFieldRegex.Text" xml:space="preserve">
+    <value>[CUSTOMFIELD] is an invalid format.</value>
+  </data>
+  <data name="valFieldRequired.Text" xml:space="preserve">
+    <value>[CUSTOMFIELD] is required. </value>
+  </data>
+  <data name="valPublishDate.ErrorMessage" xml:space="preserve">
+    <value>Invalid publish date.</value>
+  </data>
+  <data name="valRequired.Text" xml:space="preserve">
+    <value>&lt;br&gt;Required</value>
+  </data>
+  <data name="plTags.Help" xml:space="preserve">
+    <value>Enter tags for your article e.g. Dairy Farmer 2009</value>
+  </data>
+  <data name="plTags.Text" xml:space="preserve">
+    <value>Tags:</value>
+  </data>
+  <data name="TagsHelp.Text" xml:space="preserve">
+    <value>Separate keywords by commas e.g. Cowboy,Texas Rodeo,2009</value>
+  </data>
+  <data name="AuthorUsername.Text" xml:space="preserve">
+    <value>(username)</value>
+  </data>
+  <data name="valAuthor.ErrorMessage" xml:space="preserve">
+    <value>&lt;br /&gt;Invalid author.</value>
+  </data>
+  <data name="plImageUrl.Help" xml:space="preserve">
+    <value>Specify an external image url to associate with the article.</value>
+  </data>
+  <data name="plImageUrl.Text" xml:space="preserve">
+    <value>Image Url:</value>
+  </data>
+  <data name="SelectAuthor.Text" xml:space="preserve">
+    <value>-- Select Author --</value>
+  </data>
+  <data name="cmdAddExistingImage.Text" xml:space="preserve">
+    <value>Attach Existing Image</value>
+  </data>
+  <data name="Mirror.Text" xml:space="preserve">
+    <value>Mirror</value>
+  </data>
+  <data name="MirrorHelp.Text" xml:space="preserve">
+    <value>Specify if you want to mirror the article from another portal.</value>
+  </data>
+  <data name="plMirrorArticle.Help" xml:space="preserve">
+    <value>Check to mirror the article from another portal. </value>
+  </data>
+  <data name="plMirrorArticle.Text" xml:space="preserve">
+    <value>Mirror Article?</value>
+  </data>
+  <data name="plMirrorArticleSelect.Help" xml:space="preserve">
+    <value>Select article to mirror.</value>
+  </data>
+  <data name="plMirrorArticleSelect.Text" xml:space="preserve">
+    <value>Select Article:</value>
+  </data>
+  <data name="plMirrorAutoUpdate.Help" xml:space="preserve">
+    <value>Check to auto update article when source article is updated. </value>
+  </data>
+  <data name="plMirrorAutoUpdate.Text" xml:space="preserve">
+    <value>Auto Update?</value>
+  </data>
+  <data name="plMirrorModule.Help" xml:space="preserve">
+    <value>Select module to pick articles from. </value>
+  </data>
+  <data name="plMirrorModule.Text" xml:space="preserve">
+    <value>Select Module:</value>
+  </data>
+  <data name="valMirrorArticle.ErrorMessage" xml:space="preserve">
+    <value>You must select an article to mirror. </value>
+  </data>
+  <data name="MirrorText.Text" xml:space="preserve">
+    <value>&lt;br /&gt;This article has been mirrored from portal {0}.</value>
+  </data>
+  <data name="MirrorTextUpdate.Text" xml:space="preserve">
+    <value>&lt;br /&gt;This article has been mirrored from portal {0}. Auto-update is enabled. You are not authorized to edit this version of the article.</value>
+  </data>
+  <data name="MirrorTextLinked.Text" xml:space="preserve">
+    <value>&lt;br /&gt;This article has been mirrored from {0} portals. </value>
+  </data>
+  <data name="plFolder.Help" xml:space="preserve">
+    <value>Select the folder to upload to.</value>
+  </data>
+  <data name="plFolder.Text" xml:space="preserve">
+    <value>Upload Folder:</value>
+  </data>
+</root>

@@ -1,0 +1,32 @@
+[PRINT]<div class="article">
+
+    <div class="articleCalendar articleCalendarIcon-[PUBLISHSTARTDATE:MM]">
+        <div class="articleCalendarDay">[PUBLISHSTARTDATE:dd]</div>
+    </div>
+    <div class="articleHeadline"><h1>[EDIT]<a href="[ARTICLELINK]">[TITLE]</a></h1></div>
+    <div class="articleAuthor Normal"><a href="[AUTHORLINK]">[AUTHOR]</a> posted on [PUBLISHSTARTDATE:MMMM dd, yyyy HH:mm][HASRATING] [RATING][/HASRATING]</div>
+
+    <div class="articleEntry Normal">
+        [HASIMAGE]<div class="articleImage">[IMAGETHUMB:100]</div>[/HASIMAGE]
+        [HASSUMMARY][SUMMARY][/HASSUMMARY][HASNOSUMMARY][DETAILS:150][/HASNOSUMMARY]
+        [ISRSSITEM]<p><a href="[LINK]" target="_blank">[Read the rest of this article...]</a></p>[/ISRSSITEM]
+        [ISNOTRSSITEM]
+        [HASMOREDETAIL:150]
+            <p><a href="[ARTICLELINK]" target="[LINKTARGET]">[Read the rest of this article...]</a></p>
+        [/HASMOREDETAIL:150][/ISNOTRSSITEM][TAGS]
+    </div>
+    
+    [HASCATEGORIES] 
+    <div class="articleCategories Normal">
+        Posted in: [CATEGORIES]
+    </div>
+    [/HASCATEGORIES]
+    
+    <div class="Normal">
+        Actions: 
+        <a rel="nofollow" href="mailto:?subject=[TITLESAFEJS]&amp;body=Thought you might like this: [ARTICLELINK]">E-mail</a> | 
+        <a rel="bookmark" href="[ARTICLELINK]">Permalink</a> | 
+        [HASCOMMENTSENABLED]<a rel="nofollow" href="[COMMENTLINK]">Comments ([COMMENTCOUNT])</a> [ISSYNDICATIONENABLED]<a rel="nofollow" href="[COMMENTRSS]"><img src="Images/rssbutton.gif" alt="RSS comment feed" style="border-width:0px;" /></a>[/ISSYNDICATIONENABLED] [/HASCOMMENTSENABLED]
+    </div>
+    
+</div>

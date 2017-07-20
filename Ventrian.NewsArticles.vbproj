@@ -1,0 +1,1006 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{25F6A930-34CD-4730-8324-D234D4637898}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>
+    </RootNamespace>
+    <AssemblyName>Ventrian.NewsArticles</AssemblyName>
+    <OptionStrict>Off</OptionStrict>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DocumentationFile>Ventrian.xml</DocumentationFile>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42353,42354,42355</NoWarn>
+    <WarningsAsErrors>
+    </WarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>Ventrian.xml</DocumentationFile>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42353,42354,42355</NoWarn>
+    <WarningsAsErrors>
+    </WarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CookComputing.XmlRpc, Version=2.1.0.3, Culture=neutral, PublicKeyToken=a7d6e17aa302004d" />
+    <Reference Include="DotNetNuke, Version=6.2.3.141, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\DotNetNuke482\Website\Bin\DotNetNuke.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetNuke.Web.Client, Version=6.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\DotNetNuke.Web.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="ephtmltopdf, Version=4.0.6.31734, Culture=neutral, PublicKeyToken=5b5f377bc08a4d32, processorArchitecture=MSIL" />
+    <Reference Include="Joel.Net.Akismet, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Mobile" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Ventrian.ImageResizer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Ventrian.NewsArticles.Secure, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Collections.Specialized" />
+    <Import Include="System.Configuration" />
+    <Import Include="System.Text" />
+    <Import Include="System.Text.RegularExpressions" />
+    <Import Include="System.Web" />
+    <Import Include="System.Web.Caching" />
+    <Import Include="System.Web.SessionState" />
+    <Import Include="System.Web.Security" />
+    <Import Include="System.Web.Profile" />
+    <Import Include="System.Web.UI" />
+    <Import Include="System.Web.UI.WebControls" />
+    <Import Include="System.Web.UI.WebControls.WebParts" />
+    <Import Include="System.Web.UI.HtmlControls" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="API\MetaWebLog\MetaBlogInfo.vb" />
+    <Compile Include="API\MetaWebLog\Handler.ashx.vb">
+      <DependentUpon>Handler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="API\MetaWebLog\MetaCategoryInfo.vb" />
+    <Compile Include="API\MetaWebLog\MetaException.vb" />
+    <Compile Include="API\MetaWebLog\MetaFaultInfo.vb" />
+    <Compile Include="API\MetaWebLog\MetaMediaInfo.vb" />
+    <Compile Include="API\MetaWebLog\MetaMediaUrlInfo.vb" />
+    <Compile Include="API\MetaWebLog\MetaPostInfo.vb" />
+    <Compile Include="API\MetaWebLog\XmlrpcRequest.vb" />
+    <Compile Include="API\MetaWebLog\XmlrpcResponse.vb" />
+    <Compile Include="API\Rsd.ashx.vb">
+      <DependentUpon>Rsd.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Base\NewsArticleControlBase.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Base\NewsArticleModuleBase.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\Archives\ArchiveInfo.vb" />
+    <Compile Include="Components\Archives\ArchiveModeType.vb" />
+    <Compile Include="Components\Archives\ArchiveSettings.vb" />
+    <Compile Include="Components\Common\ArticleConstants.vb" />
+    <Compile Include="Components\ArticleController.vb" />
+    <Compile Include="Components\ArticleInfo.vb" />
+    <Compile Include="Components\ArticleSettings.vb" />
+    <Compile Include="Components\AuthorController.vb" />
+    <Compile Include="Components\AuthorInfo.vb" />
+    <Compile Include="Components\AuthorSortByType.vb" />
+    <Compile Include="Components\Bitly.vb" />
+    <Compile Include="Components\CategoryController.vb" />
+    <Compile Include="Components\CategoryInfo.vb" />
+    <Compile Include="Components\CommentController.vb" />
+    <Compile Include="Components\CommentInfo.vb" />
+    <Compile Include="Components\Common.vb" />
+    <Compile Include="Components\CategorySortType.vb" />
+    <Compile Include="Components\CategorySecurityType.vb" />
+    <Compile Include="Components\Common\ArticleUtilities.vb" />
+    <Compile Include="Components\ContentSharingInfo.vb" />
+    <Compile Include="Components\Handout\HandoutArticle.vb" />
+    <Compile Include="Components\Handout\HandoutController.vb" />
+    <Compile Include="Components\Handout\HandoutFilterType.vb" />
+    <Compile Include="Components\Handout\HandoutInfo.vb" />
+    <Compile Include="Components\Handout\HandoutType.vb" />
+    <Compile Include="Components\LatestArticleController.vb" />
+    <Compile Include="Components\MirrorArticleController.vb" />
+    <Compile Include="Components\MirrorArticleInfo.vb" />
+    <Compile Include="Components\Social\Journal.vb" />
+    <Compile Include="Components\ThumbnailType.vb" />
+    <Compile Include="Components\Utility\LocalizationUtil.vb" />
+    <Compile Include="Components\WebControls\RefreshControl.vb" />
+    <Compile Include="Providers\FileProvider\FileController.vb" />
+    <Compile Include="Providers\FileProvider\CoreFileProvider2.vb" />
+    <Compile Include="Providers\FileProvider\FileInfo.vb" />
+    <Compile Include="Components\ImageController.vb" />
+    <Compile Include="Components\ImageInfo.vb" />
+    <Compile Include="Components\Import\FeedController.vb" />
+    <Compile Include="Components\Import\FeedDateMode.vb" />
+    <Compile Include="Components\Import\FeedExpiryType.vb" />
+    <Compile Include="Components\Import\FeedInfo.vb" />
+    <Compile Include="Components\Import\RssImportJob.vb" />
+    <Compile Include="Components\Layout\LatestLayoutController.vb" />
+    <Compile Include="Components\Layout\LatestLayoutType.vb" />
+    <Compile Include="Components\LinkFilterType.vb" />
+    <Compile Include="Components\RelatedType.vb" />
+    <Compile Include="Components\CustomFields\CustomValueController.vb" />
+    <Compile Include="Components\CustomFields\CustomValueInfo.vb" />
+    <Compile Include="Components\CustomFields\CustomFieldController.vb" />
+    <Compile Include="Components\CustomFields\CustomFieldInfo.vb" />
+    <Compile Include="Components\CustomFields\CustomFieldType.vb" />
+    <Compile Include="Components\CustomFields\CustomFieldValidationType.vb" />
+    <Compile Include="Components\SyndicationEnclosureType.vb" />
+    <Compile Include="Components\TagController.vb" />
+    <Compile Include="Components\TagInfo.vb" />
+    <Compile Include="Components\TitleReplacementType.vb" />
+    <Compile Include="Components\SyndicationLinkType.vb" />
+    <Compile Include="Components\ExpiryType.vb" />
+    <Compile Include="Components\GroupByType.vb" />
+    <Compile Include="Components\DisplayType.vb" />
+    <Compile Include="Components\EmailTemplateController.vb" />
+    <Compile Include="Components\EmailTemplateInfo.vb" />
+    <Compile Include="Components\EmailTemplateType.vb" />
+    <Compile Include="Components\LayoutModeType.vb" />
+    <Compile Include="Components\Layout\LayoutController.vb" />
+    <Compile Include="Components\Layout\LayoutInfo.vb" />
+    <Compile Include="Components\Layout\LayoutType.vb" />
+    <Compile Include="Components\MatchOperator.vb" />
+    <Compile Include="Components\MenuOptionType.vb" />
+    <Compile Include="Components\Controllers\PageController.vb" />
+    <Compile Include="Components\Controllers\PageInfo.vb" />
+    <Compile Include="Components\RatingController.vb" />
+    <Compile Include="Components\RatingInfo.vb" />
+    <Compile Include="Components\StatusType.vb" />
+    <Compile Include="Components\TemplateConstants.vb" />
+    <Compile Include="Components\TemplateController.vb" />
+    <Compile Include="Components\TemplateInfo.vb" />
+    <Compile Include="Components\Layout\TokenProcessor.vb" />
+    <Compile Include="Components\Tracking\Notification.vb" />
+    <Compile Include="Components\Tracking\NotificationJob.vb" />
+    <Compile Include="Components\Tracking\PingBackProxy.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Tracking\PingJob.vb" />
+    <Compile Include="Components\Tracking\PingProxy.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Tracking\TrackBackProxy.vb" />
+    <Compile Include="Components\Tracking\TrackHelper.vb" />
+    <Compile Include="Components\Types\AuthorSelectType.vb" />
+    <Compile Include="Components\Types\UrlModeType.vb" />
+    <Compile Include="Components\Types\MenuPositionType.vb" />
+    <Compile Include="Components\Types\TextEditorModeType.vb" />
+    <Compile Include="Components\UserTime.vb" />
+    <Compile Include="Components\Validators\CheckBoxListValidator.vb" />
+    <Compile Include="Components\WatermarkPosition.vb" />
+    <Compile Include="Components\WebControls\PagingControl.vb" />
+    <Compile Include="Controls\SWFUploaderFiles.ashx.vb">
+      <DependentUpon>SWFUploaderFiles.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UploadFiles.ascx.designer.vb">
+      <DependentUpon>UploadFiles.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UploadFiles.ascx.vb">
+      <DependentUpon>UploadFiles.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\Listing.ascx.designer.vb">
+      <DependentUpon>Listing.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Listing.ascx.vb">
+      <DependentUpon>Listing.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\PostComment.ascx.designer.vb">
+      <DependentUpon>PostComment.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PostComment.ascx.vb">
+      <DependentUpon>PostComment.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\PostRating.ascx.designer.vb">
+      <DependentUpon>PostRating.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PostRating.ascx.vb">
+      <DependentUpon>PostRating.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\SWFUploader.ashx.vb">
+      <DependentUpon>SWFUploader.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UploadImages.ascx.designer.vb">
+      <DependentUpon>UploadImages.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UploadImages.ascx.vb">
+      <DependentUpon>UploadImages.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LatestComments.ascx.designer.vb">
+      <DependentUpon>LatestComments.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="LatestComments.ascx.vb">
+      <DependentUpon>LatestComments.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LatestCommentsOptions.ascx.designer.vb">
+      <DependentUpon>LatestCommentsOptions.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="LatestCommentsOptions.ascx.vb">
+      <DependentUpon>LatestCommentsOptions.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Providers\FileProvider\CoreFileProvider.vb" />
+    <Compile Include="Providers\FileProvider\FileProvider.vb" />
+    <Compile Include="ucEditCategory.ascx.designer.vb">
+      <DependentUpon>ucEditCategory.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ucEditCategory.ascx.vb">
+      <DependentUpon>ucEditCategory.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ucEditComment.ascx.designer.vb">
+      <DependentUpon>ucEditComment.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ucEditComment.ascx.vb">
+      <DependentUpon>ucEditComment.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ucImportFeed.ascx.designer.vb">
+      <DependentUpon>ucImportFeed.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ucImportFeed.ascx.vb">
+      <DependentUpon>ucImportFeed.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ucImportFeeds.ascx.designer.vb">
+      <DependentUpon>ucImportFeeds.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ucImportFeeds.ascx.vb">
+      <DependentUpon>ucImportFeeds.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewTag.ascx.designer.vb">
+      <DependentUpon>ViewTag.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewTag.ascx.vb">
+      <DependentUpon>ViewTag.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NewsSearch.ascx.designer.vb">
+      <DependentUpon>NewsSearch.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="NewsSearch.ascx.vb">
+      <DependentUpon>NewsSearch.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NewsSearchOptions.ascx.designer.vb">
+      <DependentUpon>NewsSearchOptions.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="NewsSearchOptions.ascx.vb">
+      <DependentUpon>NewsSearchOptions.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ucEditCustomField.ascx.designer.vb">
+      <DependentUpon>ucEditCustomField.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ucEditCustomField.ascx.vb">
+      <DependentUpon>ucEditCustomField.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ucEditCustomFields.ascx.designer.vb">
+      <DependentUpon>ucEditCustomFields.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ucEditCustomFields.ascx.vb">
+      <DependentUpon>ucEditCustomFields.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ucEditTag.ascx.designer.vb">
+      <DependentUpon>ucEditTag.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ucEditTag.ascx.vb">
+      <DependentUpon>ucEditTag.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ucEditTags.ascx.designer.vb">
+      <DependentUpon>ucEditTags.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ucEditTags.ascx.vb">
+      <DependentUpon>ucEditTags.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewSearch.ascx.designer.vb">
+      <DependentUpon>ViewSearch.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewSearch.ascx.vb">
+      <DependentUpon>ViewSearch.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ImageHandler.ashx.vb">
+      <DependentUpon>ImageHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="LatestArticles.ascx.designer.vb">
+      <DependentUpon>LatestArticles.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="LatestArticles.ascx.vb">
+      <DependentUpon>LatestArticles.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LatestArticlesOptions.ascx.designer.vb">
+      <DependentUpon>LatestArticlesOptions.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="LatestArticlesOptions.ascx.vb">
+      <DependentUpon>LatestArticlesOptions.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="NewsArchives.ascx.designer.vb">
+      <DependentUpon>NewsArchives.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="NewsArchives.ascx.vb">
+      <DependentUpon>NewsArchives.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NewsArchivesOptions.ascx.designer.vb">
+      <DependentUpon>NewsArchivesOptions.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="NewsArchivesOptions.ascx.vb">
+      <DependentUpon>NewsArchivesOptions.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NewsArticles.ascx.designer.vb">
+      <DependentUpon>NewsArticles.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="NewsArticles.ascx.vb">
+      <DependentUpon>NewsArticles.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print.aspx.designer.vb">
+      <DependentUpon>Print.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print.aspx.vb">
+      <DependentUpon>Print.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Providers\DataProvider\DataProvider.vb" />
+    <Compile Include="Rss.aspx.designer.vb">
+      <DependentUpon>Rss.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Rss.aspx.vb">
+      <DependentUpon>Rss.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RssComments.aspx.designer.vb">
+      <DependentUpon>RssComments.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RssComments.aspx.vb">
+      <SubType>ASPXCodebehind</SubType>
+      <DependentUpon>RssComments.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ucAdminOptions.ascx.designer.vb">
+      <DependentUpon>ucAdminOptions.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ucAdminOptions.ascx.vb">
+      <DependentUpon>ucAdminOptions.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ucApproveArticles.ascx.designer.vb">
+      <DependentUpon>ucApproveArticles.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ucApproveArticles.ascx.vb">
+      <DependentUpon>ucApproveArticles.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ucApproveComments.ascx.designer.vb">
+      <DependentUpon>ucApproveComments.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ucApproveComments.ascx.vb">
+      <DependentUpon>ucApproveComments.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewArchive.ascx.designer.vb">
+      <DependentUpon>ViewArchive.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewArchive.ascx.vb">
+      <DependentUpon>ViewArchive.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewArticle.ascx.designer.vb">
+      <DependentUpon>ViewArticle.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewArticle.ascx.vb">
+      <DependentUpon>ViewArticle.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewAuthor.ascx.designer.vb">
+      <DependentUpon>ViewAuthor.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewAuthor.ascx.vb">
+      <DependentUpon>ViewAuthor.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Archives.ascx.designer.vb">
+      <DependentUpon>Archives.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Archives.ascx.vb">
+      <DependentUpon>Archives.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewCategory.ascx.designer.vb">
+      <DependentUpon>ViewCategory.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewCategory.ascx.vb">
+      <DependentUpon>ViewCategory.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ucEditCategories.ascx.designer.vb">
+      <DependentUpon>ucEditCategories.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ucEditCategories.ascx.vb">
+      <DependentUpon>ucEditCategories.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ucEditPage.ascx.designer.vb">
+      <DependentUpon>ucEditPage.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ucEditPage.ascx.vb">
+      <DependentUpon>ucEditPage.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ucEditPages.ascx.designer.vb">
+      <DependentUpon>ucEditPages.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ucEditPages.ascx.vb">
+      <DependentUpon>ucEditPages.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ucEditPageSortOrder.ascx.designer.vb">
+      <DependentUpon>ucEditPageSortOrder.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ucEditPageSortOrder.ascx.vb">
+      <DependentUpon>ucEditPageSortOrder.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ucEmailTemplates.ascx.designer.vb">
+      <DependentUpon>ucEmailTemplates.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ucEmailTemplates.ascx.vb">
+      <DependentUpon>ucEmailTemplates.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ucHeader.ascx.designer.vb">
+      <DependentUpon>ucHeader.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ucHeader.ascx.vb">
+      <DependentUpon>ucHeader.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ucMyArticles.ascx.designer.vb">
+      <DependentUpon>ucMyArticles.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ucMyArticles.ascx.vb">
+      <DependentUpon>ucMyArticles.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewCurrent.ascx.designer.vb">
+      <DependentUpon>ViewCurrent.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewCurrent.ascx.vb">
+      <DependentUpon>ViewCurrent.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ucNotAuthenticated.ascx.designer.vb">
+      <DependentUpon>ucNotAuthenticated.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ucNotAuthenticated.ascx.vb">
+      <DependentUpon>ucNotAuthenticated.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ucNotAuthorized.ascx.designer.vb">
+      <DependentUpon>ucNotAuthorized.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ucNotAuthorized.ascx.vb">
+      <DependentUpon>ucNotAuthorized.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ucSubmitNews.ascx.designer.vb">
+      <DependentUpon>ucSubmitNews.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ucSubmitNews.ascx.vb">
+      <DependentUpon>ucSubmitNews.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ucSubmitNewsComplete.ascx.designer.vb">
+      <DependentUpon>ucSubmitNewsComplete.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ucSubmitNewsComplete.ascx.vb">
+      <DependentUpon>ucSubmitNewsComplete.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ucTemplateEditor.ascx.designer.vb">
+      <DependentUpon>ucTemplateEditor.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ucTemplateEditor.ascx.vb">
+      <DependentUpon>ucTemplateEditor.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ucViewOptions.ascx.designer.vb">
+      <DependentUpon>ucViewOptions.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ucViewOptions.ascx.vb">
+      <DependentUpon>ucViewOptions.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web References\wsStoryFeed\Reference.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="API\MetaWebLog\wlwmanifest.xml" />
+    <Content Include="App_LocalResources\LatestArticles.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\LatestArticlesOptions.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\NewsArchives.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\NewsArchivesOptions.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\SharedResources.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\ucAdminOptions.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\ucApproveArticles.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\ViewArchive.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\ViewArticle.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\ViewAuthor.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\ucEditCategories.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\ucEditCategory.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\ucEditPage.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\ucEditPages.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\ucEditPageSortOrder.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\ucEmailTemplates.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\ucMyArticles.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\ucNotAuthenticated.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\ucNotAuthorized.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\PostComment.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\ViewSearch.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\ucSubmitNews.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\ucSubmitNewsComplete.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\ucTemplateEditor.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\ucViewOptions.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Images\Admin\Categories.gif" />
+    <Content Include="Images\Admin\MainOptions.gif" />
+    <Content Include="Images\Admin\Templates.gif" />
+    <Content Include="Images\appearance.png" />
+    <Content Include="Images\details.png" />
+    <Content Include="Images\left_both.gif" />
+    <Content Include="Images\linkto.png" />
+    <Content Include="Images\publishing.png" />
+    <Content Include="Images\Rating\stars-0-0.gif" />
+    <Content Include="Images\Rating\stars-0-5.gif" />
+    <Content Include="Images\Rating\stars-1-0.gif" />
+    <Content Include="Images\Rating\stars-1-5.gif" />
+    <Content Include="Images\Rating\stars-2-0.gif" />
+    <Content Include="Images\Rating\stars-2-5.gif" />
+    <Content Include="Images\Rating\stars-3-0.gif" />
+    <Content Include="Images\Rating\stars-3-5.gif" />
+    <Content Include="Images\Rating\stars-4-0.gif" />
+    <Content Include="Images\Rating\stars-4-5.gif" />
+    <Content Include="Images\Rating\stars-5-0.gif" />
+    <Content Include="Images\right_both.gif" />
+    <Content Include="Images\spacer.gif" />
+    <Content Include="Images\summary.png" />
+    <Content Include="Images\tab_background.gif" />
+    <Content Include="Includes\Shadowbox\close.png" />
+    <Content Include="Includes\Shadowbox\loading.gif" />
+    <Content Include="Includes\Shadowbox\next.png" />
+    <Content Include="Includes\Shadowbox\pause.png" />
+    <Content Include="Includes\Shadowbox\play.png" />
+    <Content Include="Includes\Shadowbox\previous.png" />
+    <Content Include="Includes\Shadowbox\shadowbox.css" />
+    <Content Include="Includes\Shadowbox\shadowbox.js" />
+    <Content Include="Libraries\CookComputing.XmlRpc.dll" />
+    <Content Include="Templates\Default\Comment.Item.html" />
+    <Content Include="Templates\Default\Images\icon_comment.gif" />
+    <Content Include="Templates\Default\Listing.Featured.html" />
+    <Content Include="Templates\Default\Listing.Featured.xml" />
+    <Content Include="Templates\Default\Listing.Footer.html" />
+    <Content Include="Templates\Default\Listing.Footer.xml" />
+    <Content Include="Templates\Default\Listing.Header.html" />
+    <Content Include="Templates\Default\Listing.Item.html" />
+    <Content Include="Templates\Default\Listing.Item.xml" />
+    <Content Include="Templates\Default\Menu.Item.html" />
+    <Content Include="Templates\Default\Print.Item.html" />
+    <Content Include="Templates\Default\Template.css" />
+    <Content Include="Templates\Default\View.Item.html" />
+    <Content Include="Templates\Default\View.Item.xml" />
+    <Content Include="App_LocalResources\ucApproveComments.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\PostRating.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\Archives.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\HandoutSettings.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\Handout.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\HandoutDetail.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\NewsSearch.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\NewsSearchOptions.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\ucEditCustomFields.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\ucEditCustomField.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\ucEditTags.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\ucEditTag.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\ViewTag.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\ucImportFeeds.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\ucImportFeed.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\UploadImages.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\UploadFiles.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\LatestCommentsOptions.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\LatestComments.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_LocalResources\ucEditComment.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <EmbeddedResource Include="Components\Tracking\PingBackProxy.resx">
+      <DependentUpon>PingBackProxy.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\Tracking\PingProxy.resx">
+      <DependentUpon>PingProxy.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Content Include="App_LocalResources\ViewCategory.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Controls\UploadFiles.ascx" />
+    <Content Include="Controls\Listing.ascx" />
+    <Content Include="Controls\PostComment.ascx" />
+    <Content Include="Controls\PostRating.ascx" />
+    <Content Include="Controls\UploadImages.ascx" />
+    <Content Include="Images\Lightbox\lightbox-ico-loading.gif" />
+    <Content Include="Images\Uploader\cancelbutton.gif" />
+    <Content Include="Images\Uploader\error.gif" />
+    <Content Include="Images\Uploader\toobig.gif" />
+    <Content Include="Images\Uploader\uploadlimit.gif" />
+    <Content Include="Images\Uploader\XPButtonNoText_160x22.png" />
+    <Content Include="Images\Uploader\zerobyte.gif" />
+    <Content Include="Images\Includes\ColorPicker\ColorPicker.js" />
+    <Content Include="Images\Includes\Lightbox\jquery-1.3.2.min.js" />
+    <Content Include="Images\Includes\Lightbox\jquery.lightbox-0.4.js" />
+    <Content Include="Images\Includes\Lightbox\jquery.lightbox-0.4.pack.js" />
+    <Content Include="Images\Includes\Uploader\handlers.00.07.61.js" />
+    <Content Include="Images\Includes\Uploader\swfupload.00.07.61.js" />
+    <Content Include="Images\Includes\Uploader\swfupload.00.07.61.swf" />
+    <Content Include="Includes\ColorPicker\ColorPicker.js" />
+    <Content Include="Includes\Lightbox\jquery-1.3.2.min.js" />
+    <Content Include="Includes\Lightbox\jquery.lightbox-0.4.js" />
+    <Content Include="Includes\Lightbox\jquery.lightbox-0.4.pack.js" />
+    <Content Include="Includes\Uploader\handlers.00.07.61.js" />
+    <Content Include="Includes\Uploader\swfupload.00.07.61.js" />
+    <Content Include="Includes\Uploader\swfupload.00.07.61.swf" />
+    <Content Include="Includes\VentrianValidators.js" />
+    <Content Include="LatestComments.ascx" />
+    <Content Include="LatestCommentsOptions.ascx" />
+    <Content Include="Libraries\Joel.Net.Akismet.dll" />
+    <Content Include="Templates\Standard\File.Footer.Html" />
+    <Content Include="Templates\Standard\File.Header.Html" />
+    <Content Include="Templates\Standard\File.Item.Html" />
+    <Content Include="Templates\Standard\Listing.Empty.html" />
+    <Content Include="Templates\Standard\Image.Footer.Html" />
+    <Content Include="Templates\Standard\Image.Header.Html" />
+    <Content Include="Templates\Standard\Image.Item.Html" />
+    <Content Include="ucEditCategory.ascx" />
+    <Content Include="ucEditComment.ascx" />
+    <Content Include="ucImportFeed.ascx" />
+    <Content Include="ucImportFeeds.ascx" />
+    <Content Include="ViewTag.ascx" />
+    <Content Include="Images\rssbutton.gif" />
+    <Content Include="Images\SmartThinker\articleadd.png" />
+    <Content Include="Images\SmartThinker\commentadd.png" />
+    <Content Include="Images\SmartThinker\rateadd.png" />
+    <Content Include="Images\Includes\Handout.xml" />
+    <Content Include="Libraries\ephtmltopdf.dll" />
+    <Content Include="Libraries\Ventrian.NewsArticles.Secure.dll" />
+    <Content Include="NewsSearch.ascx" />
+    <Content Include="NewsSearchOptions.ascx" />
+    <Content Include="Templates\Standard\Related.Footer.html" />
+    <Content Include="Templates\Standard\Related.Header.html" />
+    <Content Include="Templates\Standard\Related.Item.html" />
+    <Content Include="Templates\Standard\Rss.Comment.Footer.html" />
+    <Content Include="Templates\Standard\Rss.Comment.Header.html" />
+    <Content Include="Templates\Standard\Rss.Comment.Item.html" />
+    <Content Include="Templates\Standard\Rss.Item.html" />
+    <Content Include="Templates\Standard\Rss.Footer.html" />
+    <Content Include="Templates\Standard\Rss.Header.html" />
+    <Content Include="Templates\Standard\Category.html" />
+    <Content Include="Templates\Standard\Category.Child.html" />
+    <Content Include="Templates\Standard\View.Keyword.html" />
+    <Content Include="Templates\Standard\View.Description.html" />
+    <Content Include="Templates\Standard\Handout.End.html" />
+    <Content Include="Templates\Standard\Handout.Cover.html" />
+    <Content Include="Templates\Standard\Handout.Item.html" />
+    <Content Include="Templates\Standard\Handout.Footer.html" />
+    <Content Include="Templates\Standard\Handout.Header.html" />
+    <Content Include="Templates\Standard\Print.Item.html" />
+    <Content Include="Templates\Standard\Images\01.gif" />
+    <Content Include="Templates\Standard\Images\02.gif" />
+    <Content Include="Templates\Standard\Images\03.gif" />
+    <Content Include="Templates\Standard\Images\04.gif" />
+    <Content Include="Templates\Standard\Images\05.gif" />
+    <Content Include="Templates\Standard\Images\06.gif" />
+    <Content Include="Templates\Standard\Images\07.gif" />
+    <Content Include="Templates\Standard\Images\08.gif" />
+    <Content Include="Templates\Standard\Images\09.gif" />
+    <Content Include="Templates\Standard\Images\10.gif" />
+    <Content Include="Templates\Standard\Images\11.gif" />
+    <Content Include="Templates\Standard\Images\12.gif" />
+    <Content Include="Templates\Standard\View.Title.Html" />
+    <Content Include="ucEditCustomField.ascx" />
+    <Content Include="ucEditCustomFields.ascx" />
+    <Content Include="ucEditTag.ascx" />
+    <Content Include="ucEditTags.ascx" />
+    <Content Include="ViewSearch.ascx" />
+    <Content Include="ImageHandler.ashx" />
+    <Content Include="Controls\SWFUploader.ashx" />
+    <Content Include="Controls\SWFUploaderFiles.ashx" />
+    <Content Include="API\MetaWebLog\Handler.ashx" />
+    <Content Include="API\Rsd.ashx" />
+    <None Include="Images\Includes\Handout.xsd" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="NewsArticles.dnn">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Images\Includes\VentrianValidators.js" />
+    <Content Include="Templates\Standard\Comment.Item.html" />
+    <Content Include="Templates\Standard\Listing.Featured.html" />
+    <Content Include="Templates\Standard\Images\rssbutton.gif" />
+    <Content Include="Templates\Standard\Listing.Footer.html" />
+    <Content Include="Templates\Standard\Listing.Header.html" />
+    <Content Include="Templates\Standard\Listing.Item.html" />
+    <Content Include="Templates\Standard\Menu.Item.html" />
+    <Content Include="Templates\Standard\Template.css" />
+    <Content Include="Templates\Standard\View.Item.html" />
+    <Content Include="ucApproveComments.ascx" />
+    <None Include="Web References\wsStoryFeed\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.vb</LastGenOutput>
+    </None>
+    <None Include="Web References\wsStoryFeed\StoryFeed.disco" />
+    <None Include="Web References\wsStoryFeed\StoryFeed.wsdl" />
+    <Content Include="Web.config" />
+    <Content Include="icon_comment.gif" />
+    <Content Include="icon_xml.gif" />
+    <Content Include="LatestArticles.ascx" />
+    <Content Include="LatestArticlesOptions.ascx" />
+    <Content Include="module.css" />
+    <Content Include="NewsArchives.ascx" />
+    <Content Include="NewsArchivesOptions.ascx" />
+    <Content Include="NewsArticles.ascx" />
+    <Content Include="Print.aspx" />
+    <Content Include="Rss.aspx" />
+    <Content Include="RssComments.aspx" />
+    <Content Include="ucAdminOptions.ascx" />
+    <Content Include="ucApproveArticles.ascx" />
+    <Content Include="ViewArchive.ascx" />
+    <Content Include="ViewArticle.ascx" />
+    <Content Include="ViewAuthor.ascx" />
+    <Content Include="Archives.ascx" />
+    <Content Include="ViewCategory.ascx" />
+    <Content Include="ucEditCategories.ascx" />
+    <Content Include="ucEditPage.ascx" />
+    <Content Include="ucEditPages.ascx" />
+    <Content Include="ucEditPageSortOrder.ascx" />
+    <Content Include="ucEmailTemplates.ascx" />
+    <Content Include="ucHeader.ascx" />
+    <Content Include="ucMyArticles.ascx" />
+    <Content Include="ViewCurrent.ascx" />
+    <Content Include="ucNotAuthenticated.ascx" />
+    <Content Include="ucNotAuthorized.ascx" />
+    <Content Include="ucSubmitNews.ascx" />
+    <Content Include="ucSubmitNewsComplete.ascx" />
+    <Content Include="ucTemplateEditor.ascx" />
+    <Content Include="ucViewOptions.ascx" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://localhost/dotnetnuke482test/DesktopModules/Smart-Thinker%2520-%2520UserProfile/StoryFeed.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\wsStoryFeed\</RelPath>
+      <UpdateFromURL>http://localhost/dotnetnuke482test/DesktopModules/Smart-Thinker%2520-%2520UserProfile/StoryFeed.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>MySettings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Ventrian_NewsArticles_wsStoryFeed_StoryFeedWS</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>55764</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost/DotNetNuke455</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost/DotNetNuke455</IISAppRootUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

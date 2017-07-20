@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="EmailTemplates.Text" xml:space="preserve">
+    <value>Email Templates</value>
+  </data>
+  <data name="EmailTemplatesDescription.Text" xml:space="preserve">
+    <value>In this section, you can customize the emails that are sent by this module.</value>
+  </data>
+  <data name="Name.Text" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Name.Help" xml:space="preserve">
+    <value>Select a Template to edit.</value>
+  </data>
+  <data name="Subject.Text" xml:space="preserve">
+    <value>Subject</value>
+  </data>
+  <data name="Subject.Help" xml:space="preserve">
+    <value>Subject of the email.</value>
+  </data>
+  <data name="valSubject.Text" xml:space="preserve">
+    <value>&lt;br&gt;You Must Enter a Valid Subject</value>
+  </data>
+  <data name="Template.Text" xml:space="preserve">
+    <value>Template</value>
+  </data>
+  <data name="TemplateHelp.Text" xml:space="preserve">
+    <value>Enter the template for the email here.</value>
+  </data>
+  <data name="valTemplate.ErrorMessage" xml:space="preserve">
+    <value>Template Text Is Required</value>
+  </data>
+  <data name="EmailTemplateHelp.Text" xml:space="preserve">
+    <value>Email Template Help</value>
+  </data>
+  <data name="TemplateArticleHelpDescription.Text" xml:space="preserve">
+    <value>In this section, you can view the tags for customizing emails for articles (ArticleSubmission, ArticleApproval).</value>
+  </data>
+  <data name="TemplateCommentHelpDescription.Text" xml:space="preserve">
+    <value>In this section, you can view the tags for customizing emails for comments (CommentNotification, CommentRequiringApproval, CommentApproved).</value>
+  </data>
+  <data name="UserName.Text" xml:space="preserve">
+    <value>Displays the username of article's author</value>
+  </data>
+  <data name="FirstName.Text" xml:space="preserve">
+    <value>Displays the first name of article's author</value>
+  </data>
+  <data name="LastName.Text" xml:space="preserve">
+    <value>Displays the last name of article's author</value>
+  </data>
+  <data name="FullName.Text" xml:space="preserve">
+    <value>Displays the surname of article's author</value>
+  </data>
+  <data name="PortalName.Text" xml:space="preserve">
+    <value>Displays the name of the portal</value>
+  </data>
+  <data name="PostDate.Text" xml:space="preserve">
+    <value>Displays the date and time the article is due to be published.</value>
+  </data>
+  <data name="Title.Text" xml:space="preserve">
+    <value>Displays the title of the article</value>
+  </data>
+  <data name="Summary.Text" xml:space="preserve">
+    <value>Displays the summary of the article</value>
+  </data>
+  <data name="Link.Text" xml:space="preserve">
+    <value>Displays the link to access the article</value>
+  </data>
+  <data name="CommentUserName.Text" xml:space="preserve">
+    <value>Displays the username of comment's author</value>
+  </data>
+  <data name="CommentFirstName.Text" xml:space="preserve">
+    <value>Displays the first name of comment's author</value>
+  </data>
+  <data name="CommentLastName.Text" xml:space="preserve">
+    <value>Displays the last name of comment's author</value>
+  </data>
+  <data name="CommentFullName.Text" xml:space="preserve">
+    <value>Displays the full name of comment's author</value>
+  </data>
+  <data name="CommentPostDate.Text" xml:space="preserve">
+    <value>Displays the date and time the comment was posted</value>
+  </data>
+  <data name="Comment.Text" xml:space="preserve">
+    <value>Displays the details of the comment</value>
+  </data>
+  <data name="CommentLink.Text" xml:space="preserve">
+    <value>Displays the link to access the comment</value>
+  </data>
+  <data name="ControlTitle_emailtemplates.Text" xml:space="preserve">
+    <value>Edit Email Templates</value>
+  </data>
+  <data name="ModuleHelp.Text" xml:space="preserve">
+    <value>&lt;h1&gt;About Email Templates&lt;/h1&gt;&lt;p&gt;The module allows you to customize the emails that are sent from this module.&lt;/p&gt;</value>
+  </data>
+  <data name="DisplayName.Text" xml:space="preserve">
+    <value>Displays the display name of article's author</value>
+  </data>
+  <data name="CommentDisplayName.Text" xml:space="preserve">
+    <value>Displays the display name of comment's author</value>
+  </data>
+  <data name="CommentEmail.Text" xml:space="preserve">
+    <value>Displays the email of comment's author</value>
+  </data>
+  <data name="Email.Text" xml:space="preserve">
+    <value>Displays the email of article's author</value>
+  </data>
+  <data name="CreateDate.Text" xml:space="preserve">
+    <value>Displays the date and time the article is created.</value>
+  </data>
+</root>

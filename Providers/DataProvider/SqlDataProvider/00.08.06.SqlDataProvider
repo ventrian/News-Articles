@@ -1,0 +1,62 @@
+﻿DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCategoryListAll
+GO
+		
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCategoryListAll
+	@ModuleID int,
+	@AuthorID int,
+	@ShowPending bit,
+	@SortType int    
+AS
+
+;WITH CategoryHierarchy AS
+(
+	SELECT
+		CategoryID,
+		ParentID,
+        CONVERT(nvarchar(max), Name) AS Path,
+		1 as level,
+		(SortOrder+1) * (CONVERT(bigint, '1' + REPLICATE('0', 10))) AS 'SortOrderCount'
+	FROM
+		{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Category
+	WHERE
+		ParentID = -1 
+		AND
+		ModuleID = @ModuleID
+
+	UNION ALL
+
+	SELECT
+		TH.CategoryID,
+		TH.ParentID,
+        CONVERT(nvarchar(max), CategoryHierarchy.Path + ' \ ' + TH.Name) AS Path,
+		level = level + 1,
+		CategoryHierarchy.SortOrderCount + (CONVERT(bigint, CONVERT(varchar, (TH.SortOrder+1)) + REPLICATE('0', 10-(level*2)))) AS 'SortOrderCount'
+	FROM
+		{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Category TH INNER JOIN 
+			CategoryHierarchy ON CategoryHierarchy.CategoryID = TH.ParentID
+)
+
+SELECT 
+	SortOrderCount, 
+	c.[CategoryID],
+	c.[ParentID],
+	c.[ModuleID],
+	c.[Name],
+	REPLICATE('.',(level-1)*2) + c.[Name] as 'NameIndented',
+	c.[Image],
+	c.[Description],
+	c.[SortOrder],
+	c.[InheritSecurity],
+	c.[CategorySecurityType], 
+	c.[MetaTitle],
+	c.[MetaDescription],
+	c.[MetaKeywords], 
+	ch.[level],
+	(SELECT COUNT(*) FROM {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ArticleCategories ac INNER JOIN {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article a ON ac.ArticleID = a.ArticleID WHERE ac.CategoryID = c.CategoryID AND a.IsDraft = 0 AND a.IsApproved = 1 AND (@authorId IS NULL OR a.AuthorID = @authorID) AND (@ShowPending IS NOT NULL OR (a.StartDate IS NULL OR a.StartDate < GetDate()))) as 'NumberofArticles'
+FROM 
+	CategoryHierarchy ch INNER JOIN
+		{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Category c ON ch.CategoryID = c.CategoryID
+ORDER BY 
+	CASE WHEN @SortType = 0 THEN CAST(ch.SortOrderCount AS VARCHAR) ELSE ch.Path END
+GO
+

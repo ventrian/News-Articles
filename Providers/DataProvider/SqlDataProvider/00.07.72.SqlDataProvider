@@ -1,0 +1,18 @@
+﻿DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleCategories
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleCategories
+	@ArticleID int
+AS
+
+SELECT      
+	Category.CategoryID, 
+    Category.[Name], 
+    Category.[InheritSecurity]
+FROM         
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_ArticleCategories ArticleCategories, {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Category Category
+WHERE
+	ArticleCategories.CategoryID = Category.CategoryID
+	AND
+	ArticleCategories.ArticleID = @ArticleID
+GO

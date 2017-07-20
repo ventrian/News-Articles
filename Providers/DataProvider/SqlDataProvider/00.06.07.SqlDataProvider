@@ -1,0 +1,74 @@
+﻿ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article
+	Add Summary2 ntext 
+GO
+
+UPDATE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article
+	SET Summary2 = Summary
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article
+	DROP COLUMN Summary
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article
+	Add Summary ntext 
+GO
+
+UPDATE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article
+	SET Summary = Summary2
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article
+	DROP COLUMN Summary2
+GO
+
+CREATE TABLE #Article 
+( 
+    ArticleID INT
+) 
+
+INSERT INTO #Article
+select ArticleID from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article Article where Article.ArticleID not in (select ArticleID FROM {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Page Page WHERE Article.ArticleID = Page.ArticleID)
+
+INSERT INTO {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Page(ArticleID, Title, PageText, SortOrder)
+select ArticleID, Title, Summary, 0 from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article Article where Article.ArticleID not in (select ArticleID FROM {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Page Page WHERE Article.ArticleID = Page.ArticleID)
+
+UPDATE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article
+SET Summary = null
+WHERE ArticleID in (select ArticleID from #Article)
+
+DROP TABLE #Article
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticle
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticle
+	@ArticleID int
+AS
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListBySearchCriteria
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListBySearchCriteria
+	@ModuleID	int,
+	@CategoryID	varchar(255),
+	@CategoryIDCount	int,
+	@MaxCount	int,
+	@MaxAge	int,
+	@IsApproved	bit,
+	@IsDraft	bit,
+	@StartDate	datetime,
+	@KeyWords	varchar(255), 
+	@ShowPending	bit,
+	@ShowExpired bit,   
+	@AuthorID	int,
+	@ShowFeaturedOnly bit,
+	@ShowNotFeaturedOnly bit,
+	@SortBy varchar(50),
+	@SortDirection varchar(50),
+	@Month	int,
+	@Year	int 
+AS
+GO

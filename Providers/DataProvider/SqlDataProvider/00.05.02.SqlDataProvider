@@ -1,0 +1,19 @@
+﻿DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCategoryStatistics
+GO
+
+CREATE PROCEDURE  {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCategoryStatistics
+	@ModuleID	int
+AS
+
+select 
+	Category.CategoryID,
+	Category.Name,
+	(select count(*) from {databaseOwner}{objectQualifier}dnnforge_newsarticles_articlecategories articleCategories, {databaseOwner}{objectQualifier}dnnforge_newsarticles_article articles where categoryid = Category.CategoryID and articleCategories.articleID = articles.ArticleID and articles.IsApproved = 1 AND (articles.StartDate is null or articles.StartDate < DateAdd(mi, 1, GetDate())) AND (articles.EndDate is null or articles.EndDate > DateAdd(mi, 1, GetDate())) ) as 'NumberOfArticles', 
+	(select sum(NumberOfViews) from {databaseOwner}{objectQualifier}dnnforge_newsarticles_articlecategories articleCategories, {databaseOwner}{objectQualifier}dnnforge_newsarticles_article articles where categoryid = Category.CategoryID and articleCategories.articleID = articles.ArticleID  AND (articles.StartDate is null or articles.StartDate < DateAdd(mi, 1, GetDate())) AND (articles.EndDate is null or articles.EndDate > DateAdd(mi, 1, GetDate())) ) as 'NumberOfViews'
+from
+	{databaseOwner}{objectQualifier}dnnforge_newsarticles_category Category 
+where
+	Category.ModuleID = @ModuleID
+ORDER BY
+	Category.Name
+GO

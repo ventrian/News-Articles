@@ -1,0 +1,27 @@
+﻿CREATE PROCEDURE  {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetAuthorStatistics
+	@ModuleID	int, 
+	@CategoryID 	varchar(255)
+AS
+
+DECLARE @strTop	nvarchar(2000)
+DECLARE @strWhere	nvarchar(2000)
+
+SELECT @strTop = ''
+SELECT @strWhere = ''
+
+IF (@ModuleID is not null)
+	SELECT @strWhere = @strWhere + ' AND Articles.ModuleID = ' + convert(nvarchar, @ModuleId)
+	
+IF (@CategoryId is not null)
+	SELECT @strWhere = @strWhere + ' AND Articles.ArticleID in (select ArticleID from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ArticleCategories ArticleCategories where ArticleCategories.CategoryID in (' + @CategoryID + '))'
+
+EXEC('
+SELECT     
+	UserID, UserName, FirstName, LastName, count(*) as ''ArticleCount''   
+FROM         
+	{databaseOwner}{objectQualifier}Users Users, {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article Articles
+where 1 = 1 and Users.UserID = Articles.AuthorID ' + 
+	@strWhere + ' 
+GROUP BY 
+	UserID, UserName, FirstName, LastName')
+GO

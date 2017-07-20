@@ -1,0 +1,39 @@
+﻿CREATE NONCLUSTERED INDEX [_dta_index_{objectQualifier}DnnForge_NewsArticles_Page] ON {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Page 
+(
+	[SortOrder] ASC,
+	[ArticleID] ASC
+) ON [PRIMARY]
+GO
+
+CREATE NONCLUSTERED INDEX [_dta_index_{objectQualifier}DnnForge_NewsArticles_Article] ON {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article 
+(
+	[ModuleID] ASC,
+	[ArticleID] ASC,
+	[IsApproved] ASC,
+	[IsDraft] ASC,
+	[EndDate] ASC,
+	[StartDate] ASC
+) ON [PRIMARY]
+GO
+
+CREATE NONCLUSTERED INDEX [_dta_index_{objectQualifier}DnnForge_NewsArticles_Article_Category] ON {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ArticleCategories 
+(
+	[ArticleID] ASC,
+	[CategoryID] ASC
+)ON [PRIMARY]
+GO
+
+CREATE NONCLUSTERED INDEX [_dta_index_{objectQualifier}DnnForge_NewsArticles_Article_Views] ON {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article 
+(
+	[ArticleID] ASC
+)
+INCLUDE ( [NumberOfViews]) ON [PRIMARY]
+GO
+
+CREATE NONCLUSTERED INDEX [_dta_index_{objectQualifier}DnnForge_NewsArticles_Article_Status] ON {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article 
+(
+	[ArticleID] ASC,
+	[IsDraft] ASC,
+	[IsApproved] ASC
+)ON [PRIMARY]
+GO

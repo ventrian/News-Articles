@@ -1,0 +1,197 @@
+﻿ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Category
+	ADD SortOrder int 
+GO
+
+UPDATE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Category SET SortOrder = 0
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_AddCategory
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_AddCategory
+	@ModuleID int,
+	@ParentID int,
+	@Name nvarchar(255),
+	@Image nvarchar(255),
+	@Description ntext,
+	@SortOrder int 
+AS
+
+INSERT INTO {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Category (
+	[ModuleID],
+	[ParentID],
+	[Name],
+	[Image],
+	[Description],
+	[SortOrder]
+) VALUES (
+	@ModuleID,
+	@ParentID,
+	@Name,
+	@Image,
+	@Description,
+	@SortOrder
+)
+
+select SCOPE_IDENTITY()
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_UpdateCategory
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_UpdateCategory
+	@CategoryID int, 
+	@ModuleID int, 
+	@ParentID int, 
+	@Name nvarchar(255), 
+	@Image nvarchar(255),
+	@Description ntext,
+	@SortOrder int 
+AS
+
+UPDATE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Category SET
+	[ModuleID] = @ModuleID,
+	[ParentID] = @ParentID, 
+	[Name] = @Name,
+	[Image] = @Image,
+	[Description] = @Description,
+	[SortOrder] = @SortOrder
+WHERE
+	[CategoryID] = @CategoryID
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCategory
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCategory
+	@CategoryID int
+AS
+
+SELECT
+	[CategoryID],
+	[ParentID], 
+	[ModuleID],
+	[Name],
+	[Image],
+	[Description],
+	[SortOrder] 
+FROM
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Category
+WHERE
+	[CategoryID] = @CategoryID
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCategoryList
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCategoryList
+	@ModuleID int,
+	@ParentID int 
+AS
+
+SELECT
+	[CategoryID],
+	[ParentID],
+	[ModuleID],
+	[Name],
+	[Image],
+	[Description],
+	[SortOrder] 
+FROM
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Category
+WHERE
+	[ModuleID] = @ModuleID
+	AND
+	[ParentID] = @ParentID
+ORDER BY 
+	[SortOrder], [Name]
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCategoryListAll 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCategoryListAll 
+	@ModuleID int,
+	@Current int, 
+	@CategoryID varchar(255), 
+	@MaxDepth int
+AS
+
+SET NOCOUNT ON
+
+DECLARE @FilterID int
+SET @FilterID = @Current
+
+DECLARE @level int, @line int
+ 
+CREATE TABLE #hierarchy(HierarchyID int IDENTITY (1,1), CategoryID int, level int)
+CREATE TABLE #stack (item int, level int)
+INSERT INTO #stack VALUES (@current, 1)
+SELECT @level = 1
+ 
+WHILE @level > 0
+BEGIN
+   IF EXISTS (SELECT * FROM #stack WHERE level = @level)
+      BEGIN
+         SELECT @current = item
+         FROM #stack
+         WHERE level = @level
+ 
+ 		insert into #hierarchy(CategoryID, level) values(@current, @level) 
+ 
+         DELETE FROM #stack
+         WHERE level = @level
+            AND item = @current
+            
+ 		 IF( @MaxDepth IS NULL OR @MaxDepth >= @level )
+		 BEGIN
+             INSERT #stack
+                SELECT CategoryID, @level + 1
+                FROM {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Category
+                WHERE ParentID = @current and ModuleID = @ModuleID 
+     	        ORDER BY [SortOrder] DESC, [Name] DESC
+
+             IF @@ROWCOUNT > 0
+                SELECT @level = @level + 1
+		 END
+      END
+   ELSE
+      SELECT @level = @level - 1
+END -- WHILE
+
+IF( @FilterID IS NOT NULL )
+BEGIN
+	DELETE FROM #hierarchy WHERE CategoryID = @FilterID
+END
+
+DECLARE @strModuleID	nvarchar(50)
+SELECT @strModuleID = convert(varchar, @ModuleID)
+
+DECLARE @strCategoryId	nvarchar(255)
+IF (@CategoryId is not null)
+	SELECT @strCategoryId = ' AND c.CategoryID in (' + @CategoryID + ')'
+
+EXEC('
+SELECT
+	c.[CategoryID],
+	c.[ParentID],
+	c.[ModuleID],
+	c.[Name],
+	REPLICATE(''.'',(level-2)*2) + c.[Name] as ''NameIndented'',
+	c.[Image],
+	c.[Description],
+	c.[SortOrder],
+	level-1 as ''Level'',
+	(SELECT COUNT(*) FROM {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ArticleCategories ac WHERE ac.CategoryID = c.CategoryID) as ''NumberofArticles'',
+	(SELECT SUM(a.NumberOfViews) FROM {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article a INNER JOIN {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ArticleCategories ac ON a.ArticleID = ac.ArticleID WHERE ac.CategoryID = c.CategoryID) as ''NumberofViews''
+FROM
+	#hierarchy h INNER JOIN
+		{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Category c ON h.CategoryID = c.CategoryID 
+WHERE
+	c.[ModuleID] = ' + @strModuleID + @strCategoryId + ' 
+ORDER BY 
+	h.HierarchyID ASC')
+
+drop table #hierarchy
+drop table #stack
+GO

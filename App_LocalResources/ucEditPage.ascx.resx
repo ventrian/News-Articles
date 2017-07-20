@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="ResMimeType">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="Version">
+		<value>1.0.0.0</value>
+	</resheader>
+	<resheader name="Reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=1.0.3300.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="Writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=1.0.3300.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="PageSettings.Text">
+		<value>Page Settings</value>
+	</data>
+	<data name="PageSettingsDescription.Text">
+		<value>In this section, you can edit a page settings for this article.</value>
+	</data>
+	<data name="Title.Text">
+		<value>Title</value>
+	</data>
+	<data name="Title.Help">
+		<value>Enter the name of the page.</value>
+	</data>
+	<data name="valTitle.Text">
+		<value>&lt;br&gt;You Must Enter a Valid Title</value>
+	</data>
+	<data name="Summary.Text">
+		<value>Page Text</value>
+	</data>
+	<data name="SummaryHelp.Text">
+		<value>Enter the text for the page here.</value>
+	</data>
+	<data name="valSummary.ErrorMessage">
+		<value>Page Text Is Required</value>
+	</data>
+	<data name="ControlTitle_editpage.Text">
+		<value>Edit Page</value>
+	</data>
+	<data name="ModuleHelp.Text">
+		<value>&lt;h1&gt;About Edit Page&lt;/h1&gt;&lt;p&gt;The module allows you to edit a page for your article.&lt;/p&gt;</value>
+	</data>
+</root>

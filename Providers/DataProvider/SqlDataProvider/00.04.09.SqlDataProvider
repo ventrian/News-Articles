@@ -1,0 +1,12 @@
+﻿UPDATE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article
+SET StartDate = CreatedDate
+WHERE StartDate IS NULL
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCategoryStatistics
+GO
+
+CREATE PROCEDURE  {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCategoryStatistics
+	@ModuleID	int
+AS
+GO

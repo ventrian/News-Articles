@@ -1,0 +1,15 @@
+﻿DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_DeleteArticle
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_DeleteArticle
+	@ArticleID int
+AS
+
+DELETE FROM {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ArticleCategories
+WHERE
+	[ArticleID] = @ArticleID
+
+DELETE FROM {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article
+WHERE
+	[ArticleID] = @ArticleID
+GO

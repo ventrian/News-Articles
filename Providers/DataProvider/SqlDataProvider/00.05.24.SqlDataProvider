@@ -1,0 +1,37 @@
+﻿
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCommentList
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCommentList
+	@ArticleID	int 
+AS
+
+SELECT
+	Comment.[CommentID],
+	Comment.[ArticleID],
+	Comment.[UserID], 
+	Comment.[CreatedDate],
+	Comment.[Comment],
+	Comment.[Rating],
+	Comment.[RemoteAddress],
+	Comment.[Type],
+	Comment.[TrackbackUrl],
+	Comment.[TrackbackTitle],
+	Comment.[TrackbackBlogName],
+	Comment.[TrackbackExcerpt], 
+	Comment.[AnonymousName], 
+	Comment.[AnonymousEmail], 
+	Comment.[AnonymousURL],
+	Comment.[NotifyMe],  
+	Author.[Email] as AuthorEmail,
+	Author.[UserName] as AuthorUserName,
+	Author.[FirstName] as AuthorFirstName,
+	Author.[LastName] as AuthorLastName
+FROM
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment Comment LEFT OUTER JOIN
+		{databaseOwner}{objectQualifier}Users Author ON Comment.UserID = Author.UserID
+WHERE
+	Comment.[ArticleID] = @ArticleID
+ORDER BY
+	Comment.[CreatedDate] ASC
+GO

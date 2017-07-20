@@ -1,0 +1,11 @@
+<Objects>
+	<Object>
+		<Token>[PUBLISHSTARTDATE]</Token>
+		<Settings>
+			<Setting>
+				<Name>FormatString</Name>
+				<Value>D</Value>
+			</Setting>
+		</Settings>
+	</Object>	
+</Objects>

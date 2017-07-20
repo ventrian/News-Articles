@@ -1,0 +1,45 @@
+<!-- View.Item -->
+<div class="article">
+
+    <div class="articleCalendar articleCalendarIcon-[PUBLISHSTARTDATE:MM]">
+        <div class="articleCalendarDay">[PUBLISHSTARTDATE:dd]</div>
+    </div>
+    <div class="articleHeadline"><h1><a href="[ARTICLELINK]">[TITLE]</a></h1></div>
+    <div class="articleAuthor Normal"><a href="[AUTHORLINK]">[AUTHOR]</a> posted on [PUBLISHSTARTDATE:MMMM dd, yyyy HH:mm]</div>
+
+    <div class="articleEntry Normal">
+        [HASIMAGE]<div class="articleImage">[IMAGETHUMB:100]</div>[/HASIMAGE]
+        [PAGETEXT]
+    </div>
+    
+    [HASMULTIPLEPAGES]
+    <div class="articlePaging Normal">
+        Pages: [CURRENTPAGE] of [PAGECOUNT][HASPREVPAGE] [LINKPREVIOUS][/HASPREVPAGE][HASNEXTPAGE] [LINKNEXT][/HASNEXTPAGE]
+    </div>
+    [/HASMULTIPLEPAGES]
+    
+    [HASCATEGORIES] 
+    <div class="articleCategories Normal">
+        Posted in: [CATEGORIES]
+    </div>
+    [/HASCATEGORIES]
+
+    <div class="Normal">
+        Actions: 
+        <a rel="nofollow" href="mailto:?subject=[TITLE]&amp;body=Thought you might like this: [ARTICLELINK]">E-mail</a> | 
+        <a rel="bookmark" href="[ARTICLELINK]">Permalink</a> | 
+        [HASCOMMENTSENABLED]<a rel="nofollow" href="[COMMENTLINK]">Comments ([COMMENTCOUNT])</a> <a rel="nofollow" href="[COMMENTRSS]"><img src="Images/rssbutton.gif" alt="RSS comment feed" style="border-width:0px;" /></a> | [/HASCOMMENTSENABLED]
+        <a rel="nofollow" href="http://www.dotnetkicks.com/submit?url=[ARTICLELINK]&amp;title=[TITLEURLENCODED]">Kick it!</a> | 
+        <a rel="nofollow" href="http://www.dzone.com/links/add.html?url=[ARTICLELINK]&amp;title=[TITLEURLENCODED]">DZone it!</a> | 
+        <a rel="nofollow" href="http://del.icio.us/post?url=[ARTICLELINK]&amp;title=[TITLEURLENCODED]">del.icio.us</a>
+    </div>
+
+</div>
+
+[HASCOMMENTSENABLED]
+<div class="articleComments">
+    <h2><a href="#Comments">Comments</a></h2>
+    [HASCOMMENTS][COMMENTS][/HASCOMMENTS]
+    [HASNOCOMMENTS]<span class="Normal">There are currently no comments, be the first to post one.</span>[/HASNOCOMMENTS]
+</div>
+[/HASCOMMENTSENABLED]

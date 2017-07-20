@@ -1,0 +1,218 @@
+﻿ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment ADD
+	isApproved bit NOT NULL CONSTRAINT DF_{objectQualifier}DnnForge_NewsArticles_Comment_isApproved DEFAULT 1,
+	approvedBy int NULL
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_AddComment
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_AddComment
+	@ArticleID int,
+	@UserID int, 
+	@Comment ntext,
+	@RemoteAddress nvarchar(50) ,
+	@Type int,
+	@TrackbackUrl nvarchar(255),
+	@TrackbackTitle nvarchar(255),
+	@TrackbackBlogName nvarchar(255),
+	@TrackbackExcerpt ntext,
+	@AnonymousName nvarchar(255),
+	@AnonymousEmail nvarchar(255),
+	@AnonymousURL nvarchar(255),
+	@NotifyMe bit,
+	@IsApproved bit,
+	@ApprovedBy int
+AS
+
+INSERT INTO {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment (
+	[ArticleID],
+	[UserID], 
+	[Comment],
+	[RemoteAddress],
+	[Type],
+	[TrackbackUrl],
+	[TrackbackTitle],
+	[TrackbackBlogName],
+	[TrackbackExcerpt],
+	[AnonymousName], 
+	[AnonymousEmail],
+	[AnonymousURL],
+	[NotifyMe],
+	[IsApproved],
+	[ApprovedBy]
+) VALUES (
+	@ArticleID,
+	@UserID, 
+	@Comment,
+	@RemoteAddress,
+	@Type,
+	@TrackbackUrl,
+	@TrackbackTitle,
+	@TrackbackBlogName,
+	@TrackbackExcerpt,
+	@AnonymousName,
+	@AnonymousEmail,
+	@AnonymousURL,
+	@NotifyMe,
+	@IsApproved,
+	@ApprovedBy  
+)
+
+select SCOPE_IDENTITY()
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_UpdateComment
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_UpdateComment
+	@CommentID int, 
+	@ArticleID int, 
+	@UserID int, 
+	@Comment ntext,
+	@RemoteAddress nvarchar(50),
+ 	@Type int,
+	@TrackbackUrl nvarchar(255),
+	@TrackbackTitle nvarchar(255),
+	@TrackbackBlogName nvarchar(255),
+	@TrackbackExcerpt ntext,
+	@AnonymousName nvarchar(255),
+	@AnonymousEmail nvarchar(255),
+	@AnonymousURL nvarchar(255),
+	@NotifyMe bit,
+	@IsApproved bit,
+	@ApprovedBy int 
+AS
+
+UPDATE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment SET
+	[ArticleID] = @ArticleID,
+	[UserID] = @UserID, 
+	[Comment] = @Comment,
+	[RemoteAddress] = @RemoteAddress,
+	[Type] = @Type,
+	[TrackbackUrl] = @TrackbackUrl,
+	[TrackbackTitle] = @TrackbackTitle,
+	[TrackbackBlogName] = @TrackbackBlogName,
+	[TrackbackExcerpt] = @TrackbackExcerpt,
+	[AnonymousName] = @AnonymousName,
+	[AnonymousEmail] = @AnonymousEmail,
+	[AnonymousURL] = @AnonymousURL,
+	[NotifyMe] = @NotifyMe,
+	[IsApproved] = @IsApproved,
+	[ApprovedBy] = @ApprovedBy 
+WHERE
+	[CommentID] = @CommentID
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCommentList
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCommentList
+	@ModuleID	int,
+	@ArticleID	int,
+	@IsApproved bit 
+AS
+
+SELECT
+	Comment.[CommentID],
+	Comment.[ArticleID],
+	Comment.[UserID], 
+	Comment.[CreatedDate],
+	Comment.[Comment],
+	Comment.[RemoteAddress],
+	Comment.[Type],
+	Comment.[TrackbackUrl],
+	Comment.[TrackbackTitle],
+	Comment.[TrackbackBlogName],
+	Comment.[TrackbackExcerpt], 
+	Comment.[AnonymousName], 
+	Comment.[AnonymousEmail], 
+	Comment.[AnonymousURL],
+	Comment.[NotifyMe],  
+	Comment.[IsApproved],  
+	Comment.[ApprovedBy],  
+	Author.[Email] as AuthorEmail,
+	Author.[UserName] as AuthorUserName,
+	Author.[FirstName] as AuthorFirstName,
+	Author.[LastName] as AuthorLastName
+FROM
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment Comment INNER JOIN
+		{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article Article on Comment.ArticleID = Article.ArticleID LEFT OUTER JOIN
+		{databaseOwner}{objectQualifier}Users Author ON Comment.UserID = Author.UserID
+WHERE
+	Article.ModuleID = @ModuleID
+	and
+	(@ArticleID is null OR Comment.[ArticleID] = @ArticleID)
+	and
+	Comment.IsApproved = @IsApproved
+ORDER BY
+	Comment.[CreatedDate] ASC
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetComment
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetComment
+	@CommentID int
+AS
+
+SELECT
+	Comment.[CommentID],
+	Comment.[ArticleID],
+	Comment.[UserID], 
+	Comment.[CreatedDate],
+	Comment.[Comment],
+	Comment.[RemoteAddress],
+	Comment.[Type],
+	Comment.[TrackbackUrl],
+	Comment.[TrackbackTitle],
+	Comment.[TrackbackBlogName],
+	Comment.[TrackbackExcerpt], 
+	Comment.[AnonymousName], 
+	Comment.[AnonymousEmail], 
+	Comment.[AnonymousURL], 
+	Comment.[NotifyMe], 
+	Comment.[IsApproved],  
+	Comment.[ApprovedBy],  
+	Author.[Email] as AuthorEmail,
+	Author.[UserName] as AuthorUserName,
+	Author.[FirstName] as AuthorFirstName,
+	Author.[LastName] as AuthorLastName
+FROM
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment Comment LEFT OUTER JOIN
+		{databaseOwner}{objectQualifier}Users Author ON Comment.UserID = Author.UserID
+WHERE
+	[CommentID] = @CommentID
+GO
+	
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListBySearchCriteria
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListBySearchCriteria
+	@ModuleID	int,
+	@CategoryID	varchar(255),
+	@CategoryIDCount	int,
+	@MaxCount	int,
+	@MaxAge	int,
+	@IsApproved	bit,
+	@IsDraft	bit,
+	@StartDate	datetime,
+	@KeyWords	varchar(255), 
+	@ShowPending	bit,
+	@ShowExpired bit,   
+	@AuthorID	int,
+	@ShowFeaturedOnly bit,
+	@ShowNotFeaturedOnly bit,
+	@SortBy varchar(50),
+	@SortDirection varchar(50),
+	@Month	int,
+	@Year	int 
+AS
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticle
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticle
+	@ArticleID int
+AS
+GO

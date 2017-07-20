@@ -1,0 +1,163 @@
+﻿ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment ADD
+	AnonymousName nvarchar(255) NULL,
+	AnonymousEmail nvarchar(255) NULL,
+	AnonymousURL nvarchar(255) NULL
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_AddComment
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_AddComment
+	@ArticleID int,
+	@UserID int, 
+	@Comment ntext,
+	@Rating float,
+	@RemoteAddress nvarchar(50) ,
+	@Type int,
+	@TrackbackUrl nvarchar(255),
+	@TrackbackTitle nvarchar(255),
+	@TrackbackBlogName nvarchar(255),
+	@TrackbackExcerpt ntext,
+	@AnonymousName nvarchar(255),
+	@AnonymousEmail nvarchar(255),
+	@AnonymousURL nvarchar(255)
+AS
+
+INSERT INTO {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment (
+	[ArticleID],
+	[UserID], 
+	[Comment],
+	[Rating],
+	[RemoteAddress],
+	[Type],
+	[TrackbackUrl],
+	[TrackbackTitle],
+	[TrackbackBlogName],
+	[TrackbackExcerpt],
+	[AnonymousName], 
+	[AnonymousEmail],
+	[AnonymousURL] 
+) VALUES (
+	@ArticleID,
+	@UserID, 
+	@Comment,
+	@Rating,
+	@RemoteAddress,
+	@Type,
+	@TrackbackUrl,
+	@TrackbackTitle,
+	@TrackbackBlogName,
+	@TrackbackExcerpt,
+	@AnonymousName,
+	@AnonymousEmail,
+	@AnonymousURL  
+)
+
+select SCOPE_IDENTITY()
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_UpdateComment
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_UpdateComment
+	@CommentID int, 
+	@ArticleID int, 
+	@UserID int, 
+	@Comment ntext,
+	@Rating float,
+	@RemoteAddress nvarchar(50),
+ 	@Type int,
+	@TrackbackUrl nvarchar(255),
+	@TrackbackTitle nvarchar(255),
+	@TrackbackBlogName nvarchar(255),
+	@TrackbackExcerpt ntext,
+	@AnonymousName nvarchar(255),
+	@AnonymousEmail nvarchar(255),
+	@AnonymousURL nvarchar(255) 
+AS
+
+UPDATE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment SET
+	[ArticleID] = @ArticleID,
+	[UserID] = @UserID, 
+	[Comment] = @Comment,
+	[Rating] = @Rating,
+	[RemoteAddress] = @RemoteAddress,
+	[Type] = @Type,
+	[TrackbackUrl] = @TrackbackUrl,
+	[TrackbackTitle] = @TrackbackTitle,
+	[TrackbackBlogName] = @TrackbackBlogName,
+	[TrackbackExcerpt] = @TrackbackExcerpt,
+	[AnonymousName] = @AnonymousName,
+	[AnonymousEmail] = @AnonymousEmail,
+	[AnonymousURL] = @AnonymousURL   
+WHERE
+	[CommentID] = @CommentID
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetComment
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetComment
+	@CommentID int
+AS
+
+SELECT
+	Comment.[CommentID],
+	Comment.[ArticleID],
+	Comment.[UserID], 
+	Comment.[CreatedDate],
+	Comment.[Comment],
+	Comment.[Rating],
+	Comment.[RemoteAddress],
+	Comment.[Type],
+	Comment.[TrackbackUrl],
+	Comment.[TrackbackTitle],
+	Comment.[TrackbackBlogName],
+	Comment.[TrackbackExcerpt], 
+	Comment.[AnonymousName], 
+	Comment.[AnonymousEmail], 
+	Comment.[AnonymousURL], 
+	'' as AuthorEmail,
+	Author.[UserName] as AuthorUserName,
+	Author.[FirstName] as AuthorFirstName,
+	Author.[LastName] as AuthorLastName
+FROM
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment Comment LEFT OUTER JOIN
+		{databaseOwner}{objectQualifier}Users Author ON Comment.UserID = Author.UserID
+WHERE
+	[CommentID] = @CommentID
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCommentList
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCommentList
+	@ArticleID	int 
+AS
+
+SELECT
+	Comment.[CommentID],
+	Comment.[ArticleID],
+	Comment.[UserID], 
+	Comment.[CreatedDate],
+	Comment.[Comment],
+	Comment.[Rating],
+	Comment.[RemoteAddress],
+	Comment.[Type],
+	Comment.[TrackbackUrl],
+	Comment.[TrackbackTitle],
+	Comment.[TrackbackBlogName],
+	Comment.[TrackbackExcerpt], 
+	Comment.[AnonymousName], 
+	Comment.[AnonymousEmail], 
+	Comment.[AnonymousURL], 
+	'' as AuthorEmail,
+	Author.[UserName] as AuthorUserName,
+	Author.[FirstName] as AuthorFirstName,
+	Author.[LastName] as AuthorLastName
+FROM
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment Comment LEFT OUTER JOIN
+		{databaseOwner}{objectQualifier}Users Author ON Comment.UserID = Author.UserID
+WHERE
+	Comment.[ArticleID] = @ArticleID
+GO

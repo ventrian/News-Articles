@@ -1,0 +1,116 @@
+﻿ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment ADD
+	Type int NOT NULL Default 0,
+	TrackbackUrl nvarchar(255) NULL,
+	TrackbackTitle nvarchar(255) NULL,
+	TrackbackBlogName nvarchar(255) NULL,
+	TrackbackExcerpt ntext NULL  
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_AddComment
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_AddComment
+	@ArticleID int,
+	@UserID int, 
+	@Comment ntext,
+	@Rating float,
+	@RemoteAddress nvarchar(50) ,
+	@Type int,
+	@TrackbackUrl nvarchar(255),
+	@TrackbackTitle nvarchar(255),
+	@TrackbackBlogName nvarchar(255),
+	@TrackbackExcerpt ntext 
+AS
+
+INSERT INTO {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment (
+	[ArticleID],
+	[UserID], 
+	[Comment],
+	[Rating],
+	[RemoteAddress],
+	[Type],
+	[TrackbackUrl],
+	[TrackbackTitle],
+	[TrackbackBlogName],
+	[TrackbackExcerpt] 
+) VALUES (
+	@ArticleID,
+	@UserID, 
+	@Comment,
+	@Rating,
+	@RemoteAddress,
+	@Type,
+	@TrackbackUrl,
+	@TrackbackTitle,
+	@TrackbackBlogName,
+	@TrackbackExcerpt 
+)
+
+select SCOPE_IDENTITY()
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_UpdateComment
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_UpdateComment
+	@CommentID int, 
+	@ArticleID int, 
+	@UserID int, 
+	@Comment ntext,
+	@Rating float,
+	@RemoteAddress nvarchar(50),
+ 	@Type int,
+	@TrackbackUrl nvarchar(255),
+	@TrackbackTitle nvarchar(255),
+	@TrackbackBlogName nvarchar(255),
+	@TrackbackExcerpt ntext 
+AS
+
+UPDATE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment SET
+	[ArticleID] = @ArticleID,
+	[UserID] = @UserID, 
+	[Comment] = @Comment,
+	[Rating] = @Rating,
+	[RemoteAddress] = @RemoteAddress,
+	[Type] = @Type,
+	[TrackbackUrl] = @TrackbackUrl,
+	[TrackbackTitle] = @TrackbackTitle,
+	[TrackbackBlogName] = @TrackbackBlogName,
+	[TrackbackExcerpt] = @TrackbackExcerpt  
+WHERE
+	[CommentID] = @CommentID
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetComment
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetComment
+	@CommentID int
+AS
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCommentList
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCommentList
+	@ArticleID	int 
+AS
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListBySearchCriteria
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListBySearchCriteria
+	@ModuleID	int,
+	@CategoryID	varchar(255),
+	@MaxCount	int,
+	@MaxAge	int,
+	@IsApproved	int,
+	@StartDate	datetime,
+	@KeyWords	varchar(255), 
+	@ShowHiddenAndExpired	bit, 
+	@AuthorID	int,
+	@ShowFeaturedOnly bit,
+	@SortBy varchar(50) 
+AS
+GO

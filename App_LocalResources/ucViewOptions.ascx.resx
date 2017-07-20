@@ -1,0 +1,1200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ArticleSettings.Text" xml:space="preserve">
+    <value>Article Settings</value>
+  </data>
+  <data name="ArticleSettingsHelp.Text" xml:space="preserve">
+    <value>In this section, you can set up the settings that control the Article module.</value>
+  </data>
+  <data name="BasicSettings.Text" xml:space="preserve">
+    <value>Basic Settings</value>
+  </data>
+  <data name="EnableImages.Text" xml:space="preserve">
+    <value>Allow Portal Images?</value>
+  </data>
+  <data name="EnableImagesHelp.Text" xml:space="preserve">
+    <value>Check to allow portal images to be associated with articles.</value>
+  </data>
+  <data name="EnableImagesExternal.Text" xml:space="preserve">
+    <value>Allow External Images?</value>
+  </data>
+  <data name="EnableImagesExternal.Help" xml:space="preserve">
+    <value>Check to allow external images to be associated with articles.</value>
+  </data>
+  <data name="EnableComments.Text" xml:space="preserve">
+    <value>Allow Comments?</value>
+  </data>
+  <data name="EnableCommentsHelp.Text" xml:space="preserve">
+    <value>Check to allow comments to be posted with articles.</value>
+  </data>
+  <data name="EnableRatings.Text" xml:space="preserve">
+    <value>Allow Ratings?</value>
+  </data>
+  <data name="EnableRatingsHelp.Text" xml:space="preserve">
+    <value>Check to allow ratings to be posted with articles.</value>
+  </data>
+  <data name="EnableAnonymousComments.Text" xml:space="preserve">
+    <value>Allow Anonymous Comments?</value>
+  </data>
+  <data name="EnableAnonymousCommentsHelp.Text" xml:space="preserve">
+    <value>Check to allow comments to be posted by anonymous users.</value>
+  </data>
+  <data name="EnableAnonymousRatings.Text" xml:space="preserve">
+    <value>Allow Anonymous Ratings?</value>
+  </data>
+  <data name="EnableAnonymousRatingsHelp.Text" xml:space="preserve">
+    <value>Check to allow ratings to be posted by anonymous users.</value>
+  </data>
+  <data name="EnableCoreSearch.Text" xml:space="preserve">
+    <value>Allow Core Search Integration?</value>
+  </data>
+  <data name="EnableCoreSearchHelp.Text" xml:space="preserve">
+    <value>Check to allow core search integration for articles.</value>
+  </data>
+  <data name="EnableSyndication.Text" xml:space="preserve">
+    <value>Allow Syndication?</value>
+  </data>
+  <data name="EnableSyndicationHelp.Text" xml:space="preserve">
+    <value>Check to allow syndication of articles.</value>
+  </data>
+  <data name="EnableSyndicationHtml.Text" xml:space="preserve">
+    <value>Allow Html in Syndication?</value>
+  </data>
+  <data name="EnableSyndicationHtmlHelp.Text" xml:space="preserve">
+    <value>Check to allow html tags in syndication.</value>
+  </data>
+  <data name="EnableNotificationPing.Text" xml:space="preserve">
+    <value>Enable Notification Ping?</value>
+  </data>
+  <data name="EnableNotificationPingHelp.Text" xml:space="preserve">
+    <value>Check to notify weblogs.com (when created or updated).</value>
+  </data>
+  <data name="EnableAutoTrackback.Text" xml:space="preserve">
+    <value>Auto Trackback?</value>
+  </data>
+  <data name="EnableAutoTrackbackHelp.Text" xml:space="preserve">
+    <value>Check to scan articles for links when published and attempt to notify any linked sites.</value>
+  </data>
+  <data name="EnableIncomingTrackback.Text" xml:space="preserve">
+    <value>Enable Incoming Trackback?</value>
+  </data>
+  <data name="EnableIncomingTrackbackHelp.Text" xml:space="preserve">
+    <value>Check to allow incoming trackback/pings as new comments.</value>
+  </data>
+  <data name="LaunchLinks.Text" xml:space="preserve">
+    <value>Launch Links?</value>
+  </data>
+  <data name="LaunchLinksHelp.Text" xml:space="preserve">
+    <value>Check to launch links into page by itself (no other modules loaded).</value>
+  </data>
+  <data name="BubbleFeaturedArticles.Text" xml:space="preserve">
+    <value>Featured Articles to Top?</value>
+  </data>
+  <data name="BubbleFeaturedArticlesHelp.Text" xml:space="preserve">
+    <value>Check to bring featured articles to the top of the listing.</value>
+  </data>
+  <data name="plDisplayType.Text" xml:space="preserve">
+    <value>User Display Mode</value>
+  </data>
+  <data name="plDisplayType.Help" xml:space="preserve">
+    <value>Set the display mode for any occurance of a user.</value>
+  </data>
+  <data name="UserName.Text" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="FirstName.Text" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="LastName.Text" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+  <data name="DisplayName.Text" xml:space="preserve">
+    <value>Display Name</value>
+  </data>
+  <data name="ArticlePageSize.Text" xml:space="preserve">
+    <value>Articles per page</value>
+  </data>
+  <data name="ArticlePageSizeHelp.Text" xml:space="preserve">
+    <value>Allows you to specify the default number of articles to page.</value>
+  </data>
+  <data name="NoRestriction.Text" xml:space="preserve">
+    <value>No Restriction</value>
+  </data>
+  <data name="1.Text" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="2.Text" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="3.Text" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="4.Text" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="5.Text" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="10.Text" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="15.Text" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="20.Text" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="50.Text" xml:space="preserve">
+    <value>50</value>
+  </data>
+  <data name="Template.Text" xml:space="preserve">
+    <value>Article Template</value>
+  </data>
+  <data name="TemplateHelp.Text" xml:space="preserve">
+    <value>Allows you to specify the template for displaying articles.</value>
+  </data>
+  <data name="TextEditorWidth.Text" xml:space="preserve">
+    <value>Text Editor Width</value>
+  </data>
+  <data name="TextEditorWidth.Help" xml:space="preserve">
+    <value>Enter the width of the text editor e.g. 100%, 400.</value>
+  </data>
+  <data name="TimeZone.Text" xml:space="preserve">
+    <value>Server TimeZone</value>
+  </data>
+  <data name="TimeZone.Help" xml:space="preserve">
+    <value>Enter the time zone of the server.</value>
+  </data>
+  <data name="valTextEditorWidth.ErrorMessage" xml:space="preserve">
+    <value>&lt;br&gt;Required</value>
+  </data>
+  <data name="valTextEditorWidthIsValid.ErrorMessage" xml:space="preserve">
+    <value>&lt;br&gt;Must be a valid value, e.g. 100%, 400</value>
+  </data>
+  <data name="TextEditorHeight.Text" xml:space="preserve">
+    <value>Text Editor Height</value>
+  </data>
+  <data name="TextEditorHeight.Help" xml:space="preserve">
+    <value>Enter the height of the text editor e.g. 100%, 400.</value>
+  </data>
+  <data name="valTextEditorHeight.ErrorMessage" xml:space="preserve">
+    <value>&lt;br&gt;Required</value>
+  </data>
+  <data name="valTextEditorHeightIsValid.ErrorMessage" xml:space="preserve">
+    <value>&lt;br&gt;Must be a valid value, e.g. 100%, 400</value>
+  </data>
+  <data name="AllCategories.Text" xml:space="preserve">
+    <value>All Categories</value>
+  </data>
+  <data name="FilterSettings.Text" xml:space="preserve">
+    <value>Filter Settings</value>
+  </data>
+  <data name="MaxArticles.Text" xml:space="preserve">
+    <value>Max Articles</value>
+  </data>
+  <data name="MaxArticles.Help" xml:space="preserve">
+    <value>Enter the maximum number of articles to return in current articles.</value>
+  </data>
+  <data name="valMaxArticles.ErrorMessage" xml:space="preserve">
+    <value>Required</value>
+  </data>
+  <data name="valMaxArticlesIsValid.ErrorMessage" xml:space="preserve">
+    <value>Must be a valid value, e.g. 10, 20</value>
+  </data>
+  <data name="Categories.Text" xml:space="preserve">
+    <value>Category Filter</value>
+  </data>
+  <data name="CategoriesHelp.Text" xml:space="preserve">
+    <value>Specify categories to only show articles from those categories.</value>
+  </data>
+  <data name="MatchAny.Text" xml:space="preserve">
+    <value>Match Any</value>
+  </data>
+  <data name="MatchAll.Text" xml:space="preserve">
+    <value>Match All</value>
+  </data>
+  <data name="ShowFeaturedOnly.Text" xml:space="preserve">
+    <value>Show Featured Only?</value>
+  </data>
+  <data name="ShowFeaturedOnlyHelp.Text" xml:space="preserve">
+    <value>Only show articles matched as 'Featured'.</value>
+  </data>
+  <data name="ShowNotFeaturedOnly.Text" xml:space="preserve">
+    <value>Show Not Featured Only?</value>
+  </data>
+  <data name="ShowNotFeaturedOnlyHelp.Text" xml:space="preserve">
+    <value>Only show articles not matched as 'Featured'.</value>
+  </data>
+  <data name="Author.Text" xml:space="preserve">
+    <value>Author</value>
+  </data>
+  <data name="Author.Help" xml:space="preserve">
+    <value>Optionally filter by author.</value>
+  </data>
+  <data name="SelectAuthor.Text" xml:space="preserve">
+    <value>-- All Authors --</value>
+  </data>
+  <data name="cmdSelectAuthor.Text" xml:space="preserve">
+    <value>Select Author</value>
+  </data>
+  <data name="SecuritySettings.Text" xml:space="preserve">
+    <value>Security Settings</value>
+  </data>
+  <data name="SecureUrl.Text" xml:space="preserve">
+    <value>Secure Url</value>
+  </data>
+  <data name="SecureUrl.Help" xml:space="preserve">
+    <value>Enter the url to redirect non-secured users.</value>
+  </data>
+  <data name="NotificationSettings.Text" xml:space="preserve">
+    <value>Notification Settings</value>
+  </data>
+  <data name="NotifySubmission.Text" xml:space="preserve">
+    <value>Notify Approvers on Submission</value>
+  </data>
+  <data name="NotifySubmissionHelp.Text" xml:space="preserve">
+    <value>Notify users in the approval role of an article submission.</value>
+  </data>
+  <data name="NotifySubmissionEmail.Text" xml:space="preserve">
+    <value>Notify Email Address on Submission</value>
+  </data>
+  <data name="NotifySubmissionEmailHelp.Text" xml:space="preserve">
+    <value>Notify this email address of an article submission.</value>
+  </data>
+  <data name="NotifyApproval.Text" xml:space="preserve">
+    <value>Notify Owner on Approval</value>
+  </data>
+  <data name="NotifyApprovalHelp.Text" xml:space="preserve">
+    <value>Notify owner of the article on approval.</value>
+  </data>
+  <data name="NotifyComment.Text" xml:space="preserve">
+    <value>Notify Owner on Comment</value>
+  </data>
+  <data name="NotifyCommentHelp.Text" xml:space="preserve">
+    <value>Notify owner of the article when a comment is posted.</value>
+  </data>
+  <data name="SortBy.Text" xml:space="preserve">
+    <value>Sort By</value>
+  </data>
+  <data name="SortByHelp.Text" xml:space="preserve">
+    <value>Select field to sort articles by.</value>
+  </data>
+  <data name="SortDirection.Text" xml:space="preserve">
+    <value>Sort Direction</value>
+  </data>
+  <data name="SortDirection.Help" xml:space="preserve">
+    <value>Select direction for sort.</value>
+  </data>
+  <data name="Ascending.Text" xml:space="preserve">
+    <value>Ascending</value>
+  </data>
+  <data name="Descending.Text" xml:space="preserve">
+    <value>Descending</value>
+  </data>
+  <data name="PublishDate.Text" xml:space="preserve">
+    <value>Publish Date</value>
+  </data>
+  <data name="LastUpdate.Text" xml:space="preserve">
+    <value>Last Update</value>
+  </data>
+  <data name="HighestRated.Text" xml:space="preserve">
+    <value>Highest Rated</value>
+  </data>
+  <data name="MostCommented.Text" xml:space="preserve">
+    <value>Most Commented</value>
+  </data>
+  <data name="MostViewed.Text" xml:space="preserve">
+    <value>Most Viewed</value>
+  </data>
+  <data name="SortTitle.Text" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="ControlTitle_admin.Text" xml:space="preserve">
+    <value>Main Options</value>
+  </data>
+  <data name="ModuleHelp.Text" xml:space="preserve">
+    <value>&lt;h1&gt;Main Options&lt;/h1&gt;&lt;p&gt;This module allows administrators to set options for the News Articles module.&lt;/p&gt;</value>
+  </data>
+  <data name="Turkish.Text" xml:space="preserve">
+    <value>Turkish</value>
+  </data>
+  <data name="CommentSettings.Text" xml:space="preserve">
+    <value>Comment Settings</value>
+  </data>
+  <data name="UseCaptcha.Help" xml:space="preserve">
+    <value>Check to use captcha validation on the post comment screen.</value>
+  </data>
+  <data name="UseCaptcha.Text" xml:space="preserve">
+    <value>Use Captcha?</value>
+  </data>
+  <data name="EnableCommentModeration.Help" xml:space="preserve">
+    <value>Check to require comments to be moderated before posting.</value>
+  </data>
+  <data name="EnableCommentModeration.Text" xml:space="preserve">
+    <value>Enable Comment Moderation?</value>
+  </data>
+  <data name="plNotifyCommentEmail.Help" xml:space="preserve">
+    <value>Notify email address(s) on comment, separate with a ;</value>
+  </data>
+  <data name="plNotifyCommentEmail.Text" xml:space="preserve">
+    <value>Notify Email Address on Comment</value>
+  </data>
+  <data name="valNotifyCommentEmail.ErrorMessage" xml:space="preserve">
+    <value>&lt;br&gt;Required</value>
+  </data>
+  <data name="Random.Text" xml:space="preserve">
+    <value>Random</value>
+  </data>
+  <data name="Approve.Text" xml:space="preserve">
+    <value>Approve</value>
+  </data>
+  <data name="AutoApprove.Text" xml:space="preserve">
+    <value>Auto-Approve</value>
+  </data>
+  <data name="AutoFeature.Text" xml:space="preserve">
+    <value>Auto-Feature</value>
+  </data>
+  <data name="Feature.Text" xml:space="preserve">
+    <value>Feature</value>
+  </data>
+  <data name="Secure.Text" xml:space="preserve">
+    <value>Secure</value>
+  </data>
+  <data name="Submit.Text" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="TextEditorSummaryHeight.Help" xml:space="preserve">
+    <value>Enter the height of the text editor e.g. 100%, 400.</value>
+  </data>
+  <data name="TextEditorSummaryHeight.Text" xml:space="preserve">
+    <value>Text Editor Summary Height</value>
+  </data>
+  <data name="TextEditorSummaryWidth.Help" xml:space="preserve">
+    <value>Enter the width of the text editor e.g. 100%, 400.</value>
+  </data>
+  <data name="TextEditorSummaryWidth.Text" xml:space="preserve">
+    <value>Text Editor Summary Width</value>
+  </data>
+  <data name="BasicSettings.Help" xml:space="preserve">
+    <value>Set the basic security settings. </value>
+  </data>
+  <data name="Category.Text" xml:space="preserve">
+    <value>Categories</value>
+  </data>
+  <data name="Excerpt.Text" xml:space="preserve">
+    <value>Summary</value>
+  </data>
+  <data name="ExpiryDate.Text" xml:space="preserve">
+    <value>Expiry Date</value>
+  </data>
+  <data name="FormSettings.Help" xml:space="preserve">
+    <value>Show/hide features on the 'Create Article' form. </value>
+  </data>
+  <data name="FormSettings.Text" xml:space="preserve">
+    <value>Form Settings</value>
+  </data>
+  <data name="FormSettingsHelp.Text" xml:space="preserve">
+    <value>* A role must have submit permissions to view the above items on the create article form.</value>
+  </data>
+  <data name="Image.Text" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="Link.Text" xml:space="preserve">
+    <value>Link</value>
+  </data>
+  <data name="6.Text" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="7.Text" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="8.Text" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="9.Text" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="RequireCategory.Help" xml:space="preserve">
+    <value>Check to require a category when creating an article.</value>
+  </data>
+  <data name="RequireCategory.Text" xml:space="preserve">
+    <value>Require Category</value>
+  </data>
+  <data name="ShowNotSecuredOnly.Help" xml:space="preserve">
+    <value>Only show articles not marked as 'Secure'.</value>
+  </data>
+  <data name="ShowNotSecuredOnly.Text" xml:space="preserve">
+    <value>Show Not Secured Only?</value>
+  </data>
+  <data name="ShowSecuredOnly.Help" xml:space="preserve">
+    <value>Only show articles marked as 'Secure'.</value>
+  </data>
+  <data name="ShowSecuredOnly.Text" xml:space="preserve">
+    <value>Show Secured Only?</value>
+  </data>
+  <data name="CategorySettings.Text" xml:space="preserve">
+    <value>Category Settings</value>
+  </data>
+  <data name="DefaultCategories.Help" xml:space="preserve">
+    <value>Check categories to auto-select them on the create article screen.</value>
+  </data>
+  <data name="DefaultCategories.Text" xml:space="preserve">
+    <value>Default Categories</value>
+  </data>
+  <data name="SEOSettings.Text" xml:space="preserve">
+    <value>SEO Settings</value>
+  </data>
+  <data name="Basic.Text" xml:space="preserve">
+    <value>Basic Text</value>
+  </data>
+  <data name="Rich.Text" xml:space="preserve">
+    <value>Rich Text</value>
+  </data>
+  <data name="TextEditorSummaryMode.Help" xml:space="preserve">
+    <value>Select how to render the summary text area.</value>
+  </data>
+  <data name="TextEditorSummaryMode.Text" xml:space="preserve">
+    <value>Text Editor Summary Mode:</value>
+  </data>
+  <data name="AutoSecure.Text" xml:space="preserve">
+    <value>Auto-Secure</value>
+  </data>
+  <data name="HoldCtrl.Text" xml:space="preserve">
+    <value>Hold down ctrl to select multiple.</value>
+  </data>
+  <data name="ArchiveAuthor.Help" xml:space="preserve">
+    <value>Check to show authors on the archives page.</value>
+  </data>
+  <data name="ArchiveAuthor.Text" xml:space="preserve">
+    <value>Show Authors?</value>
+  </data>
+  <data name="ArchiveCategories.Help" xml:space="preserve">
+    <value>Check to show categories on the archives page.</value>
+  </data>
+  <data name="ArchiveCategories.Text" xml:space="preserve">
+    <value>Show Categories?</value>
+  </data>
+  <data name="ArchiveCurrentArticles.Help" xml:space="preserve">
+    <value>Check to show current articles on the archives page.</value>
+  </data>
+  <data name="ArchiveCurrentArticles.Text" xml:space="preserve">
+    <value>Show Current Articles?</value>
+  </data>
+  <data name="ArchiveMonth.Help" xml:space="preserve">
+    <value>Check to show months on the archives page.</value>
+  </data>
+  <data name="ArchiveMonth.Text" xml:space="preserve">
+    <value>Show Months?</value>
+  </data>
+  <data name="ArchiveSettings.Text" xml:space="preserve">
+    <value>Archive Settings</value>
+  </data>
+  <data name="CategorySelectionHeight.Help" xml:space="preserve">
+    <value>Enter the height of the category selection listbox, e.g. 200, 400</value>
+  </data>
+  <data name="CategorySelectionHeight.Text" xml:space="preserve">
+    <value>Category Selection Height</value>
+  </data>
+  <data name="valCategorySelectionHeight.ErrorMessage" xml:space="preserve">
+    <value>&lt;br&gt;Required</value>
+  </data>
+  <data name="valCategorySelectionHeightIsValid.ErrorMessage" xml:space="preserve">
+    <value>&lt;br&gt;Must be a valid value, e.g. 200, 400</value>
+  </data>
+  <data name="CategoryBreadcrumb.Help" xml:space="preserve">
+    <value>Check to include in the page's breadcrumb.</value>
+  </data>
+  <data name="CategoryBreadcrumb.Text" xml:space="preserve">
+    <value>Include in breadcrumb?</value>
+  </data>
+  <data name="CategoryName.Help" xml:space="preserve">
+    <value>Check to include in the page's name.</value>
+  </data>
+  <data name="CategoryName.Text" xml:space="preserve">
+    <value>Include in page name?</value>
+  </data>
+  <data name="SingleCategory.Text" xml:space="preserve">
+    <value>Single Category (Category View)</value>
+  </data>
+  <data name="NotifyDefault.Help" xml:space="preserve">
+    <value>Check to make the notification checkbox on by default.</value>
+  </data>
+  <data name="NotifyDefault.Text" xml:space="preserve">
+    <value>Notify Default</value>
+  </data>
+  <data name="Article.Text" xml:space="preserve">
+    <value>Article</value>
+  </data>
+  <data name="Attachment.Text" xml:space="preserve">
+    <value>Article/Attachments</value>
+  </data>
+  <data name="SyndicationLinkMode.Help" xml:space="preserve">
+    <value>Select to always link to an article or directly to attachment/article.</value>
+  </data>
+  <data name="SyndicationLinkMode.Text" xml:space="preserve">
+    <value>Syndication Link Mode:</value>
+  </data>
+  <data name="ExpandSummary.Help" xml:space="preserve">
+    <value>Check to expand summary by default.</value>
+  </data>
+  <data name="ExpandSummary.Text" xml:space="preserve">
+    <value>Expand Summary?</value>
+  </data>
+  <data name="3rdPartySettings.Text" xml:space="preserve">
+    <value>3rd Party Settings</value>
+  </data>
+  <data name="plSmartThinkerStoryFeed.Help" xml:space="preserve">
+    <value>Check to integrate with the Smart-Thinker Story Feed (Smart-Thinker UserProfile 4.3.12+)</value>
+  </data>
+  <data name="plSmartThinkerStoryFeed.Text" xml:space="preserve">
+    <value>Publish Group Events to Smart-Thinker Story Feed</value>
+  </data>
+  <data name="Dash.Text" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="plTitleReplacement.Help" xml:space="preserve">
+    <value>Select a character to replace spaces in title with.</value>
+  </data>
+  <data name="plTitleReplacement.Text" xml:space="preserve">
+    <value>Title Replacement</value>
+  </data>
+  <data name="Underscore.Text" xml:space="preserve">
+    <value>_</value>
+  </data>
+  <data name="SyndicationSummaryLength.Help" xml:space="preserve">
+    <value>Optionally enter a maximum number of characters to show in RSS summary.</value>
+  </data>
+  <data name="SyndicationSummaryLength.Text" xml:space="preserve">
+    <value>Syndication Summary Length:</value>
+  </data>
+  <data name="SyndicationSummaryLengthHelp.Text" xml:space="preserve">
+    <value>Leave blank for unlimited.</value>
+  </data>
+  <data name="valSyndicationSummaryLengthIsValid.ErrorMessage" xml:space="preserve">
+    <value>Must be a valid number e.g. 100, 200</value>
+  </data>
+  <data name="EnableSyndicationEnclosures.Help" xml:space="preserve">
+    <value>Check to enable enclosures in syndication.</value>
+  </data>
+  <data name="EnableSyndicationEnclosures.Text" xml:space="preserve">
+    <value>Enable Syndication Enclosures?</value>
+  </data>
+  <data name="plShowPending.Help" xml:space="preserve">
+    <value>Check to show pending articles.</value>
+  </data>
+  <data name="plShowPending.Text" xml:space="preserve">
+    <value>Show Pending?</value>
+  </data>
+  <data name="Attachment-Enclosure.Text" xml:space="preserve">
+    <value>Attachments</value>
+  </data>
+  <data name="Image-Enclosure.Text" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="plSyndicationEnclosureType.Help" xml:space="preserve">
+    <value>Specify which field to use for enclosures.</value>
+  </data>
+  <data name="plSyndicationEnclosureType.Text" xml:space="preserve">
+    <value>Syndication Enclosure Type</value>
+  </data>
+  <data name="AuthorFilterSettings.Text" xml:space="preserve">
+    <value>Author Filter Settings</value>
+  </data>
+  <data name="plLoggedInUser.Help" xml:space="preserve">
+    <value>Check to filter by the logged in user.</value>
+  </data>
+  <data name="plLoggedInUser.Text" xml:space="preserve">
+    <value>Logged in user Filter:</value>
+  </data>
+  <data name="plQueryStringFilter.Help" xml:space="preserve">
+    <value>Check to filter by author on the querystring parameter.</value>
+  </data>
+  <data name="plQueryStringFilter.Text" xml:space="preserve">
+    <value>UserID Filter:</value>
+  </data>
+  <data name="plQueryStringParam.Help" xml:space="preserve">
+    <value>Enter the name of the parameter to filter on. </value>
+  </data>
+  <data name="plQueryStringParam.Text" xml:space="preserve">
+    <value>UserID Parameter:</value>
+  </data>
+  <data name="plUsernameFilter.Help" xml:space="preserve">
+    <value>Check to filter by username.</value>
+  </data>
+  <data name="plUsernameFilter.Text" xml:space="preserve">
+    <value>Username Filter:</value>
+  </data>
+  <data name="plUsernameParam.Help" xml:space="preserve">
+    <value>Specify what parameter to select from.</value>
+  </data>
+  <data name="plUsernameParam.Text" xml:space="preserve">
+    <value>Username Parameter:</value>
+  </data>
+  <data name="Bottom.Text" xml:space="preserve">
+    <value>Bottom</value>
+  </data>
+  <data name="MenuPosition.Help" xml:space="preserve">
+    <value>Specify where to place the menu.</value>
+  </data>
+  <data name="MenuPosition.Text" xml:space="preserve">
+    <value>Menu Position</value>
+  </data>
+  <data name="Top.Text" xml:space="preserve">
+    <value>Top</value>
+  </data>
+  <data name="plAlwaysShowPageID.Help" xml:space="preserve">
+    <value>Check to always show PageID in the url.</value>
+  </data>
+  <data name="plAlwaysShowPageID.Text" xml:space="preserve">
+    <value>Always Show PageID</value>
+  </data>
+  <data name="plDefaultImageFolder.Help" xml:space="preserve">
+    <value>Select the default image folder.</value>
+  </data>
+  <data name="plDefaultImageFolder.Text" xml:space="preserve">
+    <value>Default Image Folder:</value>
+  </data>
+  <data name="Root.Text" xml:space="preserve">
+    <value>Root</value>
+  </data>
+  <data name="Classic.Text" xml:space="preserve">
+    <value>Classic</value>
+  </data>
+  <data name="Shortened.Text" xml:space="preserve">
+    <value>Shorterned</value>
+  </data>
+  <data name="ShorternID.Help" xml:space="preserve">
+    <value>Specify an alias for article ID in shorterned mode.</value>
+  </data>
+  <data name="ShorternID.Text" xml:space="preserve">
+    <value>Shortened Article ID</value>
+  </data>
+  <data name="UrlMode.Help" xml:space="preserve">
+    <value>Select a url mode for formatting urls.</value>
+  </data>
+  <data name="UrlMode.Text" xml:space="preserve">
+    <value>Url Mode</value>
+  </data>
+  <data name="valShorternID.ErrorMessage" xml:space="preserve">
+    <value>&lt;br&gt;Required</value>
+  </data>
+  <data name="NotifyCommentApproval.Help" xml:space="preserve">
+    <value>Check to notify approvers when a comment requires approval.</value>
+  </data>
+  <data name="NotifyCommentApproval.Text" xml:space="preserve">
+    <value>Notify Approvers for Comment Approval</value>
+  </data>
+  <data name="NotifyCommentApprovalEmail.Help" xml:space="preserve">
+    <value>Notify email address(s) when a comment requires approval, separate with a ;</value>
+  </data>
+  <data name="NotifyCommentApprovalEmail.Text" xml:space="preserve">
+    <value>Notify Email Address for Comment Approval</value>
+  </data>
+  <data name="plUseCanonicalLink.Help" xml:space="preserve">
+    <value>Check to use the canonical link in the head tag.</value>
+  </data>
+  <data name="plUseCanonicalLink.Text" xml:space="preserve">
+    <value>Use Canonical Link</value>
+  </data>
+  <data name="MaxAge.Help" xml:space="preserve">
+    <value>Maximum age of articles (days), leave blank for no filter.</value>
+  </data>
+  <data name="MaxAge.Text" xml:space="preserve">
+    <value>Max Age</value>
+  </data>
+  <data name="MaxAge2.Help" xml:space="preserve">
+    <value>(days), leave blank for no filter.</value>
+  </data>
+  <data name="Meta.Text" xml:space="preserve">
+    <value>Meta</value>
+  </data>
+  <data name="SyndicationMaxCount.Help" xml:space="preserve">
+    <value>Specify the maximum number of items to display in an RSS feed.</value>
+  </data>
+  <data name="SyndicationMaxCount.Text" xml:space="preserve">
+    <value>Syndication Max Count:</value>
+  </data>
+  <data name="SyndicationSettings.Text" xml:space="preserve">
+    <value>Syndication Settings</value>
+  </data>
+  <data name="valSyndicationMaxCount.ErrorMessage" xml:space="preserve">
+    <value>&lt;br&gt;Required</value>
+  </data>
+  <data name="valSyndicationMaxCountIsValid.ErrorMessage" xml:space="preserve">
+    <value>&lt;br&gt;Must be a valid value, e.g. 50</value>
+  </data>
+  <data name="Custom.Text" xml:space="preserve">
+    <value>Custom Fields</value>
+  </data>
+  <data name="MatchCategoriesAll.Text" xml:space="preserve">
+    <value>Match Categories (All)</value>
+  </data>
+  <data name="MatchCategoriesAllTagsAny.Text" xml:space="preserve">
+    <value>Match Categories (All) and Tags (Any)</value>
+  </data>
+  <data name="MatchCategoriesAny.Text" xml:space="preserve">
+    <value>Match Categories (Any)</value>
+  </data>
+  <data name="MatchCategoriesAnyTagsAll.Text" xml:space="preserve">
+    <value>Match Categories (Any) and Tags (All)</value>
+  </data>
+  <data name="MatchCategoriesAnyTagsAny.Text" xml:space="preserve">
+    <value>Match Categories (Any) and Tags (Any)</value>
+  </data>
+  <data name="MatchTagsAll.Text" xml:space="preserve">
+    <value>Match Tags (All)</value>
+  </data>
+  <data name="MatchTagsAny.Text" xml:space="preserve">
+    <value>Match Tags (Any)</value>
+  </data>
+  <data name="plRelatedMode.Help" xml:space="preserve">
+    <value>Pick a mode to show related articles.</value>
+  </data>
+  <data name="plRelatedMode.Text" xml:space="preserve">
+    <value>Related Mode</value>
+  </data>
+  <data name="RelatedSettings.Text" xml:space="preserve">
+    <value>Related Settings</value>
+  </data>
+  <data name="plBitLyAPIKey.Help" xml:space="preserve">
+    <value>The API key for generating bit.ly urls.</value>
+  </data>
+  <data name="plBitLyAPIKey.Text" xml:space="preserve">
+    <value>Bit.Ly API Key</value>
+  </data>
+  <data name="plBitLyLogin.Help" xml:space="preserve">
+    <value>The login for generating bit.ly urls.</value>
+  </data>
+  <data name="plBitLyLogin.Text" xml:space="preserve">
+    <value>Bit.Ly Login</value>
+  </data>
+  <data name="plTwitterName.Help" xml:space="preserve">
+    <value>Your twitter username to be used in [TWITTERNAME]</value>
+  </data>
+  <data name="plTwitterName.Text" xml:space="preserve">
+    <value>Twitter Name</value>
+  </data>
+  <data name="TwitterSettings.Text" xml:space="preserve">
+    <value>Twitter Settings</value>
+  </data>
+  <data name="AdminSettings.Help" xml:space="preserve">
+    <value>Customise the settings usually available to host only.</value>
+  </data>
+  <data name="AdminSettings.Text" xml:space="preserve">
+    <value>Admin Settings</value>
+  </data>
+  <data name="SiteTemplates.Text" xml:space="preserve">
+    <value>Site Templates</value>
+  </data>
+  <data name="AutoApproveComment.Text" xml:space="preserve">
+    <value>Auto-Approve Comment</value>
+  </data>
+  <data name="ImageSettings.Text" xml:space="preserve">
+    <value>Image Settings</value>
+  </data>
+  <data name="plImageMaxHeight.Help" xml:space="preserve">
+    <value>Specify the maximum image height to resize.</value>
+  </data>
+  <data name="plImageMaxHeight.Text" xml:space="preserve">
+    <value>Maximum Image Height</value>
+  </data>
+  <data name="plImageMaxWidth.Help" xml:space="preserve">
+    <value>Specify the maximum image width to resize.</value>
+  </data>
+  <data name="plImageMaxWidth.Text" xml:space="preserve">
+    <value>Maximum Image Width</value>
+  </data>
+  <data name="plResizeImages.Help" xml:space="preserve">
+    <value>Check to resize images upon upload.</value>
+  </data>
+  <data name="plResizeImages.Text" xml:space="preserve">
+    <value>Resize Images?</value>
+  </data>
+  <data name="valImageMaxHeight.ErrorMessage" xml:space="preserve">
+    <value>&lt;br&gt;Required</value>
+  </data>
+  <data name="valImageMaxHeightIsNumber.ErrorMessage" xml:space="preserve">
+    <value>&lt;br&gt;Image Max Height must be a number.</value>
+  </data>
+  <data name="valImageMaxWidth.ErrorMessage" xml:space="preserve">
+    <value>&lt;br&gt;Required</value>
+  </data>
+  <data name="valImageMaxWidthIsNumber.ErrorMessage" xml:space="preserve">
+    <value>&lt;br&gt;Image Max Width must be a number.</value>
+  </data>
+  <data name="plIncludeJQuery.Help" xml:space="preserve">
+    <value>Check to include the jquery script.</value>
+  </data>
+  <data name="plIncludeJQuery.Text" xml:space="preserve">
+    <value>Include jQuery?</value>
+  </data>
+  <data name="Shorterned.Text" xml:space="preserve">
+    <value>Shortened</value>
+  </data>
+  <data name="ByDropdown.Text" xml:space="preserve">
+    <value>By Dropdown</value>
+  </data>
+  <data name="ByUsername.Text" xml:space="preserve">
+    <value>By Username</value>
+  </data>
+  <data name="plAuthorSelection.Help" xml:space="preserve">
+    <value>Specity the author selection mode for add/edit article.</value>
+  </data>
+  <data name="plAuthorSelection.Text" xml:space="preserve">
+    <value>Author Select Mode</value>
+  </data>
+  <data name="EnableImagesUpload.Help" xml:space="preserve">
+    <value>Check to enable uploading of new images.</value>
+  </data>
+  <data name="EnableImagesUpload.Text" xml:space="preserve">
+    <value>Enable Upload Images</value>
+  </data>
+  <data name="CategorySortOrder.Help" xml:space="preserve">
+    <value>Select how categories are ordered.</value>
+  </data>
+  <data name="CategorySortOrder.Text" xml:space="preserve">
+    <value>Category Sort Order</value>
+  </data>
+  <data name="Name.Text" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="SortOrder.Text" xml:space="preserve">
+    <value>Sort Order</value>
+  </data>
+  <data name="FileSettings.Text" xml:space="preserve">
+    <value>File Settings</value>
+  </data>
+  <data name="plDefaultFileFolder.Help" xml:space="preserve">
+    <value>Specify the default folder to upload files.</value>
+  </data>
+  <data name="plDefaultFileFolder.Text" xml:space="preserve">
+    <value>Default File Folder</value>
+  </data>
+  <data name="File.Text" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="SortDirectionComments.Help" xml:space="preserve">
+    <value>Select direction for sort.</value>
+  </data>
+  <data name="SortDirectionComments.Text" xml:space="preserve">
+    <value>Sort Direction</value>
+  </data>
+  <data name="plActiveSocial.Help" xml:space="preserve">
+    <value>Check to publish events to the Active Social wall</value>
+  </data>
+  <data name="plActiveSocial.Text" xml:space="preserve">
+    <value>Publish events to Active Social</value>
+  </data>
+  <data name="BottomLeft.Text" xml:space="preserve">
+    <value>Bottom Left</value>
+  </data>
+  <data name="BottomRight.Text" xml:space="preserve">
+    <value>Bottom Right</value>
+  </data>
+  <data name="TopLeft.Text" xml:space="preserve">
+    <value>Top Left</value>
+  </data>
+  <data name="TopRight.Text" xml:space="preserve">
+    <value>Top Right</value>
+  </data>
+  <data name="UseWatermark.Help" xml:space="preserve">
+    <value>Check to apply a watermark on uploaded images. The watermark is applied during the upload process.</value>
+  </data>
+  <data name="UseWatermark.Text" xml:space="preserve">
+    <value>Use Watermark?</value>
+  </data>
+  <data name="WatermarkImage.Help" xml:space="preserve">
+    <value>Specify an image to apply as a watermark.</value>
+  </data>
+  <data name="WatermarkImage.Text" xml:space="preserve">
+    <value>Watermark Image</value>
+  </data>
+  <data name="WatermarkPosition.Help" xml:space="preserve">
+    <value>Specify the position to place the watermark image.</value>
+  </data>
+  <data name="WatermarkPosition.Text" xml:space="preserve">
+    <value>Watermark Position</value>
+  </data>
+  <data name="WatermarkText.Help" xml:space="preserve">
+    <value>Specify a text string to apply as a watermark.</value>
+  </data>
+  <data name="WatermarkText.Text" xml:space="preserve">
+    <value>Watermark Text</value>
+  </data>
+  <data name="plActiveSocialCommentKey.Help" xml:space="preserve">
+    <value>Specify the access key for comment</value>
+  </data>
+  <data name="plActiveSocialCommentKey.Text" xml:space="preserve">
+    <value>Active Social Key - Comment</value>
+  </data>
+  <data name="plActiveSocialRateKey.Help" xml:space="preserve">
+    <value>Specify the access key for rate</value>
+  </data>
+  <data name="plActiveSocialRateKey.Text" xml:space="preserve">
+    <value>Active Social Key - Rate</value>
+  </data>
+  <data name="plActiveSocialSubmissionKey.Help" xml:space="preserve">
+    <value>Specify the access key for submission</value>
+  </data>
+  <data name="plActiveSocialSubmissionKey.Text" xml:space="preserve">
+    <value>Active Social Key - Submit</value>
+  </data>
+  <data name="plThumbnailType.Help" xml:space="preserve">
+    <value>Specify thumbnail cropping algorithm.</value>
+  </data>
+  <data name="plThumbnailType.Text" xml:space="preserve">
+    <value>Thumbnail Type</value>
+  </data>
+  <data name="Proportion.Text" xml:space="preserve">
+    <value>Proportion</value>
+  </data>
+  <data name="Square.Text" xml:space="preserve">
+    <value>Square (cropped)</value>
+  </data>
+  <data name="AddArticleInstances.Help" xml:space="preserve">
+    <value>Select portal/module combination to be available for sharing articles.</value>
+  </data>
+  <data name="AddArticleInstances.Text" xml:space="preserve">
+    <value>Add Article Module</value>
+  </data>
+  <data name="AvailableArticleInstances.Help" xml:space="preserve">
+    <value>Available modules to mirror articles. </value>
+  </data>
+  <data name="AvailableArticleInstances.Text" xml:space="preserve">
+    <value>Available Modules</value>
+  </data>
+  <data name="ContentSharing.Text" xml:space="preserve">
+    <value>Allows articles to be shared from other portals. </value>
+  </data>
+  <data name="ContentSharingNoneAvail.Text" xml:space="preserve">
+    <value>No article instances available in other portals.</value>
+  </data>
+  <data name="ContentSharingSettings.Text" xml:space="preserve">
+    <value>Content Sharing Settings</value>
+  </data>
+  <data name="Module.Header" xml:space="preserve">
+    <value>Module</value>
+  </data>
+  <data name="NoContentSharing.Text" xml:space="preserve">
+    <value>No modules currently linked.</value>
+  </data>
+  <data name="Portal.Header" xml:space="preserve">
+    <value>Portal</value>
+  </data>
+  <data name="Remove.Header" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="Remove.Text" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="HideWebsite.Help" xml:space="preserve">
+    <value>Check to hide website on the comment form.</value>
+  </data>
+  <data name="HideWebsite.Text" xml:space="preserve">
+    <value>Hide Website?</value>
+  </data>
+  <data name="plExpandMetaInformation.Help" xml:space="preserve">
+    <value>Expand meta information on the submit article form. </value>
+  </data>
+  <data name="plExpandMetaInformation.Text" xml:space="preserve">
+    <value>Expand Meta Information</value>
+  </data>
+  <data name="plUniquePageTitles.Help" xml:space="preserve">
+    <value>Check to enforce unique page titles in articles.</value>
+  </data>
+  <data name="plUniquePageTitles.Text" xml:space="preserve">
+    <value>Unique Page Titles</value>
+  </data>
+  <data name="plRequireEmail.Help" xml:space="preserve">
+    <value>Require email for anonymous users?</value>
+  </data>
+  <data name="plRequireEmail.Text" xml:space="preserve">
+    <value>Require Email?</value>
+  </data>
+  <data name="plRequireName.Help" xml:space="preserve">
+    <value>Require name for anonymous users?</value>
+  </data>
+  <data name="plRequireName.Text" xml:space="preserve">
+    <value>Require Name?</value>
+  </data>
+  <data name="CategoryFilterSubmit.Help" xml:space="preserve">
+    <value>Filter categories on submit article screen.</value>
+  </data>
+  <data name="CategoryFilterSubmit.Text" xml:space="preserve">
+    <value>Filter Category Submit</value>
+  </data>
+  <data name="AllGroups.Text" xml:space="preserve">
+    <value>-- All Groups -- </value>
+  </data>
+  <data name="AuthorDefault.Help" xml:space="preserve">
+    <value>Specify a default author for creating articles</value>
+  </data>
+  <data name="AuthorDefault.Text" xml:space="preserve">
+    <value>Author Default</value>
+  </data>
+  <data name="jQueryPath.Help" xml:space="preserve">
+    <value>Specify the path to jquery</value>
+  </data>
+  <data name="jQueryPath.Text" xml:space="preserve">
+    <value>jQuery Path</value>
+  </data>
+  <data name="NoDefault.Text" xml:space="preserve">
+    <value>-- Select Default Author --</value>
+  </data>
+  <data name="RoleGroup.Help" xml:space="preserve">
+    <value>Optionally filter roles by role group.</value>
+  </data>
+  <data name="RoleGroup.Text" xml:space="preserve">
+    <value>Role Group Filter</value>
+  </data>
+  <data name="SyndicationImagePath.Help" xml:space="preserve">
+    <value>Optionally specify rss image path.</value>
+  </data>
+  <data name="SyndicationImagePath.Text" xml:space="preserve">
+    <value>RSS Image Path</value>
+  </data>
+  <data name="AkismetKey.Help" xml:space="preserve">
+    <value>Specify an Akismet key to protect against comment spam.</value>
+  </data>
+  <data name="AkismetKey.Text" xml:space="preserve">
+    <value>Akismet Key</value>
+  </data>
+  <data name="FullName.Text" xml:space="preserve">
+    <value>Display Name</value>
+  </data>
+  <data name="plProcessPostTokens.Help" xml:space="preserve">
+    <value>Process tokens embedded in article. </value>
+  </data>
+  <data name="plProcessPostTokens.Text" xml:space="preserve">
+    <value>Process Post Tokens?</value>
+  </data>
+  <data name="plJournalIntegration.Help" xml:space="preserve">
+    <value>Check to integrate Create, Comment &amp; Rate Article into journal.</value>
+  </data>
+  <data name="plJournalIntegration.Text" xml:space="preserve">
+    <value>Journal Integration</value>
+  </data>
+  <data name="plJournalIntegrationGroups.Help" xml:space="preserve">
+    <value>Check security on categories and post to associates social groups/roles if applicable.</value>
+  </data>
+  <data name="plJournalIntegrationGroups.Text" xml:space="preserve">
+    <value>Journal Group Posting</value>
+  </data>
+</root>

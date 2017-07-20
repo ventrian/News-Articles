@@ -1,0 +1,53 @@
+﻿DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCommentList
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCommentList
+	@ModuleID	int,
+	@ArticleID	int,
+	@IsApproved bit,
+	@SortDirection int,   
+	@MaxCount int
+AS
+
+IF( @MaxCount is not null )
+BEGIN
+	SET ROWCOUNT @MaxCount
+END
+
+SELECT
+	Comment.[CommentID],
+	Comment.[ArticleID],
+	Comment.[UserID], 
+	Comment.[CreatedDate],
+	Comment.[Comment],
+	Comment.[RemoteAddress],
+	Comment.[Type],
+	Comment.[TrackbackUrl],
+	Comment.[TrackbackTitle],
+	Comment.[TrackbackBlogName],
+	Comment.[TrackbackExcerpt], 
+	Comment.[AnonymousName], 
+	Comment.[AnonymousEmail], 
+	Comment.[AnonymousURL],
+	Comment.[NotifyMe],  
+	Comment.[IsApproved],  
+	Comment.[ApprovedBy],  
+	Author.[Email] as AuthorEmail,
+	Author.[UserName] as AuthorUserName,
+	Author.[FirstName] as AuthorFirstName,
+	Author.[LastName] as AuthorLastName,
+	Author.[DisplayName] as AuthorDisplayName
+FROM
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment Comment INNER JOIN
+		{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article Article on Comment.ArticleID = Article.ArticleID LEFT OUTER JOIN
+		{databaseOwner}{objectQualifier}Users Author ON Comment.UserID = Author.UserID
+WHERE
+	Article.ModuleID = @ModuleID
+	and
+	(@ArticleID is null OR Comment.[ArticleID] = @ArticleID)
+	and
+	Comment.IsApproved = @IsApproved
+ORDER BY
+	CASE WHEN @SortDirection = 0 THEN Comment.[CreatedDate] END ASC, 
+	CASE WHEN @SortDirection = 1 THEN Comment.[CreatedDate] END DESC 
+GO

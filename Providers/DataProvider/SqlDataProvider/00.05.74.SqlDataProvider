@@ -1,0 +1,36 @@
+﻿drop procedure {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleList
+GO
+
+drop procedure {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListByApproved
+GO
+
+drop procedure {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListByAuthor
+GO
+
+drop procedure {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListByAuthorByStatus
+GO
+
+drop procedure {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListBySearchCriteria
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListBySearchCriteria
+	@ModuleID	int,
+	@CategoryID	varchar(255),
+	@CategoryIDCount	int,
+	@MaxCount	int,
+	@MaxAge	int,
+	@IsApproved	bit,
+	@IsDraft	bit,
+	@StartDate	datetime,
+	@KeyWords	varchar(255), 
+	@ShowPending	bit,
+	@ShowExpired bit,   
+	@AuthorID	int,
+	@ShowFeaturedOnly bit,
+	@ShowNotFeaturedOnly bit,
+	@SortBy varchar(50),
+	@SortDirection varchar(50),
+	@Month	int,
+	@Year	int 
+AS
+GO

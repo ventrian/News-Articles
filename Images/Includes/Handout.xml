@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Handout xmlns="http://tempuri.org/Handout.Xsd">
+  <Name>PDF Handout Title</Name>
+  <Description>My Handout Description</Description>
+  <Articles>
+    <Article>
+      <Title>Easy Freezy Vanilla Ice Cream</Title>
+      <Detail>Detail</Detail>
+    </Article>
+    <Article>
+      <Title>Test Title 2</Title>
+      <Detail>Detail 2</Detail>
+    </Article>
+  </Articles>
+</Handout>

@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D1901326-AD43-466F-942D-AA796EA58D8E}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>Ventrian.NewsArticles.SqlDataProvider</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyMode>None</AssemblyOriginatorKeyMode>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <OptionCompare>Binary</OptionCompare>
+    <OptionExplicit>On</OptionExplicit>
+    <OptionStrict>Off</OptionStrict>
+    <RootNamespace>
+    </RootNamespace>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <MyType>Windows</MyType>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>..\..\..\..\..\bin\</OutputPath>
+    <DocumentationFile>DnnForge.NewsArticles.SqlDataProvider.xml</DocumentationFile>
+    <BaseAddress>285212672</BaseAddress>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>
+    </DefineConstants>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <DebugSymbols>true</DebugSymbols>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>1</WarningLevel>
+    <NoWarn>42016,42017,42018,42019,42032,42353,42354,42355</NoWarn>
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>..\..\..\..\..\bin\</OutputPath>
+    <DocumentationFile>DnnForge.NewsArticles.SqlDataProvider.xml</DocumentationFile>
+    <BaseAddress>285212672</BaseAddress>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>
+    </DefineConstants>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>1</WarningLevel>
+    <NoWarn>42016,42017,42018,42019,42032,42353,42354,42355</NoWarn>
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DotNetNuke, Version=6.1.5.142, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\bin\DotNetNuke.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationBlocks.Data, Version=2.0.0.0, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\bin\Microsoft.ApplicationBlocks.Data.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.Web">
+      <Name>System.Web</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="00.00.01.SqlDataProvider" />
+    <None Include="00.00.02.SqlDataProvider" />
+    <None Include="00.00.03.SqlDataProvider" />
+    <None Include="00.00.04.SqlDataProvider" />
+    <None Include="00.00.05.SqlDataProvider" />
+    <None Include="00.00.07.SqlDataProvider" />
+    <None Include="00.00.10.SqlDataProvider" />
+    <None Include="00.01.00.SqlDataProvider" />
+    <None Include="00.01.01.SqlDataProvider" />
+    <None Include="00.01.02.SqlDataProvider" />
+    <None Include="00.02.00.SqlDataProvider" />
+    <None Include="00.02.05.SqlDataProvider" />
+    <None Include="00.02.07.SqlDataProvider" />
+    <None Include="00.03.00.SqlDataProvider" />
+    <None Include="00.03.02.SqlDataProvider" />
+    <None Include="00.04.02.SqlDataProvider" />
+    <None Include="00.04.03.SqlDataProvider" />
+    <None Include="00.04.08.SqlDataProvider" />
+    <None Include="00.04.09.SqlDataProvider" />
+    <None Include="00.05.00.SqlDataProvider" />
+    <None Include="00.05.02.SqlDataProvider" />
+    <None Include="00.05.05.SqlDataProvider" />
+    <None Include="00.05.09.SqlDataProvider" />
+    <None Include="00.05.11.SqlDataProvider" />
+    <None Include="00.05.12.SqlDataProvider" />
+    <None Include="00.05.13.SqlDataProvider" />
+    <None Include="00.05.17.SqlDataProvider" />
+    <None Include="00.05.20.SqlDataProvider" />
+    <None Include="00.05.21.SqlDataProvider" />
+    <None Include="00.05.22.SqlDataProvider" />
+    <None Include="00.05.24.SqlDataProvider" />
+    <None Include="00.05.26.SqlDataProvider" />
+    <None Include="00.05.28.SqlDataProvider" />
+    <None Include="00.05.40.SqlDataProvider" />
+    <None Include="00.05.41.SqlDataProvider" />
+    <None Include="00.05.46.SqlDataProvider" />
+    <None Include="00.05.48.SqlDataProvider" />
+    <None Include="00.05.51.SqlDataProvider" />
+    <None Include="00.05.55.SqlDataProvider" />
+    <None Include="00.05.56.SqlDataProvider" />
+    <None Include="00.05.58.SqlDataProvider" />
+    <None Include="00.05.66.SqlDataProvider" />
+    <None Include="00.05.68.SqlDataProvider" />
+    <None Include="00.05.69.SqlDataProvider" />
+    <None Include="00.05.74.SqlDataProvider" />
+    <None Include="00.05.76.SqlDataProvider" />
+    <None Include="00.05.77.SqlDataProvider" />
+    <None Include="00.05.78.SqlDataProvider" />
+    <None Include="00.06.00.SqlDataProvider" />
+    <None Include="00.06.04.SqlDataProvider" />
+    <None Include="00.06.07.SqlDataProvider" />
+    <None Include="00.06.08.SqlDataProvider" />
+    <None Include="00.06.09.SqlDataProvider" />
+    <None Include="00.06.11.SqlDataProvider" />
+    <None Include="00.06.14.SqlDataProvider" />
+    <None Include="00.06.16.SqlDataProvider" />
+    <None Include="00.06.18.SqlDataProvider" />
+    <None Include="00.07.00.SqlDataProvider" />
+    <None Include="00.07.01.SqlDataProvider" />
+    <None Include="00.07.05.SqlDataProvider" />
+    <None Include="00.07.06.SqlDataProvider" />
+    <None Include="00.07.08.SqlDataProvider" />
+    <None Include="00.07.10.SqlDataProvider" />
+    <None Include="00.07.13.SqlDataProvider" />
+    <None Include="00.07.14.SqlDataProvider" />
+    <None Include="00.07.20.SqlDataProvider" />
+    <None Include="00.07.32.SqlDataProvider" />
+    <None Include="00.07.33.SqlDataProvider" />
+    <None Include="00.07.41.SqlDataProvider" />
+    <None Include="00.07.44.SqlDataProvider" />
+    <None Include="00.07.46.SqlDataProvider" />
+    <None Include="00.07.47.SqlDataProvider" />
+    <None Include="00.07.48.SqlDataProvider" />
+    <None Include="00.07.52.SqlDataProvider" />
+    <None Include="00.07.53.SqlDataProvider" />
+    <None Include="00.07.55.SqlDataProvider" />
+    <None Include="00.07.56.SqlDataProvider" />
+    <None Include="00.07.57.SqlDataProvider" />
+    <None Include="00.07.58.SqlDataProvider" />
+    <None Include="00.07.59.SqlDataProvider" />
+    <None Include="00.07.61.SqlDataProvider" />
+    <None Include="00.07.63.SqlDataProvider" />
+    <None Include="00.07.64.SqlDataProvider" />
+    <None Include="00.07.66.SqlDataProvider" />
+    <None Include="00.07.67.SqlDataProvider" />
+    <None Include="00.07.68.SqlDataProvider" />
+    <None Include="00.07.69.SqlDataProvider" />
+    <None Include="00.07.71.SqlDataProvider" />
+    <None Include="00.07.72.SqlDataProvider" />
+    <None Include="00.07.73.SqlDataProvider" />
+    <None Include="00.07.74.SqlDataProvider" />
+    <None Include="00.07.75.SqlDataProvider" />
+    <None Include="00.07.77.SqlDataProvider" />
+    <None Include="00.07.81.SqlDataProvider" />
+    <None Include="00.07.84.SqlDataProvider" />
+    <None Include="00.07.85.SqlDataProvider" />
+    <None Include="00.07.87.SqlDataProvider" />
+    <None Include="00.07.88.SqlDataProvider" />
+    <None Include="00.07.89.SqlDataProvider" />
+    <None Include="00.07.96.SqlDataProvider" />
+    <None Include="00.07.97.SqlDataProvider" />
+    <None Include="00.07.98.SqlDataProvider" />
+    <None Include="00.07.99.SqlDataProvider" />
+    <None Include="00.08.00.SqlDataProvider" />
+    <None Include="00.08.04.SqlDataProvider" />
+    <None Include="00.09.02.SqlDataProvider" />
+    <None Include="Uninstall.SqlDataProvider" />
+    <Content Include="00.00.06.SqlDataProvider" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="SqlDataProvider.vb">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Ventrian.NewsArticles.vbproj">
+      <Project>{25F6A930-34CD-4730-8324-D234D4637898}</Project>
+      <Name>Ventrian.NewsArticles</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

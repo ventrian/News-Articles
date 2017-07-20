@@ -1,0 +1,116 @@
+<!-- View.Header -->
+<!-- View.Item -->
+<table cellspacing="1" cellpadding="0" width="100%" align="center" border="0" >
+	<tr>
+		<td class="articleTable">
+			<table cellspacing="1" cellpadding="3" width="100%" border="0" >
+				<tr align="left">
+					<td class="articleTopCell" align="left">
+                        <span class="NormalBold">[PUBLISHSTARTDATE]</span></td>
+				</tr>
+				<tr>
+					<td class="articleContentCell">
+						<table width="100%" id="Table3">
+							<tr>
+								<td>[IMAGE]</td>
+								<td class="Normal" align="left" width="100%">
+									[EDIT] <a href='[ARTICLELINK]' class="articleTitle">[TITLE]</a><br />
+									By [AUTHOR] @ [PUBLISHSTARTTIME] :: [VIEWCOUNT] Views [HASCOMMENTSENABLED]:: <a href="[COMMENTLINK]">
+										[COMMENTCOUNT] Comments</a> [/HASCOMMENTSENABLED][HASRATINGSENABLED]  :: [RATING][/HASRATINGSENABLED][HASCATEGORIES] :: [CATEGORIES][/HASCATEGORIES]
+								</td>
+								<td align="right" valign="bottom">[PRINT]&nbsp;</td>
+							</tr>
+							<tr>
+								<td colspan="3">
+									<table cellspacing="1" cellpadding="0" width="100%" align="center" border="0" id="Table4">
+										<tr>
+											<td class="articleTable">
+												<table cellspacing="1" cellpadding="3" width="100%" border="0" id="Table5">
+													<tr>
+														<td class="articleTextCell"><span class="Normal">[PAGETEXT]</span></td>
+													</tr>
+													[HASLINK]
+													<tr>
+														<td align="left" class="articleContentCell"><a href='[LINK]' class="CommandButton" target='[LINKTARGET]'>Read 
+																More..</a></td>
+													</tr>
+													[/HASLINK]
+												</table>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+<!-- View.Footer -->
+[HASMULTIPLEPAGES]
+<table cellspacing=1 cellpadding=0 width="100%" align=center border=0 id="Table1"><tr><td class=articleTable>
+<table cellspacing=1 cellpadding=3 width="100%" border=0 id="Table2">
+    <tr align=left>
+	<td class=articleFooterCell colspan="3">
+		<span class="NormalBold">Paging - Page: [CURRENTPAGE] of [PAGECOUNT]</span>
+	</td>
+</tr>
+<tr align="left">
+	<td class="articleIconCell" align="center" width="16"><img height=5 alt="" src="~/images/spacer.gif" width="16" border="0"></td>
+	<td class="articleContentCell" align="left" colspan="2">
+		[LINKPREVIOUS] | [LINKNEXT]
+	</td>
+</tr>
+</table>
+</td></tr></table>
+[/HASMULTIPLEPAGES]
+[HASIMAGES]
+<table cellspacing=1 cellpadding=0 width="100%" align=center border=0 id="Table8"><tr><td class=articleTable>
+<table cellspacing=1 cellpadding=3 width="100%" border=0 id="Table9">
+    <tr align=left>
+	<td class=articleTopCell><span class="NormalBold">Images</span></td>
+</tr>
+<tr align="left">
+	<td class="articleContentCell" align="left">
+		[IMAGES]
+	</td>
+</tr>
+</table>
+</td></tr></table>
+[/HASIMAGES]
+[ISRATEABLE]
+<table cellspacing=1 cellpadding=0 width="100%" align=center border=0 id="Table1"><tr><td class=articleTable>
+<table cellspacing=1 cellpadding=3 width="100%" border=0 id="Table2">
+    <tr align=left>
+	<td class=articleTopCell><span class="NormalBold">Rating</span></td>
+</tr>
+<tr align="left">
+	<td class="articleContentCell" align="left">
+		[POSTRATING]
+	</td>
+</tr>
+</table>
+</td></tr></table>
+[/ISRATEABLE]
+<!-- Comment.Header -->
+<a id="Comments"></a>
+<table cellspacing="1" cellpadding="0" width="100%" align="center" border="0" id="Table6">
+<tr>
+<td class="articleTable">
+<table cellspacing="1" cellpadding="3" width="100%" border="0" id="Table7">
+<tr align="left">
+<td class="articleTopCell" align="left"><span class="NormalBold">Comments</span></td>
+</tr>
+<tr>
+<td class="articleContentCell">
+[COMMENTS]
+<!-- Comment.Footer -->
+[POSTCOMMENT]
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>

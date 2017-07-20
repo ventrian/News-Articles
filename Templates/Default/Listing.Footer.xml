@@ -1,0 +1,11 @@
+<Objects>
+	<Object>
+		<Token>[CURRENTPAGE]</Token>
+		<Settings>
+			<Setting>
+				<Name>FormatString</Name>
+				<Value>D</Value>
+			</Setting>
+		</Settings>
+	</Object>	
+</Objects>

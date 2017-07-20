@@ -1,0 +1,193 @@
+﻿DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetAuthorStatistics
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetAuthorStatistics
+	@ModuleID	int, 
+	@CategoryID 	varchar(255),
+	@AuthorID int,
+	@SortBy	varchar(255),
+	@ShowPending bit  
+AS
+
+DECLARE @strTop	nvarchar(2000)
+DECLARE @strWhere	nvarchar(2000)
+
+SELECT @strTop = ''
+SELECT @strWhere = ''
+
+IF (@ModuleID is not null)
+	SELECT @strWhere = @strWhere + ' AND Articles.ModuleID = ' + convert(nvarchar, @ModuleId)
+	
+IF (@CategoryId is not null)
+	SELECT @strWhere = @strWhere + ' AND Articles.ArticleID in (select ArticleID from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ArticleCategories ArticleCategories where ArticleCategories.CategoryID in (' + @CategoryID + '))'
+
+IF (@AuthorID is not null)
+	SELECT @strWhere = @strWhere + ' AND Articles.AuthorID = ' + convert(nvarchar, @AuthorID)
+
+IF (@ShowPending is null )
+	SELECT @strWhere = @strWhere + ' AND (Articles.StartDate is null OR Articles.StartDate < ''' + convert(nvarchar, DateAdd(mi, 1, GetDate()))  + ''')'
+
+EXEC('
+SELECT     
+	UserID, UserName, DisplayName, FirstName, LastName, count(*) as ''ArticleCount''   
+FROM         
+	{databaseOwner}{objectQualifier}Users Users, {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article Articles
+where Articles.IsApproved = 1 and Articles.IsDraft = 0 and Users.UserID = Articles.AuthorID ' + 
+	@strWhere + ' 
+GROUP BY 
+	UserID, UserName, DisplayName, FirstName, LastName
+ORDER BY ' +
+	@SortBy)
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetNewsArchive
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetNewsArchive
+	@ModuleID int, 
+	@CategoryID varchar(255),
+	@AuthorID int,
+	@GroupBy varchar(255),
+	@ShowPending bit   
+AS
+
+DECLARE @strTop	nvarchar(2000)
+DECLARE @strWhere	nvarchar(2000)
+
+SELECT @strTop = ''
+SELECT @strWhere = ''
+
+IF (@ModuleID is not null)
+	SELECT @strWhere = @strWhere + ' AND Article.ModuleID = ' + convert(nvarchar, @ModuleId)
+	
+IF (@CategoryId is not null)
+	SELECT @strWhere = @strWhere + ' AND Article.ArticleID in ( select ArticleID from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ArticleCategories where {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ArticleCategories.ArticleID = Article.ArticleID and {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ArticleCategories.CategoryID in (' + @CategoryID + '))'
+
+IF (@AuthorID is not null)
+	SELECT @strWhere = @strWhere + ' AND Article.AuthorID = ' + convert(nvarchar, @AuthorID)
+
+IF (@ShowPending is null)
+BEGIN
+	SELECT @strWhere = @strWhere + ' AND (Article.StartDate is null or Article.StartDate < ''' + convert(nvarchar, DateAdd(mi, 1, GetDate()))  + ''')'
+END
+
+IF( @GroupBy = 'Month' )
+BEGIN
+EXEC('
+    select Month(StartDate) as [Month], Year(StartDate) as [Year], 1 as Day, Count(*) as [Count]
+    from {databaseOwner}{objectQualifier}dnnforge_newsarticles_article Article
+    where IsApproved = 1 and IsDraft = 0 ' + 
+	    @strWhere + '
+    group by Year(StartDate), Month(StartDate)
+    order by [Year] desc, [Month] desc')
+END
+ELSE
+BEGIN
+EXEC('
+    select 1 as [Month], Year(StartDate) as [Year], 1 as Day, Count(*) as [Count]
+    from {databaseOwner}{objectQualifier}dnnforge_newsarticles_article Article
+    where IsApproved = 1 and IsDraft = 0 ' + 
+	    @strWhere + '
+    group by Year(StartDate)
+    order by [Year] desc')
+END
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCategoryListAll
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCategoryListAll
+	@ModuleID int,
+	@Current int, 
+	@CategoryID varchar(255), 
+	@AuthorID int,
+	@MaxDepth int,
+	@ShowPending bit   
+AS
+
+SET NOCOUNT ON
+
+DECLARE @FilterID int
+SET @FilterID = @Current
+
+DECLARE @level int, @line int
+ 
+CREATE TABLE #hierarchy(HierarchyID int IDENTITY (1,1), CategoryID int, level int)
+CREATE TABLE #stack (item int, level int)
+INSERT INTO #stack VALUES (@current, 1)
+SELECT @level = 1
+ 
+WHILE @level > 0
+BEGIN
+   IF EXISTS (SELECT * FROM #stack WHERE level = @level)
+      BEGIN
+         SELECT @current = item
+         FROM #stack
+         WHERE level = @level
+ 
+ 		insert into #hierarchy(CategoryID, level) values(@current, @level) 
+ 
+         DELETE FROM #stack
+         WHERE level = @level
+            AND item = @current
+            
+ 		 IF( @MaxDepth IS NULL OR @MaxDepth >= @level )
+		 BEGIN
+             INSERT #stack
+                SELECT CategoryID, @level + 1
+                FROM {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Category
+                WHERE ParentID = @current and ModuleID = @ModuleID 
+     	        ORDER BY [SortOrder] DESC, [Name] DESC
+
+             IF @@ROWCOUNT > 0
+                SELECT @level = @level + 1
+		 END
+      END
+   ELSE
+      SELECT @level = @level - 1
+END -- WHILE
+
+IF( @FilterID IS NOT NULL )
+BEGIN
+	DELETE FROM #hierarchy WHERE CategoryID = @FilterID
+END
+
+DECLARE @strModuleID	nvarchar(50)
+SELECT @strModuleID = convert(varchar, @ModuleID)
+
+DECLARE @strCategoryId	nvarchar(255)
+IF (@CategoryId is not null)
+	SELECT @strCategoryId = ' AND c.CategoryID in (' + @CategoryID + ')'
+
+DECLARE @strAuthorId	nvarchar(255)
+IF (@authorId is not null)
+	SELECT @strAuthorId = ' AND a.AuthorID = ' + cast(@AuthorID as nvarchar)
+
+DECLARE @strPending nvarchar(2000)
+IF (@ShowPending is null) 
+	SELECT @strPending = ' AND (a.StartDate IS NULL OR a.StartDate < GetDate())'
+
+EXEC('
+SELECT
+	c.[CategoryID],
+	c.[ParentID],
+	c.[ModuleID],
+	c.[Name],
+	REPLICATE(''.'',(level-2)*2) + c.[Name] as ''NameIndented'',
+	c.[Image],
+	c.[Description],
+	c.[SortOrder],
+	level-1 as ''Level'',
+	(SELECT COUNT(*) FROM {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ArticleCategories ac INNER JOIN {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article a ON ac.ArticleID = a.ArticleID WHERE ac.CategoryID = c.CategoryID AND a.IsDraft = 0 AND a.IsApproved = 1 ' + @strAuthorId + @strPending + ') as ''NumberofArticles'',
+	(SELECT SUM(a.NumberOfViews) FROM {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article a INNER JOIN {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ArticleCategories ac ON a.ArticleID = ac.ArticleID WHERE ac.CategoryID = c.CategoryID) as ''NumberofViews''
+FROM
+	#hierarchy h INNER JOIN
+		{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Category c ON h.CategoryID = c.CategoryID 
+WHERE
+	c.[ModuleID] = ' + @strModuleID + @strCategoryId + ' 
+ORDER BY 
+	h.HierarchyID ASC')
+
+drop table #hierarchy
+drop table #stack
+GO

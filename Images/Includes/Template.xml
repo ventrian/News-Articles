@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Handout xmlns="http://tempuri.org/Handout.Xsd">
+  <Name>Ages 5 to 6 Years</Name>
+  <Description>Ages 5 to 6 Years</Description>
+  <Articles>
+    <Article>
+      <Title>My Article</Title>
+      <Detail>
+        <![CDATA[<p>Something.. </p>]]>
+      </Detail>
+    </Article>
+    <Article>
+      <Title>My Article 2</Title>
+      <Detail>
+        <![CDATA[&amp;lt;p&amp;gt;Something.. &amp;lt;/p&amp;gt;]]>
+      </Detail>
+    </Article>
+  </Articles>
+</Handout>

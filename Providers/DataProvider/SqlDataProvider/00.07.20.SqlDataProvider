@@ -1,0 +1,138 @@
+﻿CREATE TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Handout(
+	[HandoutID] [int] IDENTITY(1,1) NOT NULL,
+	[ModuleID] [int] NOT NULL,
+	[UserID] [int] NULL,
+	[Name] [nvarchar](255) NOT NULL,
+	[Description] [ntext] NULL
+) ON [PRIMARY]
+GO
+
+CREATE TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_HandoutArticle(
+	[HandoutID] [int] NOT NULL,
+	[ArticleID] [int] NOT NULL,
+	[SortOrder] [int] NOT NULL
+) ON [PRIMARY]
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_AddHandout
+	@ModuleID int,
+	@UserID int,
+	@Name nvarchar(255),
+	@Description ntext
+AS
+
+INSERT INTO {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Handout (
+	[ModuleID],
+	[UserID],
+	[Name],
+	[Description]
+) VALUES (
+	@ModuleID,
+	@UserID,
+	@Name,
+	@Description
+)
+
+select SCOPE_IDENTITY()
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_AddHandoutArticle
+	@HandoutID int,
+	@ArticleID int,
+	@SortOrder int
+AS
+
+INSERT INTO
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_HandoutArticle(HandoutID, ArticleID, SortOrder)
+VALUES
+	(@HandoutID, @ArticleID, @SortOrder)
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_DeleteHandout
+	@HandoutID int
+AS
+
+DELETE FROM         
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Handout
+WHERE
+	HandoutID = @HandoutID
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_DeleteHandoutArticleList
+	@HandoutID int
+AS
+
+DELETE FROM         
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_HandoutArticle
+WHERE
+	HandoutID = @HandoutID
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetHandout
+	@HandoutID int
+AS
+
+SELECT     
+	[HandoutID], 
+	[ModuleID], 
+	[UserID], 
+	[Name], 
+	[Description]
+FROM         
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Handout
+WHERE
+	HandoutID = @HandoutID
+Go
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetHandoutArticleList
+	@HandoutID int
+AS
+
+SELECT     
+	[HandoutID], 
+	[ArticleID],
+	[SortOrder]
+FROM         
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_HandoutArticle
+WHERE
+	HandoutID = @HandoutID
+ORDER BY 
+	[SortOrder] ASC
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetHandoutList
+	@UserID int
+AS
+
+SELECT     
+	[HandoutID], 
+	[ModuleID], 
+	[UserID], 
+	[Name], 
+	[Description]
+FROM         
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Handout
+WHERE
+	[UserID] = @UserID
+ORDER BY
+	[Name] 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_UpdateHandout
+	@HandoutID int,
+	@ModuleID int,
+	@UserID int,
+	@Name nvarchar(255),
+	@Description ntext
+AS
+
+UPDATE
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Handout
+SET
+	[ModuleID] = @ModuleID,
+	[UserID] = @UserID,
+	[Name] = @Name,
+	[Description] = @Description
+WHERE
+	HandoutID = @HandoutID
+GO

@@ -1,0 +1,23 @@
+<Objects>
+	<Object>
+		<Token>[CREATEDATE]</Token>
+		<Settings>
+			<Setting>
+				<Name>FormatString</Name>
+				<Value>D</Value>
+			</Setting>
+		</Settings>
+	</Object>	
+	<Object>
+		<Token>[EDIT]</Token>
+		<Settings>
+			<Setting>
+				<Name>ToolTip</Name>
+				<Value>Edit this Article</Value>
+			</Setting>
+		</Settings>
+	</Object>
+	<Object>
+		<Token>[TITLE]</Token>
+	</Object>
+</Objects>
