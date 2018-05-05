@@ -1080,15 +1080,15 @@ Namespace Ventrian.NewsArticles
                     End If
                 End If
             Next
-            objModules.UpdateModuleSetting(ModuleId, ArticleConstants.PERMISSION_CATEGORIES_SETTING, categoriesRoles)
-            objModules.UpdateModuleSetting(ModuleId, ArticleConstants.PERMISSION_EXCERPT_SETTING, excerptRoles)
-            objModules.UpdateModuleSetting(ModuleId, ArticleConstants.PERMISSION_IMAGE_SETTING, imageRoles)
-            objModules.UpdateModuleSetting(ModuleId, ArticleConstants.PERMISSION_FILE_SETTING, fileRoles)
-            objModules.UpdateModuleSetting(ModuleId, ArticleConstants.PERMISSION_LINK_SETTING, linkRoles)
-            objModules.UpdateModuleSetting(ModuleId, ArticleConstants.PERMISSION_PUBLISH_SETTING, publishRoles)
-            objModules.UpdateModuleSetting(ModuleId, ArticleConstants.PERMISSION_EXPIRY_SETTING, expiryRoles)
-            objModules.UpdateModuleSetting(ModuleId, ArticleConstants.PERMISSION_META_SETTING, metaRoles)
-            objModules.UpdateModuleSetting(ModuleId, ArticleConstants.PERMISSION_CUSTOM_SETTING, customRoles)
+            objModules.UpdateModuleSetting(ModuleId, ArticleConstants.PERMISSION_CATEGORIES_SETTING, IIf(String.IsNullOrEmpty(categoriesRoles), ";", categoriesRoles))
+            objModules.UpdateModuleSetting(ModuleId, ArticleConstants.PERMISSION_EXCERPT_SETTING, IIf(String.IsNullOrEmpty(excerptRoles), ";", excerptRoles))
+            objModules.UpdateModuleSetting(ModuleId, ArticleConstants.PERMISSION_IMAGE_SETTING, IIf(String.IsNullOrEmpty(imageRoles), ";", imageRoles))
+            objModules.UpdateModuleSetting(ModuleId, ArticleConstants.PERMISSION_FILE_SETTING, IIf(String.IsNullOrEmpty(fileRoles), ";", fileRoles))
+            objModules.UpdateModuleSetting(ModuleId, ArticleConstants.PERMISSION_LINK_SETTING, IIf(String.IsNullOrEmpty(linkRoles), ";", linkRoles))
+            objModules.UpdateModuleSetting(ModuleId, ArticleConstants.PERMISSION_PUBLISH_SETTING, IIf(String.IsNullOrEmpty(publishRoles), ";", publishRoles))
+            objModules.UpdateModuleSetting(ModuleId, ArticleConstants.PERMISSION_EXPIRY_SETTING, IIf(String.IsNullOrEmpty(expiryRoles), ";", expiryRoles))
+            objModules.UpdateModuleSetting(ModuleId, ArticleConstants.PERMISSION_META_SETTING, IIf(String.IsNullOrEmpty(metaRoles), ";", metaRoles))
+            objModules.UpdateModuleSetting(ModuleId, ArticleConstants.PERMISSION_CUSTOM_SETTING, IIf(String.IsNullOrEmpty(customRoles), ";", customRoles))
 
             Dim siteTemplatesRoles As String = ""
             For Each item As DataGridItem In grdAdminPermissions.Items
