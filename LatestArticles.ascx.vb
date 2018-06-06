@@ -57,12 +57,13 @@ Namespace Ventrian.NewsArticles
             Get
                 If (_articleSettings Is Nothing) Then
 
-                    _settings = DotNetNuke.Entities.Portals.PortalSettings.GetModuleSettings(_articleModuleID)
+                    Dim ModuleController As New DotNetNuke.Entities.Modules.ModuleController
+                    _settings = ModuleController.GetModuleSettings(_articleModuleID)
 
                     Dim objModuleController As New ModuleController
                     Dim objModule As ModuleInfo = objModuleController.GetModule(_articleModuleID, _articleTabID)
                     If Not (objModule Is Nothing) Then
-                        Dim objSettings As Hashtable = DotNetNuke.Entities.Portals.PortalSettings.GetTabModuleSettings(objModule.TabModuleID)
+                        Dim objSettings As Hashtable = ModuleController.GetTabModuleSettings(objModule.TabModuleID)
 
                         For Each key As String In objSettings.Keys
                             If (_settings.ContainsKey(key) = False) Then
@@ -119,7 +120,7 @@ Namespace Ventrian.NewsArticles
             Get
                 If (_serverTimeZone = Null.NullInteger) Then
 
-                    _serverTimeZone = PortalSettings.TimeZoneOffset
+                    _serverTimeZone = Ventrian.NewsArticles.Common.GetTimeZoneInteger(PortalSettings.TimeZone)
 
                     Dim objModuleSettingController As New ModuleController
                     Dim newsSettings As Hashtable = objModuleSettingController.GetModuleSettings(_articleModuleID)

@@ -43,7 +43,7 @@ Namespace Ventrian.NewsArticles
             Get
 
                 Dim objUserInfo As UserInfo = UserController.GetCurrentUserInfo
-                Return FromClientToServerFactor(objUserInfo.Profile.TimeZone, serverTimeZoneOffet)
+                Return FromClientToServerFactor(Ventrian.NewsArticles.Common.GetTimeZoneInteger(objUserInfo.Profile.PreferredTimeZone), serverTimeZoneOffet)
 
             End Get
 
@@ -54,7 +54,7 @@ Namespace Ventrian.NewsArticles
             Get
 
                 Dim _portalSettings As PortalSettings = PortalController.GetCurrentPortalSettings
-                Return FromClientToServerFactor(_portalSettings.TimeZoneOffset, serverTimeZoneOffet)
+                Return FromClientToServerFactor(Ventrian.NewsArticles.Common.GetTimeZoneInteger(_portalSettings.TimeZone), serverTimeZoneOffet)
 
             End Get
 
@@ -67,7 +67,7 @@ Namespace Ventrian.NewsArticles
 
                 Dim objUser As UserInfo = UserController.GetCurrentUserInfo()
                 Dim _portalSettings As PortalSettings = PortalController.GetCurrentPortalSettings
-                Return FromServerToClientFactor(objUser.Profile.TimeZone, _portalSettings.TimeZoneOffset)
+                Return FromServerToClientFactor(Ventrian.NewsArticles.Common.GetTimeZoneInteger(objUser.Profile.PreferredTimeZone), Ventrian.NewsArticles.Common.GetTimeZoneInteger(_portalSettings.TimeZone))
 
             End Get
 

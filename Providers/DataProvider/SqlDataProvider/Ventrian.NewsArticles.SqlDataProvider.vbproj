@@ -90,15 +90,12 @@
     <DebugType>none</DebugType>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DotNetNuke, Version=6.1.5.142, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="DotNetNuke, Version=9.2.0.366, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\bin\DotNetNuke.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\..\Libraries\DotNetNuke.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.ApplicationBlocks.Data, Version=2.0.0.0, Culture=neutral">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\bin\Microsoft.ApplicationBlocks.Data.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="Microsoft.ApplicationBlocks.Data">
+      <HintPath>..\..\..\Libraries\Microsoft.ApplicationBlocks.Data.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>

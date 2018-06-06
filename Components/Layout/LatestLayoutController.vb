@@ -129,8 +129,7 @@ Namespace Ventrian.NewsArticles
                 objLayout.Template = File.ReadAllText(filePath)
                 objLayout.Tokens = objLayout.Template.Split(delimiter)
 
-                DataCache.SetCache(cacheKey, objLayout, New CacheDependency(filePath))
-
+                DataCache.SetCache(cacheKey, objLayout, New DotNetNuke.Services.Cache.DNNCacheDependency(filePath))
             End If
 
             Return objLayout

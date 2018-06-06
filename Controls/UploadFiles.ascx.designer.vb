@@ -66,7 +66,7 @@ Namespace Ventrian.NewsArticles.Controls
         '''Auto-generated field.
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
-        Protected WithEvents dshFiles As DotNetNuke.UI.UserControls.SectionHeadControl
+        Protected WithEvents dshFiles As Global.System.Web.UI.UserControl
 
         '''<summary>
         '''tblFiles control.
@@ -111,7 +111,7 @@ Namespace Ventrian.NewsArticles.Controls
         '''Auto-generated field.
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
-        Protected WithEvents dshUploadFiles As DotNetNuke.UI.UserControls.SectionHeadControl
+        Protected WithEvents dshUploadFiles As Global.System.Web.UI.UserControl
 
         '''<summary>
         '''tblUploadFiles control.
@@ -156,7 +156,7 @@ Namespace Ventrian.NewsArticles.Controls
         '''Auto-generated field.
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
-        Protected WithEvents dshExistingFiles As DotNetNuke.UI.UserControls.SectionHeadControl
+        Protected WithEvents dshExistingFiles As Global.System.Web.UI.UserControl
 
         '''<summary>
         '''tblExistingFiles control.
@@ -174,7 +174,7 @@ Namespace Ventrian.NewsArticles.Controls
         '''Auto-generated field.
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
-        Protected WithEvents ctlFile As DotNetNuke.UI.UserControls.UrlControl
+        Protected WithEvents ctlFile As Global.System.Web.UI.UserControl
 
         '''<summary>
         '''cmdAddExistingFile control.
@@ -192,7 +192,7 @@ Namespace Ventrian.NewsArticles.Controls
         '''Auto-generated field.
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
-        Protected WithEvents dshSelectedFiles As DotNetNuke.UI.UserControls.SectionHeadControl
+        Protected WithEvents dshSelectedFiles As Global.System.Web.UI.UserControl
 
         '''<summary>
         '''tblSelectedFiles control.

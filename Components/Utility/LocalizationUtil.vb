@@ -27,7 +27,7 @@ Namespace Ventrian.NewsArticles.Components.Utility
         Private Shared Function GetHostSettingAsBoolean(ByVal key As String, ByVal defaultValue As Boolean) As Boolean
             Dim retValue As Boolean = defaultValue
             Try
-                Dim setting As String = DotNetNuke.Entities.Host.HostSettings.GetHostSetting(key)
+                Dim setting As String = DotNetNuke.Entities.Controllers.HostController.Instance.GetString(key)
                 If String.IsNullOrEmpty(setting) = False Then
                     retValue = (setting.ToUpperInvariant().StartsWith("Y") OrElse setting.ToUpperInvariant = "TRUE")
                 End If
@@ -40,7 +40,8 @@ Namespace Ventrian.NewsArticles.Components.Utility
         Private Shared Function GetPortalSettingAsBoolean(ByVal portalID As Integer, ByVal key As String, ByVal defaultValue As Boolean) As Boolean
             Dim retValue As Boolean = defaultValue
             Try
-                Dim setting As String = DotNetNuke.Entities.Portals.PortalSettings.GetSiteSetting(portalID, key)
+                Dim objPortalController As New PortalController
+                Dim setting As String = PortalController.GetPortalSetting(key, portalID, "")
                 If String.IsNullOrEmpty(setting) = False Then
                     retValue = (setting.ToUpperInvariant().StartsWith("Y") OrElse setting.ToUpperInvariant = "TRUE")
                 End If
@@ -52,13 +53,14 @@ Namespace Ventrian.NewsArticles.Components.Utility
 
         Public Shared Function UseLanguageInUrl() As Boolean
 
-            Dim hostSetting As String = DotNetNuke.Entities.Host.HostSettings.GetHostSetting("EnableUrlLanguage")
+            Dim hostSetting As String = DotNetNuke.Entities.Controllers.HostController.Instance.GetString("EnableUrlLanguage")
             If (hostSetting <> "") Then
                 Return GetHostSettingAsBoolean("EnableUrlLanguage", True)
             End If
 
             Dim objSettings As PortalSettings = PortalController.GetCurrentPortalSettings()
-            Dim portalSetting As String = DotNetNuke.Entities.Portals.PortalSettings.GetSiteSetting(objSettings.PortalId, "EnableUrlLanguage")
+            Dim portalSetting As String = PortalController.GetPortalSetting("EnableUrlLanguage", objSettings.PortalId, "")
+
             If (portalSetting <> "") Then
                 Return GetPortalSettingAsBoolean(objSettings.PortalId, "EnableUrlLanguage", True)
             End If
@@ -114,8 +116,8 @@ Namespace Ventrian.NewsArticles.Components.Utility
                         If bXmlLoaded AndAlso Not xmlLocales.SelectSingleNode("//locales/languageInUrl") Is Nothing Then
                             useLanguage = Boolean.Parse(xmlLocales.SelectSingleNode("//locales/languageInUrl").Attributes("enabled").InnerText)
                         End If
-                        If Globals.PerformanceSetting <> Globals.PerformanceSettings.NoCaching Then
-                            Dim dp As New CacheDependency(FilePath)
+                        If DotNetNuke.Entities.Host.Host.PerformanceSetting <> Globals.PerformanceSettings.NoCaching Then
+                            Dim dp As New DotNetNuke.Services.Cache.DNNCacheDependency(FilePath)
                             DataCache.SetCache(cacheKey, useLanguage, dp)
                         End If
                     Else

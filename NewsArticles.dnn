@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="6.0">
   <packages>
-    <package name="DnnForge - NewsArticles" type="Module" version="00.09.11">
+    <package name="DnnForge - NewsArticles" type="Module" version="00.09.12">
       <friendlyName>News Articles</friendlyName>
       <description>Allows you to publish News Articles to your portal.</description>
       <owner>
