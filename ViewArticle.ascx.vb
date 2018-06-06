@@ -184,7 +184,7 @@ Namespace Ventrian.NewsArticles
             Dim objModule As ModuleInfo = objModuleController.GetModule(objArticle.ModuleID, Me.TabId)
 
             If Not (objModule Is Nothing) Then
-                If (DotNetNuke.Security.PortalSecurity.IsInRoles(objModule.AuthorizedViewRoles) = False) Then
+                If DotNetNuke.Security.Permissions.ModulePermissionController.CanViewModule(objModule) = False Then
                     Response.Redirect(NavigateURL(Me.TabId), True)
                 End If
             End If

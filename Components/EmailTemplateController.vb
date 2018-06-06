@@ -84,7 +84,8 @@ Namespace Ventrian.NewsArticles
         Public Function GetApproverDistributionList(ByVal moduleID As Integer) As String
 
             Dim settings As PortalSettings = PortalController.GetCurrentPortalSettings()
-            Dim moduleSettings As Hashtable = PortalSettings.GetModuleSettings(moduleID)
+            Dim ModuleController As New DotNetNuke.Entities.Modules.ModuleController
+            Dim moduleSettings As Hashtable = ModuleController.GetModuleSettings(moduleID)
             Dim distributionList As String = ""
 
             If (moduleSettings.Contains(ArticleConstants.PERMISSION_APPROVAL_SETTING)) Then
@@ -97,16 +98,17 @@ Namespace Ventrian.NewsArticles
                     If (role.Length > 0) Then
                         Dim objRoleController As RoleController = New RoleController
                         Dim objRole As RoleInfo = objRoleController.GetRoleByName(settings.PortalId, role)
-
                         If Not (objRole Is Nothing) Then
-                            Dim objUsers As ArrayList = objRoleController.GetUserRolesByRoleName(settings.PortalId, objRole.RoleName)
-                            For Each objUser As UserRoleInfo In objUsers
-                                If (userList.Contains(objUser.UserID) = False) Then
-                                    Dim objUserController As UserController = New UserController
-                                    Dim objSelectedUser As UserInfo = objUserController.GetUser(settings.PortalId, objUser.UserID)
-                                    If Not (objSelectedUser Is Nothing) Then
-                                        If (objSelectedUser.Email.Length > 0) Then
-                                            userList.Add(objUser.UserID, objSelectedUser.Email)
+                            Dim objUsers As ArrayList = DotNetNuke.Entities.Users.UserController.GetUsers(settings.PortalId)
+                            For Each objUser As DotNetNuke.Entities.Users.UserInfo In objUsers
+                                If objUser.IsInRole(role) Then
+                                    If (userList.Contains(objUser.UserID) = False) Then
+                                        Dim objUserController As UserController = New UserController
+                                        Dim objSelectedUser As UserInfo = objUserController.GetUser(settings.PortalId, objUser.UserID)
+                                        If Not (objSelectedUser Is Nothing) Then
+                                            If (objSelectedUser.Email.Length > 0) Then
+                                                userList.Add(objUser.UserID, objSelectedUser.Email)
+                                            End If
                                         End If
                                     End If
                                 End If
@@ -308,7 +310,7 @@ Namespace Ventrian.NewsArticles
                     Dim objUser As UserInfo = objUserController.GetUser(settings.PortalId, objArticle.AuthorID)
 
                     If Not (objUser Is Nothing) Then
-                        sendTo = objUser.Membership.Email
+                        sendTo = objUser.Email
                         SendFormattedEmail(moduleID, link, objArticle, objComment, EmailTemplateType.CommentNotification, articleSettings, sendTo)
                     End If
 
@@ -321,7 +323,7 @@ Namespace Ventrian.NewsArticles
                         Dim objUser As UserInfo = objUserController.GetUser(settings.PortalId, objComment.UserID)
 
                         If Not (objUser Is Nothing) Then
-                            sendTo = objUser.Membership.Email
+                            sendTo = objUser.Email
                             SendFormattedEmail(moduleID, link, objArticle, objComment, EmailTemplateType.CommentApproved, articleSettings, sendTo)
                         End If
                     Else
@@ -336,7 +338,7 @@ Namespace Ventrian.NewsArticles
                     Dim objUser As UserInfo = objUserController.GetUser(settings.PortalId, objArticle.AuthorID)
 
                     If Not (objUser Is Nothing) Then
-                        sendTo = objUser.Membership.Email
+                        sendTo = objUser.Email
                         SendFormattedEmail(moduleID, link, objArticle, objComment, EmailTemplateType.CommentRequiringApproval, articleSettings, sendTo)
                     End If
 

@@ -40,7 +40,7 @@ Namespace Ventrian.NewsArticles
 
             If (folderID <> Null.NullInteger) Then
                 Dim objFolderController As New FolderController
-                Dim objFolder As FolderInfo = objFolderController.GetFolderInfo(objPortalSettings.PortalId, folderID)
+                Dim objFolder As FolderInfo = FolderManager.Instance.GetFolder(folderID)
                 If (objFolder IsNot Nothing) Then
                     folder = objFolder.FolderPath
                 End If

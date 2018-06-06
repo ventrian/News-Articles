@@ -14,13 +14,13 @@ Namespace Ventrian.NewsArticles
         Private Sub BindModules()
 
             Dim objDesktopModuleController As New DesktopModuleController
-            Dim objDesktopModuleInfo As DesktopModuleInfo = objDesktopModuleController.GetDesktopModuleByModuleName("DnnForge - NewsArticles")
+            Dim objDesktopModuleInfo As DesktopModuleInfo = DesktopModuleController.GetDesktopModuleByModuleName("DnnForge - NewsArticles", PortalId)
 
             If Not (objDesktopModuleInfo Is Nothing) Then
 
                 Dim objTabController As New TabController()
-                Dim objTabs As ArrayList = objTabController.GetTabs(PortalId)
-                For Each objTab As DotNetNuke.Entities.Tabs.TabInfo In objTabs
+                Dim objTabs As TabCollection = objTabController.GetTabsByPortal(PortalId)
+                For Each objTab As DotNetNuke.Entities.Tabs.TabInfo In objTabs.AsList()
                     If Not (objTab Is Nothing) Then
                         If (objTab.IsDeleted = False) Then
                             Dim objModules As New ModuleController
@@ -28,7 +28,7 @@ Namespace Ventrian.NewsArticles
                                 Dim objModule As ModuleInfo = pair.Value
                                 If (objModule.IsDeleted = False) Then
                                     If (objModule.DesktopModuleID = objDesktopModuleInfo.DesktopModuleID) Then
-                                        If PortalSecurity.IsInRoles(objModule.AuthorizedEditRoles) = True And objModule.IsDeleted = False Then
+                                        If DotNetNuke.Security.Permissions.ModulePermissionController.CanEditModuleContent(objModule) = True And objModule.IsDeleted = False Then
                                             Dim strPath As String = objTab.TabName
                                             Dim objTabSelected As TabInfo = objTab
                                             While objTabSelected.ParentId <> Null.NullInteger

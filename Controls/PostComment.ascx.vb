@@ -13,7 +13,7 @@ Namespace Ventrian.NewsArticles.Controls
 
 #Region " Private Properties "
 
-        Private ReadOnly Property ArticleModuleBase() As NewsArticleModuleBase
+        Private Overloads ReadOnly Property ArticleModuleBase() As NewsArticleModuleBase
             Get
                 If (TypeOf Parent.Parent Is NewsArticleModuleBase) Then
                     Return CType(Parent.Parent, NewsArticleModuleBase)

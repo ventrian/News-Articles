@@ -36,8 +36,7 @@ Namespace Ventrian.NewsArticles
             If (objSettings.ContainsKey(ArticleConstants.DEFAULT_FILES_FOLDER_SETTING)) Then
                 If (IsNumeric(objSettings(ArticleConstants.DEFAULT_FILES_FOLDER_SETTING))) Then
                     Dim folderID As Integer = Convert.ToInt32(objSettings(ArticleConstants.DEFAULT_FILES_FOLDER_SETTING))
-                    Dim objFolderController As New FolderController
-                    Dim objFolder As FolderInfo = objFolderController.GetFolderInfo(objPortalSettings.PortalId, folderID)
+                    Dim objFolder As FolderInfo = DotNetNuke.Services.FileSystem.FolderManager.Instance.GetFolder(folderID)
                     If (objFolder IsNot Nothing) Then
                         folder = objFolder.FolderPath
                     End If

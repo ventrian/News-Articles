@@ -66,7 +66,7 @@ Namespace Ventrian.NewsArticles.Controls
         '''Auto-generated field.
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
-        Protected WithEvents dshImages As DotNetNuke.UI.UserControls.SectionHeadControl
+        Protected WithEvents dshImages As Global.System.Web.UI.UserControl
 
         '''<summary>
         '''tblImages control.
@@ -111,7 +111,7 @@ Namespace Ventrian.NewsArticles.Controls
         '''Auto-generated field.
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
-        Protected WithEvents dshUploadImages As DotNetNuke.UI.UserControls.SectionHeadControl
+        Protected WithEvents dshUploadImages As Global.System.Web.UI.UserControl
 
         '''<summary>
         '''tblUploadImages control.
@@ -156,7 +156,7 @@ Namespace Ventrian.NewsArticles.Controls
         '''Auto-generated field.
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
-        Protected WithEvents dshExistingImages As DotNetNuke.UI.UserControls.SectionHeadControl
+        Protected WithEvents dshExistingImages As Global.System.Web.UI.UserControl
 
         '''<summary>
         '''tblExistingImages control.
@@ -174,7 +174,8 @@ Namespace Ventrian.NewsArticles.Controls
         '''Auto-generated field.
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
-        Protected WithEvents ctlImage As DotNetNuke.UI.UserControls.UrlControl
+        Protected WithEvents ctlImage As Global.System.Web.UI.UserControl
+
         '''<summary>
         '''cmdAddExistingImage control.
         '''</summary>
@@ -191,7 +192,7 @@ Namespace Ventrian.NewsArticles.Controls
         '''Auto-generated field.
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
-        Protected WithEvents dshSelectedImages As DotNetNuke.UI.UserControls.SectionHeadControl
+        Protected WithEvents dshSelectedImages As Global.System.Web.UI.UserControl
 
         '''<summary>
         '''tblSelectedImages control.
@@ -236,7 +237,7 @@ Namespace Ventrian.NewsArticles.Controls
         '''Auto-generated field.
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
-        Protected WithEvents dshExternalImage As DotNetNuke.UI.UserControls.SectionHeadControl
+        Protected WithEvents dshExternalImage As Global.System.Web.UI.UserControl
 
         '''<summary>
         '''tblExternalImage control.

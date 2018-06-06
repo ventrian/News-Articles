@@ -79,8 +79,8 @@ Namespace Ventrian.NewsArticles.Controls
                     _userID = objUser.UserID
                     HttpContext.Current.Items("UserInfo") = objUser
 
-                    Dim objRoleController As New RoleController
-                    roles = objRoleController.GetRolesByUser(_userID, _portalID)
+                    Dim objUserController As New UserController
+                    roles = objUserController.GetUser(_portalID, _userID).Roles
 
                     Dim strPortalRoles As String = Join(roles, New Char() {";"c})
                     _context.Items.Add("UserRoles", ";" + strPortalRoles + ";")

@@ -1267,16 +1267,13 @@ Namespace Ventrian.NewsArticles
                     If (IsNumeric(Settings(ArticleConstants.SERVER_TIMEZONE).ToString())) Then
                         Return Convert.ToInt32(Settings(ArticleConstants.SERVER_TIMEZONE).ToString())
                     Else
-                        Return _portalSettings.TimeZoneOffset
+                        Return Ventrian.NewsArticles.Common.GetTimeZoneInteger(_portalSettings.TimeZone)
                     End If
                 Else
-                    Return _portalSettings.TimeZoneOffset
+                    Return Ventrian.NewsArticles.Common.GetTimeZoneInteger(_portalSettings.TimeZone)
                 End If
             End Get
         End Property
-
-
-
 
         Public ReadOnly Property TemplatePath() As String
             Get
@@ -1586,10 +1583,12 @@ Namespace Ventrian.NewsArticles
                     Return False
                 End If
 
-                Dim blnHasModuleEditPermissions As Boolean = PortalSecurity.IsInRoles(_moduleConfiguration.AuthorizedEditRoles)
+                Dim blnHasModuleEditPermissions As Boolean = DotNetNuke.Security.Permissions.ModulePermissionController.CanEditModuleContent(_moduleConfiguration)
+                'Dim blnHasModuleEditPermissions As Boolean = PortalSecurity.IsInRoles(_moduleConfiguration.AuthorizedEditRoles)
 
                 If (blnHasModuleEditPermissions = False) Then
-                    blnHasModuleEditPermissions = PortalSecurity.IsInRoles(_portalSettings.ActiveTab.AdministratorRoles)
+                    blnHasModuleEditPermissions = DotNetNuke.Security.Permissions.TabPermissionController.CanAdminPage(_portalSettings.ActiveTab)
+                    'blnHasModuleEditPermissions = PortalSecurity.IsInRoles(_portalSettings.ActiveTab.AdministratorRoles)
                 End If
 
                 If (blnHasModuleEditPermissions = False) Then

@@ -25,7 +25,7 @@ Namespace Ventrian.NewsArticles.Controls
 
 #Region " Private Properties "
 
-        Private ReadOnly Property ArticleModuleBase() As NewsArticleModuleBase
+        Private Overloads ReadOnly Property ArticleModuleBase() As NewsArticleModuleBase
             Get
                 Return CType(Parent.Parent.Parent.Parent.Parent, NewsArticleModuleBase)
             End Get
@@ -89,17 +89,17 @@ Namespace Ventrian.NewsArticles.Controls
 
             drpUploadImageFolder.Items.Clear()
 
-            Dim folders As ArrayList = FileSystemUtils.GetFolders(ArticleModuleBase.PortalId)
-            For Each folder As FolderInfo In folders
+            Dim folders As IEnumerable(Of IFolderInfo) = FolderManager.Instance.GetFolders(ArticleModuleBase.PortalId)
+            For Each folder As IFolderInfo In folders
                 Dim FolderItem As New ListItem()
                 If folder.FolderPath = Null.NullString Then
                     FolderItem.Text = ArticleModuleBase.GetSharedResource("Root")
-                    ReadRoles = FileSystemUtils.GetRoles("", ArticleModuleBase.PortalId, "READ")
-                    WriteRoles = FileSystemUtils.GetRoles("", ArticleModuleBase.PortalId, "WRITE")
+                    ReadRoles = DotNetNuke.Security.Permissions.FolderPermissionController.GetFolderPermissionsCollectionByFolder(ArticleModuleBase.PortalId, "").ToString("READ")
+                    WriteRoles = DotNetNuke.Security.Permissions.FolderPermissionController.GetFolderPermissionsCollectionByFolder(ArticleModuleBase.PortalId, "").ToString("WRITE")
                 Else
                     FolderItem.Text = folder.FolderPath
-                    ReadRoles = FileSystemUtils.GetRoles(FolderItem.Text, ArticleModuleBase.PortalId, "READ")
-                    WriteRoles = FileSystemUtils.GetRoles(FolderItem.Text, ArticleModuleBase.PortalId, "WRITE")
+                    ReadRoles = DotNetNuke.Security.Permissions.FolderPermissionController.GetFolderPermissionsCollectionByFolder(ArticleModuleBase.PortalId, FolderItem.Text).ToString("READ")
+                    WriteRoles = DotNetNuke.Security.Permissions.FolderPermissionController.GetFolderPermissionsCollectionByFolder(ArticleModuleBase.PortalId, FolderItem.Text).ToString("WRITE")
                 End If
                 FolderItem.Value = folder.FolderID
 
@@ -234,13 +234,13 @@ Namespace Ventrian.NewsArticles.Controls
 
         Private Sub SetLocalization()
 
-            dshImages.Text = GetResourceKey("Images")
+            CType(dshImages, DotNetNuke.UI.UserControls.SectionHeadControl).Text = GetResourceKey("Images")
             lblImagesHelp.Text = GetResourceKey("ImagesHelp")
 
-            dshExistingImages.Text = GetResourceKey("SelectExisting")
-            dshUploadImages.Text = GetResourceKey("UploadImages")
-            dshSelectedImages.Text = GetResourceKey("SelectedImages")
-            dshExternalImage.Text = GetResourceKey("ExternalImage")
+            CType(dshImages, DotNetNuke.UI.UserControls.SectionHeadControl).Text = GetResourceKey("SelectExisting")
+            CType(dshImages, DotNetNuke.UI.UserControls.SectionHeadControl).Text = GetResourceKey("UploadImages")
+            CType(dshImages, DotNetNuke.UI.UserControls.SectionHeadControl).Text = GetResourceKey("SelectedImages")
+            CType(dshImages, DotNetNuke.UI.UserControls.SectionHeadControl).Text = GetResourceKey("ExternalImage")
 
             lblNoImages.Text = GetResourceKey("NoImages")
 
@@ -555,12 +555,11 @@ Namespace Ventrian.NewsArticles.Controls
 
             Try
 
-                If (ctlImage.Url <> "") Then
-                    If (ctlImage.Url.ToLower().StartsWith("fileid=")) Then
-                        If (IsNumeric(ctlImage.Url.ToLower().Replace("fileid=", ""))) Then
-                            Dim fileID As Integer = Convert.ToInt32(ctlImage.Url.ToLower().Replace("fileid=", ""))
-                            Dim objFileController As New DotNetNuke.Services.FileSystem.FileController
-                            Dim objFile As DotNetNuke.Services.FileSystem.FileInfo = objFileController.GetFileById(fileID, ArticleModuleBase.PortalId)
+                If (CType(ctlImage, DotNetNuke.UI.UserControls.UrlControl).Url <> "") Then
+                    If (CType(ctlImage, DotNetNuke.UI.UserControls.UrlControl).Url.ToLower().StartsWith("fileid=")) Then
+                        If (IsNumeric(CType(ctlImage, DotNetNuke.UI.UserControls.UrlControl).Url.ToLower().Replace("fileid=", ""))) Then
+                            Dim fileID As Integer = Convert.ToInt32(CType(ctlImage, DotNetNuke.UI.UserControls.UrlControl).Url.ToLower().Replace("fileid=", ""))
+                            Dim objFile As DotNetNuke.Services.FileSystem.FileInfo = FileManager.Instance.GetFile(fileID)
                             If (objFile IsNot Nothing) Then
 
                                 Dim objImageController As New ImageController

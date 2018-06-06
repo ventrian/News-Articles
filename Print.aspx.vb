@@ -101,7 +101,7 @@ Namespace Ventrian.NewsArticles
                         Else
                             objCSSCache(ID) = ""
                         End If
-                        If Not DotNetNuke.Common.Globals.PerformanceSetting = DotNetNuke.Common.Globals.PerformanceSettings.NoCaching Then
+                        If Not DotNetNuke.Entities.Host.Host.PerformanceSetting = DotNetNuke.Common.Globals.PerformanceSettings.NoCaching Then
                             DataCache.SetCache("CSS", objCSSCache)
                         End If
                     End If
@@ -122,7 +122,7 @@ Namespace Ventrian.NewsArticles
                         Else
                             objCSSCache(ID) = ""
                         End If
-                        If Not DotNetNuke.Common.Globals.PerformanceSetting = DotNetNuke.Common.Globals.PerformanceSettings.NoCaching Then
+                        If Not DotNetNuke.Entities.Host.Host.PerformanceSetting = DotNetNuke.Common.Globals.PerformanceSettings.NoCaching Then
                             DataCache.SetCache("CSS", objCSSCache)
                         End If
                     End If
@@ -180,7 +180,7 @@ Namespace Ventrian.NewsArticles
                 Dim objModule As ModuleInfo = objModuleController.GetModule(objArticle.ModuleID, _tabID)
 
                 If Not (objModule Is Nothing) Then
-                    If (DotNetNuke.Security.PortalSecurity.IsInRoles(objModule.AuthorizedViewRoles) = False) Then
+                    If DotNetNuke.Security.Permissions.ModulePermissionController.CanViewModule(objModule) = False Then
                         Response.Redirect(NavigateURL(_tabID), True)
                     End If
 
@@ -279,7 +279,7 @@ Namespace Ventrian.NewsArticles
                     Dim objModuleController As New ModuleController
                     Dim settings As Hashtable = objModuleController.GetModuleSettings(_moduleID)
                     'Add TabModule Settings
-                    settings = DotNetNuke.Entities.Portals.PortalSettings.GetTabModuleSettings(_tabModuleID, settings)
+                    settings = objModuleController.GetTabModuleSettings(_tabModuleID)
                     Dim objModule As ModuleInfo = objModuleController.GetModule(_moduleID, _tabID)
                     _articleSettings = New ArticleSettings(settings, Me.PortalSettings, objModule)
                 End If
