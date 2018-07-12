@@ -63,6 +63,11 @@ Namespace Ventrian.NewsArticles
 
         End Function
 
+        Public Shared Function GetTimeZoneInteger(ByVal TimeZone As TimeZoneInfo) As Integer
+            Return TimeZone.BaseUtcOffset.TotalMinutes
+        End Function
+
+
         Public Shared Function FormatTitle(ByVal title As String, ByVal objArticleSettings As ArticleSettings) As String
 
             If (title = "") Then
@@ -134,7 +139,7 @@ Namespace Ventrian.NewsArticles
             Next
             Return sb.ToString()
         End Function
-        
+
         Public Shared Function IsAlphaNumeric(ByVal sChr As String) As Boolean
             IsAlphaNumeric = sChr Like "[0-9A-Za-z ]"
         End Function
@@ -477,13 +482,13 @@ Namespace Ventrian.NewsArticles
             Dim objModulesFound As New List(Of ModuleInfo)
 
             Dim objDesktopModuleController As New DesktopModuleController
-            Dim objDesktopModuleInfo As DesktopModuleInfo = objDesktopModuleController.GetDesktopModuleByModuleName("DnnForge - NewsArticles")
+            Dim objDesktopModuleInfo As DesktopModuleInfo = DesktopModuleController.GetDesktopModuleByModuleName("DnnForge - NewsArticles", portalID)
 
             If Not (objDesktopModuleInfo Is Nothing) Then
 
                 Dim objTabController As New TabController()
-                Dim objTabs As ArrayList = objTabController.GetTabs(portalID)
-                For Each objTab As DotNetNuke.Entities.Tabs.TabInfo In objTabs
+                Dim objTabs As TabCollection = objTabController.GetTabsByPortal(portalID)
+                For Each objTab As DotNetNuke.Entities.Tabs.TabInfo In objTabs.AsList()
                     If Not (objTab Is Nothing) Then
                         If (objTab.IsDeleted = False) Then
                             Dim objModules As New ModuleController
@@ -543,7 +548,7 @@ Namespace Ventrian.NewsArticles
                 strURL = strURL & "&authorID=" & authorID.ToString()
 
                 ' TODO: Remove at a later date when minimum version raised.
-                If Localization.GetEnabledLocales.Count > 1 AndAlso LocalizationUtil.UseLanguageInUrl Then
+                If LocaleController.Instance.GetLocales(PortalSettings.Current.PortalId).Count > 1 AndAlso LocalizationUtil.UseLanguageInUrl Then
                     strURL += "&language=" & Thread.CurrentThread.CurrentCulture.Name
                 End If
 
@@ -586,7 +591,7 @@ Namespace Ventrian.NewsArticles
 
         Public Shared Function GetCategoryLink(ByVal tabID As Integer, ByVal moduleID As Integer, ByVal categoryID As String, ByVal title As String, ByVal launchLinks As Boolean, ByVal targetTab As TabInfo, ByVal articleSettings As ArticleSettings) As String
 
-            If DotNetNuke.Entities.Host.HostSettings.GetHostSetting("UseFriendlyUrls") = "Y" Then
+            If HostController.Instance.GetString("UseFriendlyUrls") = "Y" Then
 
                 Dim strURL As String = ApplicationURL(tabID)
                 Dim settings As PortalSettings = PortalController.GetCurrentPortalSettings
@@ -600,7 +605,7 @@ Namespace Ventrian.NewsArticles
                 strURL = strURL & "&categoryId=" & categoryID
 
                 ' TODO: Remove at a later date when minimum version raised.
-                If Localization.GetEnabledLocales.Count > 1 AndAlso LocalizationUtil.UseLanguageInUrl Then
+                If LocaleController.Instance.GetLocales(PortalSettings.Current.PortalId).Count > 1 AndAlso LocalizationUtil.UseLanguageInUrl Then
                     strURL += "&language=" & Thread.CurrentThread.CurrentCulture.Name
                 End If
 

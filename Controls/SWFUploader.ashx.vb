@@ -79,8 +79,8 @@ Namespace Ventrian.NewsArticles.Controls
                     _userID = objUser.UserID
                     HttpContext.Current.Items("UserInfo") = objUser
 
-                    Dim objRoleController As New RoleController
-                    roles = objRoleController.GetRolesByUser(_userID, _portalID)
+                    Dim objUserController As New UserController
+                    roles = objUserController.GetUser(_portalID, _userID).Roles
 
                     Dim strPortalRoles As String = Join(roles, New Char() {";"c})
                     _context.Items.Add("UserRoles", ";" + strPortalRoles + ";")
@@ -229,8 +229,7 @@ Namespace Ventrian.NewsArticles.Controls
                 End If
 
                 If (folderID <> Null.NullInteger) Then
-                    Dim objFolderController As New FolderController
-                    Dim objFolder As FolderInfo = objFolderController.GetFolderInfo(_portalID, folderID)
+                    Dim objFolder As FolderInfo = DotNetNuke.Services.FileSystem.FolderManager.Instance.GetFolder(folderID)
                     If (objFolder IsNot Nothing) Then
                         folder = objFolder.FolderPath
                     End If

@@ -350,7 +350,7 @@ Namespace Ventrian.NewsArticles.Base
 
                 ' Admin of Module
                 '
-                If (PortalSecurity.HasEditPermissions(objModule.ModulePermissions)) Then
+                If DotNetNuke.Security.Permissions.ModulePermissionController.CanEditModuleContent(objModule) Then
 
                     Return True
 

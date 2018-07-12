@@ -703,7 +703,7 @@ Namespace Ventrian.NewsArticles
                 Dim objTab As TabInfo = objTabController.GetTab(objModule.TabID, _portalSettings.PortalId, False)
 
                 Dim settings As Hashtable = objModuleController.GetModuleSettings(objModule.ModuleID)
-                settings = PortalSettings.GetTabModuleSettings(objModule.TabModuleID, settings)
+                settings = objModuleController.GetTabModuleSettings(objModule.TabModuleID)
                 articleSettings = New ArticleSettings(settings, _portalSettings, objModule)
                 If (settings.Contains(ArticleConstants.LAUNCH_LINKS)) Then
                     launchLinks = Convert.ToBoolean(settings(ArticleConstants.LAUNCH_LINKS).ToString())

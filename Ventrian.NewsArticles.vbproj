@@ -50,12 +50,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CookComputing.XmlRpc, Version=2.1.0.3, Culture=neutral, PublicKeyToken=a7d6e17aa302004d" />
-    <Reference Include="DotNetNuke, Version=6.2.3.141, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\DotNetNuke482\Website\Bin\DotNetNuke.dll</HintPath>
+    <Reference Include="DotNetNuke">
+      <HintPath>..\..\bin\DotNetNuke.dll</HintPath>
     </Reference>
-    <Reference Include="DotNetNuke.Web.Client, Version=6.1.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="DotNetNuke.Web.Client">
       <HintPath>..\..\bin\DotNetNuke.Web.Client.dll</HintPath>
     </Reference>
     <Reference Include="ephtmltopdf, Version=4.0.6.31734, Culture=neutral, PublicKeyToken=5b5f377bc08a4d32, processorArchitecture=MSIL" />
@@ -72,8 +70,8 @@
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Web.Mobile" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="Ventrian.ImageResizer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <Private>False</Private>
+    <Reference Include="Ventrian.ImageResizer">
+      <HintPath>..\..\bin\Ventrian.ImageResizer.dll</HintPath>
     </Reference>
     <Reference Include="Ventrian.NewsArticles.Secure, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
   </ItemGroup>
@@ -430,8 +428,8 @@
       <DependentUpon>RssComments.aspx</DependentUpon>
     </Compile>
     <Compile Include="RssComments.aspx.vb">
-      <SubType>ASPXCodebehind</SubType>
       <DependentUpon>RssComments.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ucAdminOptions.ascx.designer.vb">
       <DependentUpon>ucAdminOptions.ascx</DependentUpon>
