@@ -45,10 +45,8 @@ Namespace Ventrian.NewsArticles.Base
                     Try
                         _articleSettings = New ArticleSettings(Settings, PortalSettings, ModuleConfiguration)
                     Catch
-                        Dim objModuleController As New ModuleController()
-
-                        Dim objSettings As Hashtable = objModuleController.GetModuleSettings(ModuleId)
-                        Dim objTabSettings As Hashtable = objModuleController.GetTabModuleSettings(TabModuleId)
+                        Dim objSettings As Hashtable = ModuleConfiguration.ModuleSettings
+                        Dim objTabSettings As Hashtable = ModuleConfiguration.TabModuleSettings
 
                         For Each item As DictionaryEntry In objTabSettings
                             If (objSettings.ContainsKey(item.Key) = False) Then
@@ -57,7 +55,7 @@ Namespace Ventrian.NewsArticles.Base
                         Next
 
                         _articleSettings = New ArticleSettings(objSettings, PortalSettings, ModuleConfiguration)
-                        objModuleController.UpdateModuleSetting(ModuleId, "ResetArticleSettings", "true")
+                        ModuleController.Instance.UpdateModuleSetting(ModuleId, "ResetArticleSettings", "true")
                     End Try
                 End If
                 Return _articleSettings

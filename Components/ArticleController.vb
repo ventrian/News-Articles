@@ -288,8 +288,7 @@ Namespace Ventrian.NewsArticles
 
         Public Function GetSearchItems(ByVal ModInfo As DotNetNuke.Entities.Modules.ModuleInfo) As DotNetNuke.Services.Search.SearchItemInfoCollection Implements DotNetNuke.Entities.Modules.ISearchable.GetSearchItems
 
-            Dim objModuleController As New ModuleController
-            Dim settings As Hashtable = objModuleController.GetModuleSettings(ModInfo.ModuleID)
+            Dim settings As Hashtable = Common.GetModuleSettings(ModInfo.ModuleID)
             settings = GetTabModuleSettings(ModInfo.TabModuleID, settings)
 
             Dim doSearch As Boolean = False

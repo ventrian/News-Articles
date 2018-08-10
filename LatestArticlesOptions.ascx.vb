@@ -655,7 +655,7 @@ Namespace Ventrian.NewsArticles
 
         Public Function GetAuthorList(ByVal moduleID As Integer) As ArrayList
 
-            Dim moduleSettings As Hashtable = DotNetNuke.Entities.Portals.PortalSettings.GetModuleSettings(moduleID)
+            Dim moduleSettings As Hashtable = Common.GetModuleSettings(moduleID)
             Dim distributionList As String = ""
             Dim userList As New ArrayList
 

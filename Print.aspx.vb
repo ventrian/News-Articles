@@ -277,10 +277,8 @@ Namespace Ventrian.NewsArticles
             Get
                 If (_articleSettings Is Nothing) Then
                     Dim objModuleController As New ModuleController
-                    Dim settings As Hashtable = objModuleController.GetModuleSettings(_moduleID)
-                    'Add TabModule Settings
-                    settings = DotNetNuke.Entities.Portals.PortalSettings.GetTabModuleSettings(_tabModuleID, settings)
-                    Dim objModule As ModuleInfo = objModuleController.GetModule(_moduleID, _tabID)
+                    Dim objModule As ModuleInfo = Common.GetModuleInfo(_moduleID, _tabID)
+                    Dim settings As Hashtable =Common.JoinHashTables(objModule.ModuleSettings, objModule.TabModuleSettings)
                     _articleSettings = New ArticleSettings(settings, Me.PortalSettings, objModule)
                 End If
                 Return _articleSettings

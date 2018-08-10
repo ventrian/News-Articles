@@ -372,7 +372,7 @@ Namespace Ventrian.NewsArticles
 
         Public Function GetAuthorList(ByVal moduleID As Integer) As ArrayList
 
-            Dim moduleSettings As Hashtable = DotNetNuke.Entities.Portals.PortalSettings.GetModuleSettings(moduleID)
+            Dim moduleSettings As Hashtable = Common.GetModuleSettings(moduleId)
             Dim distributionList As String = ""
             Dim userList As New ArrayList
 
@@ -594,7 +594,7 @@ Namespace Ventrian.NewsArticles
                     Dim folderLinked As String = ""
 
                     Dim objModuleController As New ModuleController()
-                    Dim objSettingsLinked As Hashtable = objModuleController.GetModuleSettings(drpMirrorModule.SelectedValue.Split("-"c)(1))
+                    Dim objSettingsLinked As Hashtable = Common.GetModuleSettings(drpMirrorModule.SelectedValue.Split("-"c)(1))
 
                     If (objSettingsLinked.ContainsKey(ArticleConstants.DEFAULT_FILES_FOLDER_SETTING)) Then
                         If (IsNumeric(objSettingsLinked(ArticleConstants.DEFAULT_FILES_FOLDER_SETTING))) Then
@@ -614,7 +614,7 @@ Namespace Ventrian.NewsArticles
 
                     Dim folder As String = ""
 
-                    Dim objSettings As Hashtable = objModuleController.GetModuleSettings(ModuleId)
+                    Dim objSettings As Hashtable = Common.GetModuleSettings(ModuleId)
 
                     If (objSettings.ContainsKey(ArticleConstants.DEFAULT_FILES_FOLDER_SETTING)) Then
                         If (IsNumeric(objSettings(ArticleConstants.DEFAULT_FILES_FOLDER_SETTING))) Then
@@ -963,8 +963,7 @@ Namespace Ventrian.NewsArticles
                                     'Copy Files
                                     Dim folderLinked As String = ""
 
-                                    Dim objModuleController As New ModuleController()
-                                    Dim objSettingsLinked As Hashtable = objModuleController.GetModuleSettings(objArticleMirrored.ModuleID)
+                                    Dim objSettingsLinked As Hashtable = Common.GetModuleSettings(objArticleMirrored.ModuleID)
 
                                     If (objSettingsLinked.ContainsKey(ArticleConstants.DEFAULT_FILES_FOLDER_SETTING)) Then
                                         If (IsNumeric(objSettingsLinked(ArticleConstants.DEFAULT_FILES_FOLDER_SETTING))) Then
@@ -984,7 +983,7 @@ Namespace Ventrian.NewsArticles
 
                                     Dim folder As String = ""
 
-                                    Dim objSettings As Hashtable = objModuleController.GetModuleSettings(ModuleId)
+                                    Dim objSettings As Hashtable = Common.GetModuleSettings(ModuleId)
 
                                     If (objSettings.ContainsKey(ArticleConstants.DEFAULT_FILES_FOLDER_SETTING)) Then
                                         If (IsNumeric(objSettings(ArticleConstants.DEFAULT_FILES_FOLDER_SETTING))) Then

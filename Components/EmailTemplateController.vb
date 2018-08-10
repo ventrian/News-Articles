@@ -83,8 +83,8 @@ Namespace Ventrian.NewsArticles
 
         Public Function GetApproverDistributionList(ByVal moduleID As Integer) As String
 
-            Dim settings As PortalSettings = PortalController.GetCurrentPortalSettings()
-            Dim moduleSettings As Hashtable = PortalSettings.GetModuleSettings(moduleID)
+            Dim settings As PortalSettings = PortalSettings.Current
+            Dim moduleSettings As Hashtable = Common.GetModuleSettings(moduleID)
             Dim distributionList As String = ""
 
             If (moduleSettings.Contains(ArticleConstants.PERMISSION_APPROVAL_SETTING)) Then

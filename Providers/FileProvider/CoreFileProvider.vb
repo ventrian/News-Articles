@@ -30,9 +30,6 @@ Namespace Ventrian.NewsArticles
 
 			Dim folder As String = ""
 
-			Dim objModuleController As New ModuleController()
-			Dim objSettings As Hashtable = objModuleController.GetModuleSettings(moduleID)
-
 			If (folderID <> Null.NullInteger) Then
 				Dim objFolderController As New FolderController
 				Dim objFolder As FolderInfo = objFolderController.GetFolderInfo(objPortalSettings.PortalId, folderID)

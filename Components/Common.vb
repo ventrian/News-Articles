@@ -39,6 +39,17 @@ Namespace Ventrian.NewsArticles
 
         End Sub
 
+        Friend Shared Function GetModuleInfo(moduleId As Integer, optional tabId As integer = -1) As ModuleInfo
+            Dim mdlInfo As ModuleInfo = ModuleController.Instance.GetModule(moduleID, tabId, False)
+            return mdlInfo  
+        End Function
+        Friend Shared Function GetModuleSettings(moduleId As integer) As Hashtable
+            return GetModuleInfo(moduleId).ModuleSettings
+        End Function
+        Friend Shared Function GetTabModuleSettings(moduleId As integer, tabId As integer) As Hashtable
+            return GetModuleInfo(moduleId, tabId).ModuleSettings
+        End Function
+
 #End Region
 
 #Region " Public Shared Methods "
@@ -770,6 +781,22 @@ Namespace Ventrian.NewsArticles
             Dim pattern As String = "<(.|\n)*?>"
             Return Regex.Replace(HTML, pattern, String.Empty)
         End Function
+
+        public Shared Function JoinHashTables(ParamArray ht As Hashtable()) As Hashtable
+            dim retval as New Hashtable
+
+            For Each objHt As Hashtable In ht
+                For Each key As Object In objHt.Keys
+                    If retval.ContainsKey(key) Then
+                        retval(key) = objHt(key)
+                    Else 
+                        retval.Add(key, objHt(key))
+                    End If
+                Next
+            Next
+            return retval
+        End Function
+
 
 #End Region
 
