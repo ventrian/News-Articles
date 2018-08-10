@@ -1,0 +1,84 @@
+﻿drop procedure {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListBySearchCriteria
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListBySearchCriteria
+	@ModuleID	int,
+	@CategoryID	varchar(255),
+	@CategoryIDCount	int,
+	@MaxCount	int,
+	@MaxAge	int,
+	@IsApproved	bit,
+	@IsDraft	bit,
+	@StartDate	datetime,
+	@KeyWords	varchar(255), 
+	@ShowPending	bit,
+	@ShowExpired bit,   
+	@AuthorID	int,
+	@ShowFeaturedOnly bit,
+	@ShowNotFeaturedOnly bit,
+	@SortBy varchar(50),
+	@SortDirection varchar(50),
+	@Month	int,
+	@Year	int 
+AS
+GO
+
+drop procedure {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetAuthorList
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetAuthorList
+	@ModuleID int
+AS
+
+SELECT DISTINCT 
+	Authors.UserID, 
+	Authors.Username, 
+	Authors.FirstName, 
+	Authors.LastName,
+	Authors.DisplayName 
+
+FROM         
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article Articles, {databaseOwner}{objectQualifier}Users Authors
+
+WHERE
+	Articles.AuthorID = Authors.UserID
+	and
+	Articles.ModuleID = @ModuleID
+	and 
+	Articles.IsApproved = 1
+
+ORDER BY
+	Authors.FirstName, Authors.LastName
+GO
+
+drop procedure {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetNewsArchive
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetNewsArchive
+	@ModuleID int, 
+	@CategoryID varchar(255)
+AS
+
+DECLARE @strTop	nvarchar(2000)
+DECLARE @strWhere	nvarchar(2000)
+
+SELECT @strTop = ''
+SELECT @strWhere = ''
+
+IF (@ModuleID is not null)
+	SELECT @strWhere = @strWhere + ' AND Article.ModuleID = ' + convert(nvarchar, @ModuleId)
+	
+IF (@CategoryId is not null)
+	SELECT @strWhere = @strWhere + ' AND Article.ArticleID in ( select ArticleID from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ArticleCategories where {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ArticleCategories.ArticleID = Article.ArticleID and {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ArticleCategories.CategoryID in (' + @CategoryID + '))'
+
+SELECT @strWhere = @strWhere + ' AND (Article.StartDate is null or Article.StartDate < ''' + convert(nvarchar, DateAdd(mi, 1, GetDate()))  + ''')'
+SELECT @strWhere = @strWhere + ' AND (Article.EndDate is null or Article.EndDate > ''' + convert(nvarchar, DateAdd(mi, -1, GetDate()))  + ''')'
+
+EXEC('
+select Month(StartDate) as [Month], Year(StartDate) as [Year], 1 as Day, Count(*) as [Count]
+from {databaseOwner}{objectQualifier}dnnforge_newsarticles_article Article
+where IsApproved = 1 and IsDraft = 0 ' + 
+	@strWhere + '
+group by Year(StartDate), Month(StartDate)
+order by [Year] desc, [Month] desc')
+GO

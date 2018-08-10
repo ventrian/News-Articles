@@ -1,0 +1,149 @@
+﻿ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Image ADD
+	Description ntext NULL
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ImageAdd 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ImageAdd 
+	@ArticleID int,
+	@Title nvarchar(255),
+	@FileName nvarchar(100),
+	@Extension nvarchar(100),
+	@Size int,
+	@Width int,
+	@Height int,
+	@ContentType nvarchar(200),
+	@Folder nvarchar(200),
+	@SortOrder int,
+	@ImageGuid nvarchar(50),
+	@Description ntext 
+AS
+
+INSERT INTO {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Image (
+	[ArticleID],
+	[Title],
+	[FileName],
+	[Extension],
+	[Size],
+	[Width],
+	[Height],
+	[ContentType],
+	[Folder],
+	[SortOrder],
+	[ImageGuid],
+	[Description] 
+) VALUES (
+	@ArticleID,
+	@Title,
+	@FileName,
+	@Extension,
+	@Size,
+	@Width,
+	@Height,
+	@ContentType,
+	@Folder,
+	@SortOrder,
+	@ImageGuid,
+	@Description 
+)
+
+select SCOPE_IDENTITY()
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ImageGet
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ImageGet
+	@ImageID int 
+AS
+
+SELECT     
+	ImageID, 
+	ArticleID, 
+	Title, 
+	FileName, 
+	Extension, 
+	Size, 
+	Width, 
+	Height, 
+	ContentType, 
+	Folder, 
+	SortOrder, 
+	ImageGuid,
+	Description 
+FROM         
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Image
+WHERE
+	ImageID = @ImageID
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ImageList
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ImageList
+	@ArticleID int,
+	@ImageGuid nvarchar(50)  
+AS
+
+SELECT     
+	ImageID, 
+	ArticleID, 
+	Title, 
+	FileName, 
+	Extension, 
+	Size, 
+	Width, 
+	Height, 
+	ContentType, 
+	Folder, 
+	SortOrder, 
+	ImageGuid,
+	Description 
+FROM         
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Image
+WHERE
+	(@ArticleID IS NULL OR ArticleID = @ArticleID) 
+	AND
+	(@ImageGuid IS NULL OR ImageGuid = @ImageGuid) 
+ORDER BY 
+	SortOrder
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ImageUpdate
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ImageUpdate
+	@ImageID int, 
+	@ArticleID int,
+	@Title nvarchar(255),
+	@FileName nvarchar(100),
+	@Extension nvarchar(100),
+	@Size int,
+	@Width int,
+	@Height int,
+	@ContentType nvarchar(200),
+	@Folder nvarchar(200),
+	@SortOrder int,
+	@ImageGuid nvarchar(50),
+	@Description ntext 
+AS
+
+UPDATE
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Image
+SET
+	[ArticleID] = @ArticleID,
+	[Title] = @Title,
+	[FileName] = @FileName,
+	[Extension] = @Extension,
+	[Size] = @Size,
+	[Width] = @Width,
+	[Height] = @Height,
+	[ContentType] = @ContentType,
+	[Folder] = @Folder,
+	[SortOrder] = @SortOrder,
+	[ImageGuid] = @ImageGuid,
+	[Description] = @Description
+WHERE
+	[ImageID] = @ImageID
+GO

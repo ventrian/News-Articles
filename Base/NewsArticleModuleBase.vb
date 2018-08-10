@@ -226,25 +226,31 @@ Namespace Ventrian.NewsArticles.Base
             End If
 
         End Function
-        Protected Function StripHtml(ByVal html As String) As String
 
-            Const pattern As String = "<(.|\n)*?>"
-            Return Regex.Replace(html, pattern, String.Empty)
+		Public Function StripHtml(ByVal html As String) As String
 
-        End Function
+			Return StripHtml(html, False)
 
+		End Function
 
-        Private Function RoundToUnit(ByVal d As Double, ByVal unit As Double, ByVal roundDown As Boolean) As Double
+		Public Function StripHtml(ByVal html As String, ByVal cleanLineBreaks As Boolean) As String
 
-            If (roundDown) Then
-                Return Math.Round(Math.Round((d / unit) - 0.5, 0) * unit, 2)
-            Else
-                Return Math.Round(Math.Round((d / unit) + 0.5, 0) * unit, 2)
-            End If
+			Dim pattern As String = "<(.|\n)*?>"
+			Return Regex.Replace(html, pattern, String.Empty).Replace(System.Environment.NewLine, " ")
 
-        End Function
+		End Function
 
-        Protected Function GetRatingImage(ByVal objDataItem As Object) As String
+		Private Function RoundToUnit(ByVal d As Double, ByVal unit As Double, ByVal roundDown As Boolean) As Double
+
+			If (roundDown) Then
+				Return Math.Round(Math.Round((d / unit) - 0.5, 0) * unit, 2)
+			Else
+				Return Math.Round(Math.Round((d / unit) + 0.5, 0) * unit, 2)
+			End If
+
+		End Function
+
+		Protected Function GetRatingImage(ByVal objDataItem As Object) As String
 
             Dim objArticle As ArticleInfo = CType(objDataItem, ArticleInfo)
 

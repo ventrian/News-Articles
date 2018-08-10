@@ -1,0 +1,537 @@
+﻿CREATE TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Rating (
+	[RatingID] [int] IDENTITY (1, 1) NOT NULL ,
+	[ArticleID] [int] NOT NULL ,
+	[UserID] [int] NOT NULL ,
+	[CreatedDate] [datetime] NOT NULL ,
+	[Rating] [float] NULL 
+) ON [PRIMARY]
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Rating ADD 
+	CONSTRAINT [PK_{objectQualifier}DnnForge_NewsArticles_Rating] PRIMARY KEY  CLUSTERED 
+	(
+		[RatingID]
+	)  ON [PRIMARY] 
+GO
+
+INSERT INTO {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Rating(ArticleID, UserID, CreatedDate, Rating)
+SELECT ArticleID, UserID, CreatedDate, Rating FROM {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment WHERE Rating is not null
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_RatingAdd
+	@ArticleID int,
+	@UserID int,
+	@CreatedDate datetime,
+	@Rating float
+AS
+
+INSERT INTO  {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Rating (
+	[ArticleID],
+	[UserID],
+	[CreatedDate],
+	[Rating]
+) VALUES (
+	@ArticleID,
+	@UserID,
+	@CreatedDate,
+	@Rating
+)
+
+select SCOPE_IDENTITY()
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_RatingDelete
+	@RatingID int
+AS
+
+DELETE FROM {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Rating
+WHERE
+	[RatingID] = @RatingID
+
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_RatingGet
+	@ArticleID int, 
+	@UserID int
+	
+AS
+
+SELECT
+	[RatingID],
+	[ArticleID],
+	[UserID],
+	[CreatedDate],
+	[Rating]
+FROM {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Rating
+WHERE
+	[ArticleID] = @ArticleID
+	and
+	[UserID] = @UserID
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_RatingGetByID
+	@RatingID int
+	
+AS
+
+SELECT
+	[RatingID],
+	[ArticleID],
+	[UserID],
+	[CreatedDate],
+	[Rating]
+FROM {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Rating
+WHERE
+	[RatingID] = @RatingID
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment 
+	DROP COLUMN Rating
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_AddComment
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_AddComment
+	@ArticleID int,
+	@UserID int, 
+	@Comment ntext,
+	@RemoteAddress nvarchar(50) ,
+	@Type int,
+	@TrackbackUrl nvarchar(255),
+	@TrackbackTitle nvarchar(255),
+	@TrackbackBlogName nvarchar(255),
+	@TrackbackExcerpt ntext,
+	@AnonymousName nvarchar(255),
+	@AnonymousEmail nvarchar(255),
+	@AnonymousURL nvarchar(255),
+	@NotifyMe bit 
+AS
+
+INSERT INTO {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment (
+	[ArticleID],
+	[UserID], 
+	[Comment],
+	[RemoteAddress],
+	[Type],
+	[TrackbackUrl],
+	[TrackbackTitle],
+	[TrackbackBlogName],
+	[TrackbackExcerpt],
+	[AnonymousName], 
+	[AnonymousEmail],
+	[AnonymousURL],
+	[NotifyMe]
+) VALUES (
+	@ArticleID,
+	@UserID, 
+	@Comment,
+	@RemoteAddress,
+	@Type,
+	@TrackbackUrl,
+	@TrackbackTitle,
+	@TrackbackBlogName,
+	@TrackbackExcerpt,
+	@AnonymousName,
+	@AnonymousEmail,
+	@AnonymousURL,
+	@NotifyMe   
+)
+
+select SCOPE_IDENTITY()
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetComment
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetComment
+	@CommentID int
+AS
+
+SELECT
+	Comment.[CommentID],
+	Comment.[ArticleID],
+	Comment.[UserID], 
+	Comment.[CreatedDate],
+	Comment.[Comment],
+	Comment.[RemoteAddress],
+	Comment.[Type],
+	Comment.[TrackbackUrl],
+	Comment.[TrackbackTitle],
+	Comment.[TrackbackBlogName],
+	Comment.[TrackbackExcerpt], 
+	Comment.[AnonymousName], 
+	Comment.[AnonymousEmail], 
+	Comment.[AnonymousURL], 
+	Comment.[NotifyMe], 
+	Author.[Email] as AuthorEmail,
+	Author.[UserName] as AuthorUserName,
+	Author.[FirstName] as AuthorFirstName,
+	Author.[LastName] as AuthorLastName
+FROM
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment Comment LEFT OUTER JOIN
+		{databaseOwner}{objectQualifier}Users Author ON Comment.UserID = Author.UserID
+WHERE
+	[CommentID] = @CommentID
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCommentList
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCommentList
+	@ArticleID	int 
+AS
+
+SELECT
+	Comment.[CommentID],
+	Comment.[ArticleID],
+	Comment.[UserID], 
+	Comment.[CreatedDate],
+	Comment.[Comment],
+	Comment.[RemoteAddress],
+	Comment.[Type],
+	Comment.[TrackbackUrl],
+	Comment.[TrackbackTitle],
+	Comment.[TrackbackBlogName],
+	Comment.[TrackbackExcerpt], 
+	Comment.[AnonymousName], 
+	Comment.[AnonymousEmail], 
+	Comment.[AnonymousURL],
+	Comment.[NotifyMe],  
+	Author.[Email] as AuthorEmail,
+	Author.[UserName] as AuthorUserName,
+	Author.[FirstName] as AuthorFirstName,
+	Author.[LastName] as AuthorLastName
+FROM
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment Comment LEFT OUTER JOIN
+		{databaseOwner}{objectQualifier}Users Author ON Comment.UserID = Author.UserID
+WHERE
+	Comment.[ArticleID] = @ArticleID
+ORDER BY
+	Comment.[CreatedDate] ASC
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_UpdateComment
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_UpdateComment
+	@CommentID int, 
+	@ArticleID int, 
+	@UserID int, 
+	@Comment ntext,
+	@RemoteAddress nvarchar(50),
+ 	@Type int,
+	@TrackbackUrl nvarchar(255),
+	@TrackbackTitle nvarchar(255),
+	@TrackbackBlogName nvarchar(255),
+	@TrackbackExcerpt ntext,
+	@AnonymousName nvarchar(255),
+	@AnonymousEmail nvarchar(255),
+	@AnonymousURL nvarchar(255),
+	@NotifyMe bit  
+AS
+
+UPDATE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment SET
+	[ArticleID] = @ArticleID,
+	[UserID] = @UserID, 
+	[Comment] = @Comment,
+	[RemoteAddress] = @RemoteAddress,
+	[Type] = @Type,
+	[TrackbackUrl] = @TrackbackUrl,
+	[TrackbackTitle] = @TrackbackTitle,
+	[TrackbackBlogName] = @TrackbackBlogName,
+	[TrackbackExcerpt] = @TrackbackExcerpt,
+	[AnonymousName] = @AnonymousName,
+	[AnonymousEmail] = @AnonymousEmail,
+	[AnonymousURL] = @AnonymousURL,
+	[NotifyMe] = @NotifyMe    
+WHERE
+	[CommentID] = @CommentID
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticle
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticle
+	@ArticleID int
+AS
+SELECT
+	Article.[ArticleID],
+	Article.[AuthorID],
+	Article.[ApproverID],
+	Article.[CreatedDate],
+	Article.[LastUpdate],
+	Article.[Title],
+	Article.[Summary],
+	Article.[IsApproved],
+	Article.[NumberOfViews],
+	Article.[IsDraft],
+	Article.[StartDate],
+	Article.[EndDate],
+	Article.[ModuleID],
+	Article.[IsFeatured],
+	Article.[ImageUrl],
+	Article.[LastUpdateID],
+	Article.[IsSecure],
+	'' as AuthorEmail,
+	Author.[UserName] as AuthorUserName,
+	Author.[FirstName] as AuthorFirstName,
+	Author.[LastName] as AuthorLastName,
+	'' as LastUpdateEmail,
+	Updated.[UserName] as LastUpdateUserName,
+	Updated.[FirstName] as LastUpdateFirstName,
+	Updated.[LastName] as LastUpdateLastName,
+	(select count(*) from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment where {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment.ArticleID = Article.ArticleID) as 'CommentCount', 
+	(select count(*) from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Page where {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Page.ArticleID = Article.ArticleID) as 'PageCount', 
+	(select AVG(rating) from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Rating where {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Rating.ArticleID = Article.ArticleID) as 'Rating', 
+	case when Images.FileName is null then '' else Images.Folder + Images.FileName end AS ImageUrlResolved, 
+	case when UrlFiles.FileName is null then Article.URL else UrlFiles.Folder + UrlFiles.FileName end AS URL 
+
+FROM
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article Article LEFT OUTER JOIN 
+		{databaseOwner}{objectQualifier}Users Author ON Article.AuthorID = Author.UserID LEFT OUTER JOIN
+		{databaseOwner}{objectQualifier}Users Updated ON Article.LastUpdateID = Updated.UserID LEFT OUTER JOIN
+		{databaseOwner}{objectQualifier}Files UrlFiles ON Article.URL = 'fileid=' + CONVERT(nvarchar, UrlFiles.FileID) LEFT OUTER JOIN
+        {databaseOwner}{objectQualifier}Files Images ON Article.ImageUrl = 'fileid=' + CONVERT(nvarchar, Images.FileID) 
+
+WHERE	
+	Article.[ArticleID] = @ArticleID
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleList
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleList
+	@ModuleID	int
+AS
+
+SELECT
+	Article.[ArticleID],
+	Article.[AuthorID],
+	Article.[ApproverID],
+	Article.[CreatedDate],
+	Article.[LastUpdate],
+	Article.[Title],
+	Article.[Summary],
+	Article.[IsApproved],
+	Article.[NumberOfViews],
+	Article.[IsDraft],
+	Article.[StartDate],
+	Article.[EndDate],
+	Article.[ModuleID],
+	Article.[IsFeatured],
+	Article.[ImageUrl],
+	Article.[LastUpdateID],
+	'' as AuthorEmail,
+	Author.[UserName] as AuthorUserName,
+	Author.[FirstName] as AuthorFirstName,
+	Author.[LastName] as AuthorLastName,
+	'' as LastUpdateEmail,
+	Updated.[UserName] as LastUpdateUserName,
+	Updated.[FirstName] as LastUpdateFirstName,
+	Updated.[LastName] as LastUpdateLastName,
+	(select count(*) from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment where {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment.ArticleID = Article.ArticleID) as 'CommentCount', 
+	case when Images.FileName is null then '' else Images.Folder + Images.FileName end AS ImageUrlResolved, 
+	case when UrlFiles.FileName is null then Article.URL else UrlFiles.Folder + UrlFiles.FileName end AS URL 
+
+FROM
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article Article LEFT OUTER JOIN 
+		{databaseOwner}{objectQualifier}Users Author ON Article.AuthorID = Author.UserID LEFT OUTER JOIN 
+		{databaseOwner}{objectQualifier}Users Updated ON Article.LastUpdateID = Updated.UserID LEFT OUTER JOIN
+		{databaseOwner}{objectQualifier}Files UrlFiles ON Article.URL = 'fileid=' + CONVERT(nvarchar, UrlFiles.FileID) LEFT OUTER JOIN
+        {databaseOwner}{objectQualifier}Files Images ON Article.ImageUrl = 'fileid=' + CONVERT(nvarchar, Images.FileID) 
+WHERE	
+	Article.[ModuleID] = @ModuleID
+
+ORDER BY 
+	Article.[CreatedDate] DESC
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListByApproved
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListByApproved
+	@ModuleID	int,
+	@IsApproved	bit
+AS
+
+SELECT
+	Article.[ArticleID],
+	Article.[AuthorID],
+	Article.[ApproverID],
+	Article.[CreatedDate],
+	Article.[LastUpdate],
+	Article.[Title],
+	Article.[Summary],
+	Article.[IsApproved],
+	Article.[NumberOfViews],
+	Article.[IsDraft],
+	Article.[StartDate],
+	Article.[EndDate],
+	Article.[ModuleID],
+	Article.[IsFeatured],
+	Article.[ImageUrl],
+	Article.[LastUpdateID],
+	'' as AuthorEmail,
+	Author.[UserName] as AuthorUserName,
+	Author.[FirstName] as AuthorFirstName,
+	Author.[LastName] as AuthorLastName,
+	'' as LastUpdateEmail,
+	Updated.[UserName] as LastUpdateUserName,
+	Updated.[FirstName] as LastUpdateFirstName,
+	Updated.[LastName] as LastUpdateLastName,
+	(select count(*) from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment where {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment.ArticleID = Article.ArticleID) as 'CommentCount',
+	(select count(*) from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Page where {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Page.ArticleID = Article.ArticleID) as 'PageCount', 
+	(select AVG(rating) from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Rating where {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Rating.ArticleID = Article.ArticleID) as 'Rating', 
+	case when Images.FileName is null then '' else Images.Folder + Images.FileName end AS ImageUrlResolved, 
+	case when UrlFiles.FileName is null then Article.URL else UrlFiles.Folder + UrlFiles.FileName end AS URL 
+
+FROM
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article Article LEFT OUTER JOIN 
+		{databaseOwner}{objectQualifier}Users Author ON Article.AuthorID = Author.UserID LEFT OUTER JOIN 
+		{databaseOwner}{objectQualifier}Users Updated ON Article.LastUpdateID = Updated.UserID LEFT OUTER JOIN
+		{databaseOwner}{objectQualifier}Files UrlFiles ON Article.URL = 'fileid=' + CONVERT(nvarchar, UrlFiles.FileID) LEFT OUTER JOIN
+        {databaseOwner}{objectQualifier}Files Images ON Article.ImageUrl = 'fileid=' + CONVERT(nvarchar, Images.FileID) 
+
+WHERE	
+	Article.[ModuleID] = @ModuleID
+	AND
+	Article.[IsApproved] = @IsApproved
+	AND
+	Article.[IsDraft] = 0 
+
+ORDER BY 
+	Article.[CreatedDate] DESC
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListByAuthor
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListByAuthor
+	@ModuleID	int,
+	@AuthorID	int
+AS
+
+SELECT
+	Article.[ArticleID],
+	Article.[AuthorID],
+	Article.[ApproverID],
+	Article.[CreatedDate],
+	Article.[LastUpdate],
+	Article.[Title],
+	Article.[Summary],
+	Article.[IsApproved],
+	Article.[NumberOfViews],
+	Article.[IsDraft],
+	Article.[StartDate],
+	Article.[EndDate],
+	Article.[ModuleID],
+	Article.[IsFeatured],
+	Article.[ImageUrl],
+	Article.[LastUpdateID],
+	'' as AuthorEmail,
+	Author.[UserName] as AuthorUserName,
+	Author.[FirstName] as AuthorFirstName,
+	Author.[LastName] as AuthorLastName,
+	'' as LastUpdateEmail,
+	Updated.[UserName] as LastUpdateUserName,
+	Updated.[FirstName] as LastUpdateFirstName,
+	Updated.[LastName] as LastUpdateLastName,
+	(select count(*) from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment where {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment.ArticleID = Article.ArticleID) as 'CommentCount', 
+	(select AVG(rating) from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Rating where {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Rating.ArticleID = Article.ArticleID) as 'Rating', 
+	case when Images.FileName is null then '' else Images.Folder + Images.FileName end AS ImageUrlResolved, 
+	case when UrlFiles.FileName is null then Article.URL else UrlFiles.Folder + UrlFiles.FileName end AS URL 
+
+FROM
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article Article LEFT OUTER JOIN 
+		{databaseOwner}{objectQualifier}Users Author ON Article.AuthorID = Author.UserID LEFT OUTER JOIN 
+		{databaseOwner}{objectQualifier}Users Updated ON Article.LastUpdateID = Updated.UserID LEFT OUTER JOIN
+		{databaseOwner}{objectQualifier}Files UrlFiles ON Article.URL = 'fileid=' + CONVERT(nvarchar, UrlFiles.FileID) LEFT OUTER JOIN
+        {databaseOwner}{objectQualifier}Files Images ON Article.ImageUrl = 'fileid=' + CONVERT(nvarchar, Images.FileID) 
+WHERE	
+	Article.[ModuleID] = @ModuleID
+	AND
+	Article.[AuthorID] = @AuthorID
+
+ORDER BY 
+	Article.[CreatedDate] DESC
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListByAuthorByStatus
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListByAuthorByStatus
+	@ModuleID	int,
+	@AuthorID	int,
+	@IsApproved	bit,
+	@IsDraft	bit 
+AS
+
+SELECT
+	Article.[ArticleID],
+	Article.[AuthorID],
+	Article.[ApproverID],
+	Article.[CreatedDate],
+	Article.[LastUpdate],
+	Article.[Title],
+	Article.[Summary],
+	Article.[IsApproved],
+	Article.[NumberOfViews],
+	Article.[IsDraft],
+	Article.[StartDate],
+	Article.[EndDate],
+	Article.[ModuleID],
+	Article.[IsFeatured],
+	Article.[ImageUrl],
+	Article.[LastUpdateID],
+	'' as AuthorEmail,
+	Author.[UserName] as AuthorUserName,
+	Author.[FirstName] as AuthorFirstName,
+	Author.[LastName] as AuthorLastName,
+	'' as LastUpdateEmail,
+	Updated.[UserName] as LastUpdateUserName,
+	Updated.[FirstName] as LastUpdateFirstName,
+	Updated.[LastName] as LastUpdateLastName,
+	(select count(*) from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment where {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment.ArticleID = Article.ArticleID) as 'CommentCount', 
+	(select AVG(rating) from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Rating where {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Rating.ArticleID = Article.ArticleID) as 'Rating', 
+	case when Images.FileName is null then '' else Images.Folder + Images.FileName end AS ImageUrlResolved, 
+	case when UrlFiles.FileName is null then Article.URL else UrlFiles.Folder + UrlFiles.FileName end AS URL 
+
+FROM
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article Article LEFT OUTER JOIN 
+		{databaseOwner}{objectQualifier}Users Author ON Article.AuthorID = Author.UserID LEFT OUTER JOIN 
+		{databaseOwner}{objectQualifier}Users Updated ON Article.LastUpdateID = Updated.UserID LEFT OUTER JOIN
+		{databaseOwner}{objectQualifier}Files UrlFiles ON Article.URL = 'fileid=' + CONVERT(nvarchar, UrlFiles.FileID) LEFT OUTER JOIN
+        {databaseOwner}{objectQualifier}Files Images ON Article.ImageUrl = 'fileid=' + CONVERT(nvarchar, Images.FileID) 
+WHERE	
+	Article.[ModuleID] = @ModuleID
+	AND
+	Article.[AuthorID] = @AuthorID
+	AND
+	Article.[IsApproved] = @IsApproved
+	AND
+	Article.[IsDraft] = @IsDraft
+
+ORDER BY 
+	Article.[CreatedDate] DESC
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListBySearchCriteria
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListBySearchCriteria
+	@ModuleID	int,
+	@CategoryID	varchar(255),
+	@MaxCount	int,
+	@MaxAge	int,
+	@IsApproved	int,
+	@StartDate	datetime,
+	@KeyWords	varchar(255), 
+	@ShowHiddenAndExpired	bit, 
+	@AuthorID	int,
+	@ShowFeaturedOnly bit,
+	@SortBy varchar(50),
+	@Month	int,
+	@Year	int 
+AS
+GO

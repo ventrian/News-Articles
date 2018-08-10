@@ -165,105 +165,25 @@ Namespace Ventrian.NewsArticles.Controls
 
             Dim objFilePosted As HttpPostedFile = _context.Request.Files("Filedata")
 
-            If Not (objFilePosted Is Nothing) Then
+			If Not (objFilePosted Is Nothing) Then
 
-                Dim objPortalController As New PortalController()
-                If (objPortalController.HasSpaceAvailable(_portalID, objFilePosted.ContentLength) = False) Then
-                    _context.Response.Write("-1")
-                    _context.Response.End()
-                End If
+				Dim objPortalController As New PortalController()
+				If (objPortalController.HasSpaceAvailable(_portalID, objFilePosted.ContentLength) = False) Then
+					_context.Response.Write("-1")
+					_context.Response.End()
+				End If
 
-                Dim username As String = _context.User.Identity.Name
+				Dim username As String = _context.User.Identity.Name
 
-                If (_articleID <> Null.NullInteger) Then
-                    FileProvider.Instance().AddFile(_articleID, _moduleID, objFilePosted)
-                Else
-                    FileProvider.Instance().AddFile(_fileGuid, _moduleID, objFilePosted)
-                End If
+				If (_articleID <> Null.NullInteger) Then
+					FileProvider.Instance().AddFile(_articleID, _moduleID, objFilePosted)
+				Else
+					FileProvider.Instance().AddFile(_fileGuid, _moduleID, objFilePosted)
+				End If
 
-                'Dim objFile As New FileInfo
+			End If
 
-                'objFile.ArticleID = _articleID
-                'If (_articleID = Null.NullInteger) Then
-                '    objFile.FileGuid = _fileGuid
-                'End If
-                'objFile.FileName = objFilePosted.FileName
-                'objFile.SortOrder = 0
-
-                'Dim filesList As List(Of FileInfo) = objFileController.GetFileList(_articleID, _fileGuid)
-
-                'If (filesList.Count > 0) Then
-                '    objFile.SortOrder = CType(filesList(filesList.Count - 1), FileInfo).SortOrder + 1
-                'End If
-
-                'Dim objPortalSettings As PortalSettings = PortalController.GetCurrentPortalSettings()
-
-                'Dim folder As String = ""
-                'If (ArticleSettings.DefaultFilesFolder <> Null.NullInteger) Then
-                '    Dim objFolderController As New FolderController
-                '    Dim objFolder As FolderInfo = objFolderController.GetFolderInfo(_portalID, ArticleSettings.DefaultFilesFolder)
-                '    If (objFolder IsNot Nothing) Then
-                '        folder = objFolder.FolderPath
-                '    End If
-                'End If
-
-                'objFile.Folder = folder
-                'objFile.ContentType = objFilePosted.ContentType
-
-                'If (objFile.FileName.Split("."c).Length > 0) Then
-                '    objFile.Extension = objFile.FileName.Split("."c)(objFile.FileName.Split("."c).Length - 1)
-
-                '    If (objFile.Extension.ToLower() = "jpg") Then
-                '        objFile.ContentType = "image/jpeg"
-                '    End If
-                '    If (objFile.Extension.ToLower() = "gif") Then
-                '        objFile.ContentType = "image/gif"
-                '    End If
-                '    If (objFile.Extension.ToLower() = "txt") Then
-                '        objFile.ContentType = "text/plain"
-                '    End If
-                '    If (objFile.Extension.ToLower() = "html") Then
-                '        objFile.ContentType = "text/html"
-                '    End If
-                '    If (objFile.Extension.ToLower() = "mp3") Then
-                '        objFile.ContentType = "audio/mpeg"
-                '    End If
-
-                'End If
-                'objFile.Title = objFile.FileName.Replace("." & objFile.Extension, "")
-
-                'Dim filePath As String = objPortalSettings.HomeDirectoryMapPath & folder.Replace("/", "\")
-
-                'If Not (Directory.Exists(filePath)) Then
-                '    Directory.CreateDirectory(filePath)
-                'End If
-
-                'If (File.Exists(filePath & objFile.FileName)) Then
-                '    For i As Integer = 1 To 100
-                '        If (File.Exists(filePath & i.ToString() & "_" & objFile.FileName) = False) Then
-                '            objFile.FileName = i.ToString() & "_" & objFile.FileName
-                '            Exit For
-                '        End If
-                '    Next
-                'End If
-
-                'objFile.Size = objFilePosted.ContentLength
-                'objFilePosted.SaveAs(filePath & objFile.FileName)
-
-                'objFile.FileID = objFileController.Add(objFile)
-
-                'If (_articleID <> Null.NullInteger) Then
-                '    Dim objArticleController As New ArticleController
-                '    Dim objArticle As ArticleInfo = objArticleController.GetArticle(_articleID)
-                '    If (objArticle IsNot Nothing) Then
-                '        objArticle.FileCount = objArticle.FileCount + 1
-                '        objArticleController.UpdateArticle(objArticle)
-                '    End If
-                'End If
-
-            End If
-
-            _context.Response.Write("0")
+			_context.Response.Write("0")
             _context.Response.End()
 
         End Sub

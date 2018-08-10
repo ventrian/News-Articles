@@ -1,0 +1,271 @@
+ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article   
+	Add [IsDraft] bit NOT NULL DEFAULT 0
+GO
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Page') and OBJECTPROPERTY(id, N'IsTable') = 1)
+CREATE TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Page (
+	[PageID] [int] IDENTITY (1, 1) NOT NULL ,
+	[ArticleID] [int] NOT NULL ,
+	[Title] [nvarchar] (255) NOT NULL ,
+	[PageText] [ntext] NOT NULL ,
+	[SortOrder] [int] NOT NULL 
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'PK_{objectQualifier}DnnForge_NewsArticles_Page') and OBJECTPROPERTY(id, N'IsPrimaryKey') = 1)
+ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Page ADD 
+	CONSTRAINT [PK_{objectQualifier}DnnForge_NewsArticles_Page] PRIMARY KEY  CLUSTERED 
+	(
+		[PageID]
+	)  ON [PRIMARY] 
+GO
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'DF_{objectQualifier}DnnForge_NewsArticles_Page_SortOrder') and OBJECTPROPERTY(id, N'IsConstraint') = 1)
+ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Page ADD 
+	CONSTRAINT [DF_{objectQualifier}DnnForge_NewsArticles_Page_SortOrder] DEFAULT (0) FOR [SortOrder]
+GO
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'FK_{objectQualifier}DnnForge_NewsArticles_Page_{objectQualifier}DnnForge_NewsArticles_Article') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Page ADD 
+	CONSTRAINT [FK_{objectQualifier}DnnForge_NewsArticles_Page_{objectQualifier}DnnForge_NewsArticles_Article] FOREIGN KEY 
+	(
+		[ArticleID]
+	) REFERENCES {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article (
+		[ArticleID]
+	) ON DELETE CASCADE 
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}DnnForge_NewsArticles_AddArticle') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}DnnForge_NewsArticles_AddArticle
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_AddArticle
+	@CategoryID int,
+	@AuthorID int,
+	@ApproverID int,
+	@CreatedDate datetime,
+	@LastUpdate datetime,
+	@Title nvarchar(255),
+	@Summary nvarchar(4000),
+	@IsApproved bit,
+	@NumberOfViews int,
+	@IsDraft bit
+AS
+
+INSERT INTO {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article (
+	[CategoryID],
+	[AuthorID],
+	[ApproverID],
+	[CreatedDate],
+	[LastUpdate],
+	[Title],
+	[Summary],
+	[IsApproved],
+	[NumberOfViews],
+	[IsDraft]
+) VALUES (
+	@CategoryID,
+	@AuthorID,
+	@ApproverID,
+	@CreatedDate,
+	@LastUpdate,
+	@Title,
+	@Summary,
+	@IsApproved,
+	@NumberOfViews,
+	@IsDraft
+)
+
+select SCOPE_IDENTITY()
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}DnnForge_NewsArticles_AddPage') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}DnnForge_NewsArticles_AddPage
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_AddPage
+	@ArticleID int,
+	@Title nvarchar(255), 
+	@PageText ntext,
+	@SortOrder int
+AS
+
+declare @count int
+
+select @count = (select count(*) from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Page where ArticleID = @ArticleID)
+
+INSERT INTO {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Page (
+	[ArticleID],
+	[Title],
+	[PageText],
+	[SortOrder]
+) VALUES (
+	@ArticleID,
+	@Title,
+	@PageText,
+	@count
+)
+
+select SCOPE_IDENTITY()
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}DnnForge_NewsArticles_DeletePage') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}DnnForge_NewsArticles_DeletePage
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_DeletePage
+	@PageID int
+AS
+
+DELETE FROM {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Page
+WHERE
+	[PageID] = @PageID
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticle') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticle
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticle
+	@ArticleID int
+AS
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleList') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleList
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleList
+	@ModuleID	int
+AS
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListByApproved') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListByApproved
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListByApproved
+	@ModuleID	int,
+	@IsApproved	bit
+AS
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListByAuthor') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListByAuthor
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListByAuthor
+	@ModuleID	int,
+	@AuthorID	int
+AS
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListByAuthorByApproved') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListByAuthorByApproved
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListByAuthorByStatus
+	@ModuleID	int,
+	@AuthorID	int,
+	@IsApproved	bit,
+	@IsDraft	bit 
+AS
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetPage') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetPage
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetPage
+	@PageID int
+AS
+
+SELECT
+	[PageID],
+	[ArticleID],
+	[Title], 
+	[PageText],
+	[SortOrder]
+FROM
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Page
+WHERE
+	[PageID] = @PageID
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetPageList') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetPageList
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetPageList
+	@ArticleID int
+AS
+
+SELECT
+	[PageID],
+	[ArticleID],
+	[Title], 
+	[PageText],
+	[SortOrder]
+FROM
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Page
+
+WHERE
+	[ArticleID] = @ArticleID
+
+ORDER BY
+	[SortOrder] ASC
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}DnnForge_NewsArticles_UpdateArticle') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}DnnForge_NewsArticles_UpdateArticle
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_UpdateArticle
+	@ArticleID int, 
+	@CategoryID int, 
+	@AuthorID int, 
+	@ApproverID int, 
+	@CreatedDate datetime, 
+	@LastUpdate datetime, 
+	@Title nvarchar(255), 
+	@Summary nvarchar(4000), 
+	@IsApproved bit, 
+	@NumberOfViews int, 
+	@IsDraft bit 
+AS
+
+UPDATE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article SET
+	[CategoryID] = @CategoryID,
+	[AuthorID] = @AuthorID,
+	[ApproverID] = @ApproverID,
+	[CreatedDate] = @CreatedDate,
+	[LastUpdate] = @LastUpdate,
+	[Title] = @Title,
+	[Summary] = @Summary,
+	[IsApproved] = @IsApproved,
+	[NumberOfViews] = @NumberOfViews,
+	[IsDraft] = @IsDraft
+WHERE
+	[ArticleID] = @ArticleID
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}DnnForge_NewsArticles_UpdatePage') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}DnnForge_NewsArticles_UpdatePage
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_UpdatePage
+	@PageID int, 
+	@ArticleID int, 
+	@Title nvarchar(255), 
+	@PageText ntext, 
+	@SortOrder int 
+AS
+
+UPDATE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Page SET
+	[ArticleID] = @ArticleID,
+	[Title] = @Title, 
+	[PageText] = @PageText,
+	[SortOrder] = @SortOrder
+WHERE
+	[PageID] = @PageID
+GO

@@ -1,0 +1,23 @@
+﻿ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ArticleCategories DROP 
+	CONSTRAINT FK_{objectQualifier}DnnForge_NewsArticles_ArticleCategories_{objectQualifier}DnnForge_NewsArticles_Article 
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ArticleCategories DROP 
+	CONSTRAINT FK_{objectQualifier}DnnForge_NewsArticles_ArticleCategories_DnnForge_NewsArticles_Category 
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ArticleCategories ADD 
+	CONSTRAINT FK_{objectQualifier}DnnForge_NewsArticles_ArticleCategories_{objectQualifier}DnnForge_NewsArticles_Article FOREIGN KEY 
+	(
+		[ArticleID]
+	) REFERENCES {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article (
+		[ArticleID]
+	) ON DELETE CASCADE
+	 ,
+	CONSTRAINT FK_{objectQualifier}DnnForge_NewsArticles_ArticleCategories_{objectQualifier}DnnForge_NewsArticles_Category FOREIGN KEY 
+	(
+		[CategoryID]
+	) REFERENCES {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Category (
+		[CategoryID]
+	)  
+GO

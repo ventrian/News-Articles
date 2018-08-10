@@ -12,102 +12,97 @@ Namespace Ventrian.NewsArticles
 
 #Region " Public Methods "
 
-        Public Overrides Function AddFile(ByVal articleID As Integer, ByVal moduleID As Integer, ByVal objPostedFile As System.Web.HttpPostedFile) As Integer
+		Public Overrides Function AddFile(ByVal articleID As Integer, ByVal moduleID As Integer, folderID As Integer, ByVal objPostedFile As System.Web.HttpPostedFile) As Integer
 
-            Dim objFile As New FileInfo
+			Dim objFile As New FileInfo
 
-            objFile.ArticleID = articleID
-            objFile.FileName = objPostedFile.FileName
-            objFile.SortOrder = 0
+			objFile.ArticleID = articleID
+			objFile.FileName = objPostedFile.FileName
+			objFile.SortOrder = 0
 
-            Dim filesList As List(Of FileInfo) = GetFiles(articleID)
+			Dim filesList As List(Of FileInfo) = GetFiles(articleID)
 
-            If (filesList.Count > 0) Then
-                objFile.SortOrder = CType(filesList(filesList.Count - 1), FileInfo).SortOrder + 1
-            End If
+			If (filesList.Count > 0) Then
+				objFile.SortOrder = CType(filesList(filesList.Count - 1), FileInfo).SortOrder + 1
+			End If
 
-            Dim objPortalSettings As PortalSettings = PortalController.GetCurrentPortalSettings()
+			Dim objPortalSettings As PortalSettings = PortalController.GetCurrentPortalSettings()
 
-            Dim folder As String = ""
+			Dim folder As String = ""
 
-            Dim objModuleController As New ModuleController()
-            Dim objSettings As Hashtable = objModuleController.GetModuleSettings(moduleID)
+			Dim objModuleController As New ModuleController()
+			Dim objSettings As Hashtable = objModuleController.GetModuleSettings(moduleID)
 
-            Dim folderID As Integer = Null.NullInteger
-            If (IsNumeric(HttpContext.Current.Request.Form("FolderID"))) Then
-                folderID = Convert.ToInt32(HttpContext.Current.Request.Form("FolderID"))
-            End If
+			If (folderID <> Null.NullInteger) Then
+				Dim objFolderController As New FolderController
+				Dim objFolder As FolderInfo = objFolderController.GetFolderInfo(objPortalSettings.PortalId, folderID)
+				If (objFolder IsNot Nothing) Then
+					folder = objFolder.FolderPath
+				End If
+			End If
 
-            If (folderID <> Null.NullInteger) Then
-                Dim objFolderController As New FolderController
-                Dim objFolder As FolderInfo = objFolderController.GetFolderInfo(objPortalSettings.PortalId, folderID)
-                If (objFolder IsNot Nothing) Then
-                    folder = objFolder.FolderPath
-                End If
-            End If
+			objFile.Folder = folder
+			objFile.ContentType = objPostedFile.ContentType
 
-            objFile.Folder = folder
-            objFile.ContentType = objPostedFile.ContentType
+			If (objFile.FileName.Split("."c).Length > 0) Then
+				objFile.Extension = objFile.FileName.Split("."c)(objFile.FileName.Split("."c).Length - 1)
 
-            If (objFile.FileName.Split("."c).Length > 0) Then
-                objFile.Extension = objFile.FileName.Split("."c)(objFile.FileName.Split("."c).Length - 1)
+				If (objFile.Extension.ToLower() = "jpg") Then
+					objFile.ContentType = "image/jpeg"
+				End If
+				If (objFile.Extension.ToLower() = "gif") Then
+					objFile.ContentType = "image/gif"
+				End If
+				If (objFile.Extension.ToLower() = "txt") Then
+					objFile.ContentType = "text/plain"
+				End If
+				If (objFile.Extension.ToLower() = "html") Then
+					objFile.ContentType = "text/html"
+				End If
+				If (objFile.Extension.ToLower() = "mp3") Then
+					objFile.ContentType = "audio/mpeg"
+				End If
 
-                If (objFile.Extension.ToLower() = "jpg") Then
-                    objFile.ContentType = "image/jpeg"
-                End If
-                If (objFile.Extension.ToLower() = "gif") Then
-                    objFile.ContentType = "image/gif"
-                End If
-                If (objFile.Extension.ToLower() = "txt") Then
-                    objFile.ContentType = "text/plain"
-                End If
-                If (objFile.Extension.ToLower() = "html") Then
-                    objFile.ContentType = "text/html"
-                End If
-                If (objFile.Extension.ToLower() = "mp3") Then
-                    objFile.ContentType = "audio/mpeg"
-                End If
+			End If
+			objFile.Title = objFile.FileName.Replace("." & objFile.Extension, "")
 
-            End If
-            objFile.Title = objFile.FileName.Replace("." & objFile.Extension, "")
+			Dim filePath As String = objPortalSettings.HomeDirectoryMapPath & folder.Replace("/", "\")
 
-            Dim filePath As String = objPortalSettings.HomeDirectoryMapPath & folder.Replace("/", "\")
+			If Not (Directory.Exists(filePath)) Then
+				Directory.CreateDirectory(filePath)
+			End If
 
-            If Not (Directory.Exists(filePath)) Then
-                Directory.CreateDirectory(filePath)
-            End If
+			If (File.Exists(filePath & objFile.FileName)) Then
+				For i As Integer = 1 To 100
+					If (File.Exists(filePath & i.ToString() & "_" & objFile.FileName) = False) Then
+						objFile.FileName = i.ToString() & "_" & objFile.FileName
+						Exit For
+					End If
+				Next
+			End If
 
-            If (File.Exists(filePath & objFile.FileName)) Then
-                For i As Integer = 1 To 100
-                    If (File.Exists(filePath & i.ToString() & "_" & objFile.FileName) = False) Then
-                        objFile.FileName = i.ToString() & "_" & objFile.FileName
-                        Exit For
-                    End If
-                Next
-            End If
+			objFile.Size = objPostedFile.ContentLength
+			objPostedFile.SaveAs(filePath & objFile.FileName)
 
-            objFile.Size = objPostedFile.ContentLength
-            objPostedFile.SaveAs(filePath & objFile.FileName)
+			Dim objFileController As New FileController
+			objFile.FileID = objFileController.Add(objFile)
 
-            Dim objFileController As New FileController
-            objFile.FileID = objFileController.Add(objFile)
+			If (articleID > 0) Then
+				Dim objArticleController As New ArticleController
+				Dim objArticle As ArticleInfo = objArticleController.GetArticle(articleID)
+				objArticle.FileCount = objArticle.FileCount + 1
+				objArticleController.UpdateArticle(objArticle)
+			End If
 
-            If (articleID > 0) Then
-                Dim objArticleController As New ArticleController
-                Dim objArticle As ArticleInfo = objArticleController.GetArticle(articleID)
-                objArticle.FileCount = objArticle.FileCount + 1
-                objArticleController.UpdateArticle(objArticle)
-            End If
+			Return objFile.FileID
 
-            Return objFile.FileID
+		End Function
 
-        End Function
+		Public Overrides Function AddFile(ByVal articleID As Integer, ByVal moduleID As Integer, folderID As Integer, ByVal objPostedFile As HttpPostedFile, ByVal providerParams As Object) As Integer
+			Return AddFile(articleID, moduleID, folderID, objPostedFile)
+		End Function
 
-        Public Overrides Function AddFile(ByVal articleID As Integer, ByVal moduleID As Integer, ByVal objPostedFile As HttpPostedFile, ByVal providerParams As Object) As Integer
-            Return AddFile(articleID, moduleID, objPostedFile)
-        End Function
-
-        Public Overrides Function AddExistingFile(ByVal articleID As Integer, ByVal moduleID As Integer, ByVal providerParams As Object) As Integer
+		Public Overrides Function AddExistingFile(ByVal articleID As Integer, ByVal moduleID As Integer, ByVal providerParams As Object) As Integer
             Throw New NotImplementedException()
         End Function
 

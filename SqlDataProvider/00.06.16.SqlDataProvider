@@ -1,0 +1,116 @@
+﻿DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetComment
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetComment
+	@CommentID int
+AS
+
+SELECT
+	Comment.[CommentID],
+	Comment.[ArticleID],
+	Comment.[UserID], 
+	Comment.[CreatedDate],
+	Comment.[Comment],
+	Comment.[RemoteAddress],
+	Comment.[Type],
+	Comment.[TrackbackUrl],
+	Comment.[TrackbackTitle],
+	Comment.[TrackbackBlogName],
+	Comment.[TrackbackExcerpt], 
+	Comment.[AnonymousName], 
+	Comment.[AnonymousEmail], 
+	Comment.[AnonymousURL], 
+	Comment.[NotifyMe], 
+	Comment.[IsApproved],  
+	Comment.[ApprovedBy],  
+	Author.[Email] as AuthorEmail,
+	Author.[UserName] as AuthorUserName,
+	Author.[FirstName] as AuthorFirstName,
+	Author.[LastName] as AuthorLastName,
+	Author.[DisplayName] as AuthorDisplayName
+FROM
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment Comment LEFT OUTER JOIN
+		{databaseOwner}{objectQualifier}Users Author ON Comment.UserID = Author.UserID
+WHERE
+	[CommentID] = @CommentID
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCommentList
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCommentList
+	@ModuleID	int,
+	@ArticleID	int,
+	@IsApproved bit 
+AS
+
+SELECT
+	Comment.[CommentID],
+	Comment.[ArticleID],
+	Comment.[UserID], 
+	Comment.[CreatedDate],
+	Comment.[Comment],
+	Comment.[RemoteAddress],
+	Comment.[Type],
+	Comment.[TrackbackUrl],
+	Comment.[TrackbackTitle],
+	Comment.[TrackbackBlogName],
+	Comment.[TrackbackExcerpt], 
+	Comment.[AnonymousName], 
+	Comment.[AnonymousEmail], 
+	Comment.[AnonymousURL],
+	Comment.[NotifyMe],  
+	Comment.[IsApproved],  
+	Comment.[ApprovedBy],  
+	Author.[Email] as AuthorEmail,
+	Author.[UserName] as AuthorUserName,
+	Author.[FirstName] as AuthorFirstName,
+	Author.[LastName] as AuthorLastName,
+	Author.[DisplayName] as AuthorDisplayName
+FROM
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment Comment INNER JOIN
+		{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article Article on Comment.ArticleID = Article.ArticleID LEFT OUTER JOIN
+		{databaseOwner}{objectQualifier}Users Author ON Comment.UserID = Author.UserID
+WHERE
+	Article.ModuleID = @ModuleID
+	and
+	(@ArticleID is null OR Comment.[ArticleID] = @ArticleID)
+	and
+	Comment.IsApproved = @IsApproved
+ORDER BY
+	Comment.[CreatedDate] ASC
+GO
+
+DROP PROCEDURE  {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetAuthorStatistics
+GO
+
+CREATE PROCEDURE  {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetAuthorStatistics
+	@ModuleID	int, 
+	@CategoryID 	varchar(255),
+	@SortBy	varchar(255) 
+AS
+
+DECLARE @strTop	nvarchar(2000)
+DECLARE @strWhere	nvarchar(2000)
+
+SELECT @strTop = ''
+SELECT @strWhere = ''
+
+IF (@ModuleID is not null)
+	SELECT @strWhere = @strWhere + ' AND Articles.ModuleID = ' + convert(nvarchar, @ModuleId)
+	
+IF (@CategoryId is not null)
+	SELECT @strWhere = @strWhere + ' AND Articles.ArticleID in (select ArticleID from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ArticleCategories ArticleCategories where ArticleCategories.CategoryID in (' + @CategoryID + '))'
+
+EXEC('
+SELECT     
+	UserID, UserName, DisplayName, FirstName, LastName, count(*) as ''ArticleCount''   
+FROM         
+	{databaseOwner}{objectQualifier}Users Users, {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article Articles
+where 1 = 1 and Users.UserID = Articles.AuthorID ' + 
+	@strWhere + ' 
+GROUP BY 
+	UserID, UserName, DisplayName, FirstName, LastName
+ORDER BY ' +
+	@SortBy)
+GO

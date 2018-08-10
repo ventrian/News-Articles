@@ -1,0 +1,269 @@
+﻿ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article ADD
+	IsFeatured bit NOT NULL CONSTRAINT DF_{objectQualifier}DnnForge_NewsArticles_Article_IsFeatured DEFAULT 0
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment
+	DROP CONSTRAINT FK_{objectQualifier}DnnForge_NewsArticles_Comment_{objectQualifier}DnnForge_NewsArticles_Article
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment ADD
+	Rating float NULL,
+	RemoteAddress nvarchar(50) NULL
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment WITH NOCHECK ADD CONSTRAINT
+	FK_{objectQualifier}DnnForge_NewsArticles_Comment_{objectQualifier}DnnForge_NewsArticles_Article FOREIGN KEY
+	(
+	ArticleID
+	) REFERENCES {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article
+	(
+	ArticleID
+	) ON DELETE CASCADE
+	 
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_AddArticle
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_AddArticle
+	@AuthorID int,
+	@ApproverID int,
+	@CreatedDate datetime,
+	@LastUpdate datetime,
+	@Title nvarchar(255),
+	@Summary nvarchar(4000),
+	@IsApproved bit,
+	@NumberOfViews int,
+	@IsDraft bit,
+	@StartDate DateTime,
+	@EndDate DateTime,
+	@ModuleID int,
+	@ImageUrl nvarchar(255),
+	@IsFeatured bit 
+AS
+
+INSERT INTO {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article (
+	[AuthorID],
+	[ApproverID],
+	[CreatedDate],
+	[LastUpdate],
+	[Title],
+	[Summary],
+	[IsApproved],
+	[NumberOfViews],
+	[IsDraft],
+	[StartDate],
+	[EndDate],
+	[ModuleID],
+	[ImageUrl],
+	[IsFeatured] 
+) VALUES (
+	@AuthorID,
+	@ApproverID,
+	@CreatedDate,
+	@LastUpdate,
+	@Title,
+	@Summary,
+	@IsApproved,
+	@NumberOfViews,
+	@IsDraft,
+	@StartDate,
+	@EndDate,
+	@ModuleID,
+	@ImageUrl,
+	@IsFeatured 
+)
+
+select SCOPE_IDENTITY()
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_UpdateArticle
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_UpdateArticle
+	@ArticleID int, 
+	@AuthorID int, 
+	@ApproverID int, 
+	@CreatedDate datetime, 
+	@LastUpdate datetime, 
+	@Title nvarchar(255), 
+	@Summary nvarchar(4000), 
+	@IsApproved bit, 
+	@NumberOfViews int, 
+	@IsDraft bit,
+	@StartDate DateTime,
+	@EndDate DateTime,
+	@ModuleID int,
+	@ImageUrl nvarchar(255),
+	@IsFeatured bit 
+AS
+
+UPDATE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article SET
+	[AuthorID] = @AuthorID,
+	[ApproverID] = @ApproverID,
+	[CreatedDate] = @CreatedDate,
+	[LastUpdate] = @LastUpdate,
+	[Title] = @Title,
+	[Summary] = @Summary,
+	[IsApproved] = @IsApproved,
+	[NumberOfViews] = @NumberOfViews,
+	[IsDraft] = @IsDraft,
+	[StartDate] = @StartDate,
+	[EndDate] = @EndDate,
+	[ModuleID] = @ModuleID,
+	[ImageUrl] = @ImageUrl,
+	[IsFeatured] = @IsFeatured 
+WHERE
+	[ArticleID] = @ArticleID
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticle
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticle
+	@ArticleID int
+AS
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListByApproved
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListByApproved
+	@ModuleID	int,
+	@IsApproved	bit
+AS
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListByAuthor
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListByAuthor
+	@ModuleID	int,
+	@AuthorID	int
+AS
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListByAuthorByStatus
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListByAuthorByStatus
+	@ModuleID	int,
+	@AuthorID	int,
+	@IsApproved	bit,
+	@IsDraft	bit 
+AS
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListBySearchCriteria
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListBySearchCriteria
+	@ModuleID	int,
+	@CategoryID	varchar(255),
+	@MaxCount	int,
+	@MaxAge	int,
+	@IsApproved	int,
+	@StartDate	datetime,
+	@KeyWords	varchar(255), 
+	@ShowHiddenAndExpired	bit, 
+	@AuthorID	int  
+AS
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleList
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleList
+	@ModuleID	int
+AS
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_AddComment
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_AddComment
+	@ArticleID int,
+	@UserID int, 
+	@Comment ntext,
+	@Rating float,
+	@RemoteAddress nvarchar(50) 
+AS
+
+INSERT INTO {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment (
+	[ArticleID],
+	[UserID], 
+	[Comment],
+	[Rating],
+	[RemoteAddress]
+) VALUES (
+	@ArticleID,
+	@UserID, 
+	@Comment,
+	@Rating,
+	@RemoteAddress
+)
+
+select SCOPE_IDENTITY()
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_UpdateComment
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_UpdateComment
+	@CommentID int, 
+	@ArticleID int, 
+	@UserID int, 
+	@Comment ntext,
+	@Rating float,
+	@RemoteAddress nvarchar(50) 
+AS
+
+UPDATE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment SET
+	[ArticleID] = @ArticleID,
+	[UserID] = @UserID, 
+	[Comment] = @Comment,
+	[Rating] = @Rating,
+	[RemoteAddress] = @RemoteAddress 
+WHERE
+	[CommentID] = @CommentID
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetComment
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetComment
+	@CommentID int
+AS
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCommentList
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCommentList
+	@ArticleID	int 
+AS
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetAuthorList
+	@ModuleID int
+AS
+
+SELECT DISTINCT 
+	Authors.UserID, 
+	Authors.Username, 
+	Authors.FirstName, 
+	Authors.LastName
+
+FROM         
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article Articles, {databaseOwner}{objectQualifier}Users Authors
+
+WHERE
+	Articles.AuthorID = Authors.UserID
+	and
+	Articles.ModuleID = @ModuleID
+	and 
+	Articles.IsApproved = 1
+
+ORDER BY
+	Authors.FirstName, Authors.LastName
+GO

@@ -1,0 +1,4 @@
+﻿ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article 
+	DROP CONSTRAINT FK_{objectQualifier}DnnForge_NewsArticles_Article_Users
+GO
+

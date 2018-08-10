@@ -1,0 +1,10 @@
+﻿ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_CustomValue DROP 
+	CONSTRAINT [PK_{objectQualifier}DnnForge_NewsArticles_CustomValue]
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_CustomValue ADD 
+	CONSTRAINT [PK_{objectQualifier}DnnForge_NewsArticles_CustomValue] PRIMARY KEY CLUSTERED 
+	(
+		[CustomValueID]
+	)  ON [PRIMARY] 
+GO

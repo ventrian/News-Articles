@@ -33,9 +33,9 @@ Namespace Ventrian.NewsArticles
 
 #Region " Abstract methods "
 
-        Public MustOverride Function AddFile(ByVal articleID As Integer, ByVal moduleID As Integer, ByVal objPostedFile As System.Web.HttpPostedFile) As Integer
-        Public MustOverride Function AddFile(ByVal articleID As Integer, ByVal moduleID As Integer, ByVal objPostedFile As System.Web.HttpPostedFile, ByVal providerParams As Object) As Integer
-        Public MustOverride Function AddExistingFile(ByVal articleID As Integer, ByVal moduleID As Integer, ByVal providerParams As Object) As Integer
+		Public MustOverride Function AddFile(ByVal articleID As Integer, ByVal moduleID As Integer, folderID As Integer, ByVal objPostedFile As System.Web.HttpPostedFile) As Integer
+		Public MustOverride Function AddFile(ByVal articleID As Integer, ByVal moduleID As Integer, folderID As Integer, ByVal objPostedFile As System.Web.HttpPostedFile, ByVal providerParams As Object) As Integer
+		Public MustOverride Function AddExistingFile(ByVal articleID As Integer, ByVal moduleID As Integer, ByVal providerParams As Object) As Integer
         Public MustOverride Sub DeleteFile(ByVal articleID As Integer, ByVal fileID As Integer)
         Public MustOverride Function GetFile(ByVal fileID As Integer) As FileInfo
         Public MustOverride Function GetFiles(ByVal articleID As Integer) As List(Of FileInfo)

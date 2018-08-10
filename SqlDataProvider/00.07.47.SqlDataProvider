@@ -1,0 +1,288 @@
+﻿CREATE TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_CustomField(
+	[CustomFieldID] [int] IDENTITY(1,1) NOT NULL,
+	[ModuleID] [int] NOT NULL,
+	[Name] [nvarchar](255) NOT NULL,
+	[FieldType] [int] NOT NULL,
+	[FieldElements] [ntext] NULL,
+	[DefaultValue] [nvarchar](255) NULL,
+	[Caption] [nvarchar](255) NULL,
+	[CaptionHelp] [nvarchar](255) NULL,
+	[IsRequired] [bit] NOT NULL,
+	[IsVisible] [bit] NOT NULL,
+	[SortOrder] [int] NOT NULL,
+	[ValidationType] [int] NOT NULL,
+	[RegularExpression] [nvarchar](4000) NULL,
+	[Length] [int] NULL
+) ON [PRIMARY]
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_CustomField ADD 
+	CONSTRAINT [PK_{objectQualifier}DnnForge_NewsArticles_CustomField] PRIMARY KEY  CLUSTERED 
+	(
+		[CustomFieldID]
+	)  ON [PRIMARY] 
+GO
+
+CREATE TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_CustomValue(
+	[CustomValueID] [int] IDENTITY(1,1) NOT NULL,
+	[ArticleID] [int] NOT NULL,
+	[CustomFieldID] [int] NOT NULL,
+	[CustomValue] [ntext] NOT NULL
+) ON [PRIMARY] 
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_CustomValue ADD 
+	CONSTRAINT [PK_{objectQualifier}DnnForge_NewsArticles_CustomValue] PRIMARY KEY CLUSTERED 
+	(
+		[CustomValueID]
+	)  ON [PRIMARY] 
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_DeleteArticle
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_DeleteArticle
+	@ArticleID int
+AS
+
+DELETE FROM 
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_CustomValue
+WHERE
+	[ArticleID] = @ArticleID
+
+DELETE FROM {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ArticleCategories
+WHERE
+	[ArticleID] = @ArticleID
+
+DELETE FROM {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article
+WHERE
+	[ArticleID] = @ArticleID
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_DeleteCustomField
+	@CustomFieldID int
+AS
+
+DELETE FROM 
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_CustomValue
+WHERE
+	CustomFieldID = @CustomFieldID
+
+DELETE FROM 
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_CustomField
+WHERE
+	CustomFieldID = @CustomFieldID
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_DeleteCustomValue
+	@CustomValueID int
+AS
+
+DELETE FROM {databaseOwner}{objectQualifier}DnnForge_NewsArticles_CustomValue
+WHERE
+	[CustomValueID] = @CustomValueID
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCustomField
+      @CustomFieldID int
+AS
+
+SELECT     
+      CustomFieldID, 
+      ModuleID, 
+      [Name], 
+      FieldType, 
+      FieldElements, 
+      DefaultValue, 
+      Caption, 
+      CaptionHelp, 
+      IsRequired, 
+      IsVisible, 
+      SortOrder, 
+      ValidationType, 
+    RegularExpression, 
+      [Length]
+FROM         
+      {databaseOwner}{objectQualifier}DnnForge_NewsArticles_CustomField
+WHERE
+      [CustomFieldID] = @CustomFieldID
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCustomFieldList
+      @ModuleID int
+AS
+
+SELECT     
+      CustomFieldID, 
+      ModuleID, 
+      [Name], 
+      FieldType, 
+      FieldElements, 
+      DefaultValue, 
+      Caption, 
+      CaptionHelp, 
+      IsRequired, 
+      IsVisible, 
+      SortOrder, 
+      ValidationType, 
+    RegularExpression, 
+      [Length]
+FROM         
+      {databaseOwner}{objectQualifier}DnnForge_NewsArticles_CustomField
+WHERE
+      [ModuleID] = @ModuleID
+ORDER BY
+	SortOrder
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCustomValueByField
+	@ArticleID int,
+	@CustomFieldID int
+AS
+
+SELECT
+	[CustomValueID],
+	[ArticleID],
+	[CustomFieldID],
+	[CustomValue]
+FROM {databaseOwner}{objectQualifier}DnnForge_NewsArticles_CustomValue
+WHERE
+	[ArticleID] = @ArticleID
+	and
+	[CustomFieldID] = @CustomFieldID
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCustomValueList
+	@ArticleID int
+AS
+
+SELECT
+	[CustomValueID],
+	[ArticleID],
+	[CustomFieldID],
+	[CustomValue]
+FROM 
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_CustomValue
+WHERE
+	[ArticleID] = @ArticleID
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_UpdateCustomField
+	@CustomFieldID int,
+	@ModuleID int,
+	@Name nvarchar(255),
+	@FieldType int,
+	@FieldElements ntext,
+	@DefaultValue nvarchar(255),
+	@Caption nvarchar(255),
+	@CaptionHelp nvarchar(255),
+	@IsRequired bit,
+	@IsVisible bit,
+	@SortOrder int,
+	@ValidationType int, 
+	@Length int,
+	@RegularExpression nvarchar(4000)
+AS
+
+UPDATE
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_CustomField
+SET
+	[ModuleID] = @ModuleID,
+	[Name] = @Name,
+	[FieldType] = @FieldType,
+	[FieldElements] = @FieldElements,
+	[DefaultValue] = @DefaultValue,
+	[Caption] = @Caption,
+	[CaptionHelp] = @CaptionHelp,
+	[IsRequired] = @IsRequired,
+	[IsVisible] = @IsVisible,
+	[SortOrder] = @SortOrder,
+	[ValidationType] = @ValidationType,
+	[Length] = @Length,
+	[RegularExpression] = @RegularExpression
+WHERE
+	CustomFieldID = @CustomFieldID
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_UpdateCustomValue
+	@CustomValueID int, 
+	@ArticleID int, 
+	@CustomFieldID int, 
+	@CustomValue ntext 
+AS
+
+UPDATE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_CustomValue SET
+	[ArticleID] = @ArticleID,
+	[CustomFieldID] = @CustomFieldID,
+	[CustomValue] = @CustomValue
+WHERE
+	[CustomValueID] = @CustomValueID
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_AddCustomField
+	@ModuleID int,
+	@Name nvarchar(255),
+	@FieldType int,
+	@FieldElements ntext,
+	@DefaultValue nvarchar(255),
+	@Caption nvarchar(255),
+	@CaptionHelp nvarchar(255),
+	@IsRequired bit,
+	@IsVisible bit,
+	@SortOrder int,
+	@ValidationType int, 
+	@Length int,
+	@RegularExpression nvarchar(4000)
+AS
+
+INSERT INTO {databaseOwner}{objectQualifier}DnnForge_NewsArticles_CustomField (
+	[ModuleID],
+	[Name],
+	[FieldType],
+	[FieldElements],
+	[DefaultValue],
+	[Caption],
+	[CaptionHelp],
+	[IsRequired],
+	[IsVisible],
+	[SortOrder],
+	[ValidationType],
+	[Length],
+	[RegularExpression]
+) VALUES (
+	@ModuleID,
+	@Name,
+	@FieldType,
+	@FieldElements,
+	@DefaultValue,
+	@Caption,
+	@CaptionHelp,
+	@IsRequired,
+	@IsVisible,
+	@SortOrder,
+	@ValidationType,
+	@Length,
+	@RegularExpression
+)
+
+select SCOPE_IDENTITY()
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_AddCustomValue
+	@ArticleID int,
+	@CustomFieldID int,
+	@CustomValue ntext
+AS
+
+INSERT INTO {databaseOwner}{objectQualifier}DnnForge_NewsArticles_CustomValue (
+	[ArticleID],
+	[CustomFieldID],
+	[CustomValue]
+) VALUES (
+	@ArticleID,
+	@CustomFieldID,
+	@CustomValue
+)
+
+select SCOPE_IDENTITY()
+GO

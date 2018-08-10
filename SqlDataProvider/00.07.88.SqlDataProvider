@@ -1,0 +1,61 @@
+﻿CREATE TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Mirror(
+	[ArticleID] [int] NOT NULL,
+	[LinkedArticleID] [int] NOT NULL,
+	[LinkedPortalID] [int] NOT NULL,
+	[AutoUpdate] [bit] NOT NULL,
+ CONSTRAINT [PK_{objectQualifier}DnnForge_NewsArticles_Mirror] PRIMARY KEY CLUSTERED 
+(
+	[ArticleID] ASC
+)
+) ON [PRIMARY]
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetMirrorArticle
+	@ArticleID int
+AS
+
+SELECT
+	m.[ArticleID],
+	m.[LinkedArticleID],
+	m.[LinkedPortalID],
+	m.[AutoUpdate]    
+FROM
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Mirror m
+WHERE
+	m.[ArticleID] = @ArticleID
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetMirrorArticleList 
+	@LinkedArticleID int
+AS
+
+SELECT
+	m.[ArticleID],
+	m.[LinkedArticleID],
+	m.[LinkedPortalID],
+	m.[AutoUpdate]    
+FROM
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Mirror m
+WHERE
+	m.[LinkedArticleID] = @LinkedArticleID
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_AddMirrorArticle 
+	@ArticleID int,
+	@LinkedArticleID int,
+	@LinkedPortalID int,
+	@AutoUpdate bit 
+AS
+
+INSERT INTO {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Mirror (
+	[ArticleID],
+	[LinkedArticleID],
+	[LinkedPortalID],
+	[AutoUpdate] 
+) VALUES (
+	@ArticleID, 
+	@LinkedArticleID, 
+	@LinkedPortalID, 
+	@AutoUpdate  
+)
+GO

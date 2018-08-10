@@ -1,0 +1,111 @@
+﻿CREATE TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_EmailTemplate (
+	[TemplateID] [int] IDENTITY (1, 1) NOT NULL ,
+	[ModuleID] [int] NOT NULL ,
+	[Name] [nvarchar] (50) NOT NULL ,
+	[Subject] [nvarchar] (255) NOT NULL ,
+	[Template] [ntext] NOT NULL 
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_EmailTemplate ADD 
+	CONSTRAINT [PK_{objectQualifier}DnnForge_NewsArticles_EmailTemplate] PRIMARY KEY  CLUSTERED 
+	(
+		[TemplateID]
+	)  ON [PRIMARY] 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_EmailTemplateGet
+	@TemplateID int
+AS
+
+SELECT
+	[TemplateID],
+	[ModuleID],
+	[Name],
+	[Subject],
+	[Template]
+FROM {databaseOwner}{objectQualifier}DnnForge_NewsArticles_EmailTemplate
+WHERE
+	[TemplateID] = @TemplateID
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_EmailTemplateList
+	@ModuleID int
+AS
+
+SELECT
+	[TemplateID],
+	[ModuleID],
+	[Name],
+	[Subject],
+	[Template]
+FROM {databaseOwner}{objectQualifier}DnnForge_NewsArticles_EmailTemplate
+WHERE
+	[ModuleID] = @ModuleID
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_EmailTemplateAdd
+	@ModuleID int,
+	@Name nvarchar(50),
+	@Subject nvarchar(255),
+	@Template ntext
+AS
+
+INSERT INTO {databaseOwner}{objectQualifier}DnnForge_NewsArticles_EmailTemplate (
+	[ModuleID],
+	[Name],
+	[Subject],
+	[Template]
+) VALUES (
+	@ModuleID,
+	@Name,
+	@Subject,
+	@Template
+)
+
+select SCOPE_IDENTITY()
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_EmailTemplateUpdate
+	@TemplateID int, 
+	@ModuleID int, 
+	@Name nvarchar(50), 
+	@Subject nvarchar(255), 
+	@Template ntext 
+AS
+
+UPDATE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_EmailTemplate SET
+	[ModuleID] = @ModuleID,
+	[Name] = @Name,
+	[Subject] = @Subject,
+	[Template] = @Template
+WHERE
+	[TemplateID] = @TemplateID
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_EmailTemplateDelete
+	@TemplateID int
+AS
+
+DELETE FROM {databaseOwner}{objectQualifier}DnnForge_NewsArticles_EmailTemplate
+WHERE
+	[TemplateID] = @TemplateID
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_EmailTemplateGetByName
+	@ModuleID int, 
+	@Name nvarchar(50)
+AS
+
+SELECT
+	[TemplateID],
+	[ModuleID],
+	[Name],
+	[Subject],
+	[Template]
+FROM {databaseOwner}{objectQualifier}DnnForge_NewsArticles_EmailTemplate
+WHERE
+	[ModuleID] = @ModuleID
+	and
+	[Name] = @Name
+GO
