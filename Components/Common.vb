@@ -189,7 +189,7 @@ Namespace Ventrian.NewsArticles
             If Host.UseFriendlyUrls Then
 
                 Dim strURL As String = ApplicationURL(objTab.TabID)
-                Dim settings As PortalSettings = PortalController.GetCurrentPortalSettings
+                Dim settings As PortalSettings = PortalController.Instance.GetCurrentPortalSettings
 
                 If (articleSettings.LaunchLinks) Then
                     strURL = strURL & "&ctl=ArticleView"
@@ -331,7 +331,7 @@ Namespace Ventrian.NewsArticles
             If HostController.Instance.GetString("UseFriendlyUrls") = "Y" Then
 
                 Dim strURL As String = ApplicationURL(objTab.TabID)
-                Dim settings As PortalSettings = PortalController.GetCurrentPortalSettings
+                Dim settings As PortalSettings = PortalController.Instance.GetCurrentPortalSettings
 
                 If (articleSettings.LaunchLinks) Then
                     strURL = strURL & "&ctl=ArticleView"
@@ -487,14 +487,13 @@ Namespace Ventrian.NewsArticles
 
             Dim objModulesFound As New List(Of ModuleInfo)
 
-            Dim objDesktopModuleController As New DesktopModuleController
-            Dim objDesktopModuleInfo As DesktopModuleInfo = objDesktopModuleController.GetDesktopModuleByModuleName("DnnForge - NewsArticles")
+            Dim objDesktopModuleInfo As DesktopModuleInfo = DesktopModuleController.GetDesktopModuleByModuleName("DnnForge - NewsArticles", portalID)
 
             If Not (objDesktopModuleInfo Is Nothing) Then
 
                 Dim objTabController As New TabController()
-                Dim objTabs As ArrayList = objTabController.GetTabs(portalID)
-                For Each objTab As DotNetNuke.Entities.Tabs.TabInfo In objTabs
+                Dim objTabs As TabCollection = objTabController.GetTabsByPortal(portalID)
+                For Each objTab As DotNetNuke.Entities.Tabs.TabInfo In objTabs.Values
                     If Not (objTab Is Nothing) Then
                         If (objTab.IsDeleted = False) Then
                             Dim objModules As New ModuleController
@@ -530,10 +529,10 @@ Namespace Ventrian.NewsArticles
 
         Public Shared Function GetAuthorLink(ByVal tabID As Integer, ByVal moduleID As Integer, ByVal authorID As Integer, ByVal username As String, ByVal launchLinks As Boolean, ByVal articleSettings As ArticleSettings) As String
 
-            Dim objTab As TabInfo = PortalController.GetCurrentPortalSettings.ActiveTab
-            If (tabID <> PortalController.GetCurrentPortalSettings.ActiveTab.TabID) Then
+            Dim objTab As TabInfo = PortalController.Instance.GetCurrentPortalSettings.ActiveTab
+            If (tabID <> PortalController.Instance.GetCurrentPortalSettings.ActiveTab.TabID) Then
                 Dim objTabController As New TabController
-                objTab = objTabController.GetTab(tabID, PortalController.GetCurrentPortalSettings.PortalId, False)
+                objTab = objTabController.GetTab(tabID, PortalController.Instance.GetCurrentPortalSettings.PortalId, False)
             End If
             Return GetAuthorLink(tabID, moduleID, authorID, username, launchLinks, objTab, articleSettings)
 
@@ -554,7 +553,7 @@ Namespace Ventrian.NewsArticles
                 strURL = strURL & "&authorID=" & authorID.ToString()
 
                 ' TODO: Remove at a later date when minimum version raised.
-                If Localization.GetEnabledLocales.Count > 1 AndAlso LocalizationUtil.UseLanguageInUrl Then
+                If LocaleController.Instance.GetLocales(PortalSettings.Current.PortalId).Count > 1 AndAlso LocalizationUtil.UseLanguageInUrl Then
                     strURL += "&language=" & Thread.CurrentThread.CurrentCulture.Name
                 End If
 
@@ -574,7 +573,7 @@ Namespace Ventrian.NewsArticles
                     End If
                 End If
 
-                Return FriendlyUrl(targetTab, strURL, Common.FormatTitle("", articleSettings), PortalController.GetCurrentPortalSettings)
+                Return FriendlyUrl(targetTab, strURL, Common.FormatTitle("", articleSettings), PortalController.Instance.GetCurrentPortalSettings)
 
             Else
 
@@ -586,10 +585,10 @@ Namespace Ventrian.NewsArticles
 
         Public Shared Function GetCategoryLink(ByVal tabID As Integer, ByVal moduleID As Integer, ByVal categoryID As String, ByVal title As String, ByVal launchLinks As Boolean, ByVal articleSettings As ArticleSettings) As String
 
-            Dim objTab As TabInfo = PortalController.GetCurrentPortalSettings.ActiveTab
-            If (tabID <> PortalController.GetCurrentPortalSettings.ActiveTab.TabID) Then
+            Dim objTab As TabInfo = PortalController.Instance.GetCurrentPortalSettings.ActiveTab
+            If (tabID <> PortalController.Instance.GetCurrentPortalSettings.ActiveTab.TabID) Then
                 Dim objTabController As New TabController
-                objTab = objTabController.GetTab(tabID, PortalController.GetCurrentPortalSettings.PortalId, False)
+                objTab = objTabController.GetTab(tabID, PortalController.Instance.GetCurrentPortalSettings.PortalId, False)
             End If
             Return GetCategoryLink(tabID, moduleID, categoryID, title, launchLinks, objTab, articleSettings)
 
@@ -597,10 +596,10 @@ Namespace Ventrian.NewsArticles
 
         Public Shared Function GetCategoryLink(ByVal tabID As Integer, ByVal moduleID As Integer, ByVal categoryID As String, ByVal title As String, ByVal launchLinks As Boolean, ByVal targetTab As TabInfo, ByVal articleSettings As ArticleSettings) As String
 
-            If DotNetNuke.Entities.Host.HostSettings.GetHostSetting("UseFriendlyUrls") = "Y" Then
-
+            If Host.UseFriendlyUrls Then
+                
                 Dim strURL As String = ApplicationURL(tabID)
-                Dim settings As PortalSettings = PortalController.GetCurrentPortalSettings
+                Dim settings As PortalSettings = PortalController.Instance.GetCurrentPortalSettings
 
                 If (launchLinks) Then
                     strURL = strURL & "&ctl=CategoryView"
@@ -611,7 +610,7 @@ Namespace Ventrian.NewsArticles
                 strURL = strURL & "&categoryId=" & categoryID
 
                 ' TODO: Remove at a later date when minimum version raised.
-                If Localization.GetEnabledLocales.Count > 1 AndAlso LocalizationUtil.UseLanguageInUrl Then
+                If LocaleController.Instance.GetLocales(settings.PortalId).Count > 1 AndAlso LocalizationUtil.UseLanguageInUrl Then
                     strURL += "&language=" & Thread.CurrentThread.CurrentCulture.Name
                 End If
 

@@ -10,6 +10,7 @@ Imports DotNetNuke.Entities.Modules
 Imports DotNetNuke.Entities.Portals
 Imports DotNetNuke.Entities.Users
 Imports DotNetNuke.Security
+Imports DotNetNuke.Security.Permissions
 Imports Ventrian.NewsArticles.Components.Types
 
 Namespace Ventrian.NewsArticles
@@ -52,7 +53,7 @@ Namespace Ventrian.NewsArticles
 
             If Not roles Is Nothing Then
                 Dim context As HttpContext = HttpContext.Current
-                Dim objUserInfo As UserInfo = UserController.GetCurrentUserInfo
+                Dim objUserInfo As UserInfo = UserController.Instance.GetCurrentUserInfo
                 Dim role As String
 
                 For Each role In roles.Split(New Char() {";"c})
@@ -116,7 +117,7 @@ Namespace Ventrian.NewsArticles
         Public ReadOnly Property AuthorSelect() As AuthorSelectType
             Get
                 If (Settings.Contains(ArticleConstants.AUTHOR_SELECT_TYPE)) Then
-                    Return CType(System.Enum.Parse(GetType(AuthorSelectType), Settings(ArticleConstants.AUTHOR_SELECT_TYPE).ToString()), AuthorSelectType)
+                    Return CType([Enum].Parse(GetType(AuthorSelectType), Settings(ArticleConstants.AUTHOR_SELECT_TYPE).ToString()), AuthorSelectType)
                 Else
                     Return AuthorSelectType.ByDropdown
                 End If
@@ -267,7 +268,7 @@ Namespace Ventrian.NewsArticles
             Get
                 If (Settings.Contains(ArticleConstants.CATEGORY_SORT_SETTING)) Then
                     Try
-                        Return CType(System.Enum.Parse(GetType(CategorySortType), Settings(ArticleConstants.CATEGORY_SORT_SETTING).ToString()), CategorySortType)
+                        Return CType([Enum].Parse(GetType(CategorySortType), Settings(ArticleConstants.CATEGORY_SORT_SETTING).ToString()), CategorySortType)
                     Catch
                         Return ArticleConstants.CATEGORY_SORT_SETTING_DEFAULT
                     End Try
@@ -615,7 +616,7 @@ Namespace Ventrian.NewsArticles
         Public ReadOnly Property ImageThumbnailType() As ThumbnailType
             Get
                 If (Settings.Contains(ArticleConstants.IMAGE_THUMBNAIL_SETTING)) Then
-                    Return CType(System.Enum.Parse(GetType(ThumbnailType), Settings(ArticleConstants.IMAGE_THUMBNAIL_SETTING).ToString()), ThumbnailType)
+                    Return CType([Enum].Parse(GetType(ThumbnailType), Settings(ArticleConstants.IMAGE_THUMBNAIL_SETTING).ToString()), ThumbnailType)
                 Else
                     Return ArticleConstants.DEFAULT_IMAGE_THUMBNAIL
                 End If
@@ -635,7 +636,7 @@ Namespace Ventrian.NewsArticles
         Public ReadOnly Property MatchCategories() As MatchOperatorType
             Get
                 If (Settings.Contains(ArticleConstants.MATCH_OPERATOR_SETTING)) Then
-                    Return CType(System.Enum.Parse(GetType(MatchOperatorType), Settings(ArticleConstants.MATCH_OPERATOR_SETTING).ToString()), MatchOperatorType)
+                    Return CType([Enum].Parse(GetType(MatchOperatorType), Settings(ArticleConstants.MATCH_OPERATOR_SETTING).ToString()), MatchOperatorType)
                 Else
                     Return MatchOperatorType.MatchAny
                 End If
@@ -701,7 +702,7 @@ Namespace Ventrian.NewsArticles
         Public ReadOnly Property MenuPosition() As MenuPositionType
             Get
                 If (Settings.Contains(ArticleConstants.MENU_POSITION_TYPE)) Then
-                    Return CType(System.Enum.Parse(GetType(MenuPositionType), Settings(ArticleConstants.MENU_POSITION_TYPE).ToString()), MenuPositionType)
+                    Return CType([Enum].Parse(GetType(MenuPositionType), Settings(ArticleConstants.MENU_POSITION_TYPE).ToString()), MenuPositionType)
                 Else
                     Return MenuPositionType.Top
                 End If
@@ -861,7 +862,7 @@ Namespace Ventrian.NewsArticles
         Public ReadOnly Property SyndicationLinkType() As SyndicationLinkType
             Get
                 If (Settings.Contains(ArticleConstants.SYNDICATION_LINK_TYPE)) Then
-                    Return CType(System.Enum.Parse(GetType(SyndicationLinkType), Settings(ArticleConstants.SYNDICATION_LINK_TYPE).ToString()), SyndicationLinkType)
+                    Return CType([Enum].Parse(GetType(SyndicationLinkType), Settings(ArticleConstants.SYNDICATION_LINK_TYPE).ToString()), SyndicationLinkType)
                 Else
                     Return SyndicationLinkType.Article
                 End If
@@ -871,7 +872,7 @@ Namespace Ventrian.NewsArticles
         Public ReadOnly Property SyndicationEnclosureType() As SyndicationEnclosureType
             Get
                 If (Settings.Contains(ArticleConstants.SYNDICATION_ENCLOSURE_TYPE)) Then
-                    Return CType(System.Enum.Parse(GetType(SyndicationEnclosureType), Settings(ArticleConstants.SYNDICATION_ENCLOSURE_TYPE).ToString()), SyndicationEnclosureType)
+                    Return CType([Enum].Parse(GetType(SyndicationEnclosureType), Settings(ArticleConstants.SYNDICATION_ENCLOSURE_TYPE).ToString()), SyndicationEnclosureType)
                 Else
                     Return SyndicationEnclosureType.Attachment
                 End If
@@ -952,7 +953,7 @@ Namespace Ventrian.NewsArticles
             Get
                 If (Settings.Contains(ArticleConstants.SEO_URL_MODE_SETTING)) Then
                     Try
-                        Return CType(System.Enum.Parse(GetType(UrlModeType), Settings(ArticleConstants.SEO_URL_MODE_SETTING).ToString()), UrlModeType)
+                        Return CType([Enum].Parse(GetType(UrlModeType), Settings(ArticleConstants.SEO_URL_MODE_SETTING).ToString()), UrlModeType)
                     Catch
                         Return UrlModeType.Shorterned
                     End Try
@@ -996,7 +997,7 @@ Namespace Ventrian.NewsArticles
             Get
                 If (_settings.Contains(ArticleConstants.IMAGE_WATERMARK_IMAGE_POSITION_SETTING)) Then
                     Try
-                        Return CType(System.Enum.Parse(GetType(WatermarkPosition), _settings(ArticleConstants.IMAGE_WATERMARK_IMAGE_POSITION_SETTING).ToString()), WatermarkPosition)
+                        Return CType([Enum].Parse(GetType(WatermarkPosition), _settings(ArticleConstants.IMAGE_WATERMARK_IMAGE_POSITION_SETTING).ToString()), WatermarkPosition)
                     Catch
                         Return ArticleConstants.IMAGE_WATERMARK_IMAGE_POSITION_SETTING_DEFAULT
                     End Try
@@ -1087,7 +1088,7 @@ Namespace Ventrian.NewsArticles
 
         Public ReadOnly Property IsRateable() As Boolean
             Get
-                If (System.Web.HttpContext.Current.Request.IsAuthenticated) Then
+                If (HttpContext.Current.Request.IsAuthenticated) Then
                     Return EnableRatingsAuthenticated
                 Else
                     Return EnableRatingsAnonymous
@@ -1128,7 +1129,7 @@ Namespace Ventrian.NewsArticles
         Public ReadOnly Property DisplayMode() As DisplayType
             Get
                 If (Settings.Contains(ArticleConstants.DISPLAY_MODE)) Then
-                    Return CType(System.Enum.Parse(GetType(DisplayType), Settings(ArticleConstants.DISPLAY_MODE).ToString()), DisplayType)
+                    Return CType([Enum].Parse(GetType(DisplayType), Settings(ArticleConstants.DISPLAY_MODE).ToString()), DisplayType)
                 Else
                     Return DisplayType.FullName
                 End If
@@ -1138,7 +1139,7 @@ Namespace Ventrian.NewsArticles
         Public ReadOnly Property RelatedMode() As RelatedType
             Get
                 If (Settings.Contains(ArticleConstants.RELATED_MODE)) Then
-                    Return CType(System.Enum.Parse(GetType(RelatedType), Settings(ArticleConstants.RELATED_MODE).ToString()), RelatedType)
+                    Return CType([Enum].Parse(GetType(RelatedType), Settings(ArticleConstants.RELATED_MODE).ToString()), RelatedType)
                 Else
                     Return RelatedType.MatchCategoriesAnyTagsAny
                 End If
@@ -1174,7 +1175,7 @@ Namespace Ventrian.NewsArticles
         Public ReadOnly Property TitleReplacement() As TitleReplacementType
             Get
                 If (Settings.Contains(ArticleConstants.TITLE_REPLACEMENT_TYPE)) Then
-                    Return CType(System.Enum.Parse(GetType(TitleReplacementType), Settings(ArticleConstants.TITLE_REPLACEMENT_TYPE).ToString()), TitleReplacementType)
+                    Return CType([Enum].Parse(GetType(TitleReplacementType), Settings(ArticleConstants.TITLE_REPLACEMENT_TYPE).ToString()), TitleReplacementType)
                 Else
                     Return TitleReplacementType.Dash
                 End If
@@ -1204,7 +1205,7 @@ Namespace Ventrian.NewsArticles
         Public ReadOnly Property TextEditorSummaryMode() As TextEditorModeType
             Get
                 If (Settings.Contains(ArticleConstants.TEXT_EDITOR_SUMMARY_MODE)) Then
-                    Return CType(System.Enum.Parse(GetType(TextEditorModeType), Settings(ArticleConstants.TEXT_EDITOR_SUMMARY_MODE).ToString()), TextEditorModeType)
+                    Return CType([Enum].Parse(GetType(TextEditorModeType), Settings(ArticleConstants.TEXT_EDITOR_SUMMARY_MODE).ToString()), TextEditorModeType)
                 Else
                     Return TextEditorModeType.Rich
                 End If
@@ -1267,16 +1268,13 @@ Namespace Ventrian.NewsArticles
                     If (IsNumeric(Settings(ArticleConstants.SERVER_TIMEZONE).ToString())) Then
                         Return Convert.ToInt32(Settings(ArticleConstants.SERVER_TIMEZONE).ToString())
                     Else
-                        Return _portalSettings.TimeZoneOffset
+                        Return _portalSettings.TimeZone.GetUtcOffset(DateTime.Now).TotalHours
                     End If
                 Else
-                    Return _portalSettings.TimeZoneOffset
+                    Return _portalSettings.TimeZone.GetUtcOffset(DateTime.Now).TotalHours
                 End If
             End Get
         End Property
-
-
-
 
         Public ReadOnly Property TemplatePath() As String
             Get
@@ -1324,7 +1322,7 @@ Namespace Ventrian.NewsArticles
 
         Public ReadOnly Property IsCategoriesEnabled() As Boolean
             Get
-                If (System.Web.HttpContext.Current.Request.IsAuthenticated = False) Then
+                If (HttpContext.Current.Request.IsAuthenticated = False) Then
                     Return False
                 End If
 
@@ -1338,7 +1336,7 @@ Namespace Ventrian.NewsArticles
 
         Public ReadOnly Property IsExcerptEnabled() As Boolean
             Get
-                If (System.Web.HttpContext.Current.Request.IsAuthenticated = False) Then
+                If (HttpContext.Current.Request.IsAuthenticated = False) Then
                     Return False
                 End If
 
@@ -1352,7 +1350,7 @@ Namespace Ventrian.NewsArticles
 
         Public ReadOnly Property IsImagesEnabled() As Boolean
             Get
-                If (System.Web.HttpContext.Current.Request.IsAuthenticated = False) Then
+                If (HttpContext.Current.Request.IsAuthenticated = False) Then
                     Return False
                 End If
 
@@ -1366,7 +1364,7 @@ Namespace Ventrian.NewsArticles
 
         Public ReadOnly Property IsFilesEnabled() As Boolean
             Get
-                If (System.Web.HttpContext.Current.Request.IsAuthenticated = False) Then
+                If (HttpContext.Current.Request.IsAuthenticated = False) Then
                     Return False
                 End If
 
@@ -1380,7 +1378,7 @@ Namespace Ventrian.NewsArticles
 
         Public ReadOnly Property IsLinkEnabled() As Boolean
             Get
-                If (System.Web.HttpContext.Current.Request.IsAuthenticated = False) Then
+                If (HttpContext.Current.Request.IsAuthenticated = False) Then
                     Return False
                 End If
 
@@ -1394,7 +1392,7 @@ Namespace Ventrian.NewsArticles
 
         Public ReadOnly Property IsFeaturedEnabled() As Boolean
             Get
-                If (System.Web.HttpContext.Current.Request.IsAuthenticated = False) Then
+                If (HttpContext.Current.Request.IsAuthenticated = False) Then
                     Return False
                 End If
 
@@ -1408,7 +1406,7 @@ Namespace Ventrian.NewsArticles
 
         Public ReadOnly Property IsSecureEnabled() As Boolean
             Get
-                If (System.Web.HttpContext.Current.Request.IsAuthenticated = False) Then
+                If (HttpContext.Current.Request.IsAuthenticated = False) Then
                     Return False
                 End If
 
@@ -1422,7 +1420,7 @@ Namespace Ventrian.NewsArticles
 
         Public ReadOnly Property IsPublishEnabled() As Boolean
             Get
-                If (System.Web.HttpContext.Current.Request.IsAuthenticated = False) Then
+                If (HttpContext.Current.Request.IsAuthenticated = False) Then
                     Return False
                 End If
 
@@ -1436,7 +1434,7 @@ Namespace Ventrian.NewsArticles
 
         Public ReadOnly Property IsExpiryEnabled() As Boolean
             Get
-                If (System.Web.HttpContext.Current.Request.IsAuthenticated = False) Then
+                If (HttpContext.Current.Request.IsAuthenticated = False) Then
                     Return False
                 End If
 
@@ -1450,7 +1448,7 @@ Namespace Ventrian.NewsArticles
 
         Public ReadOnly Property IsMetaEnabled() As Boolean
             Get
-                If (System.Web.HttpContext.Current.Request.IsAuthenticated = False) Then
+                If (HttpContext.Current.Request.IsAuthenticated = False) Then
                     Return False
                 End If
 
@@ -1467,7 +1465,7 @@ Namespace Ventrian.NewsArticles
 
         Public ReadOnly Property IsCustomEnabled() As Boolean
             Get
-                If (System.Web.HttpContext.Current.Request.IsAuthenticated = False) Then
+                If (HttpContext.Current.Request.IsAuthenticated = False) Then
                     Return False
                 End If
 
@@ -1484,7 +1482,7 @@ Namespace Ventrian.NewsArticles
 
         Public ReadOnly Property IsAutoApprover() As Boolean
             Get
-                If (System.Web.HttpContext.Current.Request.IsAuthenticated = False) Then
+                If (HttpContext.Current.Request.IsAuthenticated = False) Then
                     Return False
                 End If
 
@@ -1502,7 +1500,7 @@ Namespace Ventrian.NewsArticles
 
         Public ReadOnly Property IsAutoApproverComment() As Boolean
             Get
-                If (System.Web.HttpContext.Current.Request.IsAuthenticated = False) Then
+                If (HttpContext.Current.Request.IsAuthenticated = False) Then
                     Return False
                 End If
 
@@ -1520,7 +1518,7 @@ Namespace Ventrian.NewsArticles
 
         Public ReadOnly Property IsAutoFeatured() As Boolean
             Get
-                If (System.Web.HttpContext.Current.Request.IsAuthenticated = False) Then
+                If (HttpContext.Current.Request.IsAuthenticated = False) Then
                     Return False
                 End If
 
@@ -1528,7 +1526,7 @@ Namespace Ventrian.NewsArticles
 
                     For Each role As String In Settings(ArticleConstants.PERMISSION_AUTO_FEATURE_SETTING).ToString().Split(New Char() {";"c})
                         If (role <> "") Then
-                            If (UserController.GetCurrentUserInfo.IsInRole(role)) Then
+                            If (UserController.Instance.GetCurrentUserInfo.IsInRole(role)) Then
                                 Return True
                             End If
                         End If
@@ -1542,7 +1540,7 @@ Namespace Ventrian.NewsArticles
 
         Public ReadOnly Property IsAutoSecured() As Boolean
             Get
-                If (System.Web.HttpContext.Current.Request.IsAuthenticated = False) Then
+                If (HttpContext.Current.Request.IsAuthenticated = False) Then
                     Return False
                 End If
 
@@ -1550,7 +1548,7 @@ Namespace Ventrian.NewsArticles
 
                     For Each role As String In Settings(ArticleConstants.PERMISSION_AUTO_SECURE_SETTING).ToString().Split(New Char() {";"c})
                         If (role <> "") Then
-                            If (UserController.GetCurrentUserInfo.IsInRole(role)) Then
+                            If (UserController.Instance.GetCurrentUserInfo.IsInRole(role)) Then
                                 Return True
                             End If
                         End If
@@ -1564,7 +1562,7 @@ Namespace Ventrian.NewsArticles
 
         Public ReadOnly Property IsSubmitter() As Boolean
             Get
-                If (System.Web.HttpContext.Current.Request.IsAuthenticated = False) Then
+                If (HttpContext.Current.Request.IsAuthenticated = False) Then
                     Return False
                 End If
 
@@ -1582,14 +1580,14 @@ Namespace Ventrian.NewsArticles
 
         Public ReadOnly Property IsAdmin() As Boolean
             Get
-                If (System.Web.HttpContext.Current.Request.IsAuthenticated = False) Then
+                If (HttpContext.Current.Request.IsAuthenticated = False) Then
                     Return False
                 End If
 
-                Dim blnHasModuleEditPermissions As Boolean = PortalSecurity.IsInRoles(_moduleConfiguration.AuthorizedEditRoles)
+                Dim blnHasModuleEditPermissions As Boolean = ModulePermissionController.CanAdminModule(_moduleConfiguration)
 
                 If (blnHasModuleEditPermissions = False) Then
-                    blnHasModuleEditPermissions = PortalSecurity.IsInRoles(_portalSettings.ActiveTab.AdministratorRoles)
+                    blnHasModuleEditPermissions = ModulePermissionController.CanEditModuleContent(_moduleConfiguration)
                 End If
 
                 If (blnHasModuleEditPermissions = False) Then

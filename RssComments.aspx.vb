@@ -41,19 +41,19 @@ Namespace Ventrian.NewsArticles
                         Case "PORTALEMAIL"
                             Dim objLiteral As New Literal
                             objLiteral.ID = Globals.CreateValidID("Rss-" & iPtr.ToString())
-                            objLiteral.Text = PortalController.GetCurrentPortalSettings().Email
+                            objLiteral.Text = PortalController.Instance.GetCurrentPortalSettings().Email
                             objPlaceHolder.Add(objLiteral)
 
                         Case "PORTALNAME"
                             Dim objLiteral As New Literal
                             objLiteral.ID = Globals.CreateValidID("Rss-" & iPtr.ToString())
-                            objLiteral.Text = Server.HtmlEncode(PortalController.GetCurrentPortalSettings().PortalName)
+                            objLiteral.Text = Server.HtmlEncode(PortalController.Instance.GetCurrentPortalSettings().PortalName)
                             objPlaceHolder.Add(objLiteral)
 
                         Case "PORTALURL"
                             Dim objLiteral As New Literal
                             objLiteral.ID = Globals.CreateValidID("Rss-" & iPtr.ToString())
-                            objLiteral.Text = Server.HtmlEncode(AddHTTP(PortalController.GetCurrentPortalSettings().PortalAlias.HTTPAlias))
+                            objLiteral.Text = Server.HtmlEncode(AddHTTP(PortalController.Instance.GetCurrentPortalSettings().PortalAlias.HTTPAlias))
                             objPlaceHolder.Add(objLiteral)
 
                     End Select
@@ -66,7 +66,7 @@ Namespace Ventrian.NewsArticles
 
         Private Sub ProcessItem(ByRef objPlaceHolder As ControlCollection, ByVal templateArray As String(), ByVal objArticle As ArticleInfo, ByVal objComment As CommentInfo, ByVal articleSettings As ArticleSettings)
 
-            Dim portalSettings As PortalSettings = PortalController.GetCurrentPortalSettings()
+            Dim portalSettings As PortalSettings = PortalController.Instance.GetCurrentPortalSettings()
 
             For iPtr As Integer = 0 To templateArray.Length - 1 Step 2
 

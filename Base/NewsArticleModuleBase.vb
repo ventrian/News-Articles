@@ -16,6 +16,7 @@ Imports DotNetNuke.Common
 Imports DotNetNuke.Common.Utilities
 Imports DotNetNuke.Entities.Modules
 Imports DotNetNuke.Security
+Imports DotNetNuke.Security.Permissions
 Imports DotNetNuke.Services.Localization
 
 Namespace Ventrian.NewsArticles.Base
@@ -354,7 +355,7 @@ Namespace Ventrian.NewsArticles.Base
 
                 ' Admin of Module
                 '
-                If (PortalSecurity.HasEditPermissions(objModule.ModulePermissions)) Then
+                If (ModulePermissionController.HasModuleAccess(SecurityAccessLevel.Edit, "EDIT" , objModule)) Then
 
                     Return True
 

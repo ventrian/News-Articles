@@ -314,7 +314,7 @@ Namespace Ventrian.NewsArticles
 						If (moduleContext.ArticleSettings.AuthorUsernameParam <> "") Then
 							If (HttpContext.Current.Request(moduleContext.ArticleSettings.AuthorUsernameParam) <> "") Then
 								Try
-									Dim objUser As Entities.Users.UserInfo = Entities.Users.UserController.GetUserByName(PortalController.GetCurrentPortalSettings().PortalId, HttpContext.Current.Request.QueryString(moduleContext.ArticleSettings.AuthorUsernameParam))
+									Dim objUser As Entities.Users.UserInfo = Entities.Users.UserController.GetUserByName(PortalController.Instance.GetCurrentPortalSettings().PortalId, HttpContext.Current.Request.QueryString(moduleContext.ArticleSettings.AuthorUsernameParam))
 									If (objUser IsNot Nothing) Then
 										authorIDParam = "&amp;AuthorID=" & objUser.UserID.ToString()
 									End If

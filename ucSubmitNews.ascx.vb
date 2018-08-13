@@ -249,7 +249,7 @@ Namespace Ventrian.NewsArticles
                 chkFeatured.Checked = ArticleSettings.IsAutoFeatured
                 chkSecure.Checked = ArticleSettings.IsAutoSecured
                 If (ArticleSettings.AuthorDefault <> Null.NullInteger) Then
-                    Dim objUser As UserInfo = UserController.GetUser(PortalId, ArticleSettings.AuthorDefault, True)
+                    Dim objUser As UserInfo = UserController.Instance.GetUser(PortalId, ArticleSettings.AuthorDefault)
 
                     If (objUser IsNot Nothing) Then
                         lblAuthor.Text = objUser.Username
@@ -389,8 +389,8 @@ Namespace Ventrian.NewsArticles
                         Dim objRole As DotNetNuke.Security.Roles.RoleInfo = objRoleController.GetRoleByName(PortalSettings.PortalId, role)
 
                         If Not (objRole Is Nothing) Then
-                            Dim objUsers As ArrayList = objRoleController.GetUserRolesByRoleName(PortalSettings.PortalId, objRole.RoleName)
-                            For Each objUser As DotNetNuke.Entities.Users.UserRoleInfo In objUsers
+                            Dim objUsers As List(Of UserInfo) = RoleController.Instance.GetUsersByRole(PortalSettings.PortalId, objRole.RoleName)
+                            For Each objUser As UserInfo In objUsers
                                 If (userIDs.Contains(objUser.UserID) = False) Then
                                     Dim objUserController As DotNetNuke.Entities.Users.UserController = New DotNetNuke.Entities.Users.UserController
                                     Dim objSelectedUser As DotNetNuke.Entities.Users.UserInfo = objUserController.GetUser(PortalSettings.PortalId, objUser.UserID)
@@ -599,8 +599,7 @@ Namespace Ventrian.NewsArticles
                     If (objSettingsLinked.ContainsKey(ArticleConstants.DEFAULT_FILES_FOLDER_SETTING)) Then
                         If (IsNumeric(objSettingsLinked(ArticleConstants.DEFAULT_FILES_FOLDER_SETTING))) Then
                             Dim folderID As Integer = Convert.ToInt32(objSettingsLinked(ArticleConstants.DEFAULT_FILES_FOLDER_SETTING))
-                            Dim objFolderController As New FolderController
-                            Dim objFolder As FolderInfo = objFolderController.GetFolderInfo(Convert.ToInt32(drpMirrorModule.SelectedValue.Split("-"c)(0)), folderID)
+                            Dim objFolder As FolderInfo = FolderManager.Instance.GetFolder(folderID)
                             If (objFolder IsNot Nothing) Then
                                 folderLinked = objFolder.FolderPath
                             End If
@@ -619,8 +618,7 @@ Namespace Ventrian.NewsArticles
                     If (objSettings.ContainsKey(ArticleConstants.DEFAULT_FILES_FOLDER_SETTING)) Then
                         If (IsNumeric(objSettings(ArticleConstants.DEFAULT_FILES_FOLDER_SETTING))) Then
                             Dim folderID As Integer = Convert.ToInt32(objSettings(ArticleConstants.DEFAULT_FILES_FOLDER_SETTING))
-                            Dim objFolderController As New FolderController
-                            Dim objFolder As FolderInfo = objFolderController.GetFolderInfo(PortalId, folderID)
+                            Dim objFolder As FolderInfo = FolderManager.Instance.GetFolder(folderID)
                             If (objFolder IsNot Nothing) Then
                                 folder = objFolder.FolderPath
                             End If
@@ -667,8 +665,7 @@ Namespace Ventrian.NewsArticles
                     If (objSettingsLinked.ContainsKey(ArticleConstants.DEFAULT_IMAGES_FOLDER_SETTING)) Then
                         If (IsNumeric(objSettingsLinked(ArticleConstants.DEFAULT_IMAGES_FOLDER_SETTING))) Then
                             Dim folderID As Integer = Convert.ToInt32(objSettingsLinked(ArticleConstants.DEFAULT_IMAGES_FOLDER_SETTING))
-                            Dim objFolderController As New FolderController
-                            Dim objFolder As FolderInfo = objFolderController.GetFolderInfo(Convert.ToInt32(drpMirrorModule.SelectedValue.Split("-"c)(0)), folderID)
+                            Dim objFolder As FolderInfo = FolderManager.Instance.GetFolder(folderID)
                             If (objFolder IsNot Nothing) Then
                                 folderImagesLinked = objFolder.FolderPath
                             End If
@@ -682,8 +679,7 @@ Namespace Ventrian.NewsArticles
                     If (objSettings.ContainsKey(ArticleConstants.DEFAULT_IMAGES_FOLDER_SETTING)) Then
                         If (IsNumeric(objSettings(ArticleConstants.DEFAULT_IMAGES_FOLDER_SETTING))) Then
                             Dim folderID As Integer = Convert.ToInt32(objSettings(ArticleConstants.DEFAULT_IMAGES_FOLDER_SETTING))
-                            Dim objFolderController As New FolderController
-                            Dim objFolder As FolderInfo = objFolderController.GetFolderInfo(PortalId, folderID)
+                            Dim objFolder As FolderInfo = FolderManager.Instance.GetFolder(folderID)
                             If (objFolder IsNot Nothing) Then
                                 folderImages = objFolder.FolderPath
                             End If
@@ -968,8 +964,7 @@ Namespace Ventrian.NewsArticles
                                     If (objSettingsLinked.ContainsKey(ArticleConstants.DEFAULT_FILES_FOLDER_SETTING)) Then
                                         If (IsNumeric(objSettingsLinked(ArticleConstants.DEFAULT_FILES_FOLDER_SETTING))) Then
                                             Dim folderID As Integer = Convert.ToInt32(objSettingsLinked(ArticleConstants.DEFAULT_FILES_FOLDER_SETTING))
-                                            Dim objFolderController As New FolderController
-                                            Dim objFolder As FolderInfo = objFolderController.GetFolderInfo(objArticleMirrored.ModuleID, folderID)
+                                            Dim objFolder As FolderInfo = FolderManager.Instance.GetFolder(folderID)
                                             If (objFolder IsNot Nothing) Then
                                                 folderLinked = objFolder.FolderPath
                                             End If
@@ -988,8 +983,7 @@ Namespace Ventrian.NewsArticles
                                     If (objSettings.ContainsKey(ArticleConstants.DEFAULT_FILES_FOLDER_SETTING)) Then
                                         If (IsNumeric(objSettings(ArticleConstants.DEFAULT_FILES_FOLDER_SETTING))) Then
                                             Dim folderID As Integer = Convert.ToInt32(objSettings(ArticleConstants.DEFAULT_FILES_FOLDER_SETTING))
-                                            Dim objFolderController As New FolderController
-                                            Dim objFolder As FolderInfo = objFolderController.GetFolderInfo(PortalId, folderID)
+                                            Dim objFolder As FolderInfo = FolderManager.Instance.GetFolder(folderID)
                                             If (objFolder IsNot Nothing) Then
                                                 folder = objFolder.FolderPath
                                             End If
@@ -1035,8 +1029,7 @@ Namespace Ventrian.NewsArticles
                                     If (objSettingsLinked.ContainsKey(ArticleConstants.DEFAULT_IMAGES_FOLDER_SETTING)) Then
                                         If (IsNumeric(objSettingsLinked(ArticleConstants.DEFAULT_IMAGES_FOLDER_SETTING))) Then
                                             Dim folderID As Integer = Convert.ToInt32(objSettingsLinked(ArticleConstants.DEFAULT_IMAGES_FOLDER_SETTING))
-                                            Dim objFolderController As New FolderController
-                                            Dim objFolder As FolderInfo = objFolderController.GetFolderInfo(objArticleMirrored.ModuleID, folderID)
+                                            Dim objFolder As FolderInfo = FolderManager.Instance.GetFolder(folderID)
                                             If (objFolder IsNot Nothing) Then
                                                 folderImagesLinked = objFolder.FolderPath
                                             End If
@@ -1050,8 +1043,7 @@ Namespace Ventrian.NewsArticles
                                     If (objSettings.ContainsKey(ArticleConstants.DEFAULT_IMAGES_FOLDER_SETTING)) Then
                                         If (IsNumeric(objSettings(ArticleConstants.DEFAULT_IMAGES_FOLDER_SETTING))) Then
                                             Dim folderID As Integer = Convert.ToInt32(objSettings(ArticleConstants.DEFAULT_IMAGES_FOLDER_SETTING))
-                                            Dim objFolderController As New FolderController
-                                            Dim objFolder As FolderInfo = objFolderController.GetFolderInfo(PortalId, folderID)
+                                            Dim objFolder As FolderInfo = FolderManager.Instance.GetFolder(folderID)
                                             If (objFolder IsNot Nothing) Then
                                                 folderImages = objFolder.FolderPath
                                             End If

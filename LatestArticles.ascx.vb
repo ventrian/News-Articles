@@ -120,7 +120,7 @@ Namespace Ventrian.NewsArticles
             Get
                 If (_serverTimeZone = Null.NullInteger) Then
 
-                    _serverTimeZone = PortalSettings.TimeZoneOffset
+                    _serverTimeZone = PortalSettings.TimeZone.GetUtcOffset(DateTime.Now).TotalHours
 
                     Dim objModuleSettingController As New ModuleController
                     Dim newsSettings As Hashtable = Common.GetModuleSettings(_articleModuleID)

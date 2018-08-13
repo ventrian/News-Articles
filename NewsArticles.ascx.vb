@@ -176,7 +176,7 @@ Namespace Ventrian.NewsArticles
 
             Try
 
-                jQuery.RegisterJQuery(Page)
+                'jQuery.RegisterJQuery(Page)
 
             Catch exc As Exception    'Module failed to load
                 ProcessModuleLoadException(Me, exc)

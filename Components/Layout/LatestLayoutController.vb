@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 
 Imports DotNetNuke.Common.Utilities
+Imports DotNetNuke.Services.Cache
 
 Namespace Ventrian.NewsArticles
 
@@ -129,7 +130,7 @@ Namespace Ventrian.NewsArticles
                 objLayout.Template = File.ReadAllText(filePath)
                 objLayout.Tokens = objLayout.Template.Split(delimiter)
 
-                DataCache.SetCache(cacheKey, objLayout, New CacheDependency(filePath))
+                DataCache.SetCache(cacheKey, objLayout, New DNNCacheDependency(filePath))
 
             End If
 

@@ -31,7 +31,7 @@ Namespace Ventrian.NewsArticles
             formatted = formatted.Replace("[EMAIL]", objArticle.AuthorEmail)
             formatted = formatted.Replace("[DISPLAYNAME]", objArticle.AuthorDisplayName)
 
-            Dim settings As PortalSettings = PortalController.GetCurrentPortalSettings()
+            Dim settings As PortalSettings = PortalController.Instance.GetCurrentPortalSettings()
 
             formatted = formatted.Replace("[PORTALNAME]", settings.PortalName)
             formatted = formatted.Replace("[CREATEDATE]", objArticle.CreatedDate.ToString("d") & " " & objArticle.CreatedDate.ToString("t"))
@@ -67,7 +67,7 @@ Namespace Ventrian.NewsArticles
                 formatted = formatted.Replace("[DISPLAYNAME]", objComment.AuthorDisplayName)
             End If
 
-            Dim settings As PortalSettings = PortalController.GetCurrentPortalSettings()
+            Dim settings As PortalSettings = PortalController.Instance.GetCurrentPortalSettings()
 
             formatted = formatted.Replace("[PORTALNAME]", settings.PortalName)
             formatted = formatted.Replace("[POSTDATE]", DateTime.Now.ToShortDateString & " " & DateTime.Now.ToShortTimeString)
@@ -99,8 +99,8 @@ Namespace Ventrian.NewsArticles
                         Dim objRole As RoleInfo = objRoleController.GetRoleByName(settings.PortalId, role)
 
                         If Not (objRole Is Nothing) Then
-                            Dim objUsers As ArrayList = objRoleController.GetUserRolesByRoleName(settings.PortalId, objRole.RoleName)
-                            For Each objUser As UserRoleInfo In objUsers
+                            Dim lstUsers As List(Of UserInfo) = RoleController.Instance.GetUsersByRole(settings.PortalId, objRole.RoleName)
+                            For Each objUser As UserInfo In lstUsers
                                 If (userList.Contains(objUser.UserID) = False) Then
                                     Dim objUserController As UserController = New UserController
                                     Dim objSelectedUser As UserInfo = objUserController.GetUser(settings.PortalId, objUser.UserID)
@@ -250,7 +250,7 @@ Namespace Ventrian.NewsArticles
 
         Public Sub SendFormattedEmail(ByVal moduleID As Integer, ByVal link As String, ByVal objArticle As ArticleInfo, ByVal type As EmailTemplateType, ByVal sendTo As String, ByVal articleSettings As ArticleSettings)
 
-            Dim settings As PortalSettings = PortalController.GetCurrentPortalSettings()
+            Dim settings As PortalSettings = PortalController.Instance.GetCurrentPortalSettings()
 
             Dim subject As String = ""
             Dim template As String = ""
@@ -296,7 +296,7 @@ Namespace Ventrian.NewsArticles
 
         Public Sub SendFormattedEmail(ByVal moduleID As Integer, ByVal link As String, ByVal objArticle As ArticleInfo, ByVal objComment As CommentInfo, ByVal type As EmailTemplateType, ByVal articleSettings As ArticleSettings)
 
-            Dim settings As PortalSettings = PortalController.GetCurrentPortalSettings()
+            Dim settings As PortalSettings = PortalController.Instance.GetCurrentPortalSettings()
 
             Dim sendTo As String = ""
 
@@ -308,7 +308,7 @@ Namespace Ventrian.NewsArticles
                     Dim objUser As UserInfo = objUserController.GetUser(settings.PortalId, objArticle.AuthorID)
 
                     If Not (objUser Is Nothing) Then
-                        sendTo = objUser.Membership.Email
+                        sendTo = objUser.Email
                         SendFormattedEmail(moduleID, link, objArticle, objComment, EmailTemplateType.CommentNotification, articleSettings, sendTo)
                     End If
 
@@ -321,7 +321,7 @@ Namespace Ventrian.NewsArticles
                         Dim objUser As UserInfo = objUserController.GetUser(settings.PortalId, objComment.UserID)
 
                         If Not (objUser Is Nothing) Then
-                            sendTo = objUser.Membership.Email
+                            sendTo = objUser.Email
                             SendFormattedEmail(moduleID, link, objArticle, objComment, EmailTemplateType.CommentApproved, articleSettings, sendTo)
                         End If
                     Else
@@ -336,7 +336,7 @@ Namespace Ventrian.NewsArticles
                     Dim objUser As UserInfo = objUserController.GetUser(settings.PortalId, objArticle.AuthorID)
 
                     If Not (objUser Is Nothing) Then
-                        sendTo = objUser.Membership.Email
+                        sendTo = objUser.Email
                         SendFormattedEmail(moduleID, link, objArticle, objComment, EmailTemplateType.CommentRequiringApproval, articleSettings, sendTo)
                     End If
 
@@ -351,7 +351,7 @@ Namespace Ventrian.NewsArticles
 
         Public Sub SendFormattedEmail(ByVal moduleID As Integer, ByVal link As String, ByVal objArticle As ArticleInfo, ByVal objComment As CommentInfo, ByVal type As EmailTemplateType, ByVal articleSettings As ArticleSettings, ByVal email As String)
 
-            Dim settings As PortalSettings = PortalController.GetCurrentPortalSettings()
+            Dim settings As PortalSettings = PortalController.Instance.GetCurrentPortalSettings()
 
             Dim subject As String = ""
             Dim template As String = ""
