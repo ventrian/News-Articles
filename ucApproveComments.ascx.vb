@@ -59,7 +59,7 @@ Namespace Ventrian.NewsArticles
 
                     Dim sendTo As String = ""
                     If Not (objUser Is Nothing) Then
-                        sendTo = objUser.Membership.Email
+                        sendTo = objUser.Email
                     End If
                     objEventLog.AddLog("News Articles Email Failure", "Failure to send [Author Comment] to '" & sendTo & "' from '" & Me.PortalSettings.Email, PortalSettings, -1, DotNetNuke.Services.Log.EventLog.EventLogController.EventLogType.ADMIN_ALERT)
                 End Try

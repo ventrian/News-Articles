@@ -4,6 +4,8 @@ Imports DotNetNuke.Security
 
 Imports Ventrian.NewsArticles.Base
 Imports DotNetNuke.Entities.Portals
+Imports DotNetNuke.Security.Permissions
+Imports DotNetNuke.Services.FileSystem
 
 Namespace Ventrian.NewsArticles.Controls
 
@@ -21,7 +23,7 @@ Namespace Ventrian.NewsArticles.Controls
 
 #Region " Private Properties "
 
-		Private ReadOnly Property ArticleModuleBase() As NewsArticleModuleBase
+		Private Overloads ReadOnly Property ArticleModuleBase() As NewsArticleModuleBase
 			Get
 				Return CType(Parent.Parent.Parent.Parent.Parent, NewsArticleModuleBase)
 			End Get
@@ -91,18 +93,19 @@ Namespace Ventrian.NewsArticles.Controls
 
 			drpUploadFilesFolder.Items.Clear()
 
-			Dim folders As ArrayList = FileSystemUtils.GetFolders(ArticleModuleBase.PortalId)
+			Dim folders As IEnumerable(Of FolderInfo) = FolderManager.Instance.GetFolders(ArticleModuleBase.PortalId)
             For Each folder As DotNetNuke.Services.FileSystem.FolderInfo In folders
                 If Not folder.IsProtected Then
+                    Dim folderPermissions as FolderPermissionCollection = FolderPermissionController.GetFolderPermissionsCollectionByFolder(ArticleModuleBase.PortalId,folder.FolderPath)
                     Dim FolderItem As New ListItem()
                     If folder.FolderPath = Null.NullString Then
                         FolderItem.Text = ArticleModuleBase.GetSharedResource("Root")
-                        ReadRoles = FileSystemUtils.GetRoles("", ArticleModuleBase.PortalId, "READ")
-                        WriteRoles = FileSystemUtils.GetRoles("", ArticleModuleBase.PortalId, "WRITE")
+                        ReadRoles = folderPermissions.ToString("READ")
+                        WriteRoles = folderPermissions.ToString("WRITE")
                     Else
                         FolderItem.Text = folder.FolderPath
-                        ReadRoles = FileSystemUtils.GetRoles(FolderItem.Text, ArticleModuleBase.PortalId, "READ")
-                        WriteRoles = FileSystemUtils.GetRoles(FolderItem.Text, ArticleModuleBase.PortalId, "WRITE")
+                        ReadRoles = folderPermissions.ToString("READ")
+                        WriteRoles = folderPermissions.ToString("WRITE")
                     End If
                     FolderItem.Value = folder.FolderID
 
@@ -242,7 +245,7 @@ Namespace Ventrian.NewsArticles.Controls
 
 		End Sub
 
-		Protected Sub cmdRefreshPhotos_Click(ByVal sender As Object, ByVal e As EventArgs) Handles cmdRefreshFiles.Click
+		Protected Sub cmdRefreshPhotos_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles cmdRefreshFiles.Click
 
 			Try
 
@@ -409,7 +412,7 @@ Namespace Ventrian.NewsArticles.Controls
 
 		End Sub
 
-		Protected Sub cmdAddExistingFile_Click(ByVal sender As Object, ByVal e As EventArgs) Handles cmdAddExistingFile.Click
+		Protected Sub cmdAddExistingFile_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles cmdAddExistingFile.Click
 
 			Try
 
@@ -417,8 +420,7 @@ Namespace Ventrian.NewsArticles.Controls
 					If (ctlFile.Url.ToLower().StartsWith("fileid=")) Then
 						If (IsNumeric(ctlFile.Url.ToLower().Replace("fileid=", ""))) Then
 							Dim fileID As Integer = Convert.ToInt32(ctlFile.Url.ToLower().Replace("fileid=", ""))
-							Dim objDnnFileController As New DotNetNuke.Services.FileSystem.FileController
-							Dim objDnnFile As DotNetNuke.Services.FileSystem.FileInfo = objDnnFileController.GetFileById(fileID, ArticleModuleBase.PortalId)
+							Dim objDnnFile As DotNetNuke.Services.FileSystem.FileInfo = FileManager.Instance.GetFile(fileID)
 							If (objDnnFile IsNot Nothing) Then
 
 								Dim objFileController As New FileController
@@ -455,7 +457,7 @@ Namespace Ventrian.NewsArticles.Controls
 
 		End Sub
 
-		Protected Sub btUpload_Click(sender As Object, e As EventArgs)
+		Protected Sub btUpload_Click(sender As Object, e As System.EventArgs)
 			Dim objFileController As New FileController
 			Dim objPortalController As New PortalController()
 

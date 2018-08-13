@@ -25,6 +25,16 @@ Namespace Ventrian.NewsArticles
     Partial Public Class ucViewOptions
         Inherits NewsArticleModuleBase
 
+                
+        '''<summary>
+        '''ctlWatermarkImage control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents ctlWatermarkImage As DotNetNuke.UI.UserControls.UrlControl
+
 #Region " Private Methods "
 
         Public Class ListItemComparer

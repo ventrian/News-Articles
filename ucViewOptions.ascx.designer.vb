@@ -1860,15 +1860,6 @@ Namespace Ventrian.NewsArticles
         Protected WithEvents plWatermarkImage As Global.System.Web.UI.UserControl
         
         '''<summary>
-        '''ctlWatermarkImage control.
-        '''</summary>
-        '''<remarks>
-        '''Auto-generated field.
-        '''To modify move field declaration from designer file to code-behind file.
-        '''</remarks>
-        Protected WithEvents ctlWatermarkImage As Global.System.Web.UI.UserControl
-        
-        '''<summary>
         '''plWatermarkPosition control.
         '''</summary>
         '''<remarks>

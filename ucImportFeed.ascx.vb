@@ -83,7 +83,7 @@ Namespace Ventrian.NewsArticles
                     End If
                     drpAutoExpire.SelectedValue = Convert.ToInt32(objFeed.AutoExpireUnit).ToString()
 
-                    Dim objUser As UserInfo = UserController.GetUser(PortalId, objFeed.UserID, True)
+                    Dim objUser As UserInfo = UserController.Instance.GetUser(PortalId, objFeed.UserID)
                     If (objUser IsNot Nothing) Then
                         lblAuthor.Text = objUser.Username
                     Else
