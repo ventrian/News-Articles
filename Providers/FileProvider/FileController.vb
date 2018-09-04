@@ -25,7 +25,7 @@ Namespace Ventrian.NewsArticles
 
         Public Function [Get](ByVal fileID As Integer) As FileInfo
 
-            Return CType(CBO.FillObject(DataProvider.Instance().GetFile(fileID), GetType(FileInfo)), FileInfo)
+            Return CBO.FillObject(Of FileInfo)(DataProvider.Instance().GetFile(fileID))
 
         End Function
 

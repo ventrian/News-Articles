@@ -30,7 +30,7 @@ Namespace Ventrian.NewsArticles
 
             Dim objArticles As New List(Of ArticleInfo)
             While dr.Read
-                objArticles.Add(CType(CBO.FillObject(dr, GetType(ArticleInfo), False), ArticleInfo))
+                objArticles.Add(CBO.FillObject(Of ArticleInfo)(dr, False))
             End While
 
             Dim nextResult As Boolean = dr.NextResult()
@@ -124,7 +124,7 @@ Namespace Ventrian.NewsArticles
             Dim objArticle As ArticleInfo = CType(DataCache.GetCache(cacheKey), ArticleInfo)
 
             If (objArticle Is Nothing) Then
-                objArticle = CType(CBO.FillObject(DataProvider.Instance().GetArticle(articleID), GetType(ArticleInfo)), ArticleInfo)
+                objArticle = CBO.FillObject(Of ArticleInfo)(DataProvider.Instance().GetArticle(articleID))
                 If (objArticle Is Nothing) Then
                     Return Nothing
                 End If

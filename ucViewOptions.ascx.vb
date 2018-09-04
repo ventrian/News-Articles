@@ -5,6 +5,7 @@
 '
 
 Imports System.IO
+Imports System.Linq
 
 Imports DotNetNuke.Common.Utilities
 Imports DotNetNuke.Entities.Modules
@@ -72,13 +73,12 @@ Namespace Ventrian.NewsArticles
 
         Private Sub BindRoles()
 
-            Dim objRole As New RoleController
-
             Dim availableRoles As ArrayList = New ArrayList
-            Dim roles As ArrayList
+            Dim roles As IList(Of RoleInfo)
             If (drpSecurityRoleGroups.SelectedValue = "-1") Then
-                roles = objRole.GetPortalRoles(PortalId)
+                roles = RoleController.Instance.GetRoles(PortalId)
             Else
+                Dim objRole As New RoleController
                 roles = objRole.GetRolesByGroup(PortalId, Convert.ToInt32(drpSecurityRoleGroups.SelectedValue))
             End If
 
@@ -1473,10 +1473,9 @@ Namespace Ventrian.NewsArticles
                                                     If (add) Then
                                                         Dim objListItem As New ListItem
                                                         objListItem.Value = objPortal.PortalID.ToString() & "-" & objTab.TabID.ToString() & "-" & objModule.ModuleID.ToString()
-                                                        Dim o As New PortalAliasController
-                                                        Dim aliases As ArrayList = o.GetPortalAliasArrayByPortalID(objPortal.PortalID)
+                                                        Dim aliases As IEnumerable(Of PortalAliasInfo) = PortalAliasController.Instance.GetPortalAliasesByPortalId(objPortal.PortalID)
                                                         If (aliases.Count > 0) Then
-                                                            objListItem.Text = DotNetNuke.Common.AddHTTP(CType(aliases(0), PortalAliasInfo).HTTPAlias) & " -> " & strPath & " -> " & objModule.ModuleTitle
+                                                            objListItem.Text = DotNetNuke.Common.AddHTTP(aliases(0).HTTPAlias) & " -> " & strPath & " -> " & objModule.ModuleTitle
                                                         Else
                                                             objListItem.Text = objPortal.PortalName & " -> " & strPath & " -> " & objModule.ModuleTitle
                                                         End If

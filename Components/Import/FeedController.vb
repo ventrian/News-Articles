@@ -8,7 +8,7 @@ Namespace Ventrian.NewsArticles.Import
 
         Public Function [Get](ByVal feedID As Integer) As FeedInfo
 
-            Return CType(CBO.FillObject(DataProvider.Instance().GetFeed(feedID), GetType(FeedInfo)), FeedInfo)
+            Return CBO.FillObject(Of FeedInfo)(DataProvider.Instance().GetFeed(feedID))
 
         End Function
 

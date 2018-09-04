@@ -157,7 +157,7 @@ Namespace Ventrian.NewsArticles.Controls
 				width = Convert.ToInt32(objImage.Width / (objImage.Height / height))
 			End If
 
-			Dim settings As PortalSettings = PortalController.GetCurrentPortalSettings()
+			Dim settings As PortalSettings = PortalController.Instance.GetCurrentPortalSettings()
 
 			Return Page.ResolveUrl("~/DesktopModules/DnnForge - NewsArticles/ImageHandler.ashx?Width=" & width.ToString() & "&Height=" & height.ToString() & "&HomeDirectory=" & Server.UrlEncode(settings.HomeDirectory) & "&FileName=" & Server.UrlEncode(objImage.Folder & objImage.FileName) & "&PortalID=" & settings.PortalId.ToString() & "&q=1")
 

@@ -56,7 +56,7 @@ Namespace Ventrian.NewsArticles
             Dim objRating As RatingInfo = CType(DataCache.GetCache(cacheKey), RatingInfo)
 
             If (objRating Is Nothing) Then
-                objRating = CType(CBO.FillObject(DataProvider.Instance().GetRating(articleID, userID), GetType(RatingInfo)), RatingInfo)
+                objRating = CBO.FillObject(Of RatingInfo)(DataProvider.Instance().GetRating(articleID, userID))
                 If (objRating IsNot Nothing) Then
                     DataCache.SetCache(cacheKey, objRating)
                 Else
@@ -77,7 +77,7 @@ Namespace Ventrian.NewsArticles
             Dim objRating As RatingInfo = CType(DataCache.GetCache(cacheKey), RatingInfo)
 
             If (objRating Is Nothing) Then
-                objRating = CType(CBO.FillObject(DataProvider.Instance().GetRatingByID(ratingID), GetType(RatingInfo)), RatingInfo)
+                objRating = CBO.FillObject(Of RatingInfo)(DataProvider.Instance().GetRatingByID(ratingID))
                 DataCache.SetCache(cacheKey, objRating)
             End If
 

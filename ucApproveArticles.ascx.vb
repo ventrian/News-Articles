@@ -235,7 +235,7 @@ Namespace Ventrian.NewsArticles
 
                                     Dim objRoleController As New RoleController()
 
-                                    Dim objRoles As ArrayList = objRoleController.GetRoles()
+                                    Dim objRoles As IList(Of RoleInfo) = objRoleController.GetRoles(PortalId)
                                     For Each objRole As RoleInfo In objRoles
                                         Dim roleAccess As Boolean = False
 
