@@ -6,6 +6,7 @@
 
 Imports System
 Imports System.Data
+Imports System.Linq
 
 Imports DotNetNuke
 Imports DotNetNuke.Common.Utilities
@@ -48,10 +49,10 @@ Namespace Ventrian.NewsArticles
                         _portalTitle = objPortal.PortalName
 
                         Dim o As New PortalAliasController
-                        Dim portalAliases As ArrayList = o.GetPortalAliasArrayByPortalID(_linkedPortalID)
+                        Dim portalAliases As IEnumerable(Of PortalAliasInfo) = PortalAliasController.Instance.GetPortalAliasesByPortalId(_linkedPortalID)
 
                         If (portalAliases.Count > 0) Then
-                            _portalTitle = DotNetNuke.Common.AddHTTP(CType(portalAliases(0), PortalAliasInfo).HTTPAlias)
+                            _portalTitle = DotNetNuke.Common.AddHTTP(portalAliases(0).HTTPAlias)
                         End If
                     End If
 

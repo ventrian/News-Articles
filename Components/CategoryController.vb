@@ -194,7 +194,7 @@ Namespace Ventrian.NewsArticles
                 End If
             Next
 
-            Return CType(CBO.FillObject(DataProvider.Instance().GetCategory(categoryID), GetType(CategoryInfo)), CategoryInfo)
+            Return CBO.FillObject(Of CategoryInfo)(DataProvider.Instance().GetCategory(categoryID))
 
         End Function
 

@@ -135,13 +135,13 @@ Namespace Ventrian.NewsArticles
 
         Public Function [Get](ByVal templateID As Integer) As EmailTemplateInfo
 
-            Return CType(CBO.FillObject(DataProvider.Instance().GetEmailTemplate(templateID), GetType(EmailTemplateInfo)), EmailTemplateInfo)
+            Return CBO.FillObject(Of EmailTemplateInfo)(DataProvider.Instance().GetEmailTemplate(templateID))
 
         End Function
 
         Public Function [Get](ByVal moduleID As Integer, ByVal type As EmailTemplateType) As EmailTemplateInfo
 
-            Dim objEmailTemplate As EmailTemplateInfo = CType(CBO.FillObject(DataProvider.Instance().GetEmailTemplateByName(moduleID, type.ToString()), GetType(EmailTemplateInfo)), EmailTemplateInfo)
+            Dim objEmailTemplate As EmailTemplateInfo = CBO.FillObject(of EmailTemplateInfo)(DataProvider.Instance().GetEmailTemplateByName(moduleID, type.ToString()))
 
             If (objEmailTemplate Is Nothing) Then
 
