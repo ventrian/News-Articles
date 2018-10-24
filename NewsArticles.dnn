@@ -12,7 +12,7 @@
       <license>The license for this package is not currently included within the installation file, please check with the vendor for full license details.</license>
       <releaseNotes>This package has no Release Notes</releaseNotes>
       <dependencies>
-        <dependency type="CoreVersion">06.02.00</dependency>
+        <dependency type="CoreVersion">07.03.02</dependency>
       </dependencies>
       <components>
         <component type="Module">
