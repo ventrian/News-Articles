@@ -1,0 +1,63 @@
+﻿DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetAuthorStatistics
+GO
+
+CREATE PROCEDURE  {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetAuthorStatistics
+	@ModuleID	int, 
+	@CategoryID 	varchar(255)
+AS
+
+DECLARE @strTop	nvarchar(2000)
+DECLARE @strWhere	nvarchar(2000)
+
+SELECT @strTop = ''
+SELECT @strWhere = ''
+
+IF (@ModuleID is not null)
+	SELECT @strWhere = @strWhere + ' AND Articles.ModuleID = ' + convert(nvarchar, @ModuleId)
+	
+IF (@CategoryId is not null)
+	SELECT @strWhere = @strWhere + ' AND Articles.ArticleID in (select ArticleID from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ArticleCategories ArticleCategories where ArticleCategories.CategoryID in (' + @CategoryID + '))'
+
+EXEC('
+SELECT     
+	UserID, UserName, DisplayName, FirstName, LastName, count(*) as ''ArticleCount''   
+FROM         
+	{databaseOwner}{objectQualifier}Users Users, {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article Articles
+where 1 = 1 and Users.UserID = Articles.AuthorID ' + 
+	@strWhere + ' 
+GROUP BY 
+	UserID, UserName, DisplayName, FirstName, LastName')
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListBySearchCriteria
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListBySearchCriteria
+	@ModuleID	int,
+	@CategoryID	varchar(255),
+	@CategoryIDCount	int,
+	@MaxCount	int,
+	@MaxAge	int,
+	@IsApproved	bit,
+	@IsDraft	bit,
+	@StartDate	datetime,
+	@KeyWords	varchar(255), 
+	@ShowPending	bit,
+	@ShowExpired bit,   
+	@AuthorID	int,
+	@ShowFeaturedOnly bit,
+	@ShowNotFeaturedOnly bit,
+	@SortBy varchar(50),
+	@SortDirection varchar(50),
+	@Month	int,
+	@Year	int 
+AS
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticle
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticle
+	@ArticleID int
+AS
+GO

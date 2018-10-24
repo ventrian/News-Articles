@@ -1,0 +1,21 @@
+﻿DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetMirrorArticleList
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetMirrorArticleList
+	@LinkedArticleID int
+AS
+
+SELECT
+	m.[ArticleID],
+	m.[LinkedArticleID],
+	m.[LinkedPortalID],
+	m.[AutoUpdate],
+	mo.[PortalID]      
+FROM
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Mirror m INNER JOIN
+		{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article a ON m.ArticleID = a.ArticleID INNER JOIN
+		{databaseOwner}{objectQualifier}Modules mo ON a.ModuleID = mo.ModuleID 
+WHERE
+	m.[LinkedArticleID] = @LinkedArticleID
+GO
+	

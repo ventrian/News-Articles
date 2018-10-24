@@ -1,0 +1,105 @@
+﻿ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Image
+ADD Title2 nvarchar(100)
+GO
+
+UPDATE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Image
+SET Title2 = Title
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Image
+DROP COLUMN Title 
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Image
+ADD Title nvarchar(255)
+GO
+
+UPDATE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Image
+SET Title = Title2
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Image
+DROP COLUMN Title2 
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ImageAdd 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ImageAdd
+	@ArticleID int,
+	@Title nvarchar(255),
+	@FileName nvarchar(100),
+	@Extension nvarchar(100),
+	@Size int,
+	@Width int,
+	@Height int,
+	@ContentType nvarchar(200),
+	@Folder nvarchar(200),
+	@SortOrder int,
+	@ImageGuid nvarchar(50)
+AS
+
+INSERT INTO {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Image (
+	[ArticleID],
+	[Title], 
+	[FileName],
+	[Extension],
+	[Size],
+	[Width],
+	[Height],
+	[ContentType],
+	[Folder],
+	[SortOrder],
+	[ImageGuid]
+) VALUES (
+	@ArticleID,
+	@Title, 
+	@FileName,
+	@Extension,
+	@Size,
+	@Width,
+	@Height,
+	@ContentType,
+	@Folder,
+	@SortOrder,
+	@ImageGuid 
+)
+
+select SCOPE_IDENTITY()
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ImageUpdate 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ImageUpdate 
+	@ImageID int, 
+	@ArticleID int,
+	@Title nvarchar(255),
+	@FileName nvarchar(100),
+	@Extension nvarchar(100),
+	@Size int,
+	@Width int,
+	@Height int,
+	@ContentType nvarchar(200),
+	@Folder nvarchar(200),
+	@SortOrder int,
+	@ImageGuid nvarchar(50)
+AS
+
+UPDATE
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Image
+SET
+	[ArticleID] = @ArticleID,
+	[Title] = @Title,
+	[FileName] = @FileName,
+	[Extension] = @Extension,
+	[Size] = @Size,
+	[Width] = @Width,
+	[Height] = @Height,
+	[ContentType] = @ContentType,
+	[Folder] = @Folder,
+	[SortOrder] = @SortOrder,
+	[ImageGuid] = @ImageGuid
+WHERE
+	[ImageID] = @ImageID
+GO

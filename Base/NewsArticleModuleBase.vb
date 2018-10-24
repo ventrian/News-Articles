@@ -16,6 +16,7 @@ Imports DotNetNuke.Common
 Imports DotNetNuke.Common.Utilities
 Imports DotNetNuke.Entities.Modules
 Imports DotNetNuke.Security
+Imports DotNetNuke.Security.Permissions
 Imports DotNetNuke.Services.Localization
 
 Namespace Ventrian.NewsArticles.Base
@@ -45,10 +46,8 @@ Namespace Ventrian.NewsArticles.Base
                     Try
                         _articleSettings = New ArticleSettings(Settings, PortalSettings, ModuleConfiguration)
                     Catch
-                        Dim objModuleController As New ModuleController()
-
-                        Dim objSettings As Hashtable = objModuleController.GetModuleSettings(ModuleId)
-                        Dim objTabSettings As Hashtable = objModuleController.GetTabModuleSettings(TabModuleId)
+                        Dim objSettings As Hashtable = ModuleConfiguration.ModuleSettings
+                        Dim objTabSettings As Hashtable = ModuleConfiguration.TabModuleSettings
 
                         For Each item As DictionaryEntry In objTabSettings
                             If (objSettings.ContainsKey(item.Key) = False) Then
@@ -57,7 +56,7 @@ Namespace Ventrian.NewsArticles.Base
                         Next
 
                         _articleSettings = New ArticleSettings(objSettings, PortalSettings, ModuleConfiguration)
-                        objModuleController.UpdateModuleSetting(ModuleId, "ResetArticleSettings", "true")
+                        ModuleController.Instance.UpdateModuleSetting(ModuleId, "ResetArticleSettings", "true")
                     End Try
                 End If
                 Return _articleSettings
@@ -226,25 +225,31 @@ Namespace Ventrian.NewsArticles.Base
             End If
 
         End Function
-        Protected Function StripHtml(ByVal html As String) As String
 
-            Const pattern As String = "<(.|\n)*?>"
-            Return Regex.Replace(html, pattern, String.Empty)
+		Public Function StripHtml(ByVal html As String) As String
 
-        End Function
+			Return StripHtml(html, False)
 
+		End Function
 
-        Private Function RoundToUnit(ByVal d As Double, ByVal unit As Double, ByVal roundDown As Boolean) As Double
+		Public Function StripHtml(ByVal html As String, ByVal cleanLineBreaks As Boolean) As String
 
-            If (roundDown) Then
-                Return Math.Round(Math.Round((d / unit) - 0.5, 0) * unit, 2)
-            Else
-                Return Math.Round(Math.Round((d / unit) + 0.5, 0) * unit, 2)
-            End If
+			Dim pattern As String = "<(.|\n)*?>"
+			Return Regex.Replace(html, pattern, String.Empty).Replace(System.Environment.NewLine, " ")
 
-        End Function
+		End Function
 
-        Protected Function GetRatingImage(ByVal objDataItem As Object) As String
+		Private Function RoundToUnit(ByVal d As Double, ByVal unit As Double, ByVal roundDown As Boolean) As Double
+
+			If (roundDown) Then
+				Return Math.Round(Math.Round((d / unit) - 0.5, 0) * unit, 2)
+			Else
+				Return Math.Round(Math.Round((d / unit) + 0.5, 0) * unit, 2)
+			End If
+
+		End Function
+
+		Protected Function GetRatingImage(ByVal objDataItem As Object) As String
 
             Dim objArticle As ArticleInfo = CType(objDataItem, ArticleInfo)
 
@@ -350,7 +355,7 @@ Namespace Ventrian.NewsArticles.Base
 
                 ' Admin of Module
                 '
-                If (PortalSecurity.HasEditPermissions(objModule.ModulePermissions)) Then
+                If (ModulePermissionController.HasModuleAccess(SecurityAccessLevel.Edit, "EDIT" , objModule)) Then
 
                     Return True
 

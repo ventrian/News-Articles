@@ -13,6 +13,9 @@ Imports DotNetNuke.Services.Localization
 Imports DotNetNuke.Services.Exceptions
 Imports Ventrian.NewsArticles.Components.CustomFields
 Imports System.IO
+Imports DotNetNuke.Entities.Users
+Imports DotNetNuke.Security.Permissions
+Imports DotNetNuke.Security.Roles
 
 Namespace Ventrian.NewsArticles
 
@@ -67,8 +70,8 @@ Namespace Ventrian.NewsArticles
 
             Dim objTabController As New TabController()
 
-            Dim objTabs As ArrayList = objTabController.GetTabs(PortalId)
-            For Each objTab As DotNetNuke.Entities.Tabs.TabInfo In objTabs
+            Dim objTabs As TabCollection =TabController.Instance.GetTabsByPortal(PortalId)
+            For Each objTab As DotNetNuke.Entities.Tabs.TabInfo In objTabs.Values
                 drpPageFilter.Items.Add(New ListItem(objTab.TabPath.Replace("//", "/").TrimStart("/"c), objTab.TabID.ToString()))
             Next
 
@@ -108,14 +111,13 @@ Namespace Ventrian.NewsArticles
 
         Private Sub BindModules()
 
-            Dim objDesktopModuleController As New DesktopModuleController
-            Dim objDesktopModuleInfo As DesktopModuleInfo = objDesktopModuleController.GetDesktopModuleByModuleName("DnnForge - NewsArticles")
+            Dim objDesktopModuleInfo As DesktopModuleInfo = DesktopModuleController.GetDesktopModuleByModuleName("DnnForge - NewsArticles", PortalSettings.PortalId)
 
             If Not (objDesktopModuleInfo Is Nothing) Then
 
                 Dim objTabController As New TabController()
-                Dim objTabs As ArrayList = objTabController.GetTabs(PortalId)
-                For Each objTab As DotNetNuke.Entities.Tabs.TabInfo In objTabs
+                Dim objTabs As TabCollection = TabController.Instance.GetTabsByPortal(PortalId)
+                For Each objTab As TabInfo In objTabs.Values
                     If Not (objTab Is Nothing) Then
                         If (objTab.IsDeleted = False) Then
                             Dim objModules As New ModuleController
@@ -123,7 +125,7 @@ Namespace Ventrian.NewsArticles
                                 Dim objModule As ModuleInfo = pair.Value
                                 If (objModule.IsDeleted = False) Then
                                     If (objModule.DesktopModuleID = objDesktopModuleInfo.DesktopModuleID) Then
-                                        If PortalSecurity.IsInRoles(objModule.AuthorizedEditRoles) = True And objModule.IsDeleted = False Then
+                                        If ModulePermissionController.CanEditModuleContent(objModule) = True And objModule.IsDeleted = False Then
                                             Dim strPath As String = objTab.TabName
                                             Dim objTabSelected As TabInfo = objTab
                                             While objTabSelected.ParentId <> Null.NullInteger
@@ -655,7 +657,7 @@ Namespace Ventrian.NewsArticles
 
         Public Function GetAuthorList(ByVal moduleID As Integer) As ArrayList
 
-            Dim moduleSettings As Hashtable = DotNetNuke.Entities.Portals.PortalSettings.GetModuleSettings(moduleID)
+            Dim moduleSettings As Hashtable = Common.GetModuleSettings(moduleID)
             Dim distributionList As String = ""
             Dim userList As New ArrayList
 
@@ -672,13 +674,13 @@ Namespace Ventrian.NewsArticles
                         Dim objRole As DotNetNuke.Security.Roles.RoleInfo = objRoleController.GetRoleByName(PortalSettings.PortalId, role)
 
                         If Not (objRole Is Nothing) Then
-                            Dim objUsers As ArrayList = objRoleController.GetUserRolesByRoleName(PortalSettings.PortalId, objRole.RoleName)
-                            For Each objUser As DotNetNuke.Entities.Users.UserRoleInfo In objUsers
+                            Dim objUsers As List(Of UserInfo) = RoleController.Instance.GetUsersByRole(PortalSettings.PortalId, objRole.RoleName)
+                            For Each objUser As UserInfo In objUsers
                                 If (userIDs.Contains(objUser.UserID) = False) Then
                                     Dim objUserController As DotNetNuke.Entities.Users.UserController = New DotNetNuke.Entities.Users.UserController
                                     Dim objSelectedUser As DotNetNuke.Entities.Users.UserInfo = objUserController.GetUser(PortalSettings.PortalId, objUser.UserID)
                                     If Not (objSelectedUser Is Nothing) Then
-                                        If (objSelectedUser.Membership.Email.Length > 0) Then
+                                        If (objSelectedUser.Email.Length > 0) Then
                                             userIDs.Add(objUser.UserID, objUser.UserID)
                                             userList.Add(objSelectedUser)
                                         End If

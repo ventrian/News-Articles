@@ -8,6 +8,7 @@ Imports DotNetNuke.Services.Exceptions
 Imports DotNetNuke.Services.Localization
 
 Imports System.Text
+Imports DotNetNuke.Security.Permissions
 Imports Ventrian.NewsArticles.Base
 
 Namespace Ventrian.NewsArticles
@@ -184,7 +185,8 @@ Namespace Ventrian.NewsArticles
             Dim objModule As ModuleInfo = objModuleController.GetModule(objArticle.ModuleID, Me.TabId)
 
             If Not (objModule Is Nothing) Then
-                If (DotNetNuke.Security.PortalSecurity.IsInRoles(objModule.AuthorizedViewRoles) = False) Then
+                If (ModulePermissionController.CanViewModule(objModule) = False) Then
+                'If (DotNetNuke.Security.PortalSecurity.IsInRoles(objModule.AuthorizedViewRoles) = False) Then
                     Response.Redirect(NavigateURL(Me.TabId), True)
                 End If
             End If
@@ -263,7 +265,43 @@ Namespace Ventrian.NewsArticles
                 Me.BasePage.Header.Controls.Add(phPageHeaderTitle)
             End If
 
-        End Sub
+
+			' set metatags for sharing
+			Dim sb As New StringBuilder()
+			Dim desc As String = StripHtml(Server.HtmlDecode(objArticle.Summary.Trim()), True)
+			If String.IsNullOrEmpty(desc) Then
+				Dim pageController As New PageController
+				Dim pageList As ArrayList = pageController.GetPageList(objArticle.ArticleID)
+				If pageList.Count > 0 Then
+					Dim p As PageInfo = pageList(0)
+					desc = StripHtml(Server.HtmlDecode(p.PageText), True)
+				End If
+			End If
+			desc = desc.Substring(0, Math.Min(300, desc.Length))
+
+			Dim img As String = ""
+			If (objArticle.ImageUrl <> "") Then
+				img = FormatImageUrl(objArticle.ImageUrl)
+			Else
+				If (objArticle.ImageCount > 0) Then
+					Dim objImageController As New ImageController
+					Dim objImages As List(Of ImageInfo) = objImageController.GetImageList(objArticle.ArticleID, Null.NullString())
+					If (objImages.Count > 0) Then
+						img = AddHTTP(System.Web.HttpContext.Current.Request.Url.Host & PortalSettings.HomeDirectory & objImages(0).Folder & objImages(0).FileName)
+					End If
+				End If
+			End If
+
+			sb.AppendFormat("<meta property=""og:type"" content=""{0}"" />{1}", "article", System.Environment.NewLine)
+			sb.AppendFormat("<meta property=""og:title"" content=""{0}"" />{1}", objArticle.Title, System.Environment.NewLine)
+			sb.AppendFormat("<meta property=""og:description"" content=""{0}"" />{1}", desc, System.Environment.NewLine)
+			sb.AppendFormat("<meta property=""og:url"" content=""{0}"" />{1}", targetUrl, System.Environment.NewLine)
+			If (Not String.IsNullOrEmpty(img)) Then
+				sb.AppendFormat("<meta property=""og:image"" content=""{0}"" />{1}", img, System.Environment.NewLine)
+			End If
+			Me.Parent.Page.Header.Controls.Add(New LiteralControl(sb.ToString()))
+
+		End Sub
 
         Private Sub ReadQueryString()
 

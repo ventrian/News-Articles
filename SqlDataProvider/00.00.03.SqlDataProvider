@@ -1,0 +1,14 @@
+﻿if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListBySearchCriteria') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListBySearchCriteria
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListBySearchCriteria
+	@ModuleID	int,
+	@CategoryID	int,
+	@MaxCount	int,
+	@MaxAge		int,
+	@IsApproved	int,
+	@StartDate	datetime,
+	@KeyWords	varchar(255)
+AS
+GO

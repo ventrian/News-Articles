@@ -1,0 +1,274 @@
+﻿ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article ADD
+	IsSecure int NOT NULL Default 0
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListBySearchCriteria
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListBySearchCriteria
+	@ModuleID	int,
+	@CategoryID	varchar(255),
+	@MaxCount	int,
+	@MaxAge	int,
+	@IsApproved	int,
+	@StartDate	datetime,
+	@KeyWords	varchar(255), 
+	@ShowHiddenAndExpired	bit, 
+	@AuthorID	int,
+	@ShowFeaturedOnly bit,
+	@SortBy varchar(50),
+	@Month	int,
+	@Year	int 
+AS
+
+DECLARE @strTop	nvarchar(2000)
+DECLARE @strWhere	nvarchar(2000)
+
+SELECT @strTop = ''
+SELECT @strWhere = ' 1 = 1 '
+
+IF (@MaxCount is not null)
+	SELECT @strTop = ' TOP ' + convert(nvarchar, @MaxCount)
+
+IF (@ModuleID is not null)
+	SELECT @strWhere = @strWhere + ' AND Article.ModuleID = ' + convert(nvarchar, @ModuleId)
+
+IF (@CategoryId is not null)
+	SELECT @strWhere = @strWhere + ' AND Article.ArticleID in ( select ArticleID from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ArticleCategories where {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ArticleCategories.ArticleID = Article.ArticleID and {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ArticleCategories.CategoryID in (' + @CategoryID + '))'
+
+IF (@AuthorID is not null)
+	SELECT @strWhere = @strWhere + ' AND Article.AuthorID = ' + convert(nvarchar, @AuthorID)
+
+IF (@MaxAge is not null) and (@ShowHiddenAndExpired = 0) 
+	SELECT @strWhere = @strWhere + ' AND Article.CreatedDate > ''' + convert(nvarchar, DateAdd(day, @MaxAge, @StartDate)) + ''''
+
+IF (@MaxAge is not null) and (@ShowHiddenAndExpired = 0) 
+	SELECT @strWhere = @strWhere + ' AND Article.CreatedDate < ''' + convert(nvarchar, @StartDate)  + ''''
+
+IF (@IsApproved = 1 )
+	SELECT @strWhere = @strWhere + ' AND Article.IsApproved = 1'
+
+IF (@ShowFeaturedOnly = 1 )
+	SELECT @strWhere = @strWhere + ' AND Article.IsFeatured = 1'
+
+IF (@Keywords is not null)
+	SELECT @strWhere = @strWhere + ' AND (Article.Title LIKE ''%' + @Keywords + '%'' OR Article.Summary LIKE ''%' + @Keywords + '%'' OR ((select count(*) from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Page Page where Page.ArticleID = Article.ArticleID and Page.PageText LIKE ''%' + @Keywords + '%'') > 0))'
+
+IF (@ShowHiddenAndExpired = 0) 
+	SELECT @strWhere = @strWhere + ' AND (Article.StartDate is null or Article.StartDate < ''' + convert(nvarchar, DateAdd(mi, 1, GetDate()))  + ''')'
+
+IF (@ShowHiddenAndExpired = 0) 
+	SELECT @strWhere = @strWhere + ' AND (Article.EndDate is null or Article.EndDate > ''' + convert(nvarchar, DateAdd(day, -1, GetDate()))  + ''')'
+
+IF (@Month is not null)
+	SELECT @strWhere = @strWhere + ' AND Month(Article.StartDate) = ' + convert(nvarchar, @Month)
+
+IF (@Year is not null)
+	SELECT @strWhere = @strWhere + ' AND Year(Article.StartDate) = ' + convert(nvarchar, @Year)
+	
+EXEC('
+SELECT ' + @strTop + '
+	Article.[ArticleID],
+	Article.[AuthorID],
+	Article.[ApproverID],
+	Article.[CreatedDate],
+	Article.[LastUpdate],
+	Article.[Title],
+	Article.[Summary],
+	Article.[IsApproved],
+	Article.[NumberOfViews],
+	Article.[StartDate],
+	Article.[EndDate],
+	Article.[ModuleID],
+	Article.[IsFeatured],
+	Article.[ImageUrl],
+	Article.[LastUpdateID],
+	Article.[IsSecure],
+	'''' as AuthorEmail,
+	Author.[UserName] as AuthorUserName,
+	Author.[FirstName] as AuthorFirstName,
+	Author.[LastName] as AuthorLastName,
+	'''' as LastUpdateEmail,
+	Updated.[UserName] as LastUpdateUserName,
+	Updated.[FirstName] as LastUpdateFirstName,
+	Updated.[LastName] as LastUpdateLastName,
+	(select count(*) from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Page where {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Page.ArticleID = Article.ArticleID) as ''PageCount'',
+	(select count(*) from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment where {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment.ArticleID = Article.ArticleID) as ''CommentCount'', 
+	(select AVG(rating) from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment where {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment.ArticleID = Article.ArticleID) as ''Rating'', 
+	case when Images.FileName is null then '''' else Images.Folder + Images.FileName end AS ImageUrlResolved, 
+	case when UrlFiles.FileName is null then Article.URL else UrlFiles.Folder + UrlFiles.FileName end AS URL  
+
+FROM
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article Article INNER JOIN
+    {databaseOwner}{objectQualifier}Users Author ON Article.AuthorID = Author.UserID INNER JOIN
+    {databaseOwner}{objectQualifier}Users Updated ON Article.LastUpdateID = Updated.UserID LEFT OUTER JOIN
+    {databaseOwner}{objectQualifier}Files UrlFiles ON Article.URL = ''fileid='' + CONVERT(nvarchar, UrlFiles.FileID) LEFT OUTER JOIN
+    {databaseOwner}{objectQualifier}Files Images ON Article.ImageUrl = ''fileid='' + CONVERT(nvarchar, Images.FileID)
+
+WHERE ' + 
+	@strWhere + '
+
+ORDER BY 
+	' + @SortBy + ' DESC')
+GO
+
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticle
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticle
+	@ArticleID int
+AS
+SELECT
+	Article.[ArticleID],
+	Article.[AuthorID],
+	Article.[ApproverID],
+	Article.[CreatedDate],
+	Article.[LastUpdate],
+	Article.[Title],
+	Article.[Summary],
+	Article.[IsApproved],
+	Article.[NumberOfViews],
+	Article.[IsDraft],
+	Article.[StartDate],
+	Article.[EndDate],
+	Article.[ModuleID],
+	Article.[IsFeatured],
+	Article.[ImageUrl],
+	Article.[LastUpdateID],
+	Article.[IsSecure],
+	'' as AuthorEmail,
+	Author.[UserName] as AuthorUserName,
+	Author.[FirstName] as AuthorFirstName,
+	Author.[LastName] as AuthorLastName,
+	'' as LastUpdateEmail,
+	Updated.[UserName] as LastUpdateUserName,
+	Updated.[FirstName] as LastUpdateFirstName,
+	Updated.[LastName] as LastUpdateLastName,
+	(select count(*) from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment where {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment.ArticleID = Article.ArticleID) as 'CommentCount', 
+	(select count(*) from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Page where {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Page.ArticleID = Article.ArticleID) as 'PageCount', 
+	(select AVG(rating) from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment where {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment.ArticleID = Article.ArticleID) as 'Rating', 
+	case when Images.FileName is null then '' else Images.Folder + Images.FileName end AS ImageUrlResolved, 
+	case when UrlFiles.FileName is null then Article.URL else UrlFiles.Folder + UrlFiles.FileName end AS URL 
+
+FROM
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article Article INNER JOIN
+		{databaseOwner}{objectQualifier}Users Author ON Article.AuthorID = Author.UserID INNER JOIN
+		{databaseOwner}{objectQualifier}Users Updated ON Article.LastUpdateID = Updated.UserID LEFT OUTER JOIN
+		{databaseOwner}{objectQualifier}Files UrlFiles ON Article.URL = 'fileid=' + CONVERT(nvarchar, UrlFiles.FileID) LEFT OUTER JOIN
+        {databaseOwner}{objectQualifier}Files Images ON Article.ImageUrl = 'fileid=' + CONVERT(nvarchar, Images.FileID) 
+
+WHERE	
+	Article.[ArticleID] = @ArticleID
+GO
+
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_AddArticle
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_AddArticle
+	@AuthorID int,
+	@ApproverID int,
+	@CreatedDate datetime,
+	@LastUpdate datetime,
+	@Title nvarchar(255),
+	@Summary ntext,
+	@IsApproved bit,
+	@NumberOfViews int,
+	@IsDraft bit,
+	@StartDate DateTime,
+	@EndDate DateTime,
+	@ModuleID int,
+	@ImageUrl nvarchar(255),
+	@IsFeatured bit, 
+	@LastUpdateID int, 
+	@Url nvarchar(255),
+	@IsSecure bit   
+AS
+
+INSERT INTO {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article (
+	[AuthorID],
+	[ApproverID],
+	[CreatedDate],
+	[LastUpdate],
+	[Title],
+	[Summary],
+	[IsApproved],
+	[NumberOfViews],
+	[IsDraft],
+	[StartDate],
+	[EndDate],
+	[ModuleID],
+	[ImageUrl],
+	[IsFeatured], 
+	[LastUpdateID], 
+	[Url],
+	[IsSecure] 
+) VALUES (
+	@AuthorID,
+	@ApproverID,
+	@CreatedDate,
+	@LastUpdate,
+	@Title,
+	@Summary,
+	@IsApproved,
+	@NumberOfViews,
+	@IsDraft,
+	@StartDate,
+	@EndDate,
+	@ModuleID,
+	@ImageUrl,
+	@IsFeatured,
+	@LastUpdateID,
+	@Url,
+	@IsSecure   
+)
+
+select SCOPE_IDENTITY()
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_UpdateArticle
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_UpdateArticle
+	@ArticleID int, 
+	@AuthorID int, 
+	@ApproverID int, 
+	@CreatedDate datetime, 
+	@LastUpdate datetime, 
+	@Title nvarchar(255), 
+	@Summary ntext, 
+	@IsApproved bit, 
+	@NumberOfViews int, 
+	@IsDraft bit,
+	@StartDate DateTime,
+	@EndDate DateTime,
+	@ModuleID int,
+	@ImageUrl nvarchar(255),
+	@IsFeatured bit, 
+	@LastUpdateID int, 
+	@Url nvarchar(255),
+	@IsSecure bit   
+AS
+
+UPDATE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article SET
+	[AuthorID] = @AuthorID,
+	[ApproverID] = @ApproverID,
+	[CreatedDate] = @CreatedDate,
+	[LastUpdate] = @LastUpdate,
+	[Title] = @Title,
+	[Summary] = @Summary,
+	[IsApproved] = @IsApproved,
+	[NumberOfViews] = @NumberOfViews,
+	[IsDraft] = @IsDraft,
+	[StartDate] = @StartDate,
+	[EndDate] = @EndDate,
+	[ModuleID] = @ModuleID,
+	[ImageUrl] = @ImageUrl,
+	[IsFeatured] = @IsFeatured, 
+	[LastUpdateID] = @LastUpdateID, 
+	[Url] = @Url,
+	[IsSecure] = @IsSecure   
+WHERE
+	[ArticleID] = @ArticleID
+GO

@@ -27,7 +27,7 @@ Namespace Ventrian.NewsArticles
 
         Public Function GetHandout(ByVal handoutID As Integer) As HandoutInfo
 
-            Dim objHandout As HandoutInfo = CType(CBO.FillObject(DataProvider.Instance().GetHandout(handoutID), GetType(HandoutInfo)), HandoutInfo)
+            Dim objHandout As HandoutInfo = CBO.FillObject(Of HandoutInfo)(DataProvider.Instance().GetHandout(handoutID))
 
             objHandout.Articles = CBO.FillCollection(Of HandoutArticle)(DataProvider.Instance().GetHandoutArticleList(handoutID))
 

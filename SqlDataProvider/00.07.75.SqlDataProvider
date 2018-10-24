@@ -1,0 +1,7 @@
+﻿CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_SecureCheck
+	@PortalID int, 
+	@ArticleID int,
+	@UserID int 
+AS
+	SELECT 1
+GO

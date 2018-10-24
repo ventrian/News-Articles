@@ -1,0 +1,230 @@
+﻿ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article ADD
+	MetaTitle nvarchar(200) NULL,
+	MetaDescription nvarchar(500) NULL,
+	MetaKeywords nvarchar(500) NULL,
+	PageHeadText nvarchar(500) NULL
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_AddArticle
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_AddArticle
+	@AuthorID int,
+	@ApproverID int,
+	@CreatedDate datetime,
+	@LastUpdate datetime,
+	@Title nvarchar(255),
+	@Summary ntext,
+	@IsApproved bit,
+	@NumberOfViews int,
+	@IsDraft bit,
+	@StartDate DateTime,
+	@EndDate DateTime,
+	@ModuleID int,
+	@ImageUrl nvarchar(255),
+	@IsFeatured bit, 
+	@LastUpdateID int, 
+	@Url nvarchar(255),
+	@IsSecure bit,
+	@IsNewWindow bit,
+	@MetaTitle nvarchar(200),
+	@MetaDescription nvarchar(500),
+	@MetaKeywords nvarchar(500),
+	@PageHeadText nvarchar(500) 
+AS
+
+INSERT INTO {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article (
+	[AuthorID],
+	[ApproverID],
+	[CreatedDate],
+	[LastUpdate],
+	[Title],
+	[Summary],
+	[IsApproved],
+	[NumberOfViews],
+	[IsDraft],
+	[StartDate],
+	[EndDate],
+	[ModuleID],
+	[ImageUrl],
+	[IsFeatured], 
+	[LastUpdateID], 
+	[Url],
+	[IsSecure],
+	[IsNewWindow],
+	[MetaTitle],
+	[MetaDescription],
+	[MetaKeywords],
+	[PageHeadText] 
+) VALUES (
+	@AuthorID,
+	@ApproverID,
+	@CreatedDate,
+	@LastUpdate,
+	@Title,
+	@Summary,
+	@IsApproved,
+	@NumberOfViews,
+	@IsDraft,
+	@StartDate,
+	@EndDate,
+	@ModuleID,
+	@ImageUrl,
+	@IsFeatured,
+	@LastUpdateID,
+	@Url,
+	@IsSecure,
+	@IsNewWindow,
+	@MetaTitle,
+	@MetaDescription,
+	@MetaKeywords,
+	@PageHeadText     
+)
+
+select SCOPE_IDENTITY()
+
+UPDATE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article
+SET [PageCount] = (select count(*) from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Page Page where Page.ArticleID = {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article.ArticleID)
+WHERE ArticleID = SCOPE_IDENTITY()
+
+UPDATE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article
+SET [CommentCount] = (select count(*) from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment Comment where Comment.ArticleID = {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article.ArticleID and Comment.IsApproved = 1)
+WHERE ArticleID = SCOPE_IDENTITY()
+
+UPDATE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article
+SET [Rating] = (select AVG(rating) from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Rating Rating where Rating.ArticleID = {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article.ArticleID)
+WHERE [ArticleID] = SCOPE_IDENTITY() 
+
+UPDATE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article
+SET [RatingCount] = (select COUNT(*) from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Rating Rating where Rating.ArticleID = {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article.ArticleID)
+WHERE [ArticleID] = SCOPE_IDENTITY() 
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_UpdateArticle
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_UpdateArticle
+	@ArticleID int, 
+	@AuthorID int, 
+	@ApproverID int, 
+	@CreatedDate datetime, 
+	@LastUpdate datetime, 
+	@Title nvarchar(255), 
+	@Summary ntext, 
+	@IsApproved bit, 
+	@NumberOfViews int, 
+	@IsDraft bit,
+	@StartDate DateTime,
+	@EndDate DateTime,
+	@ModuleID int,
+	@ImageUrl nvarchar(255),
+	@IsFeatured bit, 
+	@LastUpdateID int, 
+	@Url nvarchar(255),
+	@IsSecure bit,
+	@IsNewWindow bit,
+	@MetaTitle nvarchar(200),
+	@MetaDescription nvarchar(500),
+	@MetaKeywords nvarchar(500),
+	@PageHeadText nvarchar(500)  
+AS
+
+UPDATE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article SET
+	[AuthorID] = @AuthorID,
+	[ApproverID] = @ApproverID,
+	[CreatedDate] = @CreatedDate,
+	[LastUpdate] = @LastUpdate,
+	[Title] = @Title,
+	[Summary] = @Summary,
+	[IsApproved] = @IsApproved,
+	[NumberOfViews] = @NumberOfViews,
+	[IsDraft] = @IsDraft,
+	[StartDate] = @StartDate,
+	[EndDate] = @EndDate,
+	[ModuleID] = @ModuleID,
+	[ImageUrl] = @ImageUrl,
+	[IsFeatured] = @IsFeatured, 
+	[LastUpdateID] = @LastUpdateID, 
+	[Url] = @Url,
+	[IsSecure] = @IsSecure,
+	[IsNewWindow] = @IsNewWindow,
+	[MetaTitle] = @MetaTitle,
+	[MetaDescription] = @MetaDescription,
+	[MetaKeywords] = @MetaKeywords,
+	[PageHeadText] = @PageHeadText    
+WHERE
+	[ArticleID] = @ArticleID
+
+UPDATE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article
+SET [PageCount] = (select count(*) from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Page Page where Page.ArticleID = {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article.ArticleID)
+WHERE ArticleID = @ArticleID
+
+UPDATE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article
+SET [CommentCount] = (select count(*) from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment Comment where Comment.ArticleID = {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article.ArticleID and Comment.IsApproved = 1)
+WHERE ArticleID = @ArticleID
+
+UPDATE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article
+SET [Rating] = (select AVG(rating) from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Rating Rating where Rating.ArticleID = {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article.ArticleID)
+WHERE [ArticleID] = @ArticleID
+
+UPDATE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article
+SET [RatingCount] = (select COUNT(*) from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Rating Rating where Rating.ArticleID = {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article.ArticleID)
+WHERE [ArticleID] = @ArticleID
+GO
+
+DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticle
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticle
+	@ArticleID int
+AS
+SELECT
+	Article.[ArticleID],
+	Article.[AuthorID],
+	Article.[ApproverID],
+	Article.[CreatedDate],
+	Article.[LastUpdate],
+	Article.[Title],
+	Article.[Summary],
+	Article.[IsApproved],
+	Article.[NumberOfViews],
+	Article.[IsDraft],
+	Article.[StartDate],
+	Article.[EndDate],
+	Article.[ModuleID],
+	Article.[IsFeatured],
+	Article.[ImageUrl],
+	Article.[LastUpdateID],
+	Article.[IsSecure],
+	Article.[IsNewWindow],
+	Article.[ImageUrl],
+	Article.[Url],
+	Article.[PageCount],
+	Article.[CommentCount],
+	Article.[Rating],
+	Article.[RatingCount],
+	Article.[MetaTitle],
+	Article.[MetaDescription],
+	Article.[MetaKeywords],
+	Article.[PageHeadText], 
+	Author.[Email] as AuthorEmail,
+	Author.[UserName] as AuthorUserName,
+	Author.[FirstName] as AuthorFirstName,
+	Author.[LastName] as AuthorLastName,
+	Author.[DisplayName] as AuthorDisplayName,
+	Updated.[Email] as LastUpdateEmail,
+	Updated.[UserName] as LastUpdateUserName,
+	Updated.[FirstName] as LastUpdateFirstName,
+	Updated.[LastName] as LastUpdateLastName,
+	Updated.[DisplayName] as UpdatedDisplayName,
+	Page.PageText as 'Body'
+
+FROM
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article Article LEFT OUTER JOIN 
+		{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Page Page on Page.ArticleID = Article.ArticleID AND Page.SortOrder = 0 LEFT OUTER JOIN 
+		{databaseOwner}{objectQualifier}Users Author ON Article.AuthorID = Author.UserID LEFT OUTER JOIN
+		{databaseOwner}{objectQualifier}Users Updated ON Article.LastUpdateID = Updated.UserID
+
+WHERE	
+	Article.[ArticleID] = @ArticleID
+GO

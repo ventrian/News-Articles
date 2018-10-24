@@ -1,0 +1,6 @@
+﻿ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Handout ADD 
+	CONSTRAINT [PK_{objectQualifier}DnnForge_NewsArticles_Handout] PRIMARY KEY CLUSTERED 
+	(
+		[HandoutID]
+	)  ON [PRIMARY] 
+GO

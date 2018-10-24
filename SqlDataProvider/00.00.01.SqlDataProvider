@@ -1,0 +1,442 @@
+﻿if not exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article') and OBJECTPROPERTY(id, N'IsTable') = 1)
+CREATE TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article (
+	[ArticleID] [int] IDENTITY (1, 1) NOT NULL ,
+	[CategoryID] [int] NOT NULL ,
+	[AuthorID] [int] NOT NULL ,
+	[ApproverID] [int] NULL ,
+	[CreatedDate] [datetime] NOT NULL ,
+	[LastUpdate] [datetime] NOT NULL ,
+	[Title] [nvarchar] (255) NOT NULL ,
+	[Summary] [nvarchar] (4000) NOT NULL ,
+	[IsApproved] [bit] NOT NULL ,
+	[NumberOfViews] [int] NOT NULL 
+) ON [PRIMARY]
+GO
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Category') and OBJECTPROPERTY(id, N'IsTable') = 1)
+CREATE TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Category (
+	[CategoryID] [int] IDENTITY (1, 1) NOT NULL ,
+	[ModuleID] [int] NOT NULL ,
+	[Name] [nvarchar] (255) NOT NULL ,
+	[Image] [nvarchar] (255) NULL 
+) ON [PRIMARY]
+GO
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment') and OBJECTPROPERTY(id, N'IsTable') = 1)
+CREATE TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment (
+	[CommentID] [int] IDENTITY (1, 1) NOT NULL ,
+	[ArticleID] [int] NOT NULL ,
+	[UserID] [int] NOT NULL ,
+	[CreatedDate] [datetime] NOT NULL ,
+	[Comment] [ntext] NOT NULL 
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'PK_{objectQualifier}DnnForge_NewsArticles_Article') and OBJECTPROPERTY(id, N'IsPrimaryKey') = 1)
+ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article ADD 
+	CONSTRAINT [PK_{objectQualifier}DnnForge_NewsArticles_Article] PRIMARY KEY  CLUSTERED 
+	(
+		[ArticleID]
+	)  ON [PRIMARY] 
+GO
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'DF_{objectQualifier}DnnForge_NewsArticles_Article_CreatedDate') and OBJECTPROPERTY(id, N'IsConstraint') = 1)
+ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article ADD 
+	CONSTRAINT [DF_{objectQualifier}DnnForge_NewsArticles_Article_CreatedDate] DEFAULT (getdate()) FOR [CreatedDate]
+GO
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'DF_{objectQualifier}DnnForge_NewsArticles_Article_LastUpdate') and OBJECTPROPERTY(id, N'IsConstraint') = 1)
+ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article ADD 
+	CONSTRAINT [DF_{objectQualifier}DnnForge_NewsArticles_Article_LastUpdate] DEFAULT (getdate()) FOR [LastUpdate]
+GO
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'DF_{objectQualifier}DnnForge_NewsArticles_Article_IsApproved') and OBJECTPROPERTY(id, N'IsConstraint') = 1)
+ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article ADD 
+	CONSTRAINT [DF_{objectQualifier}DnnForge_NewsArticles_Article_IsApproved] DEFAULT (0) FOR [IsApproved]
+GO
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'DF_{objectQualifier}DnnForge_NewsArticles_Article_NumberOfViews') and OBJECTPROPERTY(id, N'IsConstraint') = 1)
+ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article ADD 
+	CONSTRAINT [DF_{objectQualifier}DnnForge_NewsArticles_Article_NumberOfViews] DEFAULT (0) FOR [NumberOfViews]
+GO
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'PK_{objectQualifier}DnnForge_NewsArticles_Category') and OBJECTPROPERTY(id, N'IsPrimaryKey') = 1)
+ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Category ADD 
+	CONSTRAINT [PK_{objectQualifier}DnnForge_NewsArticles_Category] PRIMARY KEY  CLUSTERED 
+	(
+		[CategoryID]
+	)  ON [PRIMARY] 
+GO
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'PK_{objectQualifier}DnnForge_NewsArticles_Comment') and OBJECTPROPERTY(id, N'IsPrimaryKey') = 1)
+ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment ADD 
+	CONSTRAINT [PK_{objectQualifier}DnnForge_NewsArticles_Comment] PRIMARY KEY  CLUSTERED 
+	(
+		[CommentID]
+	)  ON [PRIMARY] 
+GO
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'DF_{objectQualifier}DnnForge_NewsArticles_Comment_CreatedDate') and OBJECTPROPERTY(id, N'IsConstraint') = 1)
+ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment ADD 
+	CONSTRAINT [DF_{objectQualifier}DnnForge_NewsArticles_Comment_CreatedDate] DEFAULT (getdate()) FOR [CreatedDate]
+GO
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'FK_{objectQualifier}DnnForge_NewsArticles_Article_{objectQualifier}DnnForge_NewsArticles_Category') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article ADD 
+	CONSTRAINT [FK_{objectQualifier}DnnForge_NewsArticles_Article_{objectQualifier}DnnForge_NewsArticles_Category] FOREIGN KEY 
+	(
+		[CategoryID]
+	) REFERENCES {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Category (
+		[CategoryID]
+	) ON DELETE CASCADE 
+GO
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'FK_{objectQualifier}DnnForge_NewsArticles_Article_{objectQualifier}Users') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article ADD 
+	CONSTRAINT [FK_{objectQualifier}DnnForge_NewsArticles_Article_{objectQualifier}Users] FOREIGN KEY 
+	(
+		[AuthorID]
+	) REFERENCES {databaseOwner}{objectQualifier}Users (
+		[UserID]
+	) ON DELETE CASCADE 
+GO
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'FK_{objectQualifier}DnnForge_NewsArticles_Category_{objectQualifier}Modules') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Category ADD 
+	CONSTRAINT [FK_{objectQualifier}DnnForge_NewsArticles_Category_{objectQualifier}Modules] FOREIGN KEY 
+	(
+		[ModuleID]
+	) REFERENCES {databaseOwner}{objectQualifier}Modules (
+		[ModuleID]
+	) ON DELETE CASCADE 
+GO
+
+if not exists (select * from dbo.sysobjects where id = object_id(N'FK_{objectQualifier}DnnForge_NewsArticles_Comment_{objectQualifier}DnnForge_NewsArticles_Article') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment ADD 
+	CONSTRAINT [FK_{objectQualifier}DnnForge_NewsArticles_Comment_{objectQualifier}DnnForge_NewsArticles_Article] FOREIGN KEY 
+	(
+		[ArticleID]
+	) REFERENCES {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article (
+		[ArticleID]
+	) ON DELETE CASCADE 
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}DnnForge_NewsArticles_AddArticle') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}DnnForge_NewsArticles_AddArticle
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}DnnForge_NewsArticles_AddCategory') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}DnnForge_NewsArticles_AddCategory
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}DnnForge_NewsArticles_AddComment') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}DnnForge_NewsArticles_AddComment
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}DnnForge_NewsArticles_DeleteArticle') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}DnnForge_NewsArticles_DeleteArticle
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}DnnForge_NewsArticles_DeleteCategory') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}DnnForge_NewsArticles_DeleteCategory
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}DnnForge_NewsArticles_DeleteComment') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}DnnForge_NewsArticles_DeleteComment
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticle') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticle
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleList') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleList
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListByApproved') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListByApproved
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListByAuthor') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListByAuthor
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListByAuthorByApproved') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListByAuthorByApproved
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListBySearchCriteria') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListBySearchCriteria
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCategory') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCategory
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCategoryList') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCategoryList
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetComment') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetComment
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCommentList') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCommentList
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}DnnForge_NewsArticles_UpdateArticle') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}DnnForge_NewsArticles_UpdateArticle
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}DnnForge_NewsArticles_UpdateCategory') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}DnnForge_NewsArticles_UpdateCategory
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}DnnForge_NewsArticles_UpdateComment') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}DnnForge_NewsArticles_UpdateComment
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_AddArticle
+	@CategoryID int,
+	@AuthorID int,
+	@ApproverID int,
+	@CreatedDate datetime,
+	@LastUpdate datetime,
+	@Title nvarchar(255),
+	@Summary nvarchar(4000),
+	@IsApproved bit,
+	@NumberOfViews int
+AS
+
+INSERT INTO {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article (
+	[CategoryID],
+	[AuthorID],
+	[ApproverID],
+	[CreatedDate],
+	[LastUpdate],
+	[Title],
+	[Summary],
+	[IsApproved],
+	[NumberOfViews]
+) VALUES (
+	@CategoryID,
+	@AuthorID,
+	@ApproverID,
+	@CreatedDate,
+	@LastUpdate,
+	@Title,
+	@Summary,
+	@IsApproved,
+	@NumberOfViews
+)
+
+select SCOPE_IDENTITY()
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_AddCategory
+	@ModuleID int,
+	@Name nvarchar(255),
+	@Image nvarchar(255)
+AS
+
+INSERT INTO {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Category (
+	[ModuleID],
+	[Name],
+	[Image]
+) VALUES (
+	@ModuleID,
+	@Name,
+	@Image
+)
+
+select SCOPE_IDENTITY()
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_AddComment
+	@ArticleID int,
+	@UserID int, 
+	@Comment ntext
+AS
+
+INSERT INTO {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment (
+	[ArticleID],
+	[UserID], 
+	[Comment]
+) VALUES (
+	@ArticleID,
+	@UserID, 
+	@Comment
+)
+
+select SCOPE_IDENTITY()
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_DeleteArticle
+	@ArticleID int
+AS
+
+DELETE FROM {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article
+WHERE
+	[ArticleID] = @ArticleID
+
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_DeleteCategory
+	@CategoryID int
+AS
+
+DELETE FROM {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Category
+WHERE
+	[CategoryID] = @CategoryID
+
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_DeleteComment
+	@CommentID int
+AS
+
+DELETE FROM {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment
+WHERE
+	[CommentID] = @CommentID
+
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticle
+	@ArticleID int
+AS
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleList
+	@ModuleID	int
+AS
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListByApproved
+	@ModuleID	int,
+	@IsApproved	bit
+AS
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListByAuthor
+	@ModuleID	int,
+	@AuthorID	int
+AS
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListByAuthorByApproved
+	@ModuleID	int,
+	@AuthorID	int,
+	@IsApproved	bit
+AS
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetArticleListBySearchCriteria
+	@ModuleID	int,
+	@CategoryID	int,
+	@MaxCount	int,
+	@MaxAge		int,
+	@IsApproved	int,
+	@StartDate	datetime,
+	@KeyWords	varchar(255)
+AS
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCategory
+	@CategoryID int
+AS
+
+SELECT
+	[CategoryID],
+	[ModuleID],
+	[Name],
+	[Image]
+FROM
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Category
+WHERE
+	[CategoryID] = @CategoryID
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCategoryList
+	@ModuleID int
+AS
+
+SELECT
+	[CategoryID],
+	[ModuleID],
+	[Name],
+	[Image]
+FROM
+	{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Category
+WHERE
+	[ModuleID] = @ModuleID
+
+ORDER BY Name
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetComment
+	@CommentID int
+AS
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_GetCommentList
+	@ArticleID	int 
+AS
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_UpdateArticle
+	@ArticleID int, 
+	@CategoryID int, 
+	@AuthorID int, 
+	@ApproverID int, 
+	@CreatedDate datetime, 
+	@LastUpdate datetime, 
+	@Title nvarchar(255), 
+	@Summary nvarchar(4000), 
+	@IsApproved bit, 
+	@NumberOfViews int 
+AS
+
+UPDATE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Article SET
+	[CategoryID] = @CategoryID,
+	[AuthorID] = @AuthorID,
+	[ApproverID] = @ApproverID,
+	[CreatedDate] = @CreatedDate,
+	[LastUpdate] = @LastUpdate,
+	[Title] = @Title,
+	[Summary] = @Summary,
+	[IsApproved] = @IsApproved,
+	[NumberOfViews] = @NumberOfViews
+WHERE
+	[ArticleID] = @ArticleID
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_UpdateCategory
+	@CategoryID int, 
+	@ModuleID int, 
+	@Name nvarchar(255), 
+	@Image nvarchar(255) 
+AS
+
+UPDATE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Category SET
+	[ModuleID] = @ModuleID,
+	[Name] = @Name,
+	[Image] = @Image
+WHERE
+	[CategoryID] = @CategoryID
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_UpdateComment
+	@CommentID int, 
+	@ArticleID int, 
+	@UserID int, 
+	@Comment ntext 
+AS
+
+UPDATE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Comment SET
+	[ArticleID] = @ArticleID,
+	[UserID] = @UserID, 
+	[Comment] = @Comment
+WHERE
+	[CommentID] = @CommentID
+GO

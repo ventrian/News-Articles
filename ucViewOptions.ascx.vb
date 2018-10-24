@@ -5,6 +5,7 @@
 '
 
 Imports System.IO
+Imports System.Linq
 
 Imports DotNetNuke.Common.Utilities
 Imports DotNetNuke.Entities.Modules
@@ -15,6 +16,8 @@ Imports DotNetNuke.Services.Localization
 Imports Ventrian.NewsArticles.Components.Types
 Imports DotNetNuke.Services.FileSystem
 Imports DotNetNuke.Entities.Portals
+Imports DotNetNuke.Entities.Tabs
+Imports DotNetNuke.Entities.Users
 
 Imports Ventrian.NewsArticles.Base
 
@@ -22,6 +25,16 @@ Namespace Ventrian.NewsArticles
 
     Partial Public Class ucViewOptions
         Inherits NewsArticleModuleBase
+
+                
+        '''<summary>
+        '''ctlWatermarkImage control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents ctlWatermarkImage As DotNetNuke.UI.UserControls.UrlControl
 
 #Region " Private Methods "
 
@@ -60,13 +73,12 @@ Namespace Ventrian.NewsArticles
 
         Private Sub BindRoles()
 
-            Dim objRole As New RoleController
-
             Dim availableRoles As ArrayList = New ArrayList
-            Dim roles As ArrayList
+            Dim roles As IList(Of RoleInfo)
             If (drpSecurityRoleGroups.SelectedValue = "-1") Then
-                roles = objRole.GetPortalRoles(PortalId)
+                roles = RoleController.Instance.GetRoles(PortalId)
             Else
+                Dim objRole As New RoleController
                 roles = objRole.GetRolesByGroup(PortalId, Convert.ToInt32(drpSecurityRoleGroups.SelectedValue))
             End If
 
@@ -290,7 +302,11 @@ Namespace Ventrian.NewsArticles
 
         Private Sub BindTimeZone()
 
-            DotNetNuke.Services.Localization.Localization.LoadTimeZoneDropDownList(drpTimeZone, BasePage.PageCulture.Name, Convert.ToString(PortalSettings.TimeZoneOffset))
+            drpTimeZone.Items.Clear()
+            For Each tz As TimeZoneInfo In TimeZoneInfo.GetSystemTimeZones()
+                drpTimeZone.Items.Add(New ListItem(tz.DisplayName, tz.BaseUtcOffset.TotalMinutes))
+            Next
+            'DotNetNuke.Services.Localization.Localization.LoadTimeZoneDropDownList(drpTimeZone, BasePage.PageCulture.Name, Convert.ToString(PortalSettings.TimeZoneOffset))
 
         End Sub
 
@@ -1367,7 +1383,7 @@ Namespace Ventrian.NewsArticles
 
         Public Function GetAuthorList(ByVal moduleID As Integer) As ArrayList
 
-            Dim moduleSettings As Hashtable = DotNetNuke.Entities.Portals.PortalSettings.GetModuleSettings(moduleID)
+            Dim moduleSettings As Hashtable = Common.GetModuleSettings(moduleID)
             Dim distributionList As String = ""
             Dim userList As New ArrayList
 
@@ -1384,11 +1400,11 @@ Namespace Ventrian.NewsArticles
                         Dim objRole As DotNetNuke.Security.Roles.RoleInfo = objRoleController.GetRoleByName(PortalSettings.PortalId, role)
 
                         If Not (objRole Is Nothing) Then
-                            Dim objUsers As ArrayList = objRoleController.GetUserRolesByRoleName(PortalSettings.PortalId, objRole.RoleName)
-                            For Each objUser As DotNetNuke.Entities.Users.UserRoleInfo In objUsers
+                            Dim objUsers As List(Of UserInfo) = RoleController.Instance.GetUsersByRole(PortalSettings.PortalId, objRole.RoleName)
+                            For Each objUser As UserInfo In objUsers
                                 If (userIDs.Contains(objUser.UserID) = False) Then
-                                    Dim objUserController As DotNetNuke.Entities.Users.UserController = New DotNetNuke.Entities.Users.UserController
-                                    Dim objSelectedUser As DotNetNuke.Entities.Users.UserInfo = objUserController.GetUser(PortalSettings.PortalId, objUser.UserID)
+                                    Dim objUserController As UserController = New DotNetNuke.Entities.Users.UserController
+                                    Dim objSelectedUser As UserInfo = objUserController.GetUser(PortalSettings.PortalId, objUser.UserID)
                                     If Not (objSelectedUser Is Nothing) Then
                                         If (objSelectedUser.Email.Length > 0) Then
                                             userIDs.Add(objUser.UserID, objUser.UserID)
@@ -1420,14 +1436,13 @@ Namespace Ventrian.NewsArticles
 
                 If (objPortal.PortalID <> Me.PortalId) Then
 
-                    Dim objDesktopModuleController As New DesktopModuleController
-                    Dim objDesktopModuleInfo As DesktopModuleInfo = objDesktopModuleController.GetDesktopModuleByModuleName("DnnForge - NewsArticles")
+                    Dim objDesktopModuleInfo As DesktopModuleInfo = DesktopModuleController.GetDesktopModuleByModuleName("DnnForge - NewsArticles", PortalSettings.PortalId)
 
                     If Not (objDesktopModuleInfo Is Nothing) Then
 
                         Dim objTabController As New DotNetNuke.Entities.Tabs.TabController()
-                        Dim objTabs As ArrayList = objTabController.GetTabs(objPortal.PortalID)
-                        For Each objTab As DotNetNuke.Entities.Tabs.TabInfo In objTabs
+                        Dim objTabs As TabCollection = objTabController.GetTabsByPortal(objPortal.PortalID)
+                        For Each objTab As DotNetNuke.Entities.Tabs.TabInfo In objTabs.Values
                             If Not (objTab Is Nothing) Then
                                 If (objTab.IsDeleted = False) Then
                                     Dim objModules As New ModuleController
@@ -1458,10 +1473,9 @@ Namespace Ventrian.NewsArticles
                                                     If (add) Then
                                                         Dim objListItem As New ListItem
                                                         objListItem.Value = objPortal.PortalID.ToString() & "-" & objTab.TabID.ToString() & "-" & objModule.ModuleID.ToString()
-                                                        Dim o As New PortalAliasController
-                                                        Dim aliases As ArrayList = o.GetPortalAliasArrayByPortalID(objPortal.PortalID)
+                                                        Dim aliases As IEnumerable(Of PortalAliasInfo) = PortalAliasController.Instance.GetPortalAliasesByPortalId(objPortal.PortalID)
                                                         If (aliases.Count > 0) Then
-                                                            objListItem.Text = DotNetNuke.Common.AddHTTP(CType(aliases(0), PortalAliasInfo).HTTPAlias) & " -> " & strPath & " -> " & objModule.ModuleTitle
+                                                            objListItem.Text = DotNetNuke.Common.AddHTTP(aliases(0).HTTPAlias) & " -> " & strPath & " -> " & objModule.ModuleTitle
                                                         Else
                                                             objListItem.Text = objPortal.PortalName & " -> " & strPath & " -> " & objModule.ModuleTitle
                                                         End If

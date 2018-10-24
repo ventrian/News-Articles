@@ -26,6 +26,7 @@ Imports Ventrian.NewsArticles.Base
 Imports DotNetNuke.Web.Client.ClientResourceManagement
 Imports DotNetNuke.Web.Client
 Imports DotNetNuke.Services.Cache
+Imports DotNetNuke.Services.FileSystem
 
 Namespace Ventrian.NewsArticles
 
@@ -134,7 +135,7 @@ Namespace Ventrian.NewsArticles
 
         Private ReadOnly Property UserId() As Integer
             Get
-                Return UserController.GetCurrentUserInfo().UserID
+                Return UserController.Instance.GetCurrentUserInfo().UserID
             End Get
         End Property
 
@@ -321,8 +322,7 @@ Namespace Ventrian.NewsArticles
                 Return imageUrl
             Else
                 If (imageUrl.ToLower().StartsWith("fileid=")) Then
-                    Dim objFileController As DotNetNuke.Services.FileSystem.FileController = New DotNetNuke.Services.FileSystem.FileController
-                    Dim objFile As DotNetNuke.Services.FileSystem.FileInfo = objFileController.GetFileById(Convert.ToInt32(UrlUtils.GetParameterValue(imageUrl)), PortalSettings.PortalId)
+                    Dim objFile As DotNetNuke.Services.FileSystem.FileInfo = FileManager.Instance.GetFile(Convert.ToInt32(UrlUtils.GetParameterValue(imageUrl)))
                     If Not (objFile Is Nothing) Then
                         If (objFile.StorageLocation = 1) Then
                             ' Secure Url
@@ -1773,7 +1773,7 @@ Namespace Ventrian.NewsArticles
                             Dim isAuthor As Boolean = False
 
                             If (Request.IsAuthenticated) Then
-                                Dim objUser As UserInfo = UserController.GetCurrentUserInfo()
+                                Dim objUser As UserInfo = UserController.Instance.GetCurrentUserInfo()
                                 If (objUser IsNot Nothing) Then
                                     If (objUser.UserID = objArticle.AuthorID) Then
                                         isAuthor = True
@@ -2799,7 +2799,7 @@ Namespace Ventrian.NewsArticles
                                                 Dim objLiteral As New Literal
                                                 objLiteral.Text = profilePropertyValue
                                                 Dim objListController As New ListController
-                                                Dim objListEntryInfoCollection As ListEntryInfoCollection = objListController.GetListEntryInfoCollection(profilePropertyName)
+                                                Dim objListEntryInfoCollection As IEnumerable(Of ListEntryInfo) = objListController.GetListEntryInfoItems(profilePropertyName)
                                                 For Each objListEntryInfo As ListEntryInfo In objListEntryInfoCollection
                                                     If objListEntryInfo.Value = profilePropertyValue Then
                                                         objLiteral.Text = objListEntryInfo.Text
@@ -4357,7 +4357,7 @@ Namespace Ventrian.NewsArticles
                                                 Dim objLiteral As New Literal
                                                 objLiteral.Text = profilePropertyValue
                                                 Dim objListController As New ListController
-                                                Dim objListEntryInfoCollection As ListEntryInfoCollection = objListController.GetListEntryInfoCollection(profilePropertyName)
+                                                Dim objListEntryInfoCollection As IEnumerable(Of ListEntryInfo) = objListController.GetListEntryInfoItems(profilePropertyName)
                                                 For Each objListEntryInfo As ListEntryInfo In objListEntryInfoCollection
                                                     If objListEntryInfo.Value = profilePropertyValue Then
                                                         objLiteral.Text = objListEntryInfo.Text

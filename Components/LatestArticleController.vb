@@ -10,7 +10,7 @@ Namespace Ventrian.NewsArticles
         Public Function ExportModule(ByVal ModuleID As Integer) As String Implements IPortable.ExportModule
 
             Dim objModuleController As New ModuleController
-            Dim settings As Hashtable = objModuleController.GetModuleSettings(ModuleID)
+            Dim settings As Hashtable = Common.GetModuleSettings(ModuleID)
 
             Dim objLatestLayoutController As New LatestLayoutController()
 

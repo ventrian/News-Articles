@@ -1,0 +1,13 @@
+﻿DROP PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_DeleteCustomValue
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_DeleteCustomValue 
+	@ArticleID int,
+	@CustomFieldID int
+AS
+
+DELETE FROM {databaseOwner}{objectQualifier}DnnForge_NewsArticles_CustomValue
+WHERE
+	[ArticleID] = @ArticleID AND 
+	[CustomFieldID] = @CustomFieldID
+GO

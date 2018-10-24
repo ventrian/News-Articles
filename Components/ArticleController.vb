@@ -30,7 +30,7 @@ Namespace Ventrian.NewsArticles
 
             Dim objArticles As New List(Of ArticleInfo)
             While dr.Read
-                objArticles.Add(CType(CBO.FillObject(dr, GetType(ArticleInfo), False), ArticleInfo))
+                objArticles.Add(CBO.FillObject(Of ArticleInfo)(dr, False))
             End While
 
             Dim nextResult As Boolean = dr.NextResult()
@@ -124,7 +124,7 @@ Namespace Ventrian.NewsArticles
             Dim objArticle As ArticleInfo = CType(DataCache.GetCache(cacheKey), ArticleInfo)
 
             If (objArticle Is Nothing) Then
-                objArticle = CType(CBO.FillObject(DataProvider.Instance().GetArticle(articleID), GetType(ArticleInfo)), ArticleInfo)
+                objArticle = CBO.FillObject(Of ArticleInfo)(DataProvider.Instance().GetArticle(articleID))
                 If (objArticle Is Nothing) Then
                     Return Nothing
                 End If
@@ -288,8 +288,7 @@ Namespace Ventrian.NewsArticles
 
         Public Function GetSearchItems(ByVal ModInfo As DotNetNuke.Entities.Modules.ModuleInfo) As DotNetNuke.Services.Search.SearchItemInfoCollection Implements DotNetNuke.Entities.Modules.ISearchable.GetSearchItems
 
-            Dim objModuleController As New ModuleController
-            Dim settings As Hashtable = objModuleController.GetModuleSettings(ModInfo.ModuleID)
+            Dim settings As Hashtable = Common.GetModuleSettings(ModInfo.ModuleID)
             settings = GetTabModuleSettings(ModInfo.TabModuleID, settings)
 
             Dim doSearch As Boolean = False

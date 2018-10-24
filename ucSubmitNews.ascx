@@ -12,9 +12,6 @@
 
 <article:Header runat="server" id="ucHeader1" SelectedMenu="SubmitArticle" MenuPosition="Top" />
 
-<dnn:DnnJsInclude runat="server" FilePath="~/DesktopModules/DnnForge - NewsArticles/Includes/Uploader/swfupload.00.07.61.js" />
-<dnn:DnnJsInclude runat="server" FilePath="~/DesktopModules/DnnForge - NewsArticles/Includes/Uploader/handlers.00.07.61.js" />
-
 <asp:PlaceHolder ID="phMirrorText" runat="server" Visible="false">
     <div align="center"><asp:Label ID="lblMirrorText" runat="server" cssclass="Normal" /></div>
 </asp:PlaceHolder>

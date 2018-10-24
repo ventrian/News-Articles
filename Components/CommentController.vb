@@ -56,7 +56,7 @@ Namespace Ventrian.NewsArticles
 
         Public Function GetComment(ByVal commentID As Integer) As CommentInfo
 
-            Return CType(CBO.FillObject(DataProvider.Instance().GetComment(commentID), GetType(CommentInfo)), CommentInfo)
+            Return CBO.FillObject(Of CommentInfo)(DataProvider.Instance().GetComment(commentID))
 
         End Function
 

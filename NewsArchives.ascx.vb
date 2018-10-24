@@ -40,12 +40,11 @@ Namespace Ventrian.NewsArticles
             Get
                 If (_articleSettings Is Nothing) Then
 
-                    Dim objModuleController As New ModuleController()
-                    Dim _settings As Hashtable = objModuleController.GetModuleSettings(ArchiveSettings.ModuleId)
+                    Dim _settings As Hashtable = Common.GetModuleSettings(ArchiveSettings.ModuleId)
 
-                    Dim objModule As ModuleInfo = objModuleController.GetModule(ArchiveSettings.ModuleId, ArchiveSettings.TabId)
+                    Dim objModule As ModuleInfo = Common.GetModuleInfo(ArchiveSettings.ModuleId, ArchiveSettings.TabId)
                     If Not (objModule Is Nothing) Then
-                        Dim tabModuleSettings As Hashtable = objModuleController.GetTabModuleSettings(objModule.TabModuleID)
+                        Dim tabModuleSettings As Hashtable = objModule.TabModuleSettings
                         For Each strKey As String In tabModuleSettings.Keys
                             _settings(strKey) = tabModuleSettings(strKey)
                         Next
@@ -197,7 +196,7 @@ Namespace Ventrian.NewsArticles
                     Exit Sub
                 End If
 
-                Dim newsSettings As Hashtable = objModuleSettingController.GetTabModuleSettings(mi.TabModuleID)
+                Dim newsSettings As Hashtable = mi.TabModuleSettings
                 Dim excludeCategoriesRestrictive As New List(Of Integer)
 
                 For Each objCategory As CategoryInfo In Categories
@@ -338,7 +337,7 @@ Namespace Ventrian.NewsArticles
                     Exit Sub
                 End If
 
-                Dim moduleSettings As Hashtable = objModuleSettingController.GetModuleSettings(mi.ModuleID)
+                Dim moduleSettings As Hashtable = mi.ModuleSettings
 
                 Dim objCategoriesSelected As New List(Of CategoryInfo)
                 Dim objCategories As List(Of CategoryInfo) = objCategoryController.GetCategoriesAll(ArchiveSettings.ModuleId, parentID, Nothing, authorId, ArchiveSettings.CategoryMaxDepth, ArticleSettings.ShowPending, ArticleSettings.CategorySortType)
@@ -381,7 +380,7 @@ Namespace Ventrian.NewsArticles
 
             Dim mi As ModuleInfo = objModuleSettingController.GetModule(ArchiveSettings.ModuleId, ArchiveSettings.TabId)
             If Not (mi Is Nothing) Then
-                Dim newsSettings As Hashtable = objModuleSettingController.GetTabModuleSettings(mi.TabModuleID)
+                Dim newsSettings As Hashtable = mi.TabModuleSettings
                 
                 Dim authorId As Integer = Null.NullInteger
                 If (ArticleSettings.AuthorLoggedInUserFilter) Then

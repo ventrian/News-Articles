@@ -18,13 +18,15 @@
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <TargetFrameworkProfile />
+    <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,31 +34,37 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>..\..\bin\</OutputPath>
-    <DocumentationFile>Ventrian.xml</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
     <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42353,42354,42355</NoWarn>
     <WarningsAsErrors>
     </WarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <DefineDebug>false</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
-    <OutputPath>bin\</OutputPath>
-    <DocumentationFile>Ventrian.xml</DocumentationFile>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DocumentationFile>
+    </DocumentationFile>
     <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42353,42354,42355</NoWarn>
     <WarningsAsErrors>
     </WarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CookComputing.XmlRpc, Version=2.1.0.3, Culture=neutral, PublicKeyToken=a7d6e17aa302004d" />
-    <Reference Include="DotNetNuke, Version=6.2.3.141, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="DotNetNuke, Version=8.0.4.226, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\DotNetNuke482\Website\Bin\DotNetNuke.dll</HintPath>
+      <HintPath>Libraries\DotNetNuke.dll</HintPath>
+      <Private>False</Private>
     </Reference>
-    <Reference Include="DotNetNuke.Web.Client, Version=6.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="DotNetNuke.Web.Client, Version=8.0.4.226, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\bin\DotNetNuke.Web.Client.dll</HintPath>
+      <HintPath>Libraries\DotNetNuke.Web.Client.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="ephtmltopdf, Version=4.0.6.31734, Culture=neutral, PublicKeyToken=5b5f377bc08a4d32, processorArchitecture=MSIL" />
     <Reference Include="Joel.Net.Akismet, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL" />
@@ -65,6 +73,9 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
@@ -73,7 +84,8 @@
     <Reference Include="System.Web.Mobile" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Ventrian.ImageResizer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <Private>False</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libraries\Ventrian.ImageResizer.dll</HintPath>
     </Reference>
     <Reference Include="Ventrian.NewsArticles.Secure, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
   </ItemGroup>
@@ -153,7 +165,6 @@
     <Compile Include="Components\Utility\LocalizationUtil.vb" />
     <Compile Include="Components\WebControls\RefreshControl.vb" />
     <Compile Include="Providers\FileProvider\FileController.vb" />
-    <Compile Include="Providers\FileProvider\CoreFileProvider2.vb" />
     <Compile Include="Providers\FileProvider\FileInfo.vb" />
     <Compile Include="Components\ImageController.vb" />
     <Compile Include="Components\ImageInfo.vb" />
@@ -214,12 +225,8 @@
     <Compile Include="Components\Types\MenuPositionType.vb" />
     <Compile Include="Components\Types\TextEditorModeType.vb" />
     <Compile Include="Components\UserTime.vb" />
-    <Compile Include="Components\Validators\CheckBoxListValidator.vb" />
     <Compile Include="Components\WatermarkPosition.vb" />
     <Compile Include="Components\WebControls\PagingControl.vb" />
-    <Compile Include="Controls\SWFUploaderFiles.ashx.vb">
-      <DependentUpon>SWFUploaderFiles.ashx</DependentUpon>
-    </Compile>
     <Compile Include="Controls\UploadFiles.ascx.designer.vb">
       <DependentUpon>UploadFiles.ascx</DependentUpon>
     </Compile>
@@ -247,9 +254,6 @@
     <Compile Include="Controls\PostRating.ascx.vb">
       <DependentUpon>PostRating.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Controls\SWFUploader.ashx.vb">
-      <DependentUpon>SWFUploader.ashx</DependentUpon>
     </Compile>
     <Compile Include="Controls\UploadImages.ascx.designer.vb">
       <DependentUpon>UploadImages.ascx</DependentUpon>
@@ -807,21 +811,9 @@
     <Content Include="Images\Uploader\uploadlimit.gif" />
     <Content Include="Images\Uploader\XPButtonNoText_160x22.png" />
     <Content Include="Images\Uploader\zerobyte.gif" />
-    <Content Include="Images\Includes\ColorPicker\ColorPicker.js" />
-    <Content Include="Images\Includes\Lightbox\jquery-1.3.2.min.js" />
-    <Content Include="Images\Includes\Lightbox\jquery.lightbox-0.4.js" />
-    <Content Include="Images\Includes\Lightbox\jquery.lightbox-0.4.pack.js" />
-    <Content Include="Images\Includes\Uploader\handlers.00.07.61.js" />
-    <Content Include="Images\Includes\Uploader\swfupload.00.07.61.js" />
-    <Content Include="Images\Includes\Uploader\swfupload.00.07.61.swf" />
     <Content Include="Includes\ColorPicker\ColorPicker.js" />
-    <Content Include="Includes\Lightbox\jquery-1.3.2.min.js" />
     <Content Include="Includes\Lightbox\jquery.lightbox-0.4.js" />
     <Content Include="Includes\Lightbox\jquery.lightbox-0.4.pack.js" />
-    <Content Include="Includes\Uploader\handlers.00.07.61.js" />
-    <Content Include="Includes\Uploader\swfupload.00.07.61.js" />
-    <Content Include="Includes\Uploader\swfupload.00.07.61.swf" />
-    <Content Include="Includes\VentrianValidators.js" />
     <Content Include="LatestComments.ascx" />
     <Content Include="LatestCommentsOptions.ascx" />
     <Content Include="Libraries\Joel.Net.Akismet.dll" />
@@ -841,7 +833,6 @@
     <Content Include="Images\SmartThinker\articleadd.png" />
     <Content Include="Images\SmartThinker\commentadd.png" />
     <Content Include="Images\SmartThinker\rateadd.png" />
-    <Content Include="Images\Includes\Handout.xml" />
     <Content Include="Libraries\ephtmltopdf.dll" />
     <Content Include="Libraries\Ventrian.NewsArticles.Secure.dll" />
     <Content Include="NewsSearch.ascx" />
@@ -884,11 +875,8 @@
     <Content Include="ucEditTags.ascx" />
     <Content Include="ViewSearch.ascx" />
     <Content Include="ImageHandler.ashx" />
-    <Content Include="Controls\SWFUploader.ashx" />
-    <Content Include="Controls\SWFUploaderFiles.ashx" />
     <Content Include="API\MetaWebLog\Handler.ashx" />
     <Content Include="API\Rsd.ashx" />
-    <None Include="Images\Includes\Handout.xsd" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -901,7 +889,6 @@
     <None Include="NewsArticles.dnn">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Images\Includes\VentrianValidators.js" />
     <Content Include="Templates\Standard\Comment.Item.html" />
     <Content Include="Templates\Standard\Listing.Featured.html" />
     <Content Include="Templates\Standard\Images\rssbutton.gif" />
@@ -991,9 +978,9 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>55764</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/DotNetNuke455</IISUrl>
+          <IISUrl>http://europedirect.dnndev.me</IISUrl>
           <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
-          <IISAppRootUrl>http://localhost/DotNetNuke455</IISAppRootUrl>
+          <IISAppRootUrl>http://europedirect.dnndev.me</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
