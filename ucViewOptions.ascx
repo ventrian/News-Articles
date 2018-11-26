@@ -197,9 +197,23 @@
 								<td valign="top"><asp:checkbox id="chkEnableCommentModeration" Runat="server" CssClass="NormalTextBox"></asp:checkbox></td>
 							</tr>
 							<tr>
-								<td class="SubHead" width="200"><dnn:label id="plUseCaptcha" resourcekey="UseCaptcha" runat="server" controlname="chkUseCaptcha"></dnn:label></td>
-								<td valign="top"><asp:checkbox id="chkUseCaptcha" Runat="server"></asp:checkbox></td>
+								<td class="SubHead" width="200"><dnn:label id="plCaptchaType" resourcekey="CaptchaType" runat="server" controlname="drpCaptchaType"></dnn:label></td>
+								<td valign="top">
+								    <asp:dropdownlist id="drpCaptchaType" Runat="server" CssClass="NormalTextBox"></asp:dropdownlist>
+								</td>
 							</tr>
+						    <tr>
+						        <td class="SubHead" width="200"><dnn:label id="plReCaptchaSiteKey" runat="server" resourcekey="reCaptchaSiteKey" suffix=":" controlname="txtReCaptchaSiteKey"></dnn:label></td>
+						        <td valign="top">
+						            <asp:TextBox id="txtReCaptchaSiteKey" Runat="server" CssClass="NormalTextBox" MaxLength="50" />
+						        </td>
+						    </tr>
+						    <tr>
+						        <td class="SubHead" width="200"><dnn:label id="plReCaptchaSecretKey" runat="server" resourcekey="reCaptchaSecretKey" suffix=":" controlname="txtReCaptchaSecretKey"></dnn:label></td>
+						        <td valign="top">
+						            <asp:TextBox id="txtReCaptchaSecretKey" Runat="server" CssClass="NormalTextBox" MaxLength="50" />
+						        </td>
+						    </tr>
 							<tr>
 								<td class="SubHead" width="200"><dnn:label id="plHideWebsite" resourcekey="HideWebsite" runat="server" controlname="chkHideWebsite"></dnn:label></td>
 								<td valign="top"><asp:checkbox id="chkHideWebsite" Runat="server"></asp:checkbox></td>

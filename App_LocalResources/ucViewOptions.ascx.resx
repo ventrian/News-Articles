@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ArticleSettings.Text" xml:space="preserve">
     <value>Article Settings</value>
@@ -437,12 +437,6 @@
   </data>
   <data name="CommentSettings.Text" xml:space="preserve">
     <value>Comment Settings</value>
-  </data>
-  <data name="UseCaptcha.Help" xml:space="preserve">
-    <value>Check to use captcha validation on the post comment screen.</value>
-  </data>
-  <data name="UseCaptcha.Text" xml:space="preserve">
-    <value>Use Captcha?</value>
   </data>
   <data name="EnableCommentModeration.Help" xml:space="preserve">
     <value>Check to require comments to be moderated before posting.</value>
@@ -1196,5 +1190,35 @@
   </data>
   <data name="plJournalIntegrationGroups.Text" xml:space="preserve">
     <value>Journal Group Posting</value>
+  </data>
+  <data name="CaptchaType.Help" xml:space="preserve">
+    <value>Select the type of captcha to use on the post comment screen.</value>
+  </data>
+  <data name="CaptchaType.Text" xml:space="preserve">
+    <value>Captcha Type</value>
+  </data>
+  <data name="CaptchaTypeDnnCore.Text" xml:space="preserve">
+    <value>Core DNN Captcha</value>
+  </data>
+  <data name="CaptchaTypeHoneypot.Text" xml:space="preserve">
+    <value>Use a Honepot control</value>
+  </data>
+  <data name="CaptchaTypeNone.Text" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="CaptchaTypeReCaptcha.Text" xml:space="preserve">
+    <value>Google reCaptcha</value>
+  </data>
+  <data name="reCaptchaSecretKey.Text" xml:space="preserve">
+    <value>reCaptcha Secret Key</value>
+  </data>
+  <data name="reCaptchaSiteKey.Text" xml:space="preserve">
+    <value>reCaptcha Site Key</value>
+  </data>
+  <data name="reCaptchaSecretKey.Help" xml:space="preserve">
+    <value>Google reCaptcha Secret Key, only needed when CaptchaType is set to reCaptcha.</value>
+  </data>
+  <data name="reCaptchaSiteKey.Help" xml:space="preserve">
+    <value>Google reCaptcha Site Key, only needed when CaptchaType is set to reCaptcha.</value>
   </data>
 </root>

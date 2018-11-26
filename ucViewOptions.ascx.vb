@@ -26,7 +26,7 @@ Namespace Ventrian.NewsArticles
     Partial Public Class ucViewOptions
         Inherits NewsArticleModuleBase
 
-                
+
         '''<summary>
         '''ctlWatermarkImage control.
         '''</summary>
@@ -128,6 +128,17 @@ Namespace Ventrian.NewsArticles
                 li.Value = System.Enum.GetName(GetType(DisplayType), value)
                 li.Text = Localization.GetString(System.Enum.GetName(GetType(DisplayType), value), Me.LocalResourceFile)
                 drpDisplayType.Items.Add(li)
+            Next
+
+        End Sub
+
+        Private Sub BindCaptchaTypes()
+
+            For Each value As Integer In System.Enum.GetValues(GetType(CaptchaType))
+                Dim li As New ListItem
+                li.Value = System.Enum.GetName(GetType(CaptchaType), value)
+                li.Text = Localization.GetString($"CaptchaType{System.Enum.GetName(GetType(CaptchaType), value)}", Me.LocalResourceFile)
+                drpCaptchaType.Items.Add(li)
             Next
 
         End Sub
@@ -587,10 +598,26 @@ Namespace Ventrian.NewsArticles
                 chkRequireEmail.Checked = True
             End If
 
+            Dim selectCaptchaType As CaptchaType = CaptchaType.None
             If (Settings.Contains(ArticleConstants.USE_CAPTCHA_SETTING)) Then
-                chkUseCaptcha.Checked = Convert.ToBoolean(Settings(ArticleConstants.USE_CAPTCHA_SETTING).ToString())
+                'there's an existing module setting, so make sure we don't change behavior for that
+                If Convert.ToBoolean(Settings(ArticleConstants.USE_CAPTCHA_SETTING).ToString()) Then
+                    selectCaptchaType = CaptchaType.DnnCore
+                End If
             Else
-                chkUseCaptcha.Checked = False
+                If (Settings.Contains(ArticleConstants.CAPTCHATYPE_SETTING)) Then
+                    selectCaptchaType =  CType(System.Enum.Parse(GetType(CaptchaType), Settings(ArticleConstants.CAPTCHATYPE_SETTING)), CaptchaType)
+                End If
+            End If
+            Dim selectedItem As ListItem = drpCaptchaType.Items.FindByValue(selectCaptchaType.ToString())
+            drpCaptchaType.SelectedIndex = drpCaptchaType.Items.IndexOf(selectedItem)
+            
+            If (Settings.Contains(ArticleConstants.RECAPTCHA_SITEKEY_SETTING)) Then
+                txtReCaptchaSiteKey.Text = Settings(ArticleConstants.RECAPTCHA_SITEKEY_SETTING).ToString()
+            End If
+            
+            If (Settings.Contains(ArticleConstants.RECAPTCHA_SECRETKEY_SETTING)) Then
+                txtReCaptchaSecretKey.Text = Settings(ArticleConstants.RECAPTCHA_SECRETKEY_SETTING).ToString()
             End If
 
             If (Settings.Contains(ArticleConstants.NOTIFY_DEFAULT_SETTING)) Then
@@ -619,7 +646,13 @@ Namespace Ventrian.NewsArticles
             objModules.UpdateTabModuleSetting(TabModuleId, ArticleConstants.COMMENT_HIDE_WEBSITE_SETTING, chkHideWebsite.Checked.ToString())
             objModules.UpdateTabModuleSetting(TabModuleId, ArticleConstants.COMMENT_REQUIRE_NAME_SETTING, chkRequireName.Checked.ToString())
             objModules.UpdateTabModuleSetting(TabModuleId, ArticleConstants.COMMENT_REQUIRE_EMAIL_SETTING, chkRequireEmail.Checked.ToString())
-            objModules.UpdateTabModuleSetting(TabModuleId, ArticleConstants.USE_CAPTCHA_SETTING, chkUseCaptcha.Checked.ToString())
+            'This is only for upgraded modules
+            If Settings.ContainsKey(ArticleConstants.USE_CAPTCHA_SETTING) Then
+                objModules.DeleteTabModuleSetting(TabModuleId, ArticleConstants.USE_CAPTCHA_SETTING)
+            End If
+            objModules.UpdateTabModuleSetting(TabModuleId, ArticleConstants.CAPTCHATYPE_SETTING, drpCaptchaType.SelectedValue)
+            objModules.UpdateTabModuleSetting(TabModuleId, ArticleConstants.RECAPTCHA_SITEKEY_SETTING, txtReCaptchaSiteKey.Text)
+            objModules.UpdateTabModuleSetting(TabModuleId, ArticleConstants.RECAPTCHA_SECRETKEY_SETTING, txtReCaptchaSecretKey.Text)
             objModules.UpdateTabModuleSetting(TabModuleId, ArticleConstants.NOTIFY_DEFAULT_SETTING, chkNotifyDefault.Checked.ToString())
             objModules.UpdateTabModuleSetting(TabModuleId, ArticleConstants.COMMENT_SORT_DIRECTION_SETTING, drpSortDirectionComments.SelectedValue)
             objModules.UpdateModuleSetting(ModuleId, ArticleConstants.COMMENT_AKISMET_SETTING, txtAkismetKey.Text)
@@ -1570,6 +1603,7 @@ Namespace Ventrian.NewsArticles
 
                     BindCategorySortOrder()
                     BindDisplayTypes()
+                    BindCaptchaTypes()
                     BindAuthorSelection()
                     BindTextEditorMode()
                     BindPageSize()

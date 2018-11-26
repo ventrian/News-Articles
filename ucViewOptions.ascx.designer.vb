@@ -681,22 +681,58 @@ Namespace Ventrian.NewsArticles
         Protected WithEvents chkEnableCommentModeration As Global.System.Web.UI.WebControls.CheckBox
         
         '''<summary>
-        '''plUseCaptcha control.
+        '''plCaptchaType control.
         '''</summary>
         '''<remarks>
         '''Auto-generated field.
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
-        Protected WithEvents plUseCaptcha As Global.System.Web.UI.UserControl
+        Protected WithEvents plCaptchaType As Global.System.Web.UI.UserControl
         
         '''<summary>
-        '''chkUseCaptcha control.
+        '''drpCaptchaType control.
         '''</summary>
         '''<remarks>
         '''Auto-generated field.
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
-        Protected WithEvents chkUseCaptcha As Global.System.Web.UI.WebControls.CheckBox
+        Protected WithEvents drpCaptchaType As Global.System.Web.UI.WebControls.DropDownList
+        
+        '''<summary>
+        '''plReCaptchaSiteKey control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents plReCaptchaSiteKey As Global.System.Web.UI.UserControl
+        
+        '''<summary>
+        '''txtReCaptchaSiteKey control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents txtReCaptchaSiteKey As Global.System.Web.UI.WebControls.TextBox
+        
+        '''<summary>
+        '''plReCaptchaSecretKey control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents plReCaptchaSecretKey As Global.System.Web.UI.UserControl
+        
+        '''<summary>
+        '''txtReCaptchaSecretKey control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents txtReCaptchaSecretKey As Global.System.Web.UI.WebControls.TextBox
         
         '''<summary>
         '''plHideWebsite control.
