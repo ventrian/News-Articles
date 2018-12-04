@@ -1445,6 +1445,17 @@ Namespace Ventrian.NewsArticles
 
         End Sub
 
+        Private Sub SetValidationGroup()
+            Dim vgId As String = Guid.NewGuid().ToString()
+
+            valMirrorArticle.ValidationGroup = vgId
+            valTitle.ValidationGroup = vgId
+            valBody.ValidationGroup = vgId
+            valCategory.ValidationGroup = vgId
+            valPublishDateRequired.ValidationGroup = vgId
+            cmdSaveArticle.ValidationGroup = vgId
+        End Sub
+
 #End Region
 
 #Region " Event Handlers "
@@ -1503,6 +1514,7 @@ Namespace Ventrian.NewsArticles
                     BindCategories()
                     SetVisibility()
                     BindArticle()
+                    SetValidationGroup()
 
                     If (ArticleSettings.ContentSharingPortals = "" Or _articleID <> Null.NullInteger) Then
                         phMirror.Visible = False
