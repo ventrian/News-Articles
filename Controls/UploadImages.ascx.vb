@@ -11,6 +11,7 @@ Imports Ventrian.NewsArticles.Base
 Imports System.Drawing
 Imports System.Drawing.Drawing2D
 Imports System.Drawing.Imaging
+Imports System.Linq
 Imports DotNetNuke.Security.Permissions
 Imports DotNetNuke.Services.FileSystem
 
@@ -88,13 +89,20 @@ Namespace Ventrian.NewsArticles.Controls
 #Region " Private Methods "
 
 		Private Sub BindFolders()
-
 			Dim ReadRoles As String = Null.NullString
 			Dim WriteRoles As String = Null.NullString
 
 			drpUploadImageFolder.Items.Clear()
 
-			Dim folders As List(Of IFolderInfo) = FolderManager.Instance.GetFolders(ArticleModuleBase.PortalId, False)
+
+		    Dim folders As New List(Of IFolderInfo)()
+		    If ArticleSettings.DefaultImagesFolder > 0 Then
+		        Dim defaultFolder as IFolderInfo = FolderManager.Instance.GetFolder(ArticleSettings.DefaultImagesFolder)
+		        folders.Add(defaultFolder)
+		        folders.AddRange(FolderManager.Instance.GetFolders(defaultFolder))
+		    Else 
+		        folders.AddRange(FolderManager.Instance.GetFolders(ArticleModuleBase.PortalId, False))
+		    End If
             For Each folder As DotNetNuke.Services.FileSystem.FolderInfo In folders
                 If Not folder.IsProtected Then
                     Dim FolderItem As New ListItem()
@@ -118,19 +126,14 @@ Namespace Ventrian.NewsArticles.Controls
             If (drpUploadImageFolder.Items.FindByValue(ArticleSettings.DefaultImagesFolder.ToString()) IsNot Nothing) Then
 				drpUploadImageFolder.SelectedValue = ArticleSettings.DefaultImagesFolder.ToString()
 			End If
-
 		End Sub
 
 		Private Sub BindImages()
-
-			Dim objImageController As New ImageController()
-
 			dlImages.DataSource = AttachedImages
 			dlImages.DataBind()
 
 			dlImages.Visible = (dlImages.Items.Count > 0)
 			lblNoImages.Visible = (dlImages.Items.Count = 0)
-
 		End Sub
 
 		Protected Function GetArticleID() As String

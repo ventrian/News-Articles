@@ -1,5 +1,7 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="PostComment.ascx.vb" Inherits="Ventrian.NewsArticles.Controls.PostComment" %>
 <%@ Register TagPrefix="dnn" Assembly="DotNetNuke" Namespace="DotNetNuke.UI.WebControls"%>
+<%@ Register TagPrefix="article" TagName="ReCaptcha" Src="ReCaptcha.ascx" %>
+<%@ Register TagPrefix="article" TagName="Honeypot" Src="Honeypot.ascx" %>
 <asp:PlaceHolder ID="phCommentForm" runat="Server">
 <p id="pName" runat="server">
     <asp:textbox id="txtName" cssclass="NormalTextBox" runat="server" />
@@ -25,6 +27,8 @@
 		controltovalidate="txtComment" errormessage="<br>Comment Is Required" display="Dynamic" SetFocusOnError="true" ValidationGroup="PostComment" />
 </p>
 <dnn:captchacontrol id="ctlCaptcha" captchawidth="130" captchaheight="40" cssclass="Normal" runat="server" errorstyle-cssclass="NormalRed" />
+<article:ReCaptcha runat="server" id="ctlReCaptcha" />
+<article:Honeypot runat="server" id="ctlHoneypot" />
 <p>
     <asp:Button ID="btnAddComment" runat="server" Text="Add Comment" ValidationGroup="PostComment" UseSubmitBehavior="False" />
 </p>

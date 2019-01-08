@@ -57,10 +57,10 @@ Namespace Ventrian.NewsArticles
                 Dim role As String
 
                 For Each role In roles.Split(New Char() {";"c})
-                    If (role <> "" AndAlso Not role Is Nothing AndAlso _
-                     ((context.Request.IsAuthenticated = False And role = glbRoleUnauthUserName) Or _
-                     role = glbRoleAllUsersName Or _
-                     objUserInfo.IsInRole(role) = True _
+                    If (role <> "" AndAlso Not role Is Nothing AndAlso
+                     ((context.Request.IsAuthenticated = False And role = glbRoleUnauthUserName) Or
+                     role = glbRoleAllUsersName Or
+                     objUserInfo.IsInRole(role) = True
                      )) Then
                         Return True
                     End If
@@ -939,12 +939,39 @@ Namespace Ventrian.NewsArticles
             End Get
         End Property
 
-        Public ReadOnly Property UseCaptcha() As Boolean
+        Public ReadOnly Property CaptchaType() As CaptchaType
             Get
+                Dim retval As CaptchaType = CaptchaType.None
                 If (Settings.Contains(ArticleConstants.USE_CAPTCHA_SETTING)) Then
-                    Return Convert.ToBoolean(Settings(ArticleConstants.USE_CAPTCHA_SETTING))
+                    'there's an existing module setting, so make sure we don't change behavior for that
+                    If Convert.ToBoolean(Settings(ArticleConstants.USE_CAPTCHA_SETTING).ToString()) Then
+                        retval = CaptchaType.DnnCore
+                    End If
                 Else
-                    Return False
+                    If (Settings.Contains(ArticleConstants.CAPTCHATYPE_SETTING)) Then
+                        retval = CType(System.Enum.Parse(GetType(CaptchaType), Settings(ArticleConstants.CAPTCHATYPE_SETTING)), CaptchaType)
+                    End If
+                End If
+                Return retval
+            End Get
+        End Property
+
+        Public ReadOnly Property ReCaptchaSiteKey() As String
+            Get
+                If Settings.ContainsKey(ArticleConstants.RECAPTCHA_SITEKEY_SETTING) Then
+                    Return Settings(ArticleConstants.RECAPTCHA_SITEKEY_SETTING).ToString()
+                Else
+                    Return ""
+                End If
+            End Get
+        End Property
+
+        Public ReadOnly Property ReCaptchaSecretKey() As String
+            Get
+                If Settings.ContainsKey(ArticleConstants.RECAPTCHA_SECRETKEY_SETTING) Then
+                    Return Settings(ArticleConstants.RECAPTCHA_SECRETKEY_SETTING).ToString()
+                Else
+                    Return ""
                 End If
             End Get
         End Property

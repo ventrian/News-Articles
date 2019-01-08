@@ -1,4 +1,5 @@
 ﻿Imports System
+Imports System.Linq
 Imports DotNetNuke.Common.Utilities
 Imports DotNetNuke.Services.Exceptions
 Imports DotNetNuke.Security
@@ -88,13 +89,19 @@ Namespace Ventrian.NewsArticles.Controls
 		End Sub
 
 		Private Sub BindFolders()
-
 			Dim ReadRoles As String = Null.NullString
 			Dim WriteRoles As String = Null.NullString
 
 			drpUploadFilesFolder.Items.Clear()
 
-			Dim folders As List(Of IFolderInfo) = FolderManager.Instance.GetFolders(ArticleModuleBase.PortalId, False)
+		    Dim folders As New List(Of IFolderInfo)
+		    If ArticleSettings.DefaultFilesFolder > 0 Then
+		        Dim defaultFolder as IFolderInfo = FolderManager.Instance.GetFolder(ArticleSettings.DefaultFilesFolder)
+		        folders.Add(defaultFolder)
+		        folders.AddRange(FolderManager.Instance.GetFolders(defaultFolder))
+            Else 
+                folders.AddRange(FolderManager.Instance.GetFolders(ArticleModuleBase.PortalId, False))
+            End If
             For Each folder As DotNetNuke.Services.FileSystem.FolderInfo In folders
                 If Not folder.IsProtected Then
                     Dim FolderItem As New ListItem()
@@ -118,7 +125,6 @@ Namespace Ventrian.NewsArticles.Controls
             If (drpUploadFilesFolder.Items.FindByValue(ArticleSettings.DefaultFilesFolder.ToString()) IsNot Nothing) Then
 				drpUploadFilesFolder.SelectedValue = ArticleSettings.DefaultFilesFolder.ToString()
 			End If
-
 		End Sub
 
 		Protected Function GetArticleID() As String
