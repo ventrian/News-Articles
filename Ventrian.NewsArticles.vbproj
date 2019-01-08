@@ -61,6 +61,16 @@
       <HintPath>Libraries\DotNetNuke.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="DotNetNuke.Instrumentation, Version=8.0.4.226, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libraries\DotNetNuke.Instrumentation.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DotNetNuke.Log4Net, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libraries\DotNetNuke.Log4Net.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="DotNetNuke.Web.Client, Version=8.0.4.226, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Libraries\DotNetNuke.Web.Client.dll</HintPath>
@@ -164,6 +174,7 @@
     <Compile Include="Components\Social\Journal.vb" />
     <Compile Include="Components\ThumbnailType.vb" />
     <Compile Include="Components\Utility\LocalizationUtil.vb" />
+    <Compile Include="Components\Utility\LogginUtils.vb" />
     <Compile Include="Components\WebControls\RefreshControl.vb" />
     <Compile Include="Controls\Honeypot.ascx.designer.vb">
       <DependentUpon>Honeypot.ascx</DependentUpon>

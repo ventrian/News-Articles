@@ -760,7 +760,7 @@
     <value>Always Show PageID</value>
   </data>
   <data name="plDefaultImageFolder.Help" xml:space="preserve">
-    <value>Select the default image folder.</value>
+    <value>Select the default image folder. Users will only be able to select this folder or its child folders.</value>
   </data>
   <data name="plDefaultImageFolder.Text" xml:space="preserve">
     <value>Default Image Folder:</value>
@@ -976,7 +976,7 @@
     <value>File Settings</value>
   </data>
   <data name="plDefaultFileFolder.Help" xml:space="preserve">
-    <value>Specify the default folder to upload files.</value>
+    <value>Specify the default folder to upload files. Users will only be able to select this folder or its child folders.</value>
   </data>
   <data name="plDefaultFileFolder.Text" xml:space="preserve">
     <value>Default File Folder</value>
