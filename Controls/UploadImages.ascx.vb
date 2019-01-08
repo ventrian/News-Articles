@@ -1,4 +1,5 @@
-﻿Imports System.IO
+﻿Imports System
+Imports System.IO
 
 Imports DotNetNuke.Common.Utilities
 Imports DotNetNuke.Entities.Portals
@@ -10,6 +11,9 @@ Imports Ventrian.NewsArticles.Base
 Imports System.Drawing
 Imports System.Drawing.Drawing2D
 Imports System.Drawing.Imaging
+Imports System.Linq
+Imports DotNetNuke.Security.Permissions
+Imports DotNetNuke.Services.FileSystem
 
 Namespace Ventrian.NewsArticles.Controls
 
@@ -85,24 +89,31 @@ Namespace Ventrian.NewsArticles.Controls
 #Region " Private Methods "
 
 		Private Sub BindFolders()
-
 			Dim ReadRoles As String = Null.NullString
 			Dim WriteRoles As String = Null.NullString
 
 			drpUploadImageFolder.Items.Clear()
 
-			Dim folders As ArrayList = FileSystemUtils.GetFolders(ArticleModuleBase.PortalId)
+
+		    Dim folders As New List(Of IFolderInfo)()
+		    If ArticleSettings.DefaultImagesFolder > 0 Then
+		        Dim defaultFolder as IFolderInfo = FolderManager.Instance.GetFolder(ArticleSettings.DefaultImagesFolder)
+		        folders.Add(defaultFolder)
+		        folders.AddRange(FolderManager.Instance.GetFolders(defaultFolder))
+		    Else 
+		        folders.AddRange(FolderManager.Instance.GetFolders(ArticleModuleBase.PortalId, False))
+		    End If
             For Each folder As DotNetNuke.Services.FileSystem.FolderInfo In folders
                 If Not folder.IsProtected Then
                     Dim FolderItem As New ListItem()
                     If folder.FolderPath = Null.NullString Then
                         FolderItem.Text = ArticleModuleBase.GetSharedResource("Root")
-                        ReadRoles = FileSystemUtils.GetRoles("", ArticleModuleBase.PortalId, "READ")
-                        WriteRoles = FileSystemUtils.GetRoles("", ArticleModuleBase.PortalId, "WRITE")
+                        ReadRoles = FolderPermissionController.GetFolderPermissionsCollectionByFolder(ArticleModuleBase.PortalId, "").ToString("READ")
+                        WriteRoles = FolderPermissionController.GetFolderPermissionsCollectionByFolder(ArticleModuleBase.PortalId, "").ToString("WRITE")
                     Else
                         FolderItem.Text = folder.FolderPath
-                        ReadRoles = FileSystemUtils.GetRoles(FolderItem.Text, ArticleModuleBase.PortalId, "READ")
-                        WriteRoles = FileSystemUtils.GetRoles(FolderItem.Text, ArticleModuleBase.PortalId, "WRITE")
+                        ReadRoles = FolderPermissionController.GetFolderPermissionsCollectionByFolder(ArticleModuleBase.PortalId, FolderItem.Text).ToString("READ")
+                        WriteRoles = FolderPermissionController.GetFolderPermissionsCollectionByFolder(ArticleModuleBase.PortalId, FolderItem.Text).ToString("WRITE")
                     End If
                     FolderItem.Value = folder.FolderID
 
@@ -115,19 +126,14 @@ Namespace Ventrian.NewsArticles.Controls
             If (drpUploadImageFolder.Items.FindByValue(ArticleSettings.DefaultImagesFolder.ToString()) IsNot Nothing) Then
 				drpUploadImageFolder.SelectedValue = ArticleSettings.DefaultImagesFolder.ToString()
 			End If
-
 		End Sub
 
 		Private Sub BindImages()
-
-			Dim objImageController As New ImageController()
-
 			dlImages.DataSource = AttachedImages
 			dlImages.DataBind()
 
 			dlImages.Visible = (dlImages.Items.Count > 0)
 			lblNoImages.Visible = (dlImages.Items.Count = 0)
-
 		End Sub
 
 		Protected Function GetArticleID() As String
@@ -154,7 +160,7 @@ Namespace Ventrian.NewsArticles.Controls
 				width = Convert.ToInt32(objImage.Width / (objImage.Height / height))
 			End If
 
-			Dim settings As PortalSettings = PortalController.GetCurrentPortalSettings()
+			Dim settings As PortalSettings = PortalController.Instance.GetCurrentPortalSettings()
 
 			Return Page.ResolveUrl("~/DesktopModules/DnnForge - NewsArticles/ImageHandler.ashx?Width=" & width.ToString() & "&Height=" & height.ToString() & "&HomeDirectory=" & Server.UrlEncode(settings.HomeDirectory) & "&FileName=" & Server.UrlEncode(objImage.Folder & objImage.FileName) & "&PortalID=" & settings.PortalId.ToString() & "&q=1")
 
@@ -523,8 +529,7 @@ Namespace Ventrian.NewsArticles.Controls
 					If (ctlImage.Url.ToLower().StartsWith("fileid=")) Then
 						If (IsNumeric(ctlImage.Url.ToLower().Replace("fileid=", ""))) Then
 							Dim fileID As Integer = Convert.ToInt32(ctlImage.Url.ToLower().Replace("fileid=", ""))
-							Dim objFileController As New DotNetNuke.Services.FileSystem.FileController
-							Dim objFile As DotNetNuke.Services.FileSystem.FileInfo = objFileController.GetFileById(fileID, ArticleModuleBase.PortalId)
+							Dim objFile As DotNetNuke.Services.FileSystem.FileInfo = FileManager.Instance.GetFile(fileID)
 							If (objFile IsNot Nothing) Then
 
 								Dim objImageController As New ImageController
@@ -616,14 +621,13 @@ Namespace Ventrian.NewsArticles.Controls
 						objImage.SortOrder = CType(imagesList(imagesList.Count - 1), ImageInfo).SortOrder + 1
 					End If
 
-					Dim objPortalSettings As PortalSettings = PortalController.GetCurrentPortalSettings()
+					Dim objPortalSettings As PortalSettings = PortalController.Instance.GetCurrentPortalSettings()
 
 					Dim folder As String = ""
 					Dim folderId As Integer = Integer.Parse(drpUploadImageFolder.SelectedValue)
 
 					If (folderId <> Null.NullInteger) Then
-						Dim objFolderController As New DotNetNuke.Services.FileSystem.FolderController
-						Dim objFolder As DotNetNuke.Services.FileSystem.FolderInfo = objFolderController.GetFolderInfo(ArticleModuleBase.PortalId, folderId)
+						Dim objFolder As DotNetNuke.Services.FileSystem.FolderInfo = FolderManager.Instance.GetFolder(folderId)
 						If (objFolder IsNot Nothing) Then
 							folder = objFolder.FolderPath
 						End If

@@ -11,9 +11,9 @@ Option Strict On
 Option Explicit On
 
 Namespace Ventrian.NewsArticles.Controls
-
+    
     Partial Public Class PostComment
-
+        
         '''<summary>
         '''phCommentForm control.
         '''</summary>
@@ -22,7 +22,7 @@ Namespace Ventrian.NewsArticles.Controls
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents phCommentForm As Global.System.Web.UI.WebControls.PlaceHolder
-
+        
         '''<summary>
         '''pName control.
         '''</summary>
@@ -31,7 +31,7 @@ Namespace Ventrian.NewsArticles.Controls
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents pName As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-
+        
         '''<summary>
         '''txtName control.
         '''</summary>
@@ -40,7 +40,7 @@ Namespace Ventrian.NewsArticles.Controls
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents txtName As Global.System.Web.UI.WebControls.TextBox
-
+        
         '''<summary>
         '''lblName control.
         '''</summary>
@@ -49,7 +49,7 @@ Namespace Ventrian.NewsArticles.Controls
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents lblName As Global.System.Web.UI.WebControls.Label
-
+        
         '''<summary>
         '''valName control.
         '''</summary>
@@ -58,7 +58,7 @@ Namespace Ventrian.NewsArticles.Controls
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents valName As Global.System.Web.UI.WebControls.RequiredFieldValidator
-
+        
         '''<summary>
         '''pEmail control.
         '''</summary>
@@ -67,7 +67,7 @@ Namespace Ventrian.NewsArticles.Controls
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents pEmail As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-
+        
         '''<summary>
         '''txtEmail control.
         '''</summary>
@@ -76,7 +76,7 @@ Namespace Ventrian.NewsArticles.Controls
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents txtEmail As Global.System.Web.UI.WebControls.TextBox
-
+        
         '''<summary>
         '''lblEmail control.
         '''</summary>
@@ -85,7 +85,7 @@ Namespace Ventrian.NewsArticles.Controls
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents lblEmail As Global.System.Web.UI.WebControls.Label
-
+        
         '''<summary>
         '''valEmail control.
         '''</summary>
@@ -94,7 +94,7 @@ Namespace Ventrian.NewsArticles.Controls
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents valEmail As Global.System.Web.UI.WebControls.RequiredFieldValidator
-
+        
         '''<summary>
         '''valEmailIsValid control.
         '''</summary>
@@ -103,7 +103,7 @@ Namespace Ventrian.NewsArticles.Controls
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents valEmailIsValid As Global.System.Web.UI.WebControls.RegularExpressionValidator
-
+        
         '''<summary>
         '''pUrl control.
         '''</summary>
@@ -112,7 +112,7 @@ Namespace Ventrian.NewsArticles.Controls
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents pUrl As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-
+        
         '''<summary>
         '''txtURL control.
         '''</summary>
@@ -121,7 +121,7 @@ Namespace Ventrian.NewsArticles.Controls
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents txtURL As Global.System.Web.UI.WebControls.TextBox
-
+        
         '''<summary>
         '''lblUrl control.
         '''</summary>
@@ -130,7 +130,7 @@ Namespace Ventrian.NewsArticles.Controls
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents lblUrl As Global.System.Web.UI.WebControls.Label
-
+        
         '''<summary>
         '''txtComment control.
         '''</summary>
@@ -139,7 +139,7 @@ Namespace Ventrian.NewsArticles.Controls
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents txtComment As Global.System.Web.UI.WebControls.TextBox
-
+        
         '''<summary>
         '''valComment control.
         '''</summary>
@@ -148,7 +148,7 @@ Namespace Ventrian.NewsArticles.Controls
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents valComment As Global.System.Web.UI.WebControls.RequiredFieldValidator
-
+        
         '''<summary>
         '''ctlCaptcha control.
         '''</summary>
@@ -157,7 +157,25 @@ Namespace Ventrian.NewsArticles.Controls
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents ctlCaptcha As Global.DotNetNuke.UI.WebControls.CaptchaControl
-
+        
+        '''<summary>
+        '''ctlReCaptcha control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents ctlReCaptcha As Global.Ventrian.NewsArticles.Controls.ReCaptcha
+        
+        '''<summary>
+        '''ctlHoneypot control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents ctlHoneypot As Global.Ventrian.NewsArticles.Controls.Honeypot
+        
         '''<summary>
         '''btnAddComment control.
         '''</summary>
@@ -166,7 +184,7 @@ Namespace Ventrian.NewsArticles.Controls
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents btnAddComment As Global.System.Web.UI.WebControls.Button
-
+        
         '''<summary>
         '''chkNotifyMe control.
         '''</summary>
@@ -175,7 +193,7 @@ Namespace Ventrian.NewsArticles.Controls
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkNotifyMe As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''phCommentPosted control.
         '''</summary>
@@ -184,7 +202,7 @@ Namespace Ventrian.NewsArticles.Controls
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents phCommentPosted As Global.System.Web.UI.WebControls.PlaceHolder
-
+        
         '''<summary>
         '''lblRequiresApproval control.
         '''</summary>
@@ -193,7 +211,7 @@ Namespace Ventrian.NewsArticles.Controls
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents lblRequiresApproval As Global.System.Web.UI.WebControls.Label
-
+        
         '''<summary>
         '''phCommentAnonymous control.
         '''</summary>
@@ -202,7 +220,7 @@ Namespace Ventrian.NewsArticles.Controls
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents phCommentAnonymous As Global.System.Web.UI.WebControls.PlaceHolder
-
+        
         '''<summary>
         '''lblRequiresAccess control.
         '''</summary>

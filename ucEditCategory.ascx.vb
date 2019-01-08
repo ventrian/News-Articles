@@ -85,9 +85,8 @@ Namespace Ventrian.NewsArticles
 
         Private Sub BindRoles()
 
-            Dim objRole As New RoleController
             Dim availableRoles As New ArrayList
-            Dim roles As ArrayList = objRole.GetPortalRoles(PortalId)
+            Dim roles As IList(Of RoleInfo) = RoleController.Instance.GetRoles(PortalId)
 
             If Not roles Is Nothing Then
                 For Each Role As RoleInfo In roles

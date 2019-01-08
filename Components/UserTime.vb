@@ -23,15 +23,11 @@ Namespace Ventrian.NewsArticles
 
         Public Function ConvertToUserTime(ByVal dt As DateTime, ByVal ClientTimeZone As Double) As DateTime
 
-            Dim _portalSettings As PortalSettings = PortalController.GetCurrentPortalSettings
-
             Return dt.AddMinutes(ClientTimeZone)
 
         End Function
 
         Public Function ConvertToServerTime(ByVal dt As DateTime, ByVal ClientTimeZone As Double) As DateTime
-
-            Dim _portalSettings As PortalSettings = PortalController.GetCurrentPortalSettings
 
             Return dt.AddMinutes(ClientTimeZone * -1)
 
@@ -42,8 +38,8 @@ Namespace Ventrian.NewsArticles
 
             Get
 
-                Dim objUserInfo As UserInfo = UserController.GetCurrentUserInfo
-                Return FromClientToServerFactor(objUserInfo.Profile.TimeZone, serverTimeZoneOffet)
+                Dim objUserInfo As UserInfo = UserController.Instance.GetCurrentUserInfo
+                Return FromClientToServerFactor(objUserInfo.Profile.PreferredTimeZone.GetUtcOffset(DateTime.Now).TotalHours, serverTimeZoneOffet)
 
             End Get
 
@@ -53,8 +49,8 @@ Namespace Ventrian.NewsArticles
 
             Get
 
-                Dim _portalSettings As PortalSettings = PortalController.GetCurrentPortalSettings
-                Return FromClientToServerFactor(_portalSettings.TimeZoneOffset, serverTimeZoneOffet)
+                Dim _portalSettings As PortalSettings = PortalController.Instance.GetCurrentPortalSettings
+                Return FromClientToServerFactor(_portalSettings.TimeZone.GetUtcOffset(DateTime.Now).TotalHours, serverTimeZoneOffet)
 
             End Get
 
@@ -65,9 +61,9 @@ Namespace Ventrian.NewsArticles
 
             Get
 
-                Dim objUser As UserInfo = UserController.GetCurrentUserInfo()
-                Dim _portalSettings As PortalSettings = PortalController.GetCurrentPortalSettings
-                Return FromServerToClientFactor(objUser.Profile.TimeZone, _portalSettings.TimeZoneOffset)
+                Dim objUser As UserInfo = UserController.Instance.GetCurrentUserInfo()
+                Dim _portalSettings As PortalSettings = PortalController.Instance.GetCurrentPortalSettings
+                Return FromServerToClientFactor(objUser.Profile.PreferredTimeZone.GetUtcOffset(DateTime.Now).TotalHours, _portalSettings.TimeZone.GetUtcOffset(DateTime.Now).TotalHours)
 
             End Get
 

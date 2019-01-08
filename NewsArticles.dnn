@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="6.0">
   <packages>
-    <package name="DnnForge - NewsArticles" type="Module" version="00.09.11">
+    <package name="DnnForge - NewsArticles" type="Module" version="00.11.00">
       <friendlyName>News Articles</friendlyName>
       <description>Allows you to publish News Articles to your portal.</description>
       <owner>
@@ -12,7 +12,7 @@
       <license>The license for this package is not currently included within the installation file, please check with the vendor for full license details.</license>
       <releaseNotes>This package has no Release Notes</releaseNotes>
       <dependencies>
-        <dependency type="CoreVersion">06.02.00</dependency>
+        <dependency type="CoreVersion">07.03.02</dependency>
       </dependencies>
       <components>
         <component type="Module">
@@ -860,7 +860,7 @@
         </component>
       </components>
     </package>
-    <package name="DnnForge - LatestArticles" type="Module" version="00.09.11">
+    <package name="DnnForge - LatestArticles" type="Module" version="00.11.00">
       <friendlyName>News Articles Latest</friendlyName>
       <description>Allows you to display a list of the latest articles.</description>
       <iconFile />
@@ -921,7 +921,7 @@
         </component>
       </components>
     </package>
-    <package name="DnnForge - LatestComments" type="Module" version="00.09.11">
+    <package name="DnnForge - LatestComments" type="Module" version="00.11.00">
       <friendlyName>News Articles Comments</friendlyName>
       <description>Allows you to display a list of the latest comments.</description>
       <iconFile />
@@ -982,7 +982,7 @@
         </component>
       </components>
     </package>
-    <package name="DnnForge - NewsArchives" type="Module" version="00.09.11">
+    <package name="DnnForge - NewsArchives" type="Module" version="00.11.00">
       <friendlyName>News Articles Archives</friendlyName>
       <description>Allows you to display a list of articles by month.</description>
       <iconFile />
@@ -1043,7 +1043,7 @@
         </component>
       </components>
     </package>
-    <package name="DnnForge - NewsSearch" type="Module" version="00.09.11">
+    <package name="DnnForge - NewsSearch" type="Module" version="00.11.00">
       <friendlyName>News Articles Search</friendlyName>
       <description>Allows you to display a list of articles by month.</description>
       <iconFile />

@@ -24,7 +24,7 @@ Namespace Ventrian.NewsArticles
 
         Public Function GetMirrorArticle(ByVal articleID As Integer) As MirrorArticleInfo
 
-            Return CType(CBO.FillObject(DataProvider.Instance().GetMirrorArticle(articleID), GetType(MirrorArticleInfo)), MirrorArticleInfo)
+            Return CBO.FillObject(Of MirrorArticleInfo)(DataProvider.Instance().GetMirrorArticle(articleID))
 
         End Function
 

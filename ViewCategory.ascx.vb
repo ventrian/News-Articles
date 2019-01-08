@@ -9,6 +9,7 @@ Imports DotNetNuke.Common.Utilities
 Imports DotNetNuke.Services.Exceptions
 Imports DotNetNuke.Services.Localization
 Imports DotNetNuke.Security
+Imports DotNetNuke.Services.FileSystem
 
 Imports Ventrian.NewsArticles.Base
 
@@ -138,8 +139,7 @@ Namespace Ventrian.NewsArticles
 
                                 If (objCategory.Image.Split("="c).Length = 2) Then
                                     If (IsNumeric(objCategory.Image.Split("="c)(1))) Then
-                                        Dim objFileController As New DotNetNuke.Services.FileSystem.FileController()
-                                        Dim objFile As DotNetNuke.Services.FileSystem.FileInfo = objFileController.GetFileById(Convert.ToInt32(objCategory.Image.Split("="c)(1)), PortalId)
+                                        Dim objFile As DotNetNuke.Services.FileSystem.FileInfo = FileManager.Instance.GetFile(Convert.ToInt32(objCategory.Image.Split("="c)(1)))
 
                                         If (objFile IsNot Nothing) Then
                                             Dim objImage As New Image
@@ -158,8 +158,7 @@ Namespace Ventrian.NewsArticles
 
                                 If (objCategory.Image.Split("="c).Length = 2) Then
                                     If (IsNumeric(objCategory.Image.Split("="c)(1))) Then
-                                        Dim objFileController As New DotNetNuke.Services.FileSystem.FileController()
-                                        Dim objFile As DotNetNuke.Services.FileSystem.FileInfo = objFileController.GetFileById(Convert.ToInt32(objCategory.Image.Split("="c)(1)), PortalId)
+                                        Dim objFile As DotNetNuke.Services.FileSystem.FileInfo = FileManager.Instance.GetFile(Convert.ToInt32(objCategory.Image.Split("="c)(1)))
 
                                         If (objFile IsNot Nothing) Then
                                             Dim objLiteral As New Literal
@@ -281,8 +280,7 @@ Namespace Ventrian.NewsArticles
 
                                     If (objCategory.Image.Split("="c).Length = 2) Then
                                         If (IsNumeric(objCategory.Image.Split("="c)(1))) Then
-                                            Dim objFileController As New DotNetNuke.Services.FileSystem.FileController()
-                                            Dim objFile As DotNetNuke.Services.FileSystem.FileInfo = objFileController.GetFileById(Convert.ToInt32(objCategory.Image.Split("="c)(1)), PortalId)
+                                            Dim objFile As DotNetNuke.Services.FileSystem.FileInfo = FileManager.Instance.GetFile(Convert.ToInt32(objCategory.Image.Split("="c)(1)))
 
                                             If (objFile IsNot Nothing) Then
 
@@ -582,8 +580,7 @@ Namespace Ventrian.NewsArticles
 
                                 If (objCategory.Image.Split("="c).Length = 2) Then
                                     If (IsNumeric(objCategory.Image.Split("="c)(1))) Then
-                                        Dim objFileController As New DotNetNuke.Services.FileSystem.FileController()
-                                        Dim objFile As DotNetNuke.Services.FileSystem.FileInfo = objFileController.GetFileById(Convert.ToInt32(objCategory.Image.Split("="c)(1)), PortalId)
+                                        Dim objFile As DotNetNuke.Services.FileSystem.FileInfo = FileManager.Instance.GetFile(Convert.ToInt32(objCategory.Image.Split("="c)(1)))
 
                                         If (objFile IsNot Nothing) Then
                                             Dim objImage As New Image
@@ -602,8 +599,7 @@ Namespace Ventrian.NewsArticles
 
                                 If (objCategory.Image.Split("="c).Length = 2) Then
                                     If (IsNumeric(objCategory.Image.Split("="c)(1))) Then
-                                        Dim objFileController As New DotNetNuke.Services.FileSystem.FileController()
-                                        Dim objFile As DotNetNuke.Services.FileSystem.FileInfo = objFileController.GetFileById(Convert.ToInt32(objCategory.Image.Split("="c)(1)), PortalId)
+                                        Dim objFile As DotNetNuke.Services.FileSystem.FileInfo = FileManager.Instance.GetFile(Convert.ToInt32(objCategory.Image.Split("="c)(1)))
 
                                         If (objFile IsNot Nothing) Then
                                             Dim objLiteral As New Literal
@@ -779,8 +775,7 @@ Namespace Ventrian.NewsArticles
 
                                     If (objCategory.Image.Split("="c).Length = 2) Then
                                         If (IsNumeric(objCategory.Image.Split("="c)(1))) Then
-                                            Dim objFileController As New DotNetNuke.Services.FileSystem.FileController()
-                                            Dim objFile As DotNetNuke.Services.FileSystem.FileInfo = objFileController.GetFileById(Convert.ToInt32(objCategory.Image.Split("="c)(1)), PortalId)
+                                            Dim objFile As DotNetNuke.Services.FileSystem.FileInfo = FileManager.Instance.GetFile(Convert.ToInt32(objCategory.Image.Split("="c)(1)))
 
                                             If (objFile IsNot Nothing) Then
 

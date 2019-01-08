@@ -116,7 +116,7 @@ Namespace Ventrian.NewsArticles
 
                     Dim objEmailTemplateController As New EmailTemplateController
                     If Not (objUser Is Nothing) Then
-                        objEmailTemplateController.SendFormattedEmail(Me.ModuleId, Common.GetArticleLink(objArticle, PortalSettings.ActiveTab, ArticleSettings, False), objArticle, EmailTemplateType.ArticleApproved, objUser.Membership.Email, ArticleSettings)
+                        objEmailTemplateController.SendFormattedEmail(Me.ModuleId, Common.GetArticleLink(objArticle, PortalSettings.ActiveTab, ArticleSettings, False), objArticle, EmailTemplateType.ArticleApproved, objUser.Email, ArticleSettings)
                     End If
 
                 End If
@@ -235,7 +235,7 @@ Namespace Ventrian.NewsArticles
 
                                     Dim objRoleController As New RoleController()
 
-                                    Dim objRoles As ArrayList = objRoleController.GetRoles()
+                                    Dim objRoles As IList(Of RoleInfo) = objRoleController.GetRoles(PortalId)
                                     For Each objRole As RoleInfo In objRoles
                                         Dim roleAccess As Boolean = False
 

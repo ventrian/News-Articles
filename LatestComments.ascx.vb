@@ -30,12 +30,12 @@ Namespace Ventrian.NewsArticles
             Get
                 If (_articleSettings Is Nothing) Then
 
-                    Dim _settings As Hashtable = DotNetNuke.Entities.Portals.PortalSettings.GetModuleSettings(_articleModuleID)
+                    Dim _settings As Hashtable = Common.GetModuleSettings(_articleModuleID)
 
                     Dim objModuleController As New ModuleController
                     Dim objModule As ModuleInfo = objModuleController.GetModule(_articleModuleID, _articleTabID)
                     If Not (objModule Is Nothing) Then
-                        Dim objSettings As Hashtable = DotNetNuke.Entities.Portals.PortalSettings.GetTabModuleSettings(objModule.TabModuleID)
+                        Dim objSettings As Hashtable = objModule.TabModuleSettings
 
                         For Each key As String In objSettings.Keys
                             If (_settings.ContainsKey(key) = False) Then

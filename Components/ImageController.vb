@@ -8,7 +8,7 @@ Namespace Ventrian.NewsArticles
 
         Public Function [Get](ByVal imageID As Integer) As ImageInfo
 
-            Return CType(CBO.FillObject(DataProvider.Instance().GetImage(imageID), GetType(ImageInfo)), ImageInfo)
+            Return CBO.FillObject(Of ImageInfo)(DataProvider.Instance().GetImage(imageID))
 
         End Function
 

@@ -14,7 +14,7 @@ Namespace Ventrian.NewsArticles.Components.CustomFields
 
         Public Function [Get](ByVal customFieldID As Integer) As CustomFieldInfo
 
-            Return CType(CBO.FillObject(DataProvider.Instance().GetCustomField(customFieldID), GetType(CustomFieldInfo)), CustomFieldInfo)
+            Return CBO.FillObject(Of CustomFieldInfo)(DataProvider.Instance().GetCustomField(customFieldID))
 
         End Function
 

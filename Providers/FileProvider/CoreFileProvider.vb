@@ -26,16 +26,12 @@ Namespace Ventrian.NewsArticles
 				objFile.SortOrder = CType(filesList(filesList.Count - 1), FileInfo).SortOrder + 1
 			End If
 
-			Dim objPortalSettings As PortalSettings = PortalController.GetCurrentPortalSettings()
+			Dim objPortalSettings As PortalSettings = PortalController.Instance.GetCurrentPortalSettings()
 
 			Dim folder As String = ""
 
-			Dim objModuleController As New ModuleController()
-			Dim objSettings As Hashtable = objModuleController.GetModuleSettings(moduleID)
-
 			If (folderID <> Null.NullInteger) Then
-				Dim objFolderController As New FolderController
-				Dim objFolder As FolderInfo = objFolderController.GetFolderInfo(objPortalSettings.PortalId, folderID)
+				Dim objFolder As FolderInfo = FolderManager.Instance.GetFolder(folderID)
 				If (objFolder IsNot Nothing) Then
 					folder = objFolder.FolderPath
 				End If
@@ -114,7 +110,7 @@ Namespace Ventrian.NewsArticles
         Public Overrides Function GetFile(ByVal fileID As Integer) As FileInfo
             Dim objFileController As New FileController()
             Dim objFile As FileInfo = objFileController.Get(fileID)
-            objFile.Link = PortalController.GetCurrentPortalSettings().HomeDirectory() & objFile.Folder & objFile.FileName
+            objFile.Link = PortalController.Instance.GetCurrentPortalSettings().HomeDirectory() & objFile.Folder & objFile.FileName
             Return objFile
         End Function
 
@@ -122,7 +118,7 @@ Namespace Ventrian.NewsArticles
             Dim objFileController As New FileController()
             Dim objFiles As List(Of FileInfo) = objFileController.GetFileList(articleID, Null.NullString())
             For Each objFile As FileInfo In objFiles
-                objFile.Link = PortalController.GetCurrentPortalSettings().HomeDirectory() & objFile.Folder & objFile.FileName
+                objFile.Link = PortalController.Instance.GetCurrentPortalSettings().HomeDirectory() & objFile.Folder & objFile.FileName
             Next
             Return objFiles
         End Function

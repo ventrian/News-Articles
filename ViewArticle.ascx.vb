@@ -8,6 +8,7 @@ Imports DotNetNuke.Services.Exceptions
 Imports DotNetNuke.Services.Localization
 
 Imports System.Text
+Imports DotNetNuke.Security.Permissions
 Imports Ventrian.NewsArticles.Base
 
 Namespace Ventrian.NewsArticles
@@ -184,7 +185,8 @@ Namespace Ventrian.NewsArticles
             Dim objModule As ModuleInfo = objModuleController.GetModule(objArticle.ModuleID, Me.TabId)
 
             If Not (objModule Is Nothing) Then
-                If (DotNetNuke.Security.PortalSecurity.IsInRoles(objModule.AuthorizedViewRoles) = False) Then
+                If (ModulePermissionController.CanViewModule(objModule) = False) Then
+                'If (DotNetNuke.Security.PortalSecurity.IsInRoles(objModule.AuthorizedViewRoles) = False) Then
                     Response.Redirect(NavigateURL(Me.TabId), True)
                 End If
             End If

@@ -23,7 +23,7 @@ Namespace Ventrian.NewsArticles.API.MetaWebLog
 
         Private ReadOnly Property PortalSettings() As PortalSettings
             Get
-                Return PortalController.GetCurrentPortalSettings()
+                Return PortalController.Instance.GetCurrentPortalSettings()
             End Get
         End Property
 
@@ -108,8 +108,7 @@ Namespace Ventrian.NewsArticles.API.MetaWebLog
 
             Dim check As Boolean = False
 
-            Dim objModuleController As New ModuleController
-            Dim settings As Hashtable = objModuleController.GetModuleSettings(moduleId)
+            Dim settings As Hashtable = Common.GetModuleSettings(moduleId)
 
             If (user.IsSuperUser) Then
                 Return True
@@ -437,7 +436,7 @@ Namespace Ventrian.NewsArticles.API.MetaWebLog
                 Throw New MetaException("01", "You do not have permission to post articles")
             End If
 
-            Dim objSettings As Hashtable = objModuleController.GetModuleSettings(objTabModule.ModuleID)
+            Dim objSettings As Hashtable = Common.GetModuleSettings(objTabModule.ModuleID)
             Dim objArticleSettings As New ArticleSettings(objSettings, PortalSettings, objTabModule)
 
             Dim objArticle As New ArticleInfo

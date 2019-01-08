@@ -20,7 +20,7 @@ Namespace Ventrian.NewsArticles
 
         Public Function GetPage(ByVal pageId As Integer) As PageInfo
 
-            Return CType(CBO.FillObject(DataProvider.Instance().GetPage(pageId), GetType(PageInfo)), PageInfo)
+            Return CBO.FillObject(Of PageInfo)(DataProvider.Instance().GetPage(pageId))
 
         End Function
 

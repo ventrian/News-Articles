@@ -6,10 +6,13 @@
 
 Imports System.IO
 Imports System.Xml
+Imports DotNetNuke.Application
 
 Imports DotNetNuke.Common
 Imports DotNetNuke.Common.Utilities
+Imports DotNetNuke.Entities.Host
 Imports DotNetNuke.Entities.Portals
+Imports DotNetNuke.Services.Cache
 Imports DotNetNuke.Services.Localization
 
 Namespace Ventrian.NewsArticles.Components.Utility
@@ -24,51 +27,48 @@ Namespace Ventrian.NewsArticles.Components.Utility
 
 #Region " Public Methods "
 
-        Private Shared Function GetHostSettingAsBoolean(ByVal key As String, ByVal defaultValue As Boolean) As Boolean
-            Dim retValue As Boolean = defaultValue
-            Try
-                Dim setting As String = DotNetNuke.Entities.Host.HostSettings.GetHostSetting(key)
-                If String.IsNullOrEmpty(setting) = False Then
-                    retValue = (setting.ToUpperInvariant().StartsWith("Y") OrElse setting.ToUpperInvariant = "TRUE")
-                End If
-            Catch ex As Exception
-                'we just want to trap the error as we may not be installed so there will be no Settings
-            End Try
-            Return retValue
-        End Function
+        'Private Shared Function GetHostSettingAsBoolean(ByVal key As String, ByVal defaultValue As Boolean) As Boolean
+        '    Dim retValue As Boolean = defaultValue
+        '    Try
+        '        Dim setting As String = DotNetNuke.Entities.Host.HostSettings.GetHostSetting(key)
+        '        If String.IsNullOrEmpty(setting) = False Then
+        '            retValue = (setting.ToUpperInvariant().StartsWith("Y") OrElse setting.ToUpperInvariant = "TRUE")
+        '        End If
+        '    Catch ex As Exception
+        '        'we just want to trap the error as we may not be installed so there will be no Settings
+        '    End Try
+        '    Return retValue
+        'End Function
 
-        Private Shared Function GetPortalSettingAsBoolean(ByVal portalID As Integer, ByVal key As String, ByVal defaultValue As Boolean) As Boolean
-            Dim retValue As Boolean = defaultValue
-            Try
-                Dim setting As String = DotNetNuke.Entities.Portals.PortalSettings.GetSiteSetting(portalID, key)
-                If String.IsNullOrEmpty(setting) = False Then
-                    retValue = (setting.ToUpperInvariant().StartsWith("Y") OrElse setting.ToUpperInvariant = "TRUE")
-                End If
-            Catch ex As Exception
-                'we just want to trap the error as we may not be installed so there will be no Settings
-            End Try
-            Return retValue
-        End Function
+        'Private Shared Function GetPortalSettingAsBoolean(ByVal portalID As Integer, ByVal key As String, ByVal defaultValue As Boolean) As Boolean
+        '    Dim retValue As Boolean = defaultValue
+        '    Try
+        '        Dim setting As String = DotNetNuke.Entities.Portals.PortalSettings.GetSiteSetting(portalID, key)
+        '        If String.IsNullOrEmpty(setting) = False Then
+        '            retValue = (setting.ToUpperInvariant().StartsWith("Y") OrElse setting.ToUpperInvariant = "TRUE")
+        '        End If
+        '    Catch ex As Exception
+        '        'we just want to trap the error as we may not be installed so there will be no Settings
+        '    End Try
+        '    Return retValue
+        'End Function
 
         Public Shared Function UseLanguageInUrl() As Boolean
 
-            Dim hostSetting As String = DotNetNuke.Entities.Host.HostSettings.GetHostSetting("EnableUrlLanguage")
-            If (hostSetting <> "") Then
-                Return GetHostSettingAsBoolean("EnableUrlLanguage", True)
+            If (Host.EnableUrlLanguage) Then
+                Return Host.EnableUrlLanguage
             End If
 
-            Dim objSettings As PortalSettings = PortalController.GetCurrentPortalSettings()
-            Dim portalSetting As String = DotNetNuke.Entities.Portals.PortalSettings.GetSiteSetting(objSettings.PortalId, "EnableUrlLanguage")
-            If (portalSetting <> "") Then
-                Return GetPortalSettingAsBoolean(objSettings.PortalId, "EnableUrlLanguage", True)
+            If (PortalSettings.Current.EnableUrlLanguage) Then
+                Return PortalSettings.Current.EnableUrlLanguage
             End If
 
             If (File.Exists(HttpContext.Current.Server.MapPath(Localization.ApplicationResourceDirectory + "/Locales.xml")) = False) Then
-                Return GetHostSettingAsBoolean("EnableUrlLanguage", True)
+                Return Host.EnableUrlLanguage
             End If
 
             Dim cacheKey As String = ""
-            Dim objPortalSettings As PortalSettings = PortalController.GetCurrentPortalSettings()
+            Dim objPortalSettings As PortalSettings = PortalController.Instance.GetCurrentPortalSettings()
             Dim useLanguage As Boolean = False
 
             ' check default host setting
@@ -82,7 +82,7 @@ Namespace Ventrian.NewsArticles.Components.Utility
                     _strUseLanguageInUrlDefault = languageInUrl.Attributes("enabled").InnerText
                 Else
                     Try
-                        Dim version As Integer = Convert.ToInt32(PortalController.GetCurrentPortalSettings().Version.Replace(".", ""))
+                        Dim version As Integer = Convert.ToInt32(DotNetNukeContext.Current.Application.Version.ToString().Replace(".", ""))
                         If (version >= 490) Then
                             _strUseLanguageInUrlDefault = "true"
                         Else
@@ -114,8 +114,8 @@ Namespace Ventrian.NewsArticles.Components.Utility
                         If bXmlLoaded AndAlso Not xmlLocales.SelectSingleNode("//locales/languageInUrl") Is Nothing Then
                             useLanguage = Boolean.Parse(xmlLocales.SelectSingleNode("//locales/languageInUrl").Attributes("enabled").InnerText)
                         End If
-                        If Globals.PerformanceSetting <> Globals.PerformanceSettings.NoCaching Then
-                            Dim dp As New CacheDependency(FilePath)
+                        If Host.PerformanceSetting <> Globals.PerformanceSettings.NoCaching Then
+                            Dim dp As New DNNCacheDependency(FilePath)
                             DataCache.SetCache(cacheKey, useLanguage, dp)
                         End If
                     Else

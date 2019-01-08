@@ -30,7 +30,7 @@ Namespace Ventrian.NewsArticles
 
         Public Function [Get](ByVal tagID As Integer) As TagInfo
 
-            Return CType(CBO.FillObject(DataProvider.Instance().GetTag(tagID), GetType(TagInfo)), TagInfo)
+            Return CBO.FillObject(Of TagInfo)(DataProvider.Instance().GetTag(tagID))
 
         End Function
 
@@ -39,7 +39,7 @@ Namespace Ventrian.NewsArticles
             Dim objTag As TagInfo = CType(DataCache.GetCache("Tag-" & moduleID.ToString() & "-" & nameLowered), TagInfo)
 
             If (objTag Is Nothing) Then
-                objTag = CType(CBO.FillObject(DataProvider.Instance().GetTagByName(moduleID, nameLowered), GetType(TagInfo)), TagInfo)
+                objTag = CBO.FillObject(Of TagInfo)(DataProvider.Instance().GetTagByName(moduleID, nameLowered))
                 If Not (objTag Is Nothing) Then
                     DataCache.SetCache("Tag-" & moduleID.ToString() & "-" & nameLowered, objTag)
                 End If
@@ -57,7 +57,7 @@ Namespace Ventrian.NewsArticles
 
         Public Function Add(ByVal objTag As TagInfo) As Integer
 
-            Return CType(DataProvider.Instance().AddTag(objTag.ModuleID, objTag.Name, objTag.NameLowered), Integer)
+            Return DataProvider.Instance().AddTag(objTag.ModuleID, objTag.Name, objTag.NameLowered)
 
         End Function
 

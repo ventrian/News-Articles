@@ -1,6 +1,7 @@
 ﻿Imports DotNetNuke.Common.Utilities
 Imports DotNetNuke.Security
 Imports DotNetNuke.Services.Localization
+Imports DotNetNuke.Web.Client.ClientResourceManagement
 Imports Joel.Net
 Imports Ventrian.NewsArticles.Components.Social
 
@@ -13,7 +14,7 @@ Namespace Ventrian.NewsArticles.Controls
 
 #Region " Private Properties "
 
-        Private ReadOnly Property ArticleModuleBase() As NewsArticleModuleBase
+        Private Overloads ReadOnly Property ArticleModuleBase() As NewsArticleModuleBase
             Get
                 If (TypeOf Parent.Parent Is NewsArticleModuleBase) Then
                     Return CType(Parent.Parent, NewsArticleModuleBase)
@@ -174,7 +175,13 @@ Namespace Ventrian.NewsArticles.Controls
             pName.Visible = Not Request.IsAuthenticated
             pEmail.Visible = Not Request.IsAuthenticated
             pUrl.Visible = Not Request.IsAuthenticated
-            ctlCaptcha.Visible = (ArticleSettings.UseCaptcha And Request.IsAuthenticated = False)
+
+            ctlCaptcha.Visible = (ArticleSettings.CaptchaType = CaptchaType.DnnCore And Request.IsAuthenticated = False)
+            ctlReCaptcha.Visible = (ArticleSettings.CaptchaType = CaptchaType.ReCaptcha And Request.IsAuthenticated = False)
+            ctlHoneypot.Visible = (ArticleSettings.CaptchaType = CaptchaType.Honeypot And Request.IsAuthenticated = False)
+            if ctlReCaptcha.Visible Then
+                ClientResourceManager.RegisterScript(Page, ResolveUrl("https://www.google.com/recaptcha/api.js"))
+            End If
 
             If (Request.IsAuthenticated = False) Then
                 pUrl.Visible = Not ArticleSettings.IsCommentWebsiteHidden
@@ -203,6 +210,11 @@ Namespace Ventrian.NewsArticles.Controls
             valComment.ValidationGroup = "PostComment-" & ArticleID.ToString()
             btnAddComment.ValidationGroup = "PostComment-" & ArticleID.ToString()
 
+            If ArticleSettings.IsCommentsEnabled AndAlso ArticleSettings.CaptchaType = CaptchaType.ReCaptcha Then
+                ctlReCaptcha.SiteKey = ArticleSettings.ReCaptchaSiteKey
+                ctlReCaptcha.SecretKey = ArticleSettings.ReCaptchaSecretKey
+            End If
+
             If (Page.IsPostBack = False) Then
                 GetCookie()
             End If
@@ -220,11 +232,17 @@ Namespace Ventrian.NewsArticles.Controls
         Protected Sub btnAddComment_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAddComment.Click
 
             If (Page.IsValid) Then
-                If (ArticleSettings.UseCaptcha And Request.IsAuthenticated = False) Then
-                    If (ctlCaptcha.IsValid = False) Then
-                        txtComment.Focus()
-                        Return
-                    End If
+                If (ctlCaptcha.Visible AndAlso ctlCaptcha.IsValid = False) Then
+                    txtComment.Focus()
+                    Return
+                End If
+                If (ctlReCaptcha.Visible AndAlso ctlReCaptcha.RecaptchaIsValid() = False) Then
+                    txtComment.Focus()
+                    Return
+                End If
+                If (ctlHoneypot.Visible AndAlso ctlHoneypot.IsValid() = False) Then
+                    txtComment.Focus()
+                    Return
                 End If
 
                 Dim objController As New ArticleController

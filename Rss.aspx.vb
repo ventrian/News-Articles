@@ -283,13 +283,13 @@ Namespace Ventrian.NewsArticles
                         Case "PORTALNAME"
                             Dim objLiteral As New Literal
                             objLiteral.ID = Globals.CreateValidID("Rss-" & iPtr.ToString())
-                            objLiteral.Text = Server.HtmlEncode(PortalController.GetCurrentPortalSettings().PortalName)
+                            objLiteral.Text = Server.HtmlEncode(PortalController.Instance.GetCurrentPortalSettings().PortalName)
                             objPlaceHolder.Add(objLiteral)
 
                         Case "PORTALURL"
                             Dim objLiteral As New Literal
                             objLiteral.ID = Globals.CreateValidID("Rss-" & iPtr.ToString())
-                            objLiteral.Text = Server.HtmlEncode(AddHTTP(PortalController.GetCurrentPortalSettings().PortalAlias.HTTPAlias))
+                            objLiteral.Text = Server.HtmlEncode(AddHTTP(PortalController.Instance.GetCurrentPortalSettings().PortalAlias.HTTPAlias))
                             objPlaceHolder.Add(objLiteral)
 
                     End Select
@@ -312,7 +312,7 @@ Namespace Ventrian.NewsArticles
 
         Private Sub ProcessItem(ByRef objPlaceHolder As ControlCollection, ByVal templateArray As String(), ByVal objArticle As ArticleInfo, ByVal articleSettings As ArticleSettings, ByVal objTab As TabInfo)
 
-            Dim portalSettings As PortalSettings = PortalController.GetCurrentPortalSettings()
+            Dim portalSettings As PortalSettings = PortalController.Instance.GetCurrentPortalSettings()
 
             Dim enclosureLink As String = ""
             Dim enclosureType As String = ""
@@ -695,15 +695,14 @@ Namespace Ventrian.NewsArticles
 
             Dim _portalSettings As PortalSettings = CType(HttpContext.Current.Items("PortalSettings"), PortalSettings)
             Dim objModuleController As New ModuleController
-            Dim objModule As ModuleInfo = objModuleController.GetModule(m_moduleID, m_tabID)
+            Dim objModule As ModuleInfo = Common.GetModuleInfo(m_moduleID, m_tabID)
             Dim articleSettings As ArticleSettings
 
             If Not (objModule Is Nothing) Then
                 Dim objTabController As New TabController()
                 Dim objTab As TabInfo = objTabController.GetTab(objModule.TabID, _portalSettings.PortalId, False)
 
-                Dim settings As Hashtable = objModuleController.GetModuleSettings(objModule.ModuleID)
-                settings = PortalSettings.GetTabModuleSettings(objModule.TabModuleID, settings)
+                Dim settings As Hashtable =Common.JoinHashTables(objModule.ModuleSettings, objModule.TabModuleSettings)
                 articleSettings = New ArticleSettings(settings, _portalSettings, objModule)
                 If (settings.Contains(ArticleConstants.LAUNCH_LINKS)) Then
                     launchLinks = Convert.ToBoolean(settings(ArticleConstants.LAUNCH_LINKS).ToString())
@@ -720,9 +719,8 @@ Namespace Ventrian.NewsArticles
                 If (settings.Contains(ArticleConstants.ENABLE_SYNDICATION_HTML_SETTING)) Then
                     _enableSyndicationHtml = Convert.ToBoolean(settings(ArticleConstants.ENABLE_SYNDICATION_HTML_SETTING).ToString())
                 End If
-                Dim settingsModule As Hashtable = objModuleController.GetModuleSettings(objModule.ModuleID)
-                If (settingsModule.Contains(ArticleConstants.SYNDICATION_SUMMARY_LENGTH)) Then
-                    _syndicationSummaryLength = Convert.ToInt32(settingsModule(ArticleConstants.SYNDICATION_SUMMARY_LENGTH).ToString())
+                If (objModule.ModuleSettings.Contains(ArticleConstants.SYNDICATION_SUMMARY_LENGTH)) Then
+                    _syndicationSummaryLength = Convert.ToInt32(objModule.ModuleSettings(ArticleConstants.SYNDICATION_SUMMARY_LENGTH).ToString())
                 End If
                 If (settings.Contains(ArticleConstants.SHOW_PENDING_SETTING)) Then
                     showPending = Convert.ToBoolean(settings(ArticleConstants.SHOW_PENDING_SETTING).ToString())

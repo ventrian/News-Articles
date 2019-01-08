@@ -8,8 +8,10 @@ Imports System.IO
 
 Imports DotNetNuke.Common
 Imports DotNetNuke.Common.Utilities
+Imports DotNetNuke.Entities.Host
 Imports DotNetNuke.Entities.Modules
 Imports DotNetNuke.Framework
+Imports DotNetNuke.Security.Permissions
 
 
 Namespace Ventrian.NewsArticles
@@ -101,7 +103,7 @@ Namespace Ventrian.NewsArticles
                         Else
                             objCSSCache(ID) = ""
                         End If
-                        If Not DotNetNuke.Common.Globals.PerformanceSetting = DotNetNuke.Common.Globals.PerformanceSettings.NoCaching Then
+                        If Not Host.PerformanceSetting = PerformanceSettings.NoCaching Then
                             DataCache.SetCache("CSS", objCSSCache)
                         End If
                     End If
@@ -122,7 +124,7 @@ Namespace Ventrian.NewsArticles
                         Else
                             objCSSCache(ID) = ""
                         End If
-                        If Not DotNetNuke.Common.Globals.PerformanceSetting = DotNetNuke.Common.Globals.PerformanceSettings.NoCaching Then
+                        If Not Host.PerformanceSetting = PerformanceSettings.NoCaching Then
                             DataCache.SetCache("CSS", objCSSCache)
                         End If
                     End If
@@ -180,7 +182,7 @@ Namespace Ventrian.NewsArticles
                 Dim objModule As ModuleInfo = objModuleController.GetModule(objArticle.ModuleID, _tabID)
 
                 If Not (objModule Is Nothing) Then
-                    If (DotNetNuke.Security.PortalSecurity.IsInRoles(objModule.AuthorizedViewRoles) = False) Then
+                    If (ModulePermissionController.CanViewModule(objModule) = False) Then
                         Response.Redirect(NavigateURL(_tabID), True)
                     End If
 
@@ -277,10 +279,8 @@ Namespace Ventrian.NewsArticles
             Get
                 If (_articleSettings Is Nothing) Then
                     Dim objModuleController As New ModuleController
-                    Dim settings As Hashtable = objModuleController.GetModuleSettings(_moduleID)
-                    'Add TabModule Settings
-                    settings = DotNetNuke.Entities.Portals.PortalSettings.GetTabModuleSettings(_tabModuleID, settings)
-                    Dim objModule As ModuleInfo = objModuleController.GetModule(_moduleID, _tabID)
+                    Dim objModule As ModuleInfo = Common.GetModuleInfo(_moduleID, _tabID)
+                    Dim settings As Hashtable =Common.JoinHashTables(objModule.ModuleSettings, objModule.TabModuleSettings)
                     _articleSettings = New ArticleSettings(settings, Me.PortalSettings, objModule)
                 End If
                 Return _articleSettings

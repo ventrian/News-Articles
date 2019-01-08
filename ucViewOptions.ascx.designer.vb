@@ -11,9 +11,9 @@ Option Strict On
 Option Explicit On
 
 Namespace Ventrian.NewsArticles
-
+    
     Partial Public Class ucViewOptions
-
+        
         '''<summary>
         '''ucHeader1 control.
         '''</summary>
@@ -22,7 +22,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents ucHeader1 As Global.Ventrian.NewsArticles.ucHeader
-
+        
         '''<summary>
         '''dshBasic control.
         '''</summary>
@@ -31,7 +31,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents dshBasic As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''tblArticle control.
         '''</summary>
@@ -40,7 +40,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents tblArticle As Global.System.Web.UI.HtmlControls.HtmlTable
-
+        
         '''<summary>
         '''lblArticleSettingsHelp control.
         '''</summary>
@@ -49,7 +49,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents lblArticleSettingsHelp As Global.System.Web.UI.WebControls.Label
-
+        
         '''<summary>
         '''dshDetails control.
         '''</summary>
@@ -58,7 +58,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents dshDetails As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''tblDetails control.
         '''</summary>
@@ -67,7 +67,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents tblDetails As Global.System.Web.UI.HtmlControls.HtmlTable
-
+        
         '''<summary>
         '''plEnableRatings control.
         '''</summary>
@@ -76,7 +76,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plEnableRatings As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkEnableRatingsAuthenticated control.
         '''</summary>
@@ -85,7 +85,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkEnableRatingsAuthenticated As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plEnableAnonymousRatings control.
         '''</summary>
@@ -94,7 +94,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plEnableAnonymousRatings As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkEnableRatingsAnonymous control.
         '''</summary>
@@ -103,7 +103,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkEnableRatingsAnonymous As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plEnableCoreSearch control.
         '''</summary>
@@ -112,7 +112,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plEnableCoreSearch As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkEnableCoreSearch control.
         '''</summary>
@@ -121,7 +121,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkEnableCoreSearch As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plEnableNotificationPing control.
         '''</summary>
@@ -130,7 +130,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plEnableNotificationPing As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkEnableNotificationPing control.
         '''</summary>
@@ -139,7 +139,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkEnableNotificationPing As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plEnableAutoTrackback control.
         '''</summary>
@@ -148,7 +148,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plEnableAutoTrackback As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkEnableAutoTrackback control.
         '''</summary>
@@ -157,7 +157,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkEnableAutoTrackback As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plEnableIncomingTrackback control.
         '''</summary>
@@ -166,7 +166,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plEnableIncomingTrackback As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkEnableIncomingTrackback control.
         '''</summary>
@@ -175,7 +175,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkEnableIncomingTrackback As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plLaunchLinks control.
         '''</summary>
@@ -184,7 +184,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plLaunchLinks As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkLaunchLinks control.
         '''</summary>
@@ -193,7 +193,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkLaunchLinks As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plBubbleFeaturedArticles control.
         '''</summary>
@@ -202,7 +202,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plBubbleFeaturedArticles As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkBubbleFeaturedArticles control.
         '''</summary>
@@ -211,7 +211,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkBubbleFeaturedArticles As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plProcessPostTokens control.
         '''</summary>
@@ -220,7 +220,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plProcessPostTokens As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkProcessPostTokens control.
         '''</summary>
@@ -229,7 +229,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkProcessPostTokens As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plDisplayType control.
         '''</summary>
@@ -238,7 +238,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plDisplayType As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''drpDisplayType control.
         '''</summary>
@@ -247,7 +247,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents drpDisplayType As Global.System.Web.UI.WebControls.DropDownList
-
+        
         '''<summary>
         '''plArticlePageSize control.
         '''</summary>
@@ -256,7 +256,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plArticlePageSize As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''drpNumber control.
         '''</summary>
@@ -265,7 +265,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents drpNumber As Global.System.Web.UI.WebControls.DropDownList
-
+        
         '''<summary>
         '''plTemplate control.
         '''</summary>
@@ -274,7 +274,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plTemplate As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''drpTemplates control.
         '''</summary>
@@ -283,7 +283,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents drpTemplates As Global.System.Web.UI.WebControls.DropDownList
-
+        
         '''<summary>
         '''plTimeZone control.
         '''</summary>
@@ -292,7 +292,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plTimeZone As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''drpTimeZone control.
         '''</summary>
@@ -301,7 +301,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents drpTimeZone As Global.System.Web.UI.WebControls.DropDownList
-
+        
         '''<summary>
         '''plSortBy control.
         '''</summary>
@@ -310,7 +310,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plSortBy As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''drpSortBy control.
         '''</summary>
@@ -319,7 +319,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents drpSortBy As Global.System.Web.UI.WebControls.DropDownList
-
+        
         '''<summary>
         '''plSortDirection control.
         '''</summary>
@@ -328,7 +328,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plSortDirection As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''drpSortDirection control.
         '''</summary>
@@ -337,7 +337,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents drpSortDirection As Global.System.Web.UI.WebControls.DropDownList
-
+        
         '''<summary>
         '''plMenuPosition control.
         '''</summary>
@@ -346,7 +346,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plMenuPosition As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''lstMenuPosition control.
         '''</summary>
@@ -355,7 +355,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents lstMenuPosition As Global.System.Web.UI.WebControls.RadioButtonList
-
+        
         '''<summary>
         '''dshArchive control.
         '''</summary>
@@ -364,7 +364,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents dshArchive As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''tblArchive control.
         '''</summary>
@@ -373,7 +373,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents tblArchive As Global.System.Web.UI.HtmlControls.HtmlTable
-
+        
         '''<summary>
         '''Label1 control.
         '''</summary>
@@ -382,7 +382,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents Label1 As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkArchiveCurrentArticles control.
         '''</summary>
@@ -391,7 +391,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkArchiveCurrentArticles As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''Label2 control.
         '''</summary>
@@ -400,7 +400,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents Label2 As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkArchiveCategories control.
         '''</summary>
@@ -409,7 +409,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkArchiveCategories As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''Label3 control.
         '''</summary>
@@ -418,7 +418,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents Label3 As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkArchiveAuthor control.
         '''</summary>
@@ -427,7 +427,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkArchiveAuthor As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''Label4 control.
         '''</summary>
@@ -436,7 +436,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents Label4 As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkArchiveMonth control.
         '''</summary>
@@ -445,7 +445,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkArchiveMonth As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''dshCategory control.
         '''</summary>
@@ -454,7 +454,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents dshCategory As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''tblCategory control.
         '''</summary>
@@ -463,7 +463,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents tblCategory As Global.System.Web.UI.HtmlControls.HtmlTable
-
+        
         '''<summary>
         '''plRequireCategory control.
         '''</summary>
@@ -472,7 +472,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plRequireCategory As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkRequireCategory control.
         '''</summary>
@@ -481,7 +481,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkRequireCategory As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plDefaultCategories control.
         '''</summary>
@@ -490,7 +490,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plDefaultCategories As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''lstDefaultCategories control.
         '''</summary>
@@ -499,7 +499,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents lstDefaultCategories As Global.System.Web.UI.WebControls.ListBox
-
+        
         '''<summary>
         '''plCategorySelectionHeight control.
         '''</summary>
@@ -508,7 +508,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plCategorySelectionHeight As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''txtCategorySelectionHeight control.
         '''</summary>
@@ -517,7 +517,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents txtCategorySelectionHeight As Global.System.Web.UI.WebControls.TextBox
-
+        
         '''<summary>
         '''valCategorySelectionHeight control.
         '''</summary>
@@ -526,7 +526,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents valCategorySelectionHeight As Global.System.Web.UI.WebControls.RequiredFieldValidator
-
+        
         '''<summary>
         '''valCategorySelectionHeightIsValid control.
         '''</summary>
@@ -535,7 +535,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents valCategorySelectionHeightIsValid As Global.System.Web.UI.WebControls.CompareValidator
-
+        
         '''<summary>
         '''plCategoryBreadcrumb control.
         '''</summary>
@@ -544,7 +544,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plCategoryBreadcrumb As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkCategoryBreadcrumb control.
         '''</summary>
@@ -553,7 +553,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkCategoryBreadcrumb As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plCategoryName control.
         '''</summary>
@@ -562,7 +562,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plCategoryName As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkCategoryName control.
         '''</summary>
@@ -571,7 +571,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkCategoryName As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plCategorySortOrder control.
         '''</summary>
@@ -580,7 +580,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plCategorySortOrder As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''lstCategorySortOrder control.
         '''</summary>
@@ -589,7 +589,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents lstCategorySortOrder As Global.System.Web.UI.WebControls.RadioButtonList
-
+        
         '''<summary>
         '''plCategoryFilterSubmit control.
         '''</summary>
@@ -598,7 +598,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plCategoryFilterSubmit As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkCategoryFilterSubmit control.
         '''</summary>
@@ -607,7 +607,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkCategoryFilterSubmit As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''dshComments control.
         '''</summary>
@@ -616,7 +616,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents dshComments As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''tblComments control.
         '''</summary>
@@ -625,7 +625,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents tblComments As Global.System.Web.UI.HtmlControls.HtmlTable
-
+        
         '''<summary>
         '''plEnableComments control.
         '''</summary>
@@ -634,7 +634,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plEnableComments As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkEnableComments control.
         '''</summary>
@@ -643,7 +643,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkEnableComments As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plEnableAnonymousComments control.
         '''</summary>
@@ -652,7 +652,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plEnableAnonymousComments As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkEnableAnonymousComments control.
         '''</summary>
@@ -661,7 +661,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkEnableAnonymousComments As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plEnableCommentModeration control.
         '''</summary>
@@ -670,7 +670,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plEnableCommentModeration As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkEnableCommentModeration control.
         '''</summary>
@@ -679,25 +679,61 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkEnableCommentModeration As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
-        '''plUseCaptcha control.
+        '''plCaptchaType control.
         '''</summary>
         '''<remarks>
         '''Auto-generated field.
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
-        Protected WithEvents plUseCaptcha As Global.System.Web.UI.UserControl
-
+        Protected WithEvents plCaptchaType As Global.System.Web.UI.UserControl
+        
         '''<summary>
-        '''chkUseCaptcha control.
+        '''drpCaptchaType control.
         '''</summary>
         '''<remarks>
         '''Auto-generated field.
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
-        Protected WithEvents chkUseCaptcha As Global.System.Web.UI.WebControls.CheckBox
-
+        Protected WithEvents drpCaptchaType As Global.System.Web.UI.WebControls.DropDownList
+        
+        '''<summary>
+        '''plReCaptchaSiteKey control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents plReCaptchaSiteKey As Global.System.Web.UI.UserControl
+        
+        '''<summary>
+        '''txtReCaptchaSiteKey control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents txtReCaptchaSiteKey As Global.System.Web.UI.WebControls.TextBox
+        
+        '''<summary>
+        '''plReCaptchaSecretKey control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents plReCaptchaSecretKey As Global.System.Web.UI.UserControl
+        
+        '''<summary>
+        '''txtReCaptchaSecretKey control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents txtReCaptchaSecretKey As Global.System.Web.UI.WebControls.TextBox
+        
         '''<summary>
         '''plHideWebsite control.
         '''</summary>
@@ -706,7 +742,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plHideWebsite As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkHideWebsite control.
         '''</summary>
@@ -715,7 +751,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkHideWebsite As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plRequireName control.
         '''</summary>
@@ -724,7 +760,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plRequireName As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkRequireName control.
         '''</summary>
@@ -733,7 +769,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkRequireName As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plRequireEmail control.
         '''</summary>
@@ -742,7 +778,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plRequireEmail As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkRequireEmail control.
         '''</summary>
@@ -751,7 +787,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkRequireEmail As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plNotifyDefault control.
         '''</summary>
@@ -760,7 +796,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plNotifyDefault As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkNotifyDefault control.
         '''</summary>
@@ -769,7 +805,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkNotifyDefault As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plSortDirectionComments control.
         '''</summary>
@@ -778,7 +814,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plSortDirectionComments As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''drpSortDirectionComments control.
         '''</summary>
@@ -787,7 +823,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents drpSortDirectionComments As Global.System.Web.UI.WebControls.DropDownList
-
+        
         '''<summary>
         '''plAkismetKey control.
         '''</summary>
@@ -796,7 +832,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plAkismetKey As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''txtAkismetKey control.
         '''</summary>
@@ -805,7 +841,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents txtAkismetKey As Global.System.Web.UI.WebControls.TextBox
-
+        
         '''<summary>
         '''phContentSharing control.
         '''</summary>
@@ -814,7 +850,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents phContentSharing As Global.System.Web.UI.WebControls.PlaceHolder
-
+        
         '''<summary>
         '''dshContentSharing control.
         '''</summary>
@@ -823,7 +859,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents dshContentSharing As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''tblContentSharing control.
         '''</summary>
@@ -832,7 +868,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents tblContentSharing As Global.System.Web.UI.HtmlControls.HtmlTable
-
+        
         '''<summary>
         '''lblContentSharing control.
         '''</summary>
@@ -841,7 +877,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents lblContentSharing As Global.System.Web.UI.WebControls.Label
-
+        
         '''<summary>
         '''plAddArticleInstances control.
         '''</summary>
@@ -850,7 +886,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plAddArticleInstances As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''drpContentSharingPortals control.
         '''</summary>
@@ -859,7 +895,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents drpContentSharingPortals As Global.System.Web.UI.WebControls.DropDownList
-
+        
         '''<summary>
         '''cmdContentSharingAdd control.
         '''</summary>
@@ -868,7 +904,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents cmdContentSharingAdd As Global.System.Web.UI.WebControls.LinkButton
-
+        
         '''<summary>
         '''lblContentSharingNoneAvailable control.
         '''</summary>
@@ -877,7 +913,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents lblContentSharingNoneAvailable As Global.System.Web.UI.WebControls.Label
-
+        
         '''<summary>
         '''plAvailableArticleInstances control.
         '''</summary>
@@ -886,7 +922,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plAvailableArticleInstances As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''grdContentSharing control.
         '''</summary>
@@ -895,7 +931,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents grdContentSharing As Global.System.Web.UI.WebControls.DataGrid
-
+        
         '''<summary>
         '''lblNoContentSharing control.
         '''</summary>
@@ -904,7 +940,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents lblNoContentSharing As Global.System.Web.UI.WebControls.Label
-
+        
         '''<summary>
         '''dshFileSettings control.
         '''</summary>
@@ -913,7 +949,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents dshFileSettings As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''tblFile control.
         '''</summary>
@@ -922,7 +958,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents tblFile As Global.System.Web.UI.HtmlControls.HtmlTable
-
+        
         '''<summary>
         '''plDefaultFileFolder control.
         '''</summary>
@@ -931,7 +967,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plDefaultFileFolder As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''drpDefaultFileFolder control.
         '''</summary>
@@ -940,7 +976,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents drpDefaultFileFolder As Global.System.Web.UI.WebControls.DropDownList
-
+        
         '''<summary>
         '''dshFilter control.
         '''</summary>
@@ -949,7 +985,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents dshFilter As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''tblFilter control.
         '''</summary>
@@ -958,7 +994,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents tblFilter As Global.System.Web.UI.HtmlControls.HtmlTable
-
+        
         '''<summary>
         '''plMaxArticles control.
         '''</summary>
@@ -967,7 +1003,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plMaxArticles As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''txtMaxArticles control.
         '''</summary>
@@ -976,7 +1012,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents txtMaxArticles As Global.System.Web.UI.WebControls.TextBox
-
+        
         '''<summary>
         '''valMaxArticlesIsValid control.
         '''</summary>
@@ -985,7 +1021,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents valMaxArticlesIsValid As Global.System.Web.UI.WebControls.CompareValidator
-
+        
         '''<summary>
         '''plMaxAge control.
         '''</summary>
@@ -994,7 +1030,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plMaxAge As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''txtMaxAge control.
         '''</summary>
@@ -1003,7 +1039,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents txtMaxAge As Global.System.Web.UI.WebControls.TextBox
-
+        
         '''<summary>
         '''lblMaxAge control.
         '''</summary>
@@ -1012,7 +1048,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents lblMaxAge As Global.System.Web.UI.WebControls.Label
-
+        
         '''<summary>
         '''valMaxAgeType control.
         '''</summary>
@@ -1021,7 +1057,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents valMaxAgeType As Global.System.Web.UI.WebControls.CompareValidator
-
+        
         '''<summary>
         '''plCategories control.
         '''</summary>
@@ -1030,7 +1066,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plCategories As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''rdoAllCategories control.
         '''</summary>
@@ -1039,7 +1075,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents rdoAllCategories As Global.System.Web.UI.WebControls.RadioButton
-
+        
         '''<summary>
         '''rdoSingleCategory control.
         '''</summary>
@@ -1048,7 +1084,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents rdoSingleCategory As Global.System.Web.UI.WebControls.RadioButton
-
+        
         '''<summary>
         '''drpCategories control.
         '''</summary>
@@ -1057,7 +1093,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents drpCategories As Global.System.Web.UI.WebControls.DropDownList
-
+        
         '''<summary>
         '''rdoMatchAny control.
         '''</summary>
@@ -1066,7 +1102,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents rdoMatchAny As Global.System.Web.UI.WebControls.RadioButton
-
+        
         '''<summary>
         '''rdoMatchAll control.
         '''</summary>
@@ -1075,7 +1111,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents rdoMatchAll As Global.System.Web.UI.WebControls.RadioButton
-
+        
         '''<summary>
         '''lstCategories control.
         '''</summary>
@@ -1084,7 +1120,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents lstCategories As Global.System.Web.UI.WebControls.ListBox
-
+        
         '''<summary>
         '''lblHoldCtrl control.
         '''</summary>
@@ -1093,7 +1129,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents lblHoldCtrl As Global.System.Web.UI.WebControls.Label
-
+        
         '''<summary>
         '''plShowPending control.
         '''</summary>
@@ -1102,7 +1138,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plShowPending As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkShowPending control.
         '''</summary>
@@ -1111,7 +1147,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkShowPending As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plShowFeaturedOnly control.
         '''</summary>
@@ -1120,7 +1156,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plShowFeaturedOnly As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkShowFeaturedOnly control.
         '''</summary>
@@ -1129,7 +1165,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkShowFeaturedOnly As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plShowNotFeaturedOnly control.
         '''</summary>
@@ -1138,7 +1174,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plShowNotFeaturedOnly As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkShowNotFeaturedOnly control.
         '''</summary>
@@ -1147,7 +1183,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkShowNotFeaturedOnly As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plShowSecuredOnly control.
         '''</summary>
@@ -1156,7 +1192,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plShowSecuredOnly As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkShowSecuredOnly control.
         '''</summary>
@@ -1165,7 +1201,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkShowSecuredOnly As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plShowNotSecuredOnly control.
         '''</summary>
@@ -1174,7 +1210,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plShowNotSecuredOnly As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkShowNotSecuredOnly control.
         '''</summary>
@@ -1183,7 +1219,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkShowNotSecuredOnly As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''dshAuthorFilterSettings control.
         '''</summary>
@@ -1192,7 +1228,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents dshAuthorFilterSettings As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''tblAuthorFilterSettings control.
         '''</summary>
@@ -1201,7 +1237,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents tblAuthorFilterSettings As Global.System.Web.UI.HtmlControls.HtmlTable
-
+        
         '''<summary>
         '''plAuthor control.
         '''</summary>
@@ -1210,7 +1246,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plAuthor As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''lblAuthorFilter control.
         '''</summary>
@@ -1219,7 +1255,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents lblAuthorFilter As Global.System.Web.UI.WebControls.Label
-
+        
         '''<summary>
         '''cmdSelectAuthor control.
         '''</summary>
@@ -1228,7 +1264,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents cmdSelectAuthor As Global.System.Web.UI.WebControls.LinkButton
-
+        
         '''<summary>
         '''ddlAuthor control.
         '''</summary>
@@ -1237,7 +1273,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents ddlAuthor As Global.System.Web.UI.WebControls.DropDownList
-
+        
         '''<summary>
         '''plQueryStringFilter control.
         '''</summary>
@@ -1246,7 +1282,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plQueryStringFilter As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkQueryStringFilter control.
         '''</summary>
@@ -1255,7 +1291,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkQueryStringFilter As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plQueryStringParam control.
         '''</summary>
@@ -1264,7 +1300,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plQueryStringParam As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''txtQueryStringParam control.
         '''</summary>
@@ -1273,7 +1309,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents txtQueryStringParam As Global.System.Web.UI.WebControls.TextBox
-
+        
         '''<summary>
         '''plUsernameFilter control.
         '''</summary>
@@ -1282,7 +1318,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plUsernameFilter As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkUsernameFilter control.
         '''</summary>
@@ -1291,7 +1327,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkUsernameFilter As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plUsernameParam control.
         '''</summary>
@@ -1300,7 +1336,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plUsernameParam As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''txtUsernameParam control.
         '''</summary>
@@ -1309,7 +1345,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents txtUsernameParam As Global.System.Web.UI.WebControls.TextBox
-
+        
         '''<summary>
         '''plLoggedInUser control.
         '''</summary>
@@ -1318,7 +1354,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plLoggedInUser As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkLoggedInUser control.
         '''</summary>
@@ -1327,7 +1363,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkLoggedInUser As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''dshForm control.
         '''</summary>
@@ -1336,7 +1372,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents dshForm As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''tblForm control.
         '''</summary>
@@ -1345,7 +1381,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents tblForm As Global.System.Web.UI.HtmlControls.HtmlTable
-
+        
         '''<summary>
         '''plAuthorSelection control.
         '''</summary>
@@ -1354,7 +1390,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plAuthorSelection As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''lstAuthorSelection control.
         '''</summary>
@@ -1363,7 +1399,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents lstAuthorSelection As Global.System.Web.UI.WebControls.RadioButtonList
-
+        
         '''<summary>
         '''plAuthorDefault control.
         '''</summary>
@@ -1372,7 +1408,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plAuthorDefault As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''lblAuthorDefault control.
         '''</summary>
@@ -1381,7 +1417,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents lblAuthorDefault As Global.System.Web.UI.WebControls.Label
-
+        
         '''<summary>
         '''cmdSelectAuthorDefault control.
         '''</summary>
@@ -1390,7 +1426,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents cmdSelectAuthorDefault As Global.System.Web.UI.WebControls.LinkButton
-
+        
         '''<summary>
         '''drpAuthorDefault control.
         '''</summary>
@@ -1399,7 +1435,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents drpAuthorDefault As Global.System.Web.UI.WebControls.DropDownList
-
+        
         '''<summary>
         '''plExpandSummary control.
         '''</summary>
@@ -1408,7 +1444,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plExpandSummary As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkExpandSummary control.
         '''</summary>
@@ -1417,7 +1453,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkExpandSummary As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plTextEditorWidth control.
         '''</summary>
@@ -1426,7 +1462,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plTextEditorWidth As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''txtTextEditorWidth control.
         '''</summary>
@@ -1435,7 +1471,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents txtTextEditorWidth As Global.System.Web.UI.WebControls.TextBox
-
+        
         '''<summary>
         '''valEditorWidth control.
         '''</summary>
@@ -1444,7 +1480,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents valEditorWidth As Global.System.Web.UI.WebControls.RequiredFieldValidator
-
+        
         '''<summary>
         '''valEditorWidthIsValid control.
         '''</summary>
@@ -1453,7 +1489,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents valEditorWidthIsValid As Global.System.Web.UI.WebControls.CustomValidator
-
+        
         '''<summary>
         '''plTextEditorHeight control.
         '''</summary>
@@ -1462,7 +1498,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plTextEditorHeight As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''txtTextEditorHeight control.
         '''</summary>
@@ -1471,7 +1507,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents txtTextEditorHeight As Global.System.Web.UI.WebControls.TextBox
-
+        
         '''<summary>
         '''valEditorHeight control.
         '''</summary>
@@ -1480,7 +1516,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents valEditorHeight As Global.System.Web.UI.WebControls.RequiredFieldValidator
-
+        
         '''<summary>
         '''valEditorHeightIsvalid control.
         '''</summary>
@@ -1489,7 +1525,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents valEditorHeightIsvalid As Global.System.Web.UI.WebControls.CustomValidator
-
+        
         '''<summary>
         '''plTextEditorSummaryMode control.
         '''</summary>
@@ -1498,7 +1534,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plTextEditorSummaryMode As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''lstTextEditorSummaryMode control.
         '''</summary>
@@ -1507,7 +1543,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents lstTextEditorSummaryMode As Global.System.Web.UI.WebControls.RadioButtonList
-
+        
         '''<summary>
         '''plTextEditorSummaryWidth control.
         '''</summary>
@@ -1516,7 +1552,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plTextEditorSummaryWidth As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''txtTextEditorSummaryWidth control.
         '''</summary>
@@ -1525,7 +1561,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents txtTextEditorSummaryWidth As Global.System.Web.UI.WebControls.TextBox
-
+        
         '''<summary>
         '''valTextEditorSummaryWidth control.
         '''</summary>
@@ -1534,7 +1570,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents valTextEditorSummaryWidth As Global.System.Web.UI.WebControls.RequiredFieldValidator
-
+        
         '''<summary>
         '''valTextEditorSummaryWidthIsValid control.
         '''</summary>
@@ -1543,7 +1579,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents valTextEditorSummaryWidthIsValid As Global.System.Web.UI.WebControls.CustomValidator
-
+        
         '''<summary>
         '''plTextEditorSummaryHeight control.
         '''</summary>
@@ -1552,7 +1588,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plTextEditorSummaryHeight As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''txtTextEditorSummaryHeight control.
         '''</summary>
@@ -1561,7 +1597,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents txtTextEditorSummaryHeight As Global.System.Web.UI.WebControls.TextBox
-
+        
         '''<summary>
         '''valTextEditorSummaryHeight control.
         '''</summary>
@@ -1570,7 +1606,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents valTextEditorSummaryHeight As Global.System.Web.UI.WebControls.RequiredFieldValidator
-
+        
         '''<summary>
         '''valTextEditorSummaryHeightIsValid control.
         '''</summary>
@@ -1579,7 +1615,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents valTextEditorSummaryHeightIsValid As Global.System.Web.UI.WebControls.CustomValidator
-
+        
         '''<summary>
         '''dshImage control.
         '''</summary>
@@ -1588,7 +1624,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents dshImage As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''tblImage control.
         '''</summary>
@@ -1597,7 +1633,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents tblImage As Global.System.Web.UI.HtmlControls.HtmlTable
-
+        
         '''<summary>
         '''plIncludeJQuery control.
         '''</summary>
@@ -1606,7 +1642,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plIncludeJQuery As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkIncludeJQuery control.
         '''</summary>
@@ -1615,7 +1651,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkIncludeJQuery As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plJQueryPath control.
         '''</summary>
@@ -1624,7 +1660,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plJQueryPath As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''txtJQueryPath control.
         '''</summary>
@@ -1633,7 +1669,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents txtJQueryPath As Global.System.Web.UI.WebControls.TextBox
-
+        
         '''<summary>
         '''plEnableImagesUpload control.
         '''</summary>
@@ -1642,7 +1678,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plEnableImagesUpload As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkEnableImagesUpload control.
         '''</summary>
@@ -1651,7 +1687,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkEnableImagesUpload As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plEnableImages control.
         '''</summary>
@@ -1660,7 +1696,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plEnableImages As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkEnablePortalImages control.
         '''</summary>
@@ -1669,7 +1705,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkEnablePortalImages As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plEnableImagesExternal control.
         '''</summary>
@@ -1678,7 +1714,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plEnableImagesExternal As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkEnableExternalImages control.
         '''</summary>
@@ -1687,7 +1723,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkEnableExternalImages As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plDefaultImageFolder control.
         '''</summary>
@@ -1696,7 +1732,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plDefaultImageFolder As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''drpDefaultImageFolder control.
         '''</summary>
@@ -1705,7 +1741,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents drpDefaultImageFolder As Global.System.Web.UI.WebControls.DropDownList
-
+        
         '''<summary>
         '''plResizeImages control.
         '''</summary>
@@ -1714,7 +1750,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plResizeImages As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkResizeImages control.
         '''</summary>
@@ -1723,7 +1759,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkResizeImages As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plImageMaxWidth control.
         '''</summary>
@@ -1732,7 +1768,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plImageMaxWidth As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''txtImageMaxWidth control.
         '''</summary>
@@ -1741,7 +1777,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents txtImageMaxWidth As Global.System.Web.UI.WebControls.TextBox
-
+        
         '''<summary>
         '''valImageMaxWidth control.
         '''</summary>
@@ -1750,7 +1786,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents valImageMaxWidth As Global.System.Web.UI.WebControls.RequiredFieldValidator
-
+        
         '''<summary>
         '''valImageMaxWidthIsNumber control.
         '''</summary>
@@ -1759,7 +1795,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents valImageMaxWidthIsNumber As Global.System.Web.UI.WebControls.CompareValidator
-
+        
         '''<summary>
         '''plImageMaxHeight control.
         '''</summary>
@@ -1768,7 +1804,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plImageMaxHeight As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''txtImageMaxHeight control.
         '''</summary>
@@ -1777,7 +1813,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents txtImageMaxHeight As Global.System.Web.UI.WebControls.TextBox
-
+        
         '''<summary>
         '''valImageMaxHeight control.
         '''</summary>
@@ -1786,7 +1822,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents valImageMaxHeight As Global.System.Web.UI.WebControls.RequiredFieldValidator
-
+        
         '''<summary>
         '''valImageMaxHeightIsNumber control.
         '''</summary>
@@ -1795,7 +1831,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents valImageMaxHeightIsNumber As Global.System.Web.UI.WebControls.CompareValidator
-
+        
         '''<summary>
         '''plThumbnailType control.
         '''</summary>
@@ -1804,7 +1840,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plThumbnailType As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''rdoThumbnailType control.
         '''</summary>
@@ -1813,7 +1849,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents rdoThumbnailType As Global.System.Web.UI.WebControls.RadioButtonList
-
+        
         '''<summary>
         '''plUseWatermark control.
         '''</summary>
@@ -1822,7 +1858,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plUseWatermark As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkUseWatermark control.
         '''</summary>
@@ -1831,7 +1867,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkUseWatermark As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plWatermarkText control.
         '''</summary>
@@ -1840,7 +1876,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plWatermarkText As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''txtWatermarkText control.
         '''</summary>
@@ -1849,7 +1885,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents txtWatermarkText As Global.System.Web.UI.WebControls.TextBox
-
+        
         '''<summary>
         '''plWatermarkImage control.
         '''</summary>
@@ -1858,16 +1894,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plWatermarkImage As Global.System.Web.UI.UserControl
-
-        '''<summary>
-        '''ctlWatermarkImage control.
-        '''</summary>
-        '''<remarks>
-        '''Auto-generated field.
-        '''To modify move field declaration from designer file to code-behind file.
-        '''</remarks>
-        Protected WithEvents ctlWatermarkImage As DotNetNuke.UI.UserControls.UrlControl
-
+        
         '''<summary>
         '''plWatermarkPosition control.
         '''</summary>
@@ -1876,7 +1903,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plWatermarkPosition As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''drpWatermarkPosition control.
         '''</summary>
@@ -1885,7 +1912,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents drpWatermarkPosition As Global.System.Web.UI.WebControls.DropDownList
-
+        
         '''<summary>
         '''dshNotification control.
         '''</summary>
@@ -1894,7 +1921,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents dshNotification As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''tblNotification control.
         '''</summary>
@@ -1903,7 +1930,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents tblNotification As Global.System.Web.UI.HtmlControls.HtmlTable
-
+        
         '''<summary>
         '''plNotifySubmission control.
         '''</summary>
@@ -1912,7 +1939,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plNotifySubmission As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkNotifySubmission control.
         '''</summary>
@@ -1921,7 +1948,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkNotifySubmission As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plNotifySubmissionEmail control.
         '''</summary>
@@ -1930,7 +1957,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plNotifySubmissionEmail As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''txtSubmissionEmail control.
         '''</summary>
@@ -1939,7 +1966,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents txtSubmissionEmail As Global.System.Web.UI.WebControls.TextBox
-
+        
         '''<summary>
         '''plNotifyApproval control.
         '''</summary>
@@ -1948,7 +1975,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plNotifyApproval As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkNotifyApproval control.
         '''</summary>
@@ -1957,7 +1984,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkNotifyApproval As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plNotifyComment control.
         '''</summary>
@@ -1966,7 +1993,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plNotifyComment As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkNotifyComment control.
         '''</summary>
@@ -1975,7 +2002,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkNotifyComment As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plNotifyCommentEmail control.
         '''</summary>
@@ -1984,7 +2011,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plNotifyCommentEmail As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''txtNotifyCommentEmail control.
         '''</summary>
@@ -1993,7 +2020,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents txtNotifyCommentEmail As Global.System.Web.UI.WebControls.TextBox
-
+        
         '''<summary>
         '''plNotifyCommentApproval control.
         '''</summary>
@@ -2002,7 +2029,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plNotifyCommentApproval As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkNotifyCommentApproval control.
         '''</summary>
@@ -2011,7 +2038,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkNotifyCommentApproval As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plNotifyCommentApprovalEmail control.
         '''</summary>
@@ -2020,7 +2047,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plNotifyCommentApprovalEmail As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''txtNotifyCommentApprovalEmail control.
         '''</summary>
@@ -2029,7 +2056,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents txtNotifyCommentApprovalEmail As Global.System.Web.UI.WebControls.TextBox
-
+        
         '''<summary>
         '''dshRelated control.
         '''</summary>
@@ -2038,7 +2065,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents dshRelated As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''tblRelated control.
         '''</summary>
@@ -2047,7 +2074,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents tblRelated As Global.System.Web.UI.HtmlControls.HtmlTable
-
+        
         '''<summary>
         '''plRelatedMode control.
         '''</summary>
@@ -2056,7 +2083,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plRelatedMode As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''lstRelatedMode control.
         '''</summary>
@@ -2065,7 +2092,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents lstRelatedMode As Global.System.Web.UI.WebControls.RadioButtonList
-
+        
         '''<summary>
         '''dshSecurity control.
         '''</summary>
@@ -2074,7 +2101,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents dshSecurity As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''tblSecurity control.
         '''</summary>
@@ -2083,7 +2110,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents tblSecurity As Global.System.Web.UI.HtmlControls.HtmlTable
-
+        
         '''<summary>
         '''plRoleGroup control.
         '''</summary>
@@ -2092,7 +2119,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plRoleGroup As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''drpSecurityRoleGroups control.
         '''</summary>
@@ -2101,7 +2128,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents drpSecurityRoleGroups As Global.System.Web.UI.WebControls.DropDownList
-
+        
         '''<summary>
         '''plBasicSettings control.
         '''</summary>
@@ -2110,7 +2137,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plBasicSettings As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''grdBasicPermissions control.
         '''</summary>
@@ -2119,7 +2146,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents grdBasicPermissions As Global.System.Web.UI.WebControls.DataGrid
-
+        
         '''<summary>
         '''plSecureUrl control.
         '''</summary>
@@ -2128,7 +2155,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plSecureUrl As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''txtSecureUrl control.
         '''</summary>
@@ -2137,7 +2164,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents txtSecureUrl As Global.System.Web.UI.WebControls.TextBox
-
+        
         '''<summary>
         '''plFormSettings control.
         '''</summary>
@@ -2146,7 +2173,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plFormSettings As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''grdFormPermissions control.
         '''</summary>
@@ -2155,7 +2182,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents grdFormPermissions As Global.System.Web.UI.WebControls.DataGrid
-
+        
         '''<summary>
         '''lblFormSettingsHelp control.
         '''</summary>
@@ -2164,7 +2191,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents lblFormSettingsHelp As Global.System.Web.UI.WebControls.Label
-
+        
         '''<summary>
         '''trAdminSettings1 control.
         '''</summary>
@@ -2173,7 +2200,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents trAdminSettings1 As Global.System.Web.UI.HtmlControls.HtmlTableRow
-
+        
         '''<summary>
         '''plAdminSettings control.
         '''</summary>
@@ -2182,7 +2209,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plAdminSettings As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''trAdminSettings2 control.
         '''</summary>
@@ -2191,7 +2218,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents trAdminSettings2 As Global.System.Web.UI.HtmlControls.HtmlTableRow
-
+        
         '''<summary>
         '''grdAdminPermissions control.
         '''</summary>
@@ -2200,7 +2227,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents grdAdminPermissions As Global.System.Web.UI.WebControls.DataGrid
-
+        
         '''<summary>
         '''dshSEOSettings control.
         '''</summary>
@@ -2209,7 +2236,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents dshSEOSettings As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''tblSEO control.
         '''</summary>
@@ -2218,7 +2245,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents tblSEO As Global.System.Web.UI.HtmlControls.HtmlTable
-
+        
         '''<summary>
         '''plTitleReplacement control.
         '''</summary>
@@ -2227,7 +2254,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plTitleReplacement As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''lstTitleReplacement control.
         '''</summary>
@@ -2236,7 +2263,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents lstTitleReplacement As Global.System.Web.UI.WebControls.RadioButtonList
-
+        
         '''<summary>
         '''plAlwaysShowPageID control.
         '''</summary>
@@ -2245,7 +2272,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plAlwaysShowPageID As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkAlwaysShowPageID control.
         '''</summary>
@@ -2254,7 +2281,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkAlwaysShowPageID As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plUrlMode control.
         '''</summary>
@@ -2263,7 +2290,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plUrlMode As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''lstUrlMode control.
         '''</summary>
@@ -2272,7 +2299,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents lstUrlMode As Global.System.Web.UI.WebControls.RadioButtonList
-
+        
         '''<summary>
         '''plShorternID control.
         '''</summary>
@@ -2281,7 +2308,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plShorternID As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''txtShorternID control.
         '''</summary>
@@ -2290,7 +2317,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents txtShorternID As Global.System.Web.UI.WebControls.TextBox
-
+        
         '''<summary>
         '''valShorternID control.
         '''</summary>
@@ -2299,7 +2326,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents valShorternID As Global.System.Web.UI.WebControls.RequiredFieldValidator
-
+        
         '''<summary>
         '''plUseCanonicalLink control.
         '''</summary>
@@ -2308,7 +2335,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plUseCanonicalLink As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkUseCanonicalLink control.
         '''</summary>
@@ -2317,7 +2344,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkUseCanonicalLink As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plExpandMetaInformation control.
         '''</summary>
@@ -2326,7 +2353,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plExpandMetaInformation As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkExpandMetaInformation control.
         '''</summary>
@@ -2335,7 +2362,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkExpandMetaInformation As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plUniquePageTitles control.
         '''</summary>
@@ -2344,7 +2371,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plUniquePageTitles As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkUniquePageTitles control.
         '''</summary>
@@ -2353,7 +2380,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkUniquePageTitles As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''dshSyndicationSettings control.
         '''</summary>
@@ -2362,7 +2389,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents dshSyndicationSettings As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''tblSyndication control.
         '''</summary>
@@ -2371,7 +2398,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents tblSyndication As Global.System.Web.UI.HtmlControls.HtmlTable
-
+        
         '''<summary>
         '''plEnableSyndication control.
         '''</summary>
@@ -2380,7 +2407,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plEnableSyndication As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkEnableSyndication control.
         '''</summary>
@@ -2389,7 +2416,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkEnableSyndication As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plEnableSyndicationEnclosures control.
         '''</summary>
@@ -2398,7 +2425,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plEnableSyndicationEnclosures As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkEnableSyndicationEnclosures control.
         '''</summary>
@@ -2407,7 +2434,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkEnableSyndicationEnclosures As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plSyndicationEnclosureType control.
         '''</summary>
@@ -2416,7 +2443,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plSyndicationEnclosureType As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''lstSyndicationEnclosureType control.
         '''</summary>
@@ -2425,7 +2452,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents lstSyndicationEnclosureType As Global.System.Web.UI.WebControls.RadioButtonList
-
+        
         '''<summary>
         '''plEnableSyndicationHtml control.
         '''</summary>
@@ -2434,7 +2461,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plEnableSyndicationHtml As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkEnableSyndicationHtml control.
         '''</summary>
@@ -2443,7 +2470,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkEnableSyndicationHtml As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plSyndicationLinkMode control.
         '''</summary>
@@ -2452,7 +2479,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plSyndicationLinkMode As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''lstSyndicationLinkMode control.
         '''</summary>
@@ -2461,7 +2488,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents lstSyndicationLinkMode As Global.System.Web.UI.WebControls.RadioButtonList
-
+        
         '''<summary>
         '''plSyndicationSummaryLength control.
         '''</summary>
@@ -2470,7 +2497,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plSyndicationSummaryLength As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''txtSyndicationSummaryLength control.
         '''</summary>
@@ -2479,7 +2506,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents txtSyndicationSummaryLength As Global.System.Web.UI.WebControls.TextBox
-
+        
         '''<summary>
         '''valSyndicationSummaryLength control.
         '''</summary>
@@ -2488,7 +2515,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents valSyndicationSummaryLength As Global.System.Web.UI.WebControls.CompareValidator
-
+        
         '''<summary>
         '''lblSyndicationSummaryLengthHelp control.
         '''</summary>
@@ -2497,7 +2524,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents lblSyndicationSummaryLengthHelp As Global.System.Web.UI.WebControls.Label
-
+        
         '''<summary>
         '''plSyndicationMaxCount control.
         '''</summary>
@@ -2506,7 +2533,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plSyndicationMaxCount As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''txtSyndicationMaxCount control.
         '''</summary>
@@ -2515,7 +2542,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents txtSyndicationMaxCount As Global.System.Web.UI.WebControls.TextBox
-
+        
         '''<summary>
         '''valSyndicationMaxCount control.
         '''</summary>
@@ -2524,7 +2551,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents valSyndicationMaxCount As Global.System.Web.UI.WebControls.RequiredFieldValidator
-
+        
         '''<summary>
         '''valSyndicationMaxCountIsValid control.
         '''</summary>
@@ -2533,7 +2560,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents valSyndicationMaxCountIsValid As Global.System.Web.UI.WebControls.CompareValidator
-
+        
         '''<summary>
         '''plSyndicationImagePath control.
         '''</summary>
@@ -2542,7 +2569,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plSyndicationImagePath As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''txtSyndicationImagePath control.
         '''</summary>
@@ -2551,7 +2578,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents txtSyndicationImagePath As Global.System.Web.UI.WebControls.TextBox
-
+        
         '''<summary>
         '''dshTwitterSettings control.
         '''</summary>
@@ -2560,7 +2587,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents dshTwitterSettings As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''tblTwitter control.
         '''</summary>
@@ -2569,7 +2596,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents tblTwitter As Global.System.Web.UI.HtmlControls.HtmlTable
-
+        
         '''<summary>
         '''plTwitterName control.
         '''</summary>
@@ -2578,7 +2605,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plTwitterName As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''txtTwitterName control.
         '''</summary>
@@ -2587,7 +2614,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents txtTwitterName As Global.System.Web.UI.WebControls.TextBox
-
+        
         '''<summary>
         '''plBitLyLogin control.
         '''</summary>
@@ -2596,7 +2623,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plBitLyLogin As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''txtBitLyLogin control.
         '''</summary>
@@ -2605,7 +2632,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents txtBitLyLogin As Global.System.Web.UI.WebControls.TextBox
-
+        
         '''<summary>
         '''plBitLyAPIKey control.
         '''</summary>
@@ -2614,7 +2641,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plBitLyAPIKey As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''txtBitLyAPIKey control.
         '''</summary>
@@ -2623,7 +2650,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents txtBitLyAPIKey As Global.System.Web.UI.WebControls.TextBox
-
+        
         '''<summary>
         '''dsh3rdPartySettings control.
         '''</summary>
@@ -2632,7 +2659,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents dsh3rdPartySettings As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''tbl3rdParty control.
         '''</summary>
@@ -2641,7 +2668,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents tbl3rdParty As Global.System.Web.UI.HtmlControls.HtmlTable
-
+        
         '''<summary>
         '''plJournalIntegration control.
         '''</summary>
@@ -2650,7 +2677,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plJournalIntegration As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkJournalIntegration control.
         '''</summary>
@@ -2659,7 +2686,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkJournalIntegration As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plJournalIntegrationGroups control.
         '''</summary>
@@ -2668,7 +2695,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plJournalIntegrationGroups As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkJournalIntegrationGroups control.
         '''</summary>
@@ -2677,7 +2704,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkJournalIntegrationGroups As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plActiveSocial control.
         '''</summary>
@@ -2686,7 +2713,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plActiveSocial As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkActiveSocial control.
         '''</summary>
@@ -2695,7 +2722,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkActiveSocial As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''plActiveSocialSubmissionKey control.
         '''</summary>
@@ -2704,7 +2731,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plActiveSocialSubmissionKey As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''txtActiveSocialSubmissionKey control.
         '''</summary>
@@ -2713,7 +2740,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents txtActiveSocialSubmissionKey As Global.System.Web.UI.WebControls.TextBox
-
+        
         '''<summary>
         '''plActiveSocialRateKey control.
         '''</summary>
@@ -2722,7 +2749,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plActiveSocialRateKey As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''txtActiveSocialRateKey control.
         '''</summary>
@@ -2731,7 +2758,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents txtActiveSocialRateKey As Global.System.Web.UI.WebControls.TextBox
-
+        
         '''<summary>
         '''plActiveSocialCommentKey control.
         '''</summary>
@@ -2740,7 +2767,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plActiveSocialCommentKey As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''txtActiveSocialCommentKey control.
         '''</summary>
@@ -2749,7 +2776,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents txtActiveSocialCommentKey As Global.System.Web.UI.WebControls.TextBox
-
+        
         '''<summary>
         '''plSmartThinkerStoryFeed control.
         '''</summary>
@@ -2758,7 +2785,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plSmartThinkerStoryFeed As Global.System.Web.UI.UserControl
-
+        
         '''<summary>
         '''chkSmartThinkerStoryFeed control.
         '''</summary>
@@ -2767,7 +2794,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents chkSmartThinkerStoryFeed As Global.System.Web.UI.WebControls.CheckBox
-
+        
         '''<summary>
         '''cmdUpdate control.
         '''</summary>
@@ -2776,7 +2803,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents cmdUpdate As Global.System.Web.UI.WebControls.LinkButton
-
+        
         '''<summary>
         '''cmdCancel control.
         '''</summary>
@@ -2785,7 +2812,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents cmdCancel As Global.System.Web.UI.WebControls.LinkButton
-
+        
         '''<summary>
         '''ucHeader2 control.
         '''</summary>

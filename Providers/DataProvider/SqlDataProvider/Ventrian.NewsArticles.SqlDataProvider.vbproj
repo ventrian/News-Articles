@@ -92,9 +92,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DotNetNuke, Version=6.1.5.142, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="DotNetNuke, Version=8.0.4.226, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\bin\DotNetNuke.dll</HintPath>
+      <HintPath>..\..\..\Libraries\DotNetNuke.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.ApplicationBlocks.Data, Version=2.0.0.0, Culture=neutral">
@@ -241,13 +241,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Ventrian.NewsArticles.vbproj">
-      <Project>{25F6A930-34CD-4730-8324-D234D4637898}</Project>
-      <Name>Ventrian.NewsArticles</Name>
-      <Private>False</Private>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
@@ -258,6 +251,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Ventrian.NewsArticles.vbproj">
+      <Project>{25f6a930-34cd-4730-8324-d234d4637898}</Project>
+      <Name>Ventrian.NewsArticles</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>

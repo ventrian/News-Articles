@@ -11,6 +11,7 @@ Imports System.Xml
 
 Imports DotNetNuke.Common.Utilities
 Imports DotNetNuke.Entities.Portals
+Imports DotNetNuke.Services.Cache
 
 Namespace Ventrian.NewsArticles
 
@@ -64,8 +65,8 @@ Namespace Ventrian.NewsArticles
 
                 objTemplate.Tokens = objTemplate.Template.Split(delimiter)
 
-                DataCache.SetCache(cacheKey, objTemplate, New CacheDependency(path))
-                DataCache.SetCache(cacheKeyXml, objTemplate, New CacheDependency(pathXml))
+                DataCache.SetCache(cacheKey, objTemplate, New DNNCacheDependency(path))
+                DataCache.SetCache(cacheKeyXml, objTemplate, New DNNCacheDependency(pathXml))
             End If
 
             Return objTemplate
