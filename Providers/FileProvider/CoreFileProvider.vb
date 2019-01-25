@@ -17,7 +17,7 @@ Namespace Ventrian.NewsArticles
 			Dim objFile As New FileInfo
 
 			objFile.ArticleID = articleID
-			objFile.FileName = objPostedFile.FileName
+			objFile.FileName = CleanFilename(objPostedFile.FileName)
 			objFile.SortOrder = 0
 
 			Dim filesList As List(Of FileInfo) = GetFiles(articleID)
@@ -129,6 +129,31 @@ Namespace Ventrian.NewsArticles
         End Sub
 
 #End Region
+        
+		''' <summary>
+		''' Cleans a filename from forbidden characters on Windows Filesystems
+		''' </summary>
+		''' <param name="filename"></param>
+		''' <returns></returns>
+		public shared Function CleanFilename(ByVal filename As String) As String
+		    ' stuk vanaf de laatste forward of backslash is de bestandsnaam
+		    ' bestandsnaam zonder extensie moet worden beperkt tot max 200 karakters.            
+		    Dim retval As String = ""
+		    Dim folderChars = "\/"
+
+		    If filename.LastIndexOfAny(folderChars.ToCharArray()) >= 0 Then
+		        retval = filename.Substring(filename.LastIndexOfAny(folderChars.ToCharArray()) + 1)
+		    Else
+		        retval = filename
+		    End If
+		    ' forbidden characters are: \/:*?"<>|
+		    Dim regex = New Regex("[:\\/\*\?""<>\|]", RegexOptions.CultureInvariant Or RegexOptions.Compiled)
+		    ' Replace the matched text in the InputText using the replacement pattern
+		    retval = regex.Replace(retval, "-")
+
+		    'If retval.Length > 200 Then retval = retval.Substring(0, 200)
+		    Return retval
+		End Function
 
     End Class
 

@@ -581,7 +581,7 @@ Namespace Ventrian.NewsArticles.Controls
 					If (_articleID = Null.NullInteger) Then
 						objImage.ImageGuid = ArticleGuid
 					End If
-					objImage.FileName = objFile.FileName
+					objImage.FileName = CoreFileProvider.CleanFilename(objFile.FileName)
 
 					If (objFile.FileName.ToLower().EndsWith(".jpg")) Then
 						objImage.ContentType = "image/jpeg"
