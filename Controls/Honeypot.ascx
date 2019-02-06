@@ -1,4 +1,4 @@
-﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="Honeypot.ascx.vb" Inherits="Ventrian.NewsArticles.Controls.Honeypot" %>
+﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="Honeypot.ascx.vb" Inherits="Ventrian.NewsArticles.Controls.Honeypot" ClassName="Honeypot" %>
 <%@ Register TagPrefix="dnn" TagName="Label" Src="~/controls/LabelControl.ascx" %>
     <div style="display: none">
         <dnn:Label ID="ConfirmEmailLabel" ControlName="txtConfirmEmail" runat="server" />

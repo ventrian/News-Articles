@@ -1,4 +1,4 @@
-﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="PostComment.ascx.vb" Inherits="Ventrian.NewsArticles.Controls.PostComment" %>
+﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="PostComment.ascx.vb" Inherits="Ventrian.NewsArticles.Controls.PostComment" ClassName="PostComment" %>
 <%@ Register TagPrefix="dnn" Assembly="DotNetNuke" Namespace="DotNetNuke.UI.WebControls"%>
 <%@ Register TagPrefix="article" TagName="ReCaptcha" Src="ReCaptcha.ascx" %>
 <%@ Register TagPrefix="article" TagName="Honeypot" Src="Honeypot.ascx" %>
