@@ -1,4 +1,4 @@
-﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ReCaptcha.ascx.vb" Inherits="Ventrian.NewsArticles.Controls.ReCaptcha" ClassName="Recaptcha" %>
+﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ReCaptcha.ascx.vb" Inherits="Ventrian.NewsArticles.Controls.ReCaptcha" ClassName="NewsArticlesReCaptchaControl" %>
 <%@ Register TagPrefix="dnn" TagName="Label" Src="~/controls/LabelControl.ascx" %>
 <div>
     <div style="display: none">

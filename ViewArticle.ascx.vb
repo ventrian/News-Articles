@@ -359,6 +359,8 @@ Namespace Ventrian.NewsArticles
         Private Sub Page_Initialization(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Init
 
             Try
+                litSetVarArticleId.Text = $"var naArticleId={GetArticleID()};"
+
                 ReadQueryString()
                 BindArticle()
 

@@ -7,9 +7,10 @@
 <Ventrian:Header id="ucHeader2" SelectedMenu="CurrentArticles" runat="server" MenuPosition="Bottom" />
 
 <script type="text/javascript">
+    <asp:Literal runat="Server" id="litSetVarArticleId" />
     $('.NewsArticles a[href]').filter(function () {
-        return /(jpg|gif|png)$/.test($(this).attr('href'))
-    }).attr('rel', 'shadowbox[<%= GetArticleID() %>]');
+        return /(jpg|gif|png)$/.test($(this).attr('href'));
+    }).attr('rel', 'shadowbox[' + naArticleId.toString() + ']');
     
     Shadowbox.init({
         handleOversize: "drag"
