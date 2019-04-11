@@ -1,7 +1,5 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="PostComment.ascx.vb" Inherits="Ventrian.NewsArticles.Controls.PostComment" ClassName="NewsArticlesPostCommentControl" %>
 <%@ Register TagPrefix="dnn" Assembly="DotNetNuke" Namespace="DotNetNuke.UI.WebControls"%>
-<%@ Register TagPrefix="article" TagName="ReCaptcha" Src="ReCaptcha.ascx" %>
-<%@ Register TagPrefix="article" TagName="Honeypot" Src="Honeypot.ascx" %>
 <asp:PlaceHolder ID="phCommentForm" runat="Server">
 <p id="pName" runat="server">
     <asp:textbox id="txtName" cssclass="NormalTextBox" runat="server" />
@@ -27,8 +25,20 @@
 		controltovalidate="txtComment" errormessage="<br>Comment Is Required" display="Dynamic" SetFocusOnError="true" ValidationGroup="PostComment" />
 </p>
 <dnn:captchacontrol id="ctlCaptcha" captchawidth="130" captchaheight="40" cssclass="Normal" runat="server" errorstyle-cssclass="NormalRed" />
-<article:ReCaptcha runat="server" id="ctlReCaptcha" />
-<article:Honeypot runat="server" id="ctlHoneypot" />
+    <div runat="server" id="ctlReCaptcha" >
+        <div style="display: none">
+            <asp:TextBox runat="server" ID="dummyTextBox"></asp:TextBox>
+        </div>
+        <asp:PlaceHolder runat="server" id="reCaptchaDiv"></asp:PlaceHolder>    
+        <asp:CustomValidator runat="server" CssClass="dnnFormMessage dnnFormError" ControlToValidate="dummyTextBox" ID="RecaptchaValidator" OnServerValidate="RecaptchaValidator_OnServerValidate" />
+    </div>
+    <div runat="server" id="ctlHoneypot">
+        <div style="display: none">
+            <asp:Label ID="ConfirmEmailLabel" ControlName="txtConfirmEmail" runat="server" />
+            <asp:TextBox runat="server" ID="txtConfirmEmail"></asp:TextBox>
+            <asp:CustomValidator runat="server" CssClass="dnnFormMessage dnnFormError" ControlToValidate="txtConfirmEmail" ID="HoneypotValidator" OnServerValidate="HoneypotValidator_OnServerValidate"/>
+        </div>
+    </div>
 <p>
     <asp:Button ID="btnAddComment" runat="server" Text="Add Comment" ValidationGroup="PostComment" UseSubmitBehavior="False" />
 </p>
