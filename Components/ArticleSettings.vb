@@ -355,6 +355,16 @@ Namespace Ventrian.NewsArticles
                 End If
             End Get
         End Property
+        
+        Public ReadOnly Property EnablePortalFiles() As Boolean
+            Get
+                If (Settings.Contains(ArticleConstants.ENABLE_PORTAL_FILES_SETTING)) Then
+                    Return Convert.ToBoolean(Settings(ArticleConstants.ENABLE_PORTAL_FILES_SETTING).ToString())
+                Else
+                    Return True
+                End If
+            End Get
+        End Property
 
         Public ReadOnly Property EnableActiveSocialFeed() As Boolean
             Get

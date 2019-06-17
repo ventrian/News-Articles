@@ -11,9 +11,9 @@ Option Strict On
 Option Explicit On
 
 Namespace Ventrian.NewsArticles
-
+    
     Partial Public Class ViewArticle
-
+        
         '''<summary>
         '''ucHeader1 control.
         '''</summary>
@@ -22,7 +22,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents ucHeader1 As Global.Ventrian.NewsArticles.ucHeader
-
+        
         '''<summary>
         '''litPingback control.
         '''</summary>
@@ -31,7 +31,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents litPingback As Global.System.Web.UI.WebControls.Literal
-
+        
         '''<summary>
         '''litRDF control.
         '''</summary>
@@ -40,7 +40,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents litRDF As Global.System.Web.UI.WebControls.Literal
-
+        
         '''<summary>
         '''phArticle control.
         '''</summary>
@@ -49,7 +49,7 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents phArticle As Global.System.Web.UI.WebControls.PlaceHolder
-
+        
         '''<summary>
         '''ucHeader2 control.
         '''</summary>
@@ -58,5 +58,14 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents ucHeader2 As Global.Ventrian.NewsArticles.ucHeader
+        
+        '''<summary>
+        '''litSetVarArticleId control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents litSetVarArticleId As Global.System.Web.UI.WebControls.Literal
     End Class
 End Namespace

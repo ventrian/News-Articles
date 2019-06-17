@@ -176,20 +176,6 @@
     <Compile Include="Components\Utility\LocalizationUtil.vb" />
     <Compile Include="Components\Utility\LogginUtils.vb" />
     <Compile Include="Components\WebControls\RefreshControl.vb" />
-    <Compile Include="Controls\Honeypot.ascx.designer.vb">
-      <DependentUpon>Honeypot.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Honeypot.ascx.vb">
-      <DependentUpon>Honeypot.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Controls\ReCaptcha.ascx.designer.vb">
-      <DependentUpon>ReCaptcha.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ReCaptcha.ascx.vb">
-      <DependentUpon>ReCaptcha.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Providers\FileProvider\FileController.vb" />
     <Compile Include="Providers\FileProvider\FileInfo.vb" />
     <Compile Include="Components\ImageController.vb" />
@@ -700,8 +686,6 @@
     <Content Include="App_LocalResources\ucViewOptions.ascx.resx">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Controls\Honeypot.ascx" />
-    <Content Include="Controls\ReCaptcha.ascx" />
     <Content Include="Images\Admin\Categories.gif" />
     <Content Include="Images\Admin\MainOptions.gif" />
     <Content Include="Images\Admin\Templates.gif" />

@@ -1,8 +1,12 @@
 <dotnetnuke type="Package" version="6.0">
   <packages>
-    <package name="DnnForge - NewsArticles" type="Module" version="00.11.00">
+    <package name="DnnForge - NewsArticles" type="Module" version="00.11.03">
       <friendlyName>News Articles</friendlyName>
-      <description>Allows you to publish News Articles to your portal.</description>
+      <description>
+        <![CDATA[
+        Allows you to publish News Articles to your portal. Originally created by Scott McCulloch of Ventrian. Currently open source and mostly maintained by <a href="https://www.40fingers.net">40FINGERS</a>.
+        ]]>
+      </description>
       <owner>
         <name>Scott McCulloch</name>
         <organization>Ventrian</organization>
@@ -860,7 +864,7 @@
         </component>
       </components>
     </package>
-    <package name="DnnForge - LatestArticles" type="Module" version="00.11.00">
+    <package name="DnnForge - LatestArticles" type="Module" version="00.11.03">
       <friendlyName>News Articles Latest</friendlyName>
       <description>Allows you to display a list of the latest articles.</description>
       <iconFile />
@@ -921,7 +925,7 @@
         </component>
       </components>
     </package>
-    <package name="DnnForge - LatestComments" type="Module" version="00.11.00">
+    <package name="DnnForge - LatestComments" type="Module" version="00.11.03">
       <friendlyName>News Articles Comments</friendlyName>
       <description>Allows you to display a list of the latest comments.</description>
       <iconFile />
@@ -982,7 +986,7 @@
         </component>
       </components>
     </package>
-    <package name="DnnForge - NewsArchives" type="Module" version="00.11.00">
+    <package name="DnnForge - NewsArchives" type="Module" version="00.11.03">
       <friendlyName>News Articles Archives</friendlyName>
       <description>Allows you to display a list of articles by month.</description>
       <iconFile />
@@ -1043,7 +1047,7 @@
         </component>
       </components>
     </package>
-    <package name="DnnForge - NewsSearch" type="Module" version="00.11.00">
+    <package name="DnnForge - NewsSearch" type="Module" version="00.11.03">
       <friendlyName>News Articles Search</friendlyName>
       <description>Allows you to display a list of articles by month.</description>
       <iconFile />

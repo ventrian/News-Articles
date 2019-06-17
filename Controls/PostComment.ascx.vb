@@ -1,4 +1,7 @@
-﻿Imports DotNetNuke.Common.Utilities
+﻿Imports System.IO
+Imports System.Net
+Imports System.Web.Script.Serialization
+Imports DotNetNuke.Common.Utilities
 Imports DotNetNuke.Security
 Imports DotNetNuke.Services.Localization
 Imports DotNetNuke.Web.Client.ClientResourceManagement
@@ -177,10 +180,12 @@ Namespace Ventrian.NewsArticles.Controls
             pUrl.Visible = Not Request.IsAuthenticated
 
             ctlCaptcha.Visible = (ArticleSettings.CaptchaType = CaptchaType.DnnCore And Request.IsAuthenticated = False)
-            ctlReCaptcha.Visible = (ArticleSettings.CaptchaType = CaptchaType.ReCaptcha And Request.IsAuthenticated = False)
             ctlHoneypot.Visible = (ArticleSettings.CaptchaType = CaptchaType.Honeypot And Request.IsAuthenticated = False)
+            ctlReCaptcha.Visible = (ArticleSettings.CaptchaType = CaptchaType.ReCaptcha And Request.IsAuthenticated = False)
             if ctlReCaptcha.Visible Then
                 ClientResourceManager.RegisterScript(Page, ResolveUrl("https://www.google.com/recaptcha/api.js"))
+                reCaptchaDiv.Controls.Clear()
+                reCaptchaDiv.Controls.Add(New LiteralControl($"<div class=""g-recaptcha"" data-sitekey=""{GetSiteKey}"" style=""display: inline-block;""></div>"))
             End If
 
             If (Request.IsAuthenticated = False) Then
@@ -200,6 +205,11 @@ Namespace Ventrian.NewsArticles.Controls
                 Return
             End If
 
+            If ArticleSettings.IsCommentsEnabled AndAlso ArticleSettings.CaptchaType = CaptchaType.ReCaptcha Then
+                SiteKey = ArticleSettings.ReCaptchaSiteKey
+                SecretKey = ArticleSettings.ReCaptchaSecretKey
+            End If
+
             CheckSecurity()
             AssignLocalization()
             SetVisibility()
@@ -209,11 +219,6 @@ Namespace Ventrian.NewsArticles.Controls
             valEmailIsValid.ValidationGroup = "PostComment-" & ArticleID.ToString()
             valComment.ValidationGroup = "PostComment-" & ArticleID.ToString()
             btnAddComment.ValidationGroup = "PostComment-" & ArticleID.ToString()
-
-            If ArticleSettings.IsCommentsEnabled AndAlso ArticleSettings.CaptchaType = CaptchaType.ReCaptcha Then
-                ctlReCaptcha.SiteKey = ArticleSettings.ReCaptchaSiteKey
-                ctlReCaptcha.SecretKey = ArticleSettings.ReCaptchaSecretKey
-            End If
 
             If (Page.IsPostBack = False) Then
                 GetCookie()
@@ -236,11 +241,11 @@ Namespace Ventrian.NewsArticles.Controls
                     txtComment.Focus()
                     Return
                 End If
-                If (ctlReCaptcha.Visible AndAlso ctlReCaptcha.RecaptchaIsValid() = False) Then
+                If (ctlReCaptcha.Visible AndAlso RecaptchaIsValid() = False) Then
                     txtComment.Focus()
                     Return
                 End If
-                If (ctlHoneypot.Visible AndAlso ctlHoneypot.IsValid() = False) Then
+                If (ctlHoneypot.Visible AndAlso HoneypotIsValid() = False) Then
                     txtComment.Focus()
                     Return
                 End If
@@ -530,7 +535,64 @@ Namespace Ventrian.NewsArticles.Controls
         End Sub
 
 #End Region
+        
+        public property SiteKey as String = ""
+        public property SecretKey as String = ""
 
+        Protected Sub RecaptchaValidator_OnServerValidate(source As Object, args As ServerValidateEventArgs)
+            args.IsValid = RecaptchaIsValid()
+        End Sub
+
+        Protected Function GetSiteKey() As String
+            return SiteKey
+        End Function
+
+        Private _recaptchaisvalid As Boolean? = Nothing
+        Public Function RecaptchaIsValid() As Boolean
+            If _recaptchaisvalid.HasValue Then Return _recaptchaisvalid.Value
+            Dim Response As String = Request("g-recaptcha-response")
+            RecaptchaIsValid = False
+            Dim req As HttpWebRequest = CType(WebRequest.Create($"https://www.google.com/recaptcha/api/siteverify"), HttpWebRequest)
+
+            Try
+                Dim postData = $"secret={SecretKey}&response={Response}"
+                Dim postEnc = Encoding.ASCII.GetBytes(postData)
+                req.Method = "POST"
+                req.ContentType = "application/x-www-form-urlencoded"
+                req.ContentLength = postEnc.Length
+
+                Using stream = req.GetRequestStream()
+                    stream.Write(postEnc, 0, postEnc.Length)
+                End Using
+
+                Using wResponse As WebResponse = req.GetResponse()
+
+                    Using readStream As StreamReader = New StreamReader(wResponse.GetResponseStream())
+                        Dim jsonResponse As String = readStream.ReadToEnd()
+                        Dim js As JavaScriptSerializer = New JavaScriptSerializer()
+                        Dim data As RecaptchaResponse = js.Deserialize(Of RecaptchaResponse)(jsonResponse)
+                        _recaptchaisvalid = Convert.ToBoolean(data.success)
+                    End Using
+                End Using
+
+            Catch ex As WebException
+                Throw ex
+            End Try
+
+            Return _recaptchaisvalid.Value
+        End Function
+        
+        Protected Sub HoneypotValidator_OnServerValidate(source As Object, args As ServerValidateEventArgs)
+            args.IsValid = HoneyPotIsValid()
+        End Sub
+
+        Public Function HoneyPotIsValid() As Boolean
+            Return txtConfirmEmail.Text = ""
+        End Function
+
+    End Class
+    public class RecaptchaResponse
+        public Property success As String
     End Class
 
 End Namespace

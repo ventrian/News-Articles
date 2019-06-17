@@ -165,7 +165,34 @@ Namespace Ventrian.NewsArticles.Controls
         '''Auto-generated field.
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
-        Protected WithEvents ctlReCaptcha As Global.Ventrian.NewsArticles.Controls.ReCaptcha
+        Protected WithEvents ctlReCaptcha As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+        
+        '''<summary>
+        '''dummyTextBox control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents dummyTextBox As Global.System.Web.UI.WebControls.TextBox
+        
+        '''<summary>
+        '''reCaptchaDiv control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents reCaptchaDiv As Global.System.Web.UI.WebControls.PlaceHolder
+        
+        '''<summary>
+        '''RecaptchaValidator control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents RecaptchaValidator As Global.System.Web.UI.WebControls.CustomValidator
         
         '''<summary>
         '''ctlHoneypot control.
@@ -174,7 +201,34 @@ Namespace Ventrian.NewsArticles.Controls
         '''Auto-generated field.
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
-        Protected WithEvents ctlHoneypot As Global.Ventrian.NewsArticles.Controls.Honeypot
+        Protected WithEvents ctlHoneypot As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+        
+        '''<summary>
+        '''ConfirmEmailLabel control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents ConfirmEmailLabel As Global.System.Web.UI.WebControls.Label
+        
+        '''<summary>
+        '''txtConfirmEmail control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents txtConfirmEmail As Global.System.Web.UI.WebControls.TextBox
+        
+        '''<summary>
+        '''HoneypotValidator control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents HoneypotValidator As Global.System.Web.UI.WebControls.CustomValidator
         
         '''<summary>
         '''btnAddComment control.

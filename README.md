@@ -1,4 +1,5 @@
 # News-Articles
+This module was originally created by Scott McCulloch of Ventrian. The module is now out in the open, and maintained mostly by Stefan Kamphuis, Timo Breumelhof and Peter Schotman of [40FINGERS](https://www.40fingers.net/).
 
 ## Installation
 
