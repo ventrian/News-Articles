@@ -978,6 +978,24 @@ Namespace Ventrian.NewsArticles
         Protected WithEvents drpDefaultFileFolder As Global.System.Web.UI.WebControls.DropDownList
         
         '''<summary>
+        '''plEnablePortalFiles control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents plEnablePortalFiles As Global.System.Web.UI.UserControl
+        
+        '''<summary>
+        '''chkEnablePortalFiles control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents chkEnablePortalFiles As Global.System.Web.UI.WebControls.CheckBox
+        
+        '''<summary>
         '''dshFilter control.
         '''</summary>
         '''<remarks>

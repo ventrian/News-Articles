@@ -1221,4 +1221,10 @@
   <data name="reCaptchaSiteKey.Help" xml:space="preserve">
     <value>Google reCaptcha Site Key, only needed when CaptchaType is set to reCaptcha.</value>
   </data>
+  <data name="EnablePortalFiles.Text" xml:space="preserve">
+    <value>Allow Portal files?</value>
+  </data>
+  <data name="EnablePortalFilesHelp.Text" xml:space="preserve">
+    <value>Check to allow portal files to be associated with articles.</value>
+  </data>
 </root>

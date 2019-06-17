@@ -94,7 +94,6 @@ Namespace Ventrian.NewsArticles.Controls
 
 			drpUploadImageFolder.Items.Clear()
 
-
 		    Dim folders As New List(Of IFolderInfo)()
 		    If ArticleSettings.DefaultImagesFolder > 0 Then
 		        Dim defaultFolder as IFolderInfo = FolderManager.Instance.GetFolder(ArticleSettings.DefaultImagesFolder)
@@ -103,6 +102,7 @@ Namespace Ventrian.NewsArticles.Controls
 		    Else 
 		        folders.AddRange(FolderManager.Instance.GetFolders(ArticleModuleBase.PortalId, False))
 		    End If
+		    Logger.Debug($"UploadImages.BindFiles starting to iterate {folders.Count} folders.")
             For Each folder As DotNetNuke.Services.FileSystem.FolderInfo In folders
                 If Not folder.IsProtected Then
                     Dim FolderItem As New ListItem()
@@ -122,6 +122,7 @@ Namespace Ventrian.NewsArticles.Controls
                     End If
                 End If
             Next
+		    Logger.Debug($"UploadImages.BindFiles done iterating {folders.Count} folders.")
 
             If (drpUploadImageFolder.Items.FindByValue(ArticleSettings.DefaultImagesFolder.ToString()) IsNot Nothing) Then
 				drpUploadImageFolder.SelectedValue = ArticleSettings.DefaultImagesFolder.ToString()
@@ -583,7 +584,7 @@ Namespace Ventrian.NewsArticles.Controls
 					End If
 					objImage.FileName = CoreFileProvider.CleanFilename(objFile.FileName)
 
-					If (objFile.FileName.ToLower().EndsWith(".jpg")) Then
+					If (objFile.FileName.ToLower().EndsWith(".jpg") OrElse objFile.FileName.ToLower().EndsWith(".jpeg")) Then
 						objImage.ContentType = "image/jpeg"
 					End If
 
