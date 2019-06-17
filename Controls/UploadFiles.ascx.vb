@@ -102,6 +102,7 @@ Namespace Ventrian.NewsArticles.Controls
             Else 
                 folders.AddRange(FolderManager.Instance.GetFolders(ArticleModuleBase.PortalId, False))
             End If
+            Logger.Debug($"UploadFiles.BindFiles starting to iterate {folders.Count} folders.")
             For Each folder As DotNetNuke.Services.FileSystem.FolderInfo In folders
                 If Not folder.IsProtected Then
                     Dim FolderItem As New ListItem()
@@ -121,6 +122,7 @@ Namespace Ventrian.NewsArticles.Controls
                     End If
                 End If
             Next
+		    Logger.Debug($"UploadFiles.BindFiles done iterating {folders.Count} folders.")
 
             If (drpUploadFilesFolder.Items.FindByValue(ArticleSettings.DefaultFilesFolder.ToString()) IsNot Nothing) Then
 				drpUploadFilesFolder.SelectedValue = ArticleSettings.DefaultFilesFolder.ToString()
@@ -213,6 +215,8 @@ Namespace Ventrian.NewsArticles.Controls
 			Try
 				ReadQueryString()
 				SetLocalization()
+
+			    trExisting.Visible = ArticleSettings.EnablePortalFiles
 
 				If (ArticleSettings.IsFilesEnabled = False) Then
 					Me.Visible = False

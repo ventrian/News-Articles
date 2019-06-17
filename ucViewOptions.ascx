@@ -288,6 +288,11 @@
 								<td class="SubHead" width="200"><dnn:label id="plDefaultFileFolder" runat="server" controlname="drpDefaultFileFolder"></dnn:label></td>
 								<td valign="top"><asp:DropDownList id="drpDefaultFileFolder" Runat="server" width="250px" CssClass="NormalTextBox" /></td>
 							</tr>
+                            <tr>
+                                <td class="SubHead" width="200"><dnn:label id="plEnablePortalFiles" runat="server" resourcekey="EnablePortalFiles" helpkey="EnablePortalFilesHelp"
+                                                                           controlname="chkEnablePortalFiles"></dnn:label></td>
+                                <td valign="top"><asp:checkbox id="chkEnablePortalFiles" Runat="server"></asp:checkbox></td>
+                            </tr>
 						</table>	
 						<br />
 						<dnn:sectionhead id="dshFilter" cssclass="Head" runat="server" text="Filter Settings" section="tblFilter"

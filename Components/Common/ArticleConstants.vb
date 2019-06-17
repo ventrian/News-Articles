@@ -69,6 +69,7 @@ Namespace Ventrian.NewsArticles
         Public Const ENABLE_PORTAL_IMAGES_SETTING As String = "EnableImages"
         Public Const DEFAULT_IMAGES_FOLDER_SETTING As String = "DefaultImagesFolder"
         Public Const DEFAULT_FILES_FOLDER_SETTING As String = "DefaultFilesFolder"
+        Public Const ENABLE_PORTAL_FILES_SETTING As String = "EnablePortalFiles"
         Public Const IMAGE_RESIZE_SETTING As String = "ResizeImages"
         Public Const IMAGE_THUMBNAIL_SETTING As String = "ImageThumbnailType"
         Public Const IMAGE_MAX_WIDTH_SETTING As String = "ImageMaxWidth"

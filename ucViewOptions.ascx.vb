@@ -648,11 +648,12 @@ Namespace Ventrian.NewsArticles
             objModules.UpdateTabModuleSetting(TabModuleId, ArticleConstants.COMMENT_REQUIRE_EMAIL_SETTING, chkRequireEmail.Checked.ToString())
             'This is only for upgraded modules
             If Settings.ContainsKey(ArticleConstants.USE_CAPTCHA_SETTING) Then
+                objModules.DeleteModuleSetting(ModuleId, ArticleConstants.USE_CAPTCHA_SETTING)
                 objModules.DeleteTabModuleSetting(TabModuleId, ArticleConstants.USE_CAPTCHA_SETTING)
             End If
             objModules.UpdateTabModuleSetting(TabModuleId, ArticleConstants.CAPTCHATYPE_SETTING, drpCaptchaType.SelectedValue)
-            objModules.UpdateTabModuleSetting(TabModuleId, ArticleConstants.RECAPTCHA_SITEKEY_SETTING, txtReCaptchaSiteKey.Text)
-            objModules.UpdateTabModuleSetting(TabModuleId, ArticleConstants.RECAPTCHA_SECRETKEY_SETTING, txtReCaptchaSecretKey.Text)
+            objModules.UpdateModuleSetting(ModuleId, ArticleConstants.RECAPTCHA_SITEKEY_SETTING, txtReCaptchaSiteKey.Text)
+            objModules.UpdateModuleSetting(ModuleId, ArticleConstants.RECAPTCHA_SECRETKEY_SETTING, txtReCaptchaSecretKey.Text)
             objModules.UpdateTabModuleSetting(TabModuleId, ArticleConstants.NOTIFY_DEFAULT_SETTING, chkNotifyDefault.Checked.ToString())
             objModules.UpdateTabModuleSetting(TabModuleId, ArticleConstants.COMMENT_SORT_DIRECTION_SETTING, drpSortDirectionComments.SelectedValue)
             objModules.UpdateModuleSetting(ModuleId, ArticleConstants.COMMENT_AKISMET_SETTING, txtAkismetKey.Text)
@@ -913,6 +914,7 @@ Namespace Ventrian.NewsArticles
             If (drpDefaultFileFolder.Items.FindByValue(ArticleSettings.DefaultFilesFolder.ToString) IsNot Nothing) Then
                 drpDefaultFileFolder.SelectedValue = ArticleSettings.DefaultFilesFolder.ToString
             End If
+            chkEnablePortalFiles.Checked = ArticleSettings.EnablePortalFiles
 
         End Sub
 
@@ -920,6 +922,7 @@ Namespace Ventrian.NewsArticles
 
             Dim objModules As New ModuleController
             objModules.UpdateModuleSetting(ModuleId, ArticleConstants.DEFAULT_FILES_FOLDER_SETTING, drpDefaultFileFolder.SelectedValue)
+            objModules.UpdateTabModuleSetting(TabModuleId, ArticleConstants.ENABLE_PORTAL_FILES_SETTING, chkEnablePortalFiles.Checked.ToString())
 
         End Sub
 
