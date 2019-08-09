@@ -1452,8 +1452,12 @@ Namespace Ventrian.NewsArticles
             valTitle.ValidationGroup = vgId
             valBody.ValidationGroup = vgId
             valCategory.ValidationGroup = vgId
+            valExpiryDate.ValidationGroup = vgId
             valPublishDateRequired.ValidationGroup = vgId
+            valMessageBox.ValidationGroup = vgId
             cmdSaveArticle.ValidationGroup = vgId
+            cmdPublishArticle.ValidationGroup = vgId
+            cmdAddEditPages.ValidationGroup = vgId
         End Sub
 
 
