@@ -110,7 +110,7 @@ Namespace Ventrian.NewsArticles
         Public Overrides Function GetFile(ByVal fileID As Integer) As FileInfo
             Dim objFileController As New FileController()
             Dim objFile As FileInfo = objFileController.Get(fileID)
-            objFile.Link = PortalController.Instance.GetCurrentPortalSettings().HomeDirectory() & objFile.Folder & objFile.FileName
+            objFile.Link = GetFileUrl(objFile)
             Return objFile
         End Function
 
@@ -118,7 +118,7 @@ Namespace Ventrian.NewsArticles
             Dim objFileController As New FileController()
             Dim objFiles As List(Of FileInfo) = objFileController.GetFileList(articleID, Null.NullString())
             For Each objFile As FileInfo In objFiles
-                objFile.Link = PortalController.Instance.GetCurrentPortalSettings().HomeDirectory() & objFile.Folder & objFile.FileName
+                objFile.Link = GetFileUrl(objFile)
             Next
             Return objFiles
         End Function
@@ -155,6 +155,21 @@ Namespace Ventrian.NewsArticles
 		    Return retval
 		End Function
 
+        Private Shared Function GetFileUrl(objFile As FileInfo) As String
+
+            Dim portalSettings As PortalSettings = PortalController.Instance.GetCurrentPortalSettings()
+            Dim folderManager As IFolderManager = DotNetNuke.Services.FileSystem.FolderManager.Instance
+            Dim fileManager As IFileManager = DotNetNuke.Services.FileSystem.FileManager.Instance
+            Dim folder As IFolderInfo = folderManager.GetFolder(portalSettings.PortalId, objFile.Folder)
+            If folder IsNot Nothing Then
+                Dim file As IFileInfo = fileManager.GetFile(folder, objFile.FileName)
+                If file IsNot Nothing Then
+                    Return fileManager.GetUrl(file)
+                End If
+            End If 
+
+            Return portalSettings.HomeDirectory() & objFile.Folder & objFile.FileName
+        End Function
     End Class
 
 End Namespace
