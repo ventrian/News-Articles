@@ -1,4 +1,4 @@
-<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ucSubmitNewsComplete.ascx.vb" Inherits="ucSubmitNewsComplete" %>
+<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ucSubmitNewsComplete.ascx.vb" Inherits="Ventrian.NewsArticles.ucSubmitNewsComplete" %>
 <%@ Import Namespace="DotNetNuke.Common" %>
 <%@ Import Namespace="DotNetNuke.Common.Utilities" %>
 <%@ Register TagPrefix="article" TagName="Header" Src="ucHeader.ascx" %>
