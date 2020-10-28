@@ -131,6 +131,9 @@ Namespace Ventrian.NewsArticles.API.MetaWebLog
 
         Private Sub LoadXmlRequest(xml As String)
             Dim request = New XmlDocument()
+            ' fixes XXE vulnerability
+            ' https://cheatsheetseries.owasp.org/cheatsheets/XML_External_Entity_Prevention_Cheat_Sheet.html#net
+            request.XmlResolver = Nothing
             Try
                 If Not (xml.StartsWith("<?xml") OrElse xml.StartsWith("<method")) Then
                     xml = xml.Substring(xml.IndexOf("<?xml", StringComparison.Ordinal))
