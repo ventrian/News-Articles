@@ -176,7 +176,7 @@ Namespace Ventrian.NewsArticles
 #End Region
 
 #Region " Private Methods "
-        
+
         Private Function Author(ByVal authorID As Integer) As UserInfo
 
             If (authorID = Null.NullInteger) Then
@@ -285,7 +285,7 @@ Namespace Ventrian.NewsArticles
             ' variant)
             For i = UBound(bSize) To 0 Step -1
                 If b >= (1024 ^ i) Then
-                    Numeric2Bytes = ThreeNonZeroDigits(b / (1024 ^ _
+                    Numeric2Bytes = ThreeNonZeroDigits(b / (1024 ^
                         i)) & " " & bSize(i)
                     Return Numeric2Bytes
                 End If
@@ -2808,7 +2808,14 @@ Namespace Ventrian.NewsArticles
                                                 Next
                                                 objLiteral.EnableViewState = False
                                                 objPlaceHolder.Add(objLiteral)
-
+                                            Case "image"
+                                                Dim objLiteral As New Literal
+                                                If profilePropertyValue = String.Empty Then
+                                                    objLiteral.Text = String.Empty
+                                                Else
+                                                    objLiteral.Text = UrlUtils.EncryptParameter(UrlUtils.GetParameterValue($"fileid={profilePropertyValue}"), PortalSettings.GUID.ToString())
+                                                End If
+                                                objPlaceHolder.Add(objLiteral)
                                             Case Else
                                                 Dim objLiteral As New Literal
                                                 If profilePropertyValue = String.Empty Then
