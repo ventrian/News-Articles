@@ -249,21 +249,21 @@
 		            <dnn:label id="plHtmlHeader" runat="server" resourcekey="HtmlHeader" suffix=":" controlname="txtHtmlHeader"></dnn:label></TD>
 	            <TD align="left" width="325">
 		            <asp:textbox id="txtHtmlHeader" cssclass="NormalTextBox" runat="server" Rows="2" TextMode="MultiLine"
-			            maxlength="50" width="300"></asp:textbox></TD>
+			            width="300"></asp:textbox></TD>
             </TR>
 	        <TR vAlign="top">
 		        <TD class="SubHead" width="150">
 			        <dnn:label id="plHtmlBody" runat="server" resourcekey="HtmlBody" suffix=":" controlname="txtHtmlBody"></dnn:label></TD>
 		        <TD align="left" width="325">
 			        <asp:textbox id="txtHtmlBody" cssclass="NormalTextBox" runat="server" Rows="6" TextMode="MultiLine"
-				        maxlength="50" width="300"></asp:textbox></TD>
+				        width="300"></asp:textbox></TD>
 	        </TR>
 	        <TR vAlign="top">
 		        <TD class="SubHead" width="150">
 			        <dnn:label id="plHtmlFooter" runat="server" resourcekey="HtmlFooter" suffix=":" controlname="txtHtmlFooter"></dnn:label></TD>
 		        <TD align="left" width="325">
 			        <asp:textbox id="txtHtmlFooter" cssclass="NormalTextBox" runat="server" Rows="2" TextMode="MultiLine"
-				        maxlength="50" width="300"></asp:textbox></TD>
+				        width="300"></asp:textbox></TD>
 	        </TR>
 	        <tr runat="server" id="trItemsPerRow">
 		        <td class="SubHead" width="150"><dnn:label id="plItemsPerRow" runat="server" controlname="txtItemsPerRow" suffix=":"></dnn:label></td>
@@ -279,7 +279,7 @@
 			        <dnn:label id="plHtmlNoArticles" runat="server" resourcekey="HtmlNoArticles" suffix=":" controlname="txtHtmlNoArticles"></dnn:label></td>
 		        <td align="left" width="325">
 			        <asp:textbox id="txtHtmlNoArticles" cssclass="NormalTextBox" runat="server" Rows="6" TextMode="MultiLine"
-				        maxlength="50" width="300"></asp:textbox></td>
+				        width="300"></asp:textbox></td>
 	        </tr>
 	        <tr valign="top">
 	            <td colspan="2">
