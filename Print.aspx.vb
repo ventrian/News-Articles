@@ -95,50 +95,54 @@ Namespace Ventrian.NewsArticles
                     objLink.Attributes("href") = DotNetNuke.Common.Globals.HostPath & "default.css"
                     objCSS.Controls.Add(objLink)
 
-                    ' skin package style sheet
-                    ID = CreateValidID(PortalSettings.ActiveTab.SkinPath)
-                    If objCSSCache.ContainsKey(ID) = False Then
-                        If File.Exists(Server.MapPath(PortalSettings.ActiveTab.SkinPath) & "skin.css") Then
-                            objCSSCache(ID) = PortalSettings.ActiveTab.SkinPath & "skin.css"
-                        Else
-                            objCSSCache(ID) = ""
-                        End If
-                        If Not Host.PerformanceSetting = PerformanceSettings.NoCaching Then
-                            DataCache.SetCache("CSS", objCSSCache)
-                        End If
-                    End If
-                    If objCSSCache(ID).ToString <> "" Then
-                        objLink = New HtmlGenericControl("link")
-                        objLink.ID = ID
-                        objLink.Attributes("rel") = "stylesheet"
-                        objLink.Attributes("type") = "text/css"
-                        objLink.Attributes("href") = objCSSCache(ID).ToString
-                        objCSS.Controls.Add(objLink)
-                    End If
 
-                    ' skin file style sheet
-                    ID = CreateValidID(Replace(PortalSettings.ActiveTab.SkinSrc, ".ascx", ".css"))
-                    If objCSSCache.ContainsKey(ID) = False Then
-                        If File.Exists(Server.MapPath(Replace(PortalSettings.ActiveTab.SkinSrc, ".ascx", ".css"))) Then
-                            objCSSCache(ID) = Replace(PortalSettings.ActiveTab.SkinSrc, ".ascx", ".css")
-                        Else
-                            objCSSCache(ID) = ""
+                    ' skin package style sheet
+                    If PortalSettings.ActiveTab.SkinPath <> Nothing Then
+                        ID = CreateValidID(PortalSettings.ActiveTab.SkinPath)
+                        If objCSSCache.ContainsKey(ID) = False Then
+                            If File.Exists(Server.MapPath(PortalSettings.ActiveTab.SkinPath) & "skin.css") Then
+                                objCSSCache(ID) = PortalSettings.ActiveTab.SkinPath & "skin.css"
+                            Else
+                                objCSSCache(ID) = ""
+                            End If
+                            If Not Host.PerformanceSetting = PerformanceSettings.NoCaching Then
+                                DataCache.SetCache("CSS", objCSSCache)
+                            End If
                         End If
-                        If Not Host.PerformanceSetting = PerformanceSettings.NoCaching Then
-                            DataCache.SetCache("CSS", objCSSCache)
+                        If objCSSCache(ID).ToString <> "" Then
+                            objLink = New HtmlGenericControl("link")
+                            objLink.ID = ID
+                            objLink.Attributes("rel") = "stylesheet"
+                            objLink.Attributes("type") = "text/css"
+                            objLink.Attributes("href") = objCSSCache(ID).ToString
+                            objCSS.Controls.Add(objLink)
                         End If
                     End If
-                    If objCSSCache(ID).ToString <> "" Then
-                        objLink = New HtmlGenericControl("link")
-                        objLink.ID = ID
-                        objLink.Attributes("rel") = "stylesheet"
-                        objLink.Attributes("type") = "text/css"
-                        objLink.Attributes("href") = objCSSCache(ID).ToString
-                        objCSS.Controls.Add(objLink)
+                    If PortalSettings.ActiveTab.SkinPath <> Nothing AndAlso PortalSettings.ActiveTab.SkinPath <> "" Then
+                        ' skin file style sheet
+                        ID = CreateValidID(Replace(PortalSettings.ActiveTab.SkinSrc, ".ascx", ".css"))
+                        If objCSSCache.ContainsKey(ID) = False Then
+                            If File.Exists(Server.MapPath(Replace(PortalSettings.ActiveTab.SkinSrc, ".ascx", ".css"))) Then
+                                objCSSCache(ID) = Replace(PortalSettings.ActiveTab.SkinSrc, ".ascx", ".css")
+                            Else
+                                objCSSCache(ID) = ""
+                            End If
+                            If Not Host.PerformanceSetting = PerformanceSettings.NoCaching Then
+                                DataCache.SetCache("CSS", objCSSCache)
+                            End If
+                        End If
+                        If objCSSCache(ID).ToString <> "" Then
+                            objLink = New HtmlGenericControl("link")
+                            objLink.ID = ID
+                            objLink.Attributes("rel") = "stylesheet"
+                            objLink.Attributes("type") = "text/css"
+                            objLink.Attributes("href") = objCSSCache(ID).ToString
+                            objCSS.Controls.Add(objLink)
+                        End If
                     End If
                 Else
-                    ' portal style sheet
-                    ID = CreateValidID(PortalSettings.HomeDirectory)
+                        ' portal style sheet
+                        ID = CreateValidID(PortalSettings.HomeDirectory)
                     objLink = New HtmlGenericControl("link")
                     objLink.ID = ID
                     objLink.Attributes("rel") = "stylesheet"
