@@ -2809,6 +2809,15 @@ Namespace Ventrian.NewsArticles
                                                 objLiteral.EnableViewState = False
                                                 objPlaceHolder.Add(objLiteral)
 
+                                            Case "image"
+                                                Dim objLiteral As New Literal
+                                                If profilePropertyValue = String.Empty Then
+                                                    objLiteral.Text = String.Empty
+                                                Else
+                                                    objLiteral.Text = UrlUtils.EncryptParameter(UrlUtils.GetParameterValue($"fileid={profilePropertyValue}"), PortalSettings.GUID.ToString())
+                                                End If
+                                                objPlaceHolder.Add(objLiteral)
+
                                             Case Else
                                                 Dim objLiteral As New Literal
                                                 If profilePropertyValue = String.Empty Then

@@ -13,6 +13,7 @@ Imports Dotnetnuke.Entities.Portals
 Imports Dotnetnuke.Entities.Users
 Imports DotNetNuke.Framework
 Imports DotNetNuke.Security.Roles
+Imports DotNetNuke.Services.Exceptions
 
 Namespace Ventrian.NewsArticles
 
@@ -289,7 +290,8 @@ Namespace Ventrian.NewsArticles
             ' SendNotification(settings.Email, sendTo, Null.NullString, subject, template)
             Try
                 DotNetNuke.Services.Mail.Mail.SendMail(settings.Email, sendTo, "", subject, template, "", "", "", "", "", "")
-            Catch
+            Catch exc As Exception
+                LogException(exc)
             End Try
 
         End Sub
