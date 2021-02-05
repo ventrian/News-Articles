@@ -227,7 +227,7 @@
 		<tr runat="Server" id="trTags">
 			<td class="SubHead" width="150"><dnn:label id="plTags" text="Tags:" runat="server" controlname="txtTags"></dnn:label></td>
 			<td>
-				<asp:ListBox ID="lstTags" runat="server" CssClass="Normal" DataTextField="Name" DataValueField="Name" Width="300px" SelectionMode="Multiple" />
+				<asp:ListBox ID="lstTags" runat="server" CssClass="Normal" DataTextField="Name" DataValueField="Name" Width="300px" Height="150px" SelectionMode="Multiple" />
 			</td>
 		</tr>
 		</table>
