@@ -244,6 +244,16 @@ Namespace Ventrian.NewsArticles
             End Get
         End Property
 
+        Public ReadOnly Property UseStaticTagsListSubmit() As Boolean
+            Get
+                If (Settings.Contains(ArticleConstants.USE_STATIC_TAGS_LIST_SUBMIT_SETTING)) Then
+                    Return Convert.ToBoolean(Settings(ArticleConstants.USE_STATIC_TAGS_LIST_SUBMIT_SETTING).ToString())
+                Else
+                    Return ArticleConstants.USE_STATIC_TAGS_LIST_SUBMIT_SETTING_DEFAULT
+                End If
+            End Get
+        End Property
+
         Public ReadOnly Property IncludeInPageName() As Boolean
             Get
                 If (Settings.Contains(ArticleConstants.CATEGORY_NAME_SETTING)) Then

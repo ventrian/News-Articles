@@ -546,6 +546,9 @@
   <data name="CategorySettings.Text" xml:space="preserve">
     <value>Category Settings</value>
   </data>
+  <data name="TagSettings.Text" xml:space="preserve">
+    <value>Tag Settings</value>
+  </data>
   <data name="DefaultCategories.Help" xml:space="preserve">
     <value>Check categories to auto-select them on the create article screen.</value>
   </data>
@@ -1133,6 +1136,9 @@
   </data>
   <data name="CategoryFilterSubmit.Text" xml:space="preserve">
     <value>Filter Category Submit</value>
+  </data>
+  <data name="UseStaticTagsList.Text" xml:space="preserve">
+    <value>Use Static Tags List</value>
   </data>
   <data name="AllGroups.Text" xml:space="preserve">
     <value>-- All Groups -- </value>
