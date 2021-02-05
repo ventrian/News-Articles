@@ -672,22 +672,13 @@ Namespace Ventrian.NewsArticles
         Protected WithEvents plTags As Global.System.Web.UI.UserControl
 
         '''<summary>
-        '''txtTags control.
+        '''lstTags control.
         '''</summary>
         '''<remarks>
         '''Auto-generated field.
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
-        Protected WithEvents txtTags As Global.System.Web.UI.WebControls.TextBox
-
-        '''<summary>
-        '''lblTags control.
-        '''</summary>
-        '''<remarks>
-        '''Auto-generated field.
-        '''To modify move field declaration from designer file to code-behind file.
-        '''</remarks>
-        Protected WithEvents lblTags As Global.System.Web.UI.WebControls.Label
+        Protected WithEvents lstTags As Global.System.Web.UI.WebControls.ListBox
 
         '''<summary>
         '''phPublish control.

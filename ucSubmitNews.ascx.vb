@@ -191,7 +191,8 @@ Namespace Ventrian.NewsArticles
                         li.Selected = True
                     End If
                 Next
-                txtTags.Text = objArticle.Tags
+
+                SelectTags(objArticle.Tags)
 
                 Dim objPageController As New PageController
                 Dim pages As ArrayList = objPageController.GetPageList(_articleID)
@@ -334,6 +335,31 @@ Namespace Ventrian.NewsArticles
                 valCategory.Enabled = Convert.ToBoolean(Settings(ArticleConstants.REQUIRE_CATEGORY).ToString())
             End If
 
+        End Sub
+
+        Private Sub BindTags()
+            Dim objTagController As New TagController
+            Dim objTags As ArrayList = objTagController.List(ModuleId, Null.NullInteger)
+
+            objTags.Sort()
+            lstTags.DataSource = objTags
+            lstTags.DataBind()
+        End Sub
+
+        Private Sub SelectTags(ByVal tagList As String)
+            Dim objTagController As New TagController
+            For Each tag As String In tagList.Split(","c)
+                If (tag <> "") Then
+                    Dim objTag As TagInfo = objTagController.Get(ModuleId, tag)
+
+                    If Not (objTag Is Nothing) Then
+                        Dim li As ListItem = lstTags.Items.FindByValue(objTag.Name)
+                        If Not (li Is Nothing) Then
+                            li.Selected = True
+                        End If
+                    End If
+                End If
+            Next
         End Sub
 
         Private Sub BindCustomFields()
@@ -1145,31 +1171,22 @@ Namespace Ventrian.NewsArticles
                 Dim objLinkedArticle As ArticleInfo = objArticleController.GetArticle(Convert.ToInt32(drpMirrorArticle.SelectedValue))
 
                 If (objLinkedArticle IsNot Nothing) Then
-                    txtTags.Text = objLinkedArticle.Tags
+                    SelectTags(objLinkedArticle.Tags)
                 End If
             End If
 
             Dim objTagController As New TagController
             objTagController.DeleteArticleTag(articleID)
 
-            If (txtTags.Text <> "") Then
-                Dim tags As String() = txtTags.Text.Split(","c)
-                For Each tag As String In tags
-                    If (tag <> "") Then
-                        Dim objTag As TagInfo = objTagController.Get(ModuleId, tag)
+            For Each li As ListItem In lstTags.Items
+                If (li.Selected) Then
+                    Dim objTag As TagInfo = objTagController.Get(ModuleId, li.Value)
 
-                        If (objTag Is Nothing) Then
-                            objTag = New TagInfo
-                            objTag.Name = tag
-                            objTag.NameLowered = tag.ToLower()
-                            objTag.ModuleID = ModuleId
-                            objTag.TagID = objTagController.Add(objTag)
-                        End If
-
+                    If Not (objTag Is Nothing) Then
                         objTagController.Add(articleID, objTag.TagID)
                     End If
-                Next
-            End If
+                End If
+            Next
 
         End Sub
 
@@ -1517,6 +1534,7 @@ Namespace Ventrian.NewsArticles
 
                     BindStatus()
                     BindCategories()
+                    BindTags()
                     SetVisibility()
                     BindArticle()
                     SetValidationGroup()
