@@ -1140,6 +1140,9 @@
   <data name="UseStaticTagsList.Text" xml:space="preserve">
     <value>Use Static Tags List</value>
   </data>
+  <data name="UseStaticTagsList.Help" xml:space="preserve">
+    <value>Check to only allow existing tags to be used on submit article screen, otherwise allow article authors to create new tags while authoring an article. When checked, a list box will be used to select existing tags (similar to categories), rather then the text box used when unchecked.</value>
+  </data>
   <data name="AllGroups.Text" xml:space="preserve">
     <value>-- All Groups -- </value>
   </data>

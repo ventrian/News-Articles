@@ -182,7 +182,7 @@
 						<table id="tblTags" cellspacing="2" cellpadding="2" summary="Appearance Design Table"
 							border="0" runat="server">
 							<tr>
-								<td class="SubHead" width="200"><dnn:label id="Label12" runat="server" resourcekey="UseStaticTagsList" controlname="chkUseStaticTagsList"></dnn:label></td>
+								<td class="SubHead" width="200"><dnn:label id="plUseStaticTagsList" runat="server" resourcekey="UseStaticTagsList" controlname="chkUseStaticTagsList"></dnn:label></td>
 								<td valign="top"><asp:checkbox id="chkUseStaticTagsList" Runat="server" CssClass="NormalTextBox"></asp:checkbox></td>
 							</tr>
 						</table>

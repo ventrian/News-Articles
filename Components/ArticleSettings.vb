@@ -244,12 +244,12 @@ Namespace Ventrian.NewsArticles
             End Get
         End Property
 
-        Public ReadOnly Property UseStaticTagsListSubmit() As Boolean
+        Public ReadOnly Property UseStaticTagsList() As Boolean
             Get
-                If (Settings.Contains(ArticleConstants.USE_STATIC_TAGS_LIST_SUBMIT_SETTING)) Then
-                    Return Convert.ToBoolean(Settings(ArticleConstants.USE_STATIC_TAGS_LIST_SUBMIT_SETTING).ToString())
+                If (Settings.Contains(ArticleConstants.USE_STATIC_TAGS_LIST_SETTING)) Then
+                    Return Convert.ToBoolean(Settings(ArticleConstants.USE_STATIC_TAGS_LIST_SETTING).ToString())
                 Else
-                    Return ArticleConstants.USE_STATIC_TAGS_LIST_SUBMIT_SETTING_DEFAULT
+                    Return ArticleConstants.USE_STATIC_TAGS_LIST_SETTING_DEFAULT
                 End If
             End Get
         End Property
@@ -365,7 +365,7 @@ Namespace Ventrian.NewsArticles
                 End If
             End Get
         End Property
-        
+
         Public ReadOnly Property EnablePortalFiles() As Boolean
             Get
                 If (Settings.Contains(ArticleConstants.ENABLE_PORTAL_FILES_SETTING)) Then

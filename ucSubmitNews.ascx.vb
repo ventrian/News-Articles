@@ -192,7 +192,7 @@ Namespace Ventrian.NewsArticles
                     End If
                 Next
 
-                If (ArticleSettings.UseStaticTagsListSubmit) Then
+                If (ArticleSettings.UseStaticTagsList) Then
                     SelectTags(objArticle.Tags)
                 Else
                     txtTags.Text = objArticle.Tags
@@ -343,7 +343,7 @@ Namespace Ventrian.NewsArticles
         End Sub
 
         Private Sub BindTags()
-            If (ArticleSettings.UseStaticTagsListSubmit) Then
+            If (ArticleSettings.UseStaticTagsList) Then
                 txtTags.Visible = False
                 lblTags.Visible = False
 
@@ -360,15 +360,13 @@ Namespace Ventrian.NewsArticles
 
         Private Sub SelectTags(ByVal tagList As String)
             Dim objTagController As New TagController
-            For Each tag As String In tagList.Split(","c)
-                If (tag <> "") Then
-                    Dim objTag As TagInfo = objTagController.Get(ModuleId, tag)
+            For Each tag As String In tagList.Split(New Char() {","c}, StringSplitOptions.RemoveEmptyEntries)
+                Dim objTag As TagInfo = objTagController.Get(ModuleId, tag)
 
-                    If Not (objTag Is Nothing) Then
-                        Dim li As ListItem = lstTags.Items.FindByValue(objTag.Name)
-                        If Not (li Is Nothing) Then
-                            li.Selected = True
-                        End If
+                If objTag IsNot Nothing Then
+                    Dim li As ListItem = lstTags.Items.FindByValue(objTag.Name)
+                    If li IsNot Nothing Then
+                        li.Selected = True
                     End If
                 End If
             Next
@@ -1183,7 +1181,7 @@ Namespace Ventrian.NewsArticles
                 Dim objLinkedArticle As ArticleInfo = objArticleController.GetArticle(Convert.ToInt32(drpMirrorArticle.SelectedValue))
 
                 If (objLinkedArticle IsNot Nothing) Then
-                    If (ArticleSettings.UseStaticTagsListSubmit) Then
+                    If (ArticleSettings.UseStaticTagsList) Then
                         SelectTags(objLinkedArticle.Tags)
                     Else
                         txtTags.Text = objLinkedArticle.Tags
@@ -1194,12 +1192,12 @@ Namespace Ventrian.NewsArticles
             Dim objTagController As New TagController
             objTagController.DeleteArticleTag(articleID)
 
-            If (ArticleSettings.UseStaticTagsListSubmit) Then
+            If (ArticleSettings.UseStaticTagsList) Then
                 For Each li As ListItem In lstTags.Items
                     If (li.Selected) Then
                         Dim objTag As TagInfo = objTagController.Get(ModuleId, li.Value)
 
-                        If Not (objTag Is Nothing) Then
+                        If objTag IsNot Nothing Then
                             objTagController.Add(articleID, objTag.TagID)
                         End If
                     End If

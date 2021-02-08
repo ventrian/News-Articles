@@ -627,13 +627,13 @@ Namespace Ventrian.NewsArticles
         Protected WithEvents tblTags As Global.System.Web.UI.HtmlControls.HtmlTable
 
         '''<summary>
-        '''Label12 control.
+        '''plUseStaticTagsList control.
         '''</summary>
         '''<remarks>
         '''Auto-generated field.
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
-        Protected WithEvents Label12 As Global.System.Web.UI.UserControl
+        Protected WithEvents plUseStaticTagsList As Global.System.Web.UI.UserControl
 
         '''<summary>
         '''chkUseStaticTagsList control.
