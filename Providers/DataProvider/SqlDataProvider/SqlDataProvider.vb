@@ -564,8 +564,8 @@ Namespace Ventrian.NewsArticles
             SqlHelper.ExecuteNonQuery(ConnectionString, DatabaseOwner & ObjectQualifier & "DnnForge_NewsArticles_TagDelete", tagID)
         End Sub
 
-        Public Overrides Sub AddArticleTag(ByVal articleID As Integer, ByVal tagID As Integer)
-            SqlHelper.ExecuteNonQuery(ConnectionString, DatabaseOwner & ObjectQualifier & "DnnForge_NewsArticles_ArticleTagAdd", articleID, tagID)
+        Public Overrides Sub AddArticleTag(ByVal articleID As Integer, ByVal tagID As Integer, Optional ByVal displayOrder As Integer = 0)
+            SqlHelper.ExecuteNonQuery(ConnectionString, DatabaseOwner & ObjectQualifier & "DnnForge_NewsArticles_ArticleTagAdd", articleID, tagID, displayOrder)
         End Sub
 
         Public Overrides Sub DeleteArticleTag(ByVal articleID As Integer)

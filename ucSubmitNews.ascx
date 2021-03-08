@@ -225,11 +225,23 @@
 			</td>
 		</tr>
 		<tr runat="Server" id="trTags">
-			<td class="SubHead" width="150"><dnn:label id="plTags" text="Tags:" runat="server" controlname="txtTags"></dnn:label></td>
-			<td>
+			<td class="SubHead" id="tdTxtTagsTitle" width="150"><dnn:label id="plTags" text="Tags:" runat="server" controlname="txtTags"></dnn:label></td>
+			<td runat="server" id="tdTxtTags">
 				<asp:textbox id="txtTags" cssclass="NormalTextBox" width="300" maxlength="255" runat="server" /><br />
 			    <asp:Label ID="lblTags" ResourceKey="TagsHelp" runat="server" CssClass="Normal" />
+			</td>
+			<td class="SubHead" id="tdAllTagsTitle" width="150"><dnn:label id="plAllTags" text="All Tags:" runat="server"></dnn:label></td>
+			<td runat="server" id="tdAllTagsList">
 				<asp:ListBox ID="lstTags" runat="server" CssClass="Normal" DataTextField="Name" DataValueField="Name" Width="300px" Height="150px" SelectionMode="Multiple" />
+				<asp:imagebutton id="addTags" resourcekey="btnAddTags.Help" runat="server" alternatetext="Add Tags To Article" commandname="add" imageurl="~/images/action_import.gif"></asp:imagebutton>
+			</td>
+			<td runat="server" id="tdStaticTagsList"> 
+				<dnn:label id="plArticleTags" text="Article Tags:" runat="server" controlname="txtArticleTags"></dnn:label>
+				<asp:ListBox ID="lstFinalTags" runat="server" CssClass="Normal" DataTextField="Name" DataValueField="Name" Width="300px" Height="150px" SelectionMode="Single" />
+
+				<asp:imagebutton id="cmdUp" resourcekey="cmdUp.Help" runat="server" alternatetext="Move Tag Up In Tags List" commandname="up" imageurl="~/images/up.gif"></asp:imagebutton>
+				<asp:imagebutton id="cmdDown" resourcekey="cmdDown.Help" runat="server" alternatetext="Move Tag Down In Tags List" commandname="down" imageurl="~/images/dn.gif"></asp:imagebutton>
+				<asp:imagebutton id="cmdDeleteTag" resourcekey="cmdDeleteTag.Help" runat="server" alternatetext="Delete Tag From Tags List" commandname="cmdDeleteTag" imageurl="~/images/action_delete.gif"></asp:imagebutton>
 			</td>
 		</tr>
 		</table>

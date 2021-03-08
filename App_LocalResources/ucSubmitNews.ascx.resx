@@ -459,4 +459,10 @@
   <data name="plFolder.Text" xml:space="preserve">
     <value>Upload Folder:</value>
   </data>
+  <data name="plAllTags.Help" xml:space="preserve">
+    <value>Select all desired tags and add to Article Tags list.</value>
+  </data>
+  <data name="plArticleTags.Help" xml:space="preserve">
+    <value>Re-order article tags for display, and remove existing article tags.</value>
+  </data>
 </root>
