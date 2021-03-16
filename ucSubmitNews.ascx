@@ -224,6 +224,11 @@
 			        Display="None" ErrorMessage="Category is Required." Enabled="False" ResourceKey="valCategoriesRequired.ErrorMessage" SetFocusOnError="true" />
 			</td>
 		</tr>
+		<tr>
+			<td colspan="100%">
+				<hr />
+			</td>
+		</tr>
 		<tr runat="Server" id="trTags">
 			<td class="SubHead" id="tdTxtTagsTitle" width="150"><dnn:label id="plTags" text="Tags:" runat="server" controlname="txtTags"></dnn:label></td>
 			<td runat="server" id="tdTxtTags">
