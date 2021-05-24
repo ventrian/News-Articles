@@ -239,6 +239,7 @@
 			<td runat="server" id="tdAllTagsList">
 				<asp:ListBox ID="lstTags" runat="server" CssClass="Normal" DataTextField="Name" DataValueField="Name" Width="300px" Height="150px" SelectionMode="Multiple" />
 				<asp:imagebutton id="addTags" resourcekey="btnAddTags.Help" runat="server" alternatetext="Add Tags To Article" ToolTip="Add Tags To Article" commandname="add" imageurl="~/images/action_import.gif"></asp:imagebutton>
+				<asp:imagebutton id="replaceTags" resourcekey="btnReplaceTags.Help" runat="server" alternatetext="Replace Article Tags" ToolTip="Replace Article Tags" commandname="replace" imageurl="~/images/action_refresh.gif"></asp:imagebutton>
 			</td>
 			<td runat="server" id="tdStaticTagsList"> 
 				<dnn:label id="plArticleTags" text="Article Tags:" runat="server" controlname="txtArticleTags"></dnn:label>

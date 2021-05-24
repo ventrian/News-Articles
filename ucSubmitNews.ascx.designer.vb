@@ -753,6 +753,15 @@ Namespace Ventrian.NewsArticles
         Protected WithEvents addTags As Global.System.Web.UI.WebControls.ImageButton
 
         '''<summary>
+        '''replaceTags control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents replaceTags As Global.System.Web.UI.WebControls.ImageButton
+
+        '''<summary>
         '''tdStaticTagsList control.
         '''</summary>
         '''<remarks>

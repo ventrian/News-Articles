@@ -2008,7 +2008,7 @@ Namespace Ventrian.NewsArticles
 
         End Sub
 
-        Private Sub addTags_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles addTags.Click
+        Private Sub replaceTags_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles replaceTags.Click
 
             If lstTags.Items.Count > 0 Then
                 lstFinalTags.Items.Clear()
@@ -2022,6 +2022,24 @@ Namespace Ventrian.NewsArticles
             Next
 
         End Sub
+
+        Private Sub addTags_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles addTags.Click
+
+            For Each li As ListItem In lstTags.Items
+                If (li.Selected) Then
+
+                    li.Selected = False
+                    If Not lstFinalTags.Items.Contains(li) Then
+
+                        lstFinalTags.Items.Add(li)
+
+                    End If
+
+                End If
+            Next
+
+        End Sub
+
 
         Private Sub cmdUp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdUp.Click
 
