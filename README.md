@@ -1,7 +1,7 @@
 # News-Articles
-This module was originally created by Scott McCulloch of Ventrian. The module is now out in the open, and mainly maintained  by Stefan Kamphuis, Timo Breumelhof and Peter Schotman of [40FINGERS](https://www.40fingers.net/).  
-We are mainly fixing issues for our clients, so don't expect 40F to fix all issues.  
-Pull request are always welcome. :-)  
+This module was originally created by Scott McCulloch of Ventrian. The module is now out in the open, and mainly maintained  by Stefan Kamphuis, Timo Breumelhof and Peter Schotman of [40FINGERS](https://www.40fingers.net/).\ 
+We are mainly fixing issues for our clients, so don't expect 40F to fix all issues.\ 
+Pull request are always welcome. :-)\ 
 We are currently in the process of converting our clients News Articles modules to Open Content and will stop using and supporting this module in the near future.
 
 
