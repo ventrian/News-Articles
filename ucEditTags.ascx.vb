@@ -17,7 +17,10 @@ Namespace Ventrian.NewsArticles
 
             Localization.LocalizeDataGrid(grdTags, Me.LocalResourceFile)
 
-            grdTags.DataSource = objTagController.List(Me.ModuleId, Null.NullInteger)
+            Dim objTags As ArrayList = objTagController.List(Me.ModuleId, Null.NullInteger)
+
+            objTags.Sort()
+            grdTags.DataSource = objTags
             grdTags.DataBind()
 
             If (grdTags.Items.Count > 0) Then

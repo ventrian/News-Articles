@@ -807,6 +807,15 @@ Namespace Ventrian.NewsArticles
         Protected WithEvents txtTags As Global.System.Web.UI.WebControls.TextBox
 
         '''<summary>
+        '''lstTags control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents lstTags As Global.System.Web.UI.WebControls.ListBox
+
+        '''<summary>
         '''lblTags control.
         '''</summary>
         '''<remarks>

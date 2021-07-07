@@ -663,6 +663,15 @@ Namespace Ventrian.NewsArticles
         Protected WithEvents trTags As Global.System.Web.UI.HtmlControls.HtmlTableRow
 
         '''<summary>
+        '''tdTxtTagsTitle control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents tdTxtTagsTitle As Global.System.Web.UI.HtmlControls.HtmlTableCell
+
+        '''<summary>
         '''plTags control.
         '''</summary>
         '''<remarks>
@@ -670,6 +679,15 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents plTags As Global.System.Web.UI.UserControl
+
+        '''<summary>
+        '''tdTxtTags control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents tdTxtTags As Global.System.Web.UI.HtmlControls.HtmlTableCell
 
         '''<summary>
         '''txtTags control.
@@ -688,6 +706,114 @@ Namespace Ventrian.NewsArticles
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents lblTags As Global.System.Web.UI.WebControls.Label
+
+        '''<summary>
+        '''tdAllTagsTitle control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents tdAllTagsTitle As Global.System.Web.UI.HtmlControls.HtmlTableCell
+
+        '''<summary>
+        '''plAllTags control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents plAllTags As Global.System.Web.UI.UserControl
+
+        '''<summary>
+        '''tdAllTagsList control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents tdAllTagsList As Global.System.Web.UI.HtmlControls.HtmlTableCell
+
+        '''<summary>
+        '''lstTags control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents lstTags As Global.System.Web.UI.WebControls.ListBox
+
+        '''<summary>
+        '''addTags control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents addTags As Global.System.Web.UI.WebControls.ImageButton
+
+        '''<summary>
+        '''replaceTags control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents replaceTags As Global.System.Web.UI.WebControls.ImageButton
+
+        '''<summary>
+        '''tdStaticTagsList control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents tdStaticTagsList As Global.System.Web.UI.HtmlControls.HtmlTableCell
+
+        '''<summary>
+        '''plArticleTags control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents plArticleTags As Global.System.Web.UI.UserControl
+
+        '''<summary>
+        '''lstFinalTags control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents lstFinalTags As Global.System.Web.UI.WebControls.ListBox
+
+        '''<summary>
+        '''cmdUp control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents cmdUp As Global.System.Web.UI.WebControls.ImageButton
+
+        '''<summary>
+        '''cmdDown control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents cmdDown As Global.System.Web.UI.WebControls.ImageButton
+
+        '''<summary>
+        '''cmdDeleteTag control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents cmdDeleteTag As Global.System.Web.UI.WebControls.ImageButton
 
         '''<summary>
         '''phPublish control.

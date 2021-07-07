@@ -133,7 +133,7 @@ Namespace Ventrian.NewsArticles
         Public MustOverride Sub UpdateTag(ByVal tagID As Integer, ByVal moduleID As Integer, ByVal name As String, ByVal nameLowered As String, ByVal usages As Integer)
         Public MustOverride Sub DeleteTag(ByVal tagID As Integer)
 
-        Public MustOverride Sub AddArticleTag(ByVal articleID As Integer, ByVal tagID As Integer)
+        Public MustOverride Sub AddArticleTag(ByVal articleID As Integer, ByVal tagID As Integer, Optional ByVal displayOrder As Integer = 0)
         Public MustOverride Sub DeleteArticleTag(ByVal articleID As Integer)
         Public MustOverride Sub DeleteArticleTagByTag(ByVal tagID As Integer)
 

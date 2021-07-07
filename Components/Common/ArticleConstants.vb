@@ -113,6 +113,9 @@ Namespace Ventrian.NewsArticles
         Public Const CATEGORY_FILTER_SUBMIT_SETTING_DEFAULT As Boolean = False
         Public Const CATEGORY_SORT_SETTING As String = "CategorySortType"
         Public Const CATEGORY_SORT_SETTING_DEFAULT As CategorySortType = CategorySortType.SortOrder
+        Public Const USE_STATIC_TAGS_LIST_SETTING As String = "UseStaticTagsList"
+        Public Const USE_STATIC_TAGS_LIST_SETTING_DEFAULT As Boolean = False
+
 
         ' Category Security Settings
         Public Const PERMISSION_CATEGORY_VIEW_SETTING As String = "PermissionCategoryView"

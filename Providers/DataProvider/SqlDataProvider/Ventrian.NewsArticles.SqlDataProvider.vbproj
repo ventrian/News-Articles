@@ -231,6 +231,7 @@
     <None Include="00.07.99.SqlDataProvider" />
     <None Include="00.08.00.SqlDataProvider" />
     <None Include="00.08.04.SqlDataProvider" />
+    <None Include="VersionMe.SqlDataProvider" />
     <None Include="00.09.02.SqlDataProvider" />
     <None Include="Uninstall.SqlDataProvider" />
     <Content Include="00.00.06.SqlDataProvider" />

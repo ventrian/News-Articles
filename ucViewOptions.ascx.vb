@@ -523,6 +523,7 @@ Namespace Ventrian.NewsArticles
             chkCategoryBreadcrumb.Checked = ArticleSettings.CategoryBreadcrumb
             chkCategoryName.Checked = ArticleSettings.IncludeInPageName
             chkCategoryFilterSubmit.Checked = ArticleSettings.CategoryFilterSubmit
+            chkUseStaticTagsList.Checked = ArticleSettings.UseStaticTagsList
 
             If (lstCategorySortOrder.Items.FindByValue(ArticleSettings.CategorySortType.ToString()) IsNot Nothing) Then
                 lstCategorySortOrder.SelectedValue = ArticleSettings.CategorySortType.ToString()
@@ -553,6 +554,7 @@ Namespace Ventrian.NewsArticles
             objModules.UpdateModuleSetting(ModuleId, ArticleConstants.CATEGORY_BREADCRUMB_SETTING, chkCategoryBreadcrumb.Checked.ToString())
             objModules.UpdateModuleSetting(ModuleId, ArticleConstants.CATEGORY_NAME_SETTING, chkCategoryName.Checked.ToString())
             objModules.UpdateModuleSetting(ModuleId, ArticleConstants.CATEGORY_FILTER_SUBMIT_SETTING, chkCategoryFilterSubmit.Checked.ToString())
+            objModules.UpdateModuleSetting(ModuleId, ArticleConstants.USE_STATIC_TAGS_LIST_SETTING, chkUseStaticTagsList.Checked.ToString())
 
             objModules.UpdateModuleSetting(ModuleId, ArticleConstants.CATEGORY_SORT_SETTING, lstCategorySortOrder.SelectedValue)
 
