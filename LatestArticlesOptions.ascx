@@ -535,6 +535,14 @@
 			                        <asp:label id="lblImage" resourcekey="Image" cssclass="Normal" runat="server" enableviewstate="False"></asp:label>
 		                        </td>
 	                        </tr>
+
+	                        <tr valign="top">
+		                        <TD class="SubHead" width="150">[IMAGETITLE]</TD>
+		                        <td class="Normal" align="left" width="325">
+			                        <asp:label id="lblImageTitle" resourcekey="ImageTitle" cssclass="Normal" runat="server" enableviewstate="False"></asp:label>
+		                        </td>
+	                        </tr>
+
 	                        <tr valign="top">
 		                        <TD class="SubHead" width="150">[IMAGELINK]</TD>
 		                        <td class="Normal" align="left">

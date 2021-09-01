@@ -1428,6 +1428,15 @@ Namespace Ventrian.NewsArticles
         Protected WithEvents lblImage As Global.System.Web.UI.WebControls.Label
 
         '''<summary>
+        '''lblImageTitle control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents lblImageTitle As Global.System.Web.UI.WebControls.Label
+
+        '''<summary>
         '''lblImageLink control.
         '''</summary>
         '''<remarks>
