@@ -17,15 +17,80 @@ Imports DotNetNuke.Services.Search
 Imports System.Xml
 Imports System.Security.Cryptography
 Imports Ventrian.NewsArticles.Components.CustomFields
+Imports DotNetNuke.Services.Search.Entities
+Imports DotNetNuke.Entities.Portals
+Imports Ventrian.NewsArticles.Base
+
+
 
 Namespace Ventrian.NewsArticles
 
     Public Class ArticleController
-        Implements ISearchable
+        Inherits ModuleSearchBase
         Implements IPortable
 
-#Region " Private Methods "
 
+#Region " Private Methods "
+        Private _articleSettings As ArticleSettings
+        Public ReadOnly Property ArticleSettings(ByVal ModuleConfiguration As ModuleInfo) As ArticleSettings
+            Get
+                Dim portalSettings As New PortalSettings(ModuleConfiguration.TabID, ModuleConfiguration.PortalID)
+                If (_articleSettings Is Nothing) Then
+                    Try
+                        _articleSettings = New ArticleSettings(Common.GetModuleSettings(ModuleConfiguration.ModuleID), PortalSettings, ModuleConfiguration)
+                    Catch
+                        Dim objSettings As Hashtable = ModuleConfiguration.ModuleSettings
+                        Dim objTabSettings As Hashtable = ModuleConfiguration.TabModuleSettings
+
+                        For Each item As DictionaryEntry In objTabSettings
+                            If (objSettings.ContainsKey(item.Key) = False) Then
+                                objSettings.Add(item.Key, item.Value)
+                            End If
+                        Next
+
+                        _articleSettings = New ArticleSettings(objSettings, PortalSettings, ModuleConfiguration)
+                        ModuleController.Instance.UpdateModuleSetting(ModuleConfiguration.ModuleID, "ResetArticleSettings", "true")
+                    End Try
+                End If
+                Return _articleSettings
+            End Get
+        End Property
+        'Private ReadOnly _portalSettings As PortalSettings
+        'Private ReadOnly Property PortalSettings() As PortalSettings
+        '    Get
+        '        Return _portalSettings
+        '    End Get
+        'End Property
+        'Private ReadOnly _articleModule As ModuleInfo
+        'Private ReadOnly Property ArticleModule() As ModuleInfo
+        '    Get
+        '        Return _articleModule
+        '    End Get
+        'End Property
+        Private _tab As DotNetNuke.Entities.Tabs.TabInfo
+        Private ReadOnly Property Tab(ByVal objArticle As ModuleInfo) As DotNetNuke.Entities.Tabs.TabInfo
+            Get
+                Dim portalSettings As New PortalSettings(objArticle.TabID, objArticle.PortalID)
+                If (_tab Is Nothing) Then
+                    Dim objTabController As New DotNetNuke.Entities.Tabs.TabController()
+                    _tab = objTabController.GetTab(objArticle.TabID, portalSettings.PortalId, False)
+                End If
+
+                Return _tab
+            End Get
+        End Property
+
+
+        Private _objPages As ArrayList
+        Private ReadOnly Property Pages(ByVal articleId As Integer) As ArrayList
+            Get
+                If (_objPages Is Nothing) Then
+                    Dim objPageController As New PageController
+                    _objPages = objPageController.GetPageList(articleId)
+                End If
+                Return _objPages
+            End Get
+        End Property
         Private Function FillArticleCollection(ByVal dr As IDataReader, ByRef totalRecords As Integer, ByVal maxCount As Integer) As List(Of ArticleInfo)
 
             Dim objArticles As New List(Of ArticleInfo)
@@ -86,7 +151,15 @@ Namespace Ventrian.NewsArticles
 #End Region
 
 #Region " Public Methods "
-
+        Dim _includeCategory As Boolean = False
+        Public Property IncludeCategory() As Boolean
+            Get
+                Return _includeCategory
+            End Get
+            Set(ByVal value As Boolean)
+                _includeCategory = value
+            End Set
+        End Property
         Public Function GetArticleList(ByVal moduleID As Integer) As List(Of ArticleInfo)
 
             Return GetArticleList(moduleID, True)
@@ -285,24 +358,21 @@ Namespace Ventrian.NewsArticles
         End Function
 
 #Region " Optional Interfaces "
-
-        Public Function GetSearchItems(ByVal ModInfo As DotNetNuke.Entities.Modules.ModuleInfo) As DotNetNuke.Services.Search.SearchItemInfoCollection Implements DotNetNuke.Entities.Modules.ISearchable.GetSearchItems
-
-            Dim settings As Hashtable = Common.GetModuleSettings(ModInfo.ModuleID)
-            settings = GetTabModuleSettings(ModInfo.TabModuleID, settings)
-
+        Public Overrides Function GetModifiedSearchDocuments(ByVal modInfo As ModuleInfo, ByVal beginDateUtc As DateTime) As IList(Of SearchDocument)
+            Dim objArticles As List(Of ArticleInfo) = GetArticleList(modInfo.ModuleID)
+            Dim SearchItemCollection As New SearchItemInfoCollection
+            Dim settings As Hashtable = Common.GetModuleSettings(modInfo.ModuleID)
+            settings = GetTabModuleSettings(modInfo.TabModuleID, settings)
+            Dim list As New List(Of SearchDocument)
             Dim doSearch As Boolean = False
 
             If (settings.Contains(ArticleConstants.ENABLE_CORE_SEARCH_SETTING)) Then
                 doSearch = Convert.ToBoolean(settings(ArticleConstants.ENABLE_CORE_SEARCH_SETTING))
             End If
 
-            Dim SearchItemCollection As New SearchItemInfoCollection
+
 
             If (doSearch) Then
-
-                Dim objArticles As List(Of ArticleInfo) = GetArticleList(ModInfo.ModuleID)
-
                 For Each objArticle As ArticleInfo In objArticles
                     With CType(objArticle, ArticleInfo)
 
@@ -328,23 +398,135 @@ Namespace Ventrian.NewsArticles
                                     title = objArticle.Title
                                 End If
                                 If (i = 0) Then
-                                    SearchItem = New SearchItemInfo(title, pageDescription, objArticle.AuthorID, objArticle.LastUpdate, ModInfo.ModuleID, ModInfo.ModuleID.ToString() & "_" & .ArticleID.ToString & "_" & objPage.PageID.ToString, pageContent, "ArticleType=ArticleView&ArticleID=" & .ArticleID.ToString)
+                                    SearchItem = New SearchItemInfo(title, pageDescription, objArticle.AuthorID, objArticle.LastUpdate, modInfo.ModuleID, modInfo.ModuleID.ToString() & "_" & .ArticleID.ToString & "_" & objPage.PageID.ToString, pageContent, "ArticleType=ArticleView&ArticleID=" & .ArticleID.ToString)
                                 Else
-                                    SearchItem = New SearchItemInfo(title, pageDescription, objArticle.AuthorID, objArticle.LastUpdate, ModInfo.ModuleID, ModInfo.ModuleID.ToString() & "_" & .ArticleID.ToString & "_" & objPage.PageID.ToString, pageContent, "ArticleType=ArticleView&ArticleID=" & .ArticleID.ToString & "&PageID=" + objPage.PageID.ToString())
+                                    SearchItem = New SearchItemInfo(title, pageDescription, objArticle.AuthorID, objArticle.LastUpdate, modInfo.ModuleID, modInfo.ModuleID.ToString() & "_" & .ArticleID.ToString & "_" & objPage.PageID.ToString, pageContent, "ArticleType=ArticleView&ArticleID=" & .ArticleID.ToString & "&PageID=" + objPage.PageID.ToString())
                                 End If
                                 SearchItemCollection.Add(SearchItem)
+
+                                'Dim articleUrl As String
+                                'If objArticle.Url = "" Then
+                                '    Dim pageID As Integer = Null.NullInteger
+
+                                '    If (settings.Contains(ArticleConstants.ENABLE_CORE_SEARCH_SETTING)) Then
+                                '        doSearch = Convert.ToBoolean(settings(ArticleConstants.ENABLE_CORE_SEARCH_SETTING))
+                                '    End If
+                                '    If (Convert.ToBoolean(settings("AlwaysShowPageID"))) Then
+                                '        If (Pages(objArticle.ArticleID).Count > 0) Then
+                                '            pageID = CType(Pages(objArticle.ArticleID)(0), PageInfo).PageID
+                                '        End If
+                                '    End If
+
+                                '    articleUrl = Common.GetArticleLink(objArticle, Tab(modInfo), ArticleSettings(modInfo), IncludeCategory, pageID)
+                                'Else
+                                '    articleUrl = Globals.LinkClick(objArticle.Url, Tab(modInfo).TabID, objArticle.ModuleID, False)
+                                'End If
+                                Dim TabPath As String = modInfo.ParentTab.TabPath.Replace("//", "/")
+
+                                Dim item2 As New SearchDocument With {
+                                .Url = TabPath + "?" + SearchItem.GUID,
+                                    .AuthorUserId = SearchItem.Author,
+            .UniqueKey = SearchItem.SearchKey,
+            .PortalId = modInfo.PortalID,
+            .Title = SearchItem.Title,
+            .Description = SearchItem.Description,
+            .Body = SearchItem.Content,
+            .ModifiedTimeUtc = SearchItem.PubDate
+        }
+                                list.Add(item2)
                             Next
 
                         End If
 
                     End With
                 Next
-
             End If
-
-            Return SearchItemCollection
-
+            Return list
         End Function
+        'Public Overrides Function GetModifiedSearchDocuments(ByVal modInfo As ModuleInfo, ByVal beginDateUtc As DateTime) As IList(Of SearchDocument)
+        '    Dim workflowId As Integer = Me.GetWorkflow(modInfo.ModuleID, modInfo.TabID, modInfo.PortalID).Value
+        '    Dim list As New List(Of SearchDocument)
+        '    Dim info As HtmlTextInfo = Me.GetTopHtmlText(modInfo.ModuleID, True, workflowId)
+        '    Dim settings As HtmlModuleSettings = New HtmlModuleSettingsRepository().GetSettings(modInfo)
+        '    If (((Not info Is Nothing) AndAlso (info.LastModifiedOnDate.ToUniversalTime > beginDateUtc)) AndAlso (info.LastModifiedOnDate.ToUniversalTime < DateTime.UtcNow)) Then
+        '        Dim txt As String = HtmlUtils.Clean(info.Content, False)
+        '        Dim str2 As String = If((txt.Length <= settings.SearchDescLength), txt, HtmlUtils.Shorten(txt, settings.SearchDescLength, "..."))
+        '        Dim item As New SearchDocument With {
+        '    .UniqueKey = modInfo.ModuleID.ToString,
+        '    .PortalId = modInfo.PortalID,
+        '    .Title = modInfo.ModuleTitle,
+        '    .Description = str2,
+        '    .Body = txt,
+        '    .ModifiedTimeUtc = info.LastModifiedOnDate.ToUniversalTime
+        '}
+        '        If ((Not modInfo.Terms Is Nothing) AndAlso (modInfo.Terms.Count > 0)) Then
+        '            item.Tags = HtmlTextController.CollectHierarchicalTags(modInfo.Terms)
+        '        End If
+        '        list.Add(item)
+        '    End If
+        '    Return list
+        'End Function
+
+
+        'Public Function GetSearchItems(ByVal ModInfo As DotNetNuke.Entities.Modules.ModuleInfo) As DotNetNuke.Services.Search.SearchItemInfoCollection Implements DotNetNuke.Entities.Modules.ISearchable.GetSearchItems
+
+        '    Dim settings As Hashtable = Common.GetModuleSettings(ModInfo.ModuleID)
+        '    settings = GetTabModuleSettings(ModInfo.TabModuleID, settings)
+
+        '    Dim doSearch As Boolean = False
+
+        '    If (settings.Contains(ArticleConstants.ENABLE_CORE_SEARCH_SETTING)) Then
+        '        doSearch = Convert.ToBoolean(settings(ArticleConstants.ENABLE_CORE_SEARCH_SETTING))
+        '    End If
+
+        '    Dim SearchItemCollection As New SearchItemInfoCollection
+
+        '    If (doSearch) Then
+
+        '        Dim objArticles As List(Of ArticleInfo) = GetArticleList(ModInfo.ModuleID)
+
+        '        For Each objArticle As ArticleInfo In objArticles
+        '            With CType(objArticle, ArticleInfo)
+
+        '                If (objArticle.IsApproved) Then
+
+        '                    Dim objPageController As New PageController
+        '                    Dim objPages As ArrayList = objPageController.GetPageList(objArticle.ArticleID)
+        '                    For i As Integer = 0 To objPages.Count - 1
+        '                        Dim SearchItem As SearchItemInfo
+        '                        Dim objPage As PageInfo = CType(objPages(i), PageInfo)
+        '                        Dim pageContent As String = HttpUtility.HtmlDecode(objArticle.Title) + " " + System.Web.HttpUtility.HtmlDecode(objPage.PageText)
+
+        '                        For Each Item As DictionaryEntry In objArticle.CustomList
+        '                            If (Item.Value.ToString() <> "") Then
+        '                                pageContent = pageContent & vbCrLf & Item.Value.ToString()
+        '                            End If
+        '                        Next
+
+        '                        Dim pageDescription As String = HtmlUtils.Shorten(HtmlUtils.Clean(System.Web.HttpUtility.HtmlDecode(objPage.PageText), False), 100, "...")
+
+        '                        Dim title As String = objArticle.Title & " - " & objPage.Title
+        '                        If (objArticle.Title = objPage.Title) Then
+        '                            title = objArticle.Title
+        '                        End If
+        '                        If (i = 0) Then
+        '                            SearchItem = New SearchItemInfo(title, pageDescription, objArticle.AuthorID, objArticle.LastUpdate, ModInfo.ModuleID, ModInfo.ModuleID.ToString() & "_" & .ArticleID.ToString & "_" & objPage.PageID.ToString, pageContent, "ArticleType=ArticleView&ArticleID=" & .ArticleID.ToString)
+        '                        Else
+        '                            SearchItem = New SearchItemInfo(title, pageDescription, objArticle.AuthorID, objArticle.LastUpdate, ModInfo.ModuleID, ModInfo.ModuleID.ToString() & "_" & .ArticleID.ToString & "_" & objPage.PageID.ToString, pageContent, "ArticleType=ArticleView&ArticleID=" & .ArticleID.ToString & "&PageID=" + objPage.PageID.ToString())
+        '                        End If
+        '                        SearchItemCollection.Add(SearchItem)
+        '                    Next
+
+        '                End If
+
+        '            End With
+        '        Next
+
+        '    End If
+
+        '    Return SearchItemCollection
+
+        'End Function
 
         Public Function ExportModule(ByVal ModuleID As Integer) As String Implements IPortable.ExportModule
 
@@ -792,7 +974,7 @@ Namespace Ventrian.NewsArticles
 
                 If (xmlChildNode.Name = "customfields") Then
                     For Each xmlTagNode As XmlNode In xmlChildNode.ChildNodes
-                        
+
                         Dim name As String = xmlTagNode.Item("name").InnerText
                         Dim value As String = xmlTagNode.Item("value").InnerText
 
