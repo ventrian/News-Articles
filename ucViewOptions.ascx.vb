@@ -79,9 +79,9 @@ Namespace Ventrian.NewsArticles
                 roles = RoleController.Instance.GetRoles(PortalId)
             Else
                 Dim objRole As New RoleController
-                roles = objRole.GetRolesByGroup(PortalId, Convert.ToInt32(drpSecurityRoleGroups.SelectedValue))
+                roles = Common.ToList(Of RoleInfo)(objRole.GetRolesByGroup(PortalId, Convert.ToInt32(drpSecurityRoleGroups.SelectedValue)))
             End If
-
+            
             If Not roles Is Nothing Then
                 For Each Role As RoleInfo In roles
                     availableRoles.Add(New ListItem(Role.RoleName, Role.RoleName))
