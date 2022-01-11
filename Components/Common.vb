@@ -796,6 +796,18 @@ Namespace Ventrian.NewsArticles
             return retval
         End Function
 
+        Public shared Function ToList(Of T As Class)(objArrayList As ArrayList) As List(Of T)
+            Dim retval As New List(Of T)()
+
+            For Each objItem As Object In objArrayList
+                Dim newItem As T = TryCast(objItem, T)
+                If Not newItem Is Nothing Then
+                    retval.Add(newItem)
+                End If
+            Next
+
+            Return retval
+        End Function
 
 #End Region
 
