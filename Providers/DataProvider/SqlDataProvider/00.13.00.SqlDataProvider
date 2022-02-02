@@ -8,11 +8,14 @@ BEGIN
 	ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ArticleTag
 	ADD DisplayOrder INT
 
-	-- Backfill existing article tags
-	UPDATE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ArticleTag
-	SET DisplayOrder = 0
-
 END
+GO
+
+
+-- Backfill existing article tags
+UPDATE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ArticleTag
+SET DisplayOrder = 0
+WHERE DisplayOrder IS NULL
 GO
 
 -- Add DisplayOrder param to DnnForge_NewsArticles_ArticleTagAdd store procedure
