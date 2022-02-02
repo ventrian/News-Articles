@@ -98,10 +98,10 @@ Namespace Ventrian.NewsArticles
 
         End Sub
 
-        Public Sub Add(ByVal articleID As Integer, ByVal tagID As Integer)
+        Public Sub Add(ByVal articleID As Integer, ByVal tagID As Integer, Optional ByVal displayOrder As Integer = 0)
 
             RemoveCache(tagID)
-            DataProvider.Instance().AddArticleTag(articleID, tagID)
+            DataProvider.Instance().AddArticleTag(articleID, tagID, displayOrder)
 
         End Sub
 

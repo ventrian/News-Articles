@@ -153,6 +153,7 @@ Namespace Ventrian.NewsArticles
             End If
 
             If (drpModuleID.Items.Count > 0) Then
+                BindTags()
                 BindCategories()
                 BindCustomFields()
             End If
@@ -174,12 +175,95 @@ Namespace Ventrian.NewsArticles
 
         End Sub
 
+        Private Function UseStaticTagsList() As Boolean
+
+            If Not (drpModuleID.Items.Count > 0) Then
+                Return ArticleConstants.USE_STATIC_TAGS_LIST_SETTING_DEFAULT
+            End If
+
+            Dim selectedModuleValues As String() = drpModuleID.SelectedValue.Split(Convert.ToChar("-"))
+            Dim objModuleController As New ModuleController
+            Dim selectedArticlesModule As ModuleInfo = objModuleController.GetModule(Convert.ToInt32(selectedModuleValues(1)), Convert.ToInt32(selectedModuleValues(0)), False)
+
+            If Not selectedArticlesModule.ModuleSettings.Contains(ArticleConstants.USE_STATIC_TAGS_LIST_SETTING) Then
+                Return ArticleConstants.USE_STATIC_TAGS_LIST_SETTING_DEFAULT
+            End If
+
+            Return Convert.ToBoolean(selectedArticlesModule.ModuleSettings(ArticleConstants.USE_STATIC_TAGS_LIST_SETTING).ToString())
+
+        End Function
+
+        Private Sub SelectAllTags(ByVal tagIdList As String)
+
+            Dim objTagController As New TagController
+            For Each tagId As String In tagIdList.Split(New Char() {","c}, StringSplitOptions.RemoveEmptyEntries)
+                Dim objTag As TagInfo = objTagController.Get(Convert.ToInt32(tagId))
+
+                If objTag IsNot Nothing Then
+                    Dim li As ListItem = lstTags.Items.FindByValue(objTag.Name)
+                    If li IsNot Nothing Then
+                        li.Selected = True
+                    End If
+                End If
+            Next
+
+        End Sub
+
+        Private Sub BindTags()
+            If UseStaticTagsList() Then
+                lblTags.Visible = False
+                txtTags.Visible = False
+
+                lstTags.Visible = True
+                FillTagsList()
+            Else
+                lstTags.Visible = False
+
+                lblTags.Visible = True
+                txtTags.Visible = True
+            End If
+
+            If (Settings.Contains(ArticleConstants.LATEST_ARTICLES_TAGS)) Then
+                Dim tags As String = Settings(ArticleConstants.LATEST_ARTICLES_TAGS).ToString()
+                If (tags <> "" And drpModuleID.Items.Count > 0) Then
+                    If UseStaticTagsList() Then
+                        SelectAllTags(tags)
+                    Else
+                        Dim objTagController As New TagController()
+                        For Each tag As String In tags.Split(","c)
+                            Dim objTag As TagInfo = objTagController.Get(Convert.ToInt32(tag))
+                            If (objTag IsNot Nothing) Then
+                                If (txtTags.Text <> "") Then
+                                    txtTags.Text = txtTags.Text + "," + objTag.Name
+                                Else
+                                    txtTags.Text = objTag.Name
+                                End If
+                            End If
+                        Next
+                    End If
+                End If
+            End If
+        End Sub
+
+        Private Sub FillTagsList()
+            If (drpModuleID.Items.Count > 0) Then
+                Dim objTagController As New TagController
+                Dim objTags As ArrayList = objTagController.List(Convert.ToInt32(drpModuleID.SelectedValue.Split("-"c)(1)), Null.NullInteger)
+
+                objTags.Sort()
+                lstTags.DataSource = objTags
+                lstTags.DataBind()
+            End If
+        End Sub
+
         Private Sub BindSettings()
 
             If (Settings.Contains(ArticleConstants.LATEST_ARTICLES_MODULE_ID) And Settings.Contains(ArticleConstants.LATEST_ARTICLES_TAB_ID)) Then
                 If Not (drpModuleID.Items.FindByValue(Settings(ArticleConstants.LATEST_ARTICLES_TAB_ID).ToString() & "-" & Settings(ArticleConstants.LATEST_ARTICLES_MODULE_ID).ToString()) Is Nothing) Then
                     drpModuleID.SelectedValue = Settings(ArticleConstants.LATEST_ARTICLES_TAB_ID).ToString() & "-" & Settings(ArticleConstants.LATEST_ARTICLES_MODULE_ID).ToString()
                 End If
+
+                BindTags()
                 BindCategories()
                 BindCustomFields()
             End If
@@ -238,23 +322,6 @@ Namespace Ventrian.NewsArticles
             If (Settings.Contains(ArticleConstants.LATEST_ARTICLES_MATCH_OPERATOR)) Then
                 If Not (rdoMatchOperator.Items.FindByValue(Settings(ArticleConstants.LATEST_ARTICLES_MATCH_OPERATOR).ToString()) Is Nothing) Then
                     rdoMatchOperator.SelectedValue = Settings(ArticleConstants.LATEST_ARTICLES_MATCH_OPERATOR).ToString()
-                End If
-            End If
-
-            If (Settings.Contains(ArticleConstants.LATEST_ARTICLES_TAGS)) Then
-                Dim objTagController As New TagController()
-                Dim tags As String = Settings(ArticleConstants.LATEST_ARTICLES_TAGS).ToString()
-                If (tags <> "" And drpModuleID.Items.Count > 0) Then
-                    For Each tag As String In tags.Split(","c)
-                        Dim objTag As TagInfo = objTagController.Get(Convert.ToInt32(tag))
-                        If (objTag IsNot Nothing) Then
-                            If (txtTags.Text <> "") Then
-                                txtTags.Text = txtTags.Text + "," + objTag.Name
-                            Else
-                                txtTags.Text = objTag.Name
-                            End If
-                        End If
-                    Next
                 End If
             End If
 
@@ -599,31 +666,47 @@ Namespace Ventrian.NewsArticles
 
             Dim tags As String = ""
             If (drpModuleID.Items.Count > 0) Then
-                For Each tag As String In txtTags.Text.Split(","c)
-                    If (tag <> "") Then
-                        Dim objTagController As New TagController()
-                        Dim objTag As TagInfo = objTagController.Get(Convert.ToInt32(drpModuleID.SelectedValue.Split("-"c)(1)), tag.ToLower())
-                        If (objTag IsNot Nothing) Then
-                            If (tags = "") Then
-                                tags = objTag.TagID.ToString()
-                            Else
-                                tags = tags & "," & objTag.TagID.ToString()
-                            End If
-                        Else
-                            objTag = New TagInfo()
-                            objTag.ModuleID = Convert.ToInt32(drpModuleID.SelectedValue.Split("-"c)(1))
-                            objTag.Name = tag
-                            objTag.NameLowered = tag.ToLower()
-                            objTag.Usages = 0
-                            objTag.TagID = objTagController.Add(objTag)
-                            If (tags = "") Then
-                                tags = objTag.TagID.ToString()
-                            Else
-                                tags = tags & "," & objTag.TagID.ToString()
+                Dim objTagController As New TagController()
+
+                If UseStaticTagsList() Then
+                    For Each li As ListItem In lstTags.Items
+                        If li.Selected Then
+                            Dim objTag As TagInfo = objTagController.Get(Convert.ToInt32(drpModuleID.SelectedValue.Split("-"c)(1)), li.Value.ToLower())
+                            If (objTag IsNot Nothing) Then
+                                If (tags = "") Then
+                                    tags = objTag.TagID.ToString()
+                                Else
+                                    tags = tags & "," & objTag.TagID.ToString()
+                                End If
                             End If
                         End If
-                    End If
-                Next
+                    Next
+                Else
+                    For Each tag As String In txtTags.Text.Split(","c)
+                        If (tag <> "") Then
+                            Dim objTag As TagInfo = objTagController.Get(Convert.ToInt32(drpModuleID.SelectedValue.Split("-"c)(1)), tag.ToLower())
+                            If (objTag IsNot Nothing) Then
+                                If (tags = "") Then
+                                    tags = objTag.TagID.ToString()
+                                Else
+                                    tags = tags & "," & objTag.TagID.ToString()
+                                End If
+                            Else
+                                objTag = New TagInfo()
+                                objTag.ModuleID = Convert.ToInt32(drpModuleID.SelectedValue.Split("-"c)(1))
+                                objTag.Name = tag
+                                objTag.NameLowered = tag.ToLower()
+                                objTag.Usages = 0
+                                objTag.TagID = objTagController.Add(objTag)
+                                If (tags = "") Then
+                                    tags = objTag.TagID.ToString()
+                                Else
+                                    tags = tags & "," & objTag.TagID.ToString()
+                                End If
+                            End If
+                        End If
+                    Next
+                End If
             End If
             objModuleController.UpdateModuleSetting(ModuleId, ArticleConstants.LATEST_ARTICLES_TAGS, tags)
             objModuleController.UpdateModuleSetting(Me.ModuleId, ArticleConstants.LATEST_ARTICLES_TAGS_MATCH_OPERATOR, rdoTagsMatchOperator.SelectedValue)
@@ -714,6 +797,7 @@ Namespace Ventrian.NewsArticles
         Private Sub drpModuleID_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles drpModuleID.SelectedIndexChanged
 
             Try
+                BindTags()
                 BindCategories()
                 BindCustomFields()
             Catch exc As Exception 'Module failed to load

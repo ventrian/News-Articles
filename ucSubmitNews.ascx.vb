@@ -191,7 +191,14 @@ Namespace Ventrian.NewsArticles
                         li.Selected = True
                     End If
                 Next
-                txtTags.Text = objArticle.Tags
+
+                If ArticleSettings.UseStaticTagsList Then
+                    SelectAllTags(objArticle.Tags)
+                    CreateFinalTags(objArticle.Tags)
+                Else
+                    txtTags.Text = objArticle.Tags
+                End If
+
 
                 Dim objPageController As New PageController
                 Dim pages As ArrayList = objPageController.GetPageList(_articleID)
@@ -336,6 +343,60 @@ Namespace Ventrian.NewsArticles
 
         End Sub
 
+        Private Sub BindTags()
+
+            If ArticleSettings.UseStaticTagsList Then
+                tdTxtTagsTitle.Visible = False
+                tdTxtTags.Visible = False
+                FillTagsList()
+            Else
+                tdAllTagsTitle.Visible = False
+                tdAllTagsList.Visible = False
+                tdStaticTagsList.Visible = False
+            End If
+
+        End Sub
+
+        Private Sub FillTagsList()
+
+            Dim objTagController As New TagController
+            Dim objTags As ArrayList = objTagController.List(ModuleId, Null.NullInteger)
+
+            objTags.Sort()
+            lstTags.DataSource = objTags
+            lstTags.DataBind()
+
+        End Sub
+
+        Private Sub SelectAllTags(ByVal tagList As String)
+
+            Dim objTagController As New TagController
+            For Each tag As String In tagList.Split(New Char() {","c}, StringSplitOptions.RemoveEmptyEntries)
+                Dim objTag As TagInfo = objTagController.Get(ModuleId, tag)
+
+                If objTag IsNot Nothing Then
+                    Dim li As ListItem = lstTags.Items.FindByValue(objTag.Name)
+                    If li IsNot Nothing Then
+                        li.Selected = True
+                    End If
+                End If
+            Next
+
+        End Sub
+
+        Private Sub CreateFinalTags(ByVal tagList As String)
+
+            Dim objTagController As New TagController
+            For Each tag As String In tagList.Split(New Char() {","c}, StringSplitOptions.RemoveEmptyEntries)
+                Dim objTag As TagInfo = objTagController.Get(ModuleId, tag)
+
+                If objTag IsNot Nothing Then
+                    lstFinalTags.Items.Add(objTag.Name)
+                End If
+            Next
+
+        End Sub
+
         Private Sub BindCustomFields()
 
             Dim objCustomFieldController As New CustomFieldController()
@@ -372,7 +433,7 @@ Namespace Ventrian.NewsArticles
 
         Public Function GetAuthorList(ByVal moduleID As Integer) As ArrayList
 
-            Dim moduleSettings As Hashtable = Common.GetModuleSettings(moduleId)
+            Dim moduleSettings As Hashtable = Common.GetModuleSettings(moduleID)
             Dim distributionList As String = ""
             Dim userList As New ArrayList
 
@@ -1145,30 +1206,49 @@ Namespace Ventrian.NewsArticles
                 Dim objLinkedArticle As ArticleInfo = objArticleController.GetArticle(Convert.ToInt32(drpMirrorArticle.SelectedValue))
 
                 If (objLinkedArticle IsNot Nothing) Then
-                    txtTags.Text = objLinkedArticle.Tags
+                    If ArticleSettings.UseStaticTagsList Then
+                        SelectAllTags(objLinkedArticle.Tags)
+                        CreateFinalTags(objLinkedArticle.Tags)
+                    Else
+                        txtTags.Text = objLinkedArticle.Tags
+                    End If
                 End If
             End If
 
             Dim objTagController As New TagController
             objTagController.DeleteArticleTag(articleID)
 
-            If (txtTags.Text <> "") Then
-                Dim tags As String() = txtTags.Text.Split(","c)
-                For Each tag As String In tags
-                    If (tag <> "") Then
-                        Dim objTag As TagInfo = objTagController.Get(ModuleId, tag)
+            If ArticleSettings.UseStaticTagsList Then
+                Dim order As Integer = 0
 
-                        If (objTag Is Nothing) Then
-                            objTag = New TagInfo
-                            objTag.Name = tag
-                            objTag.NameLowered = tag.ToLower()
-                            objTag.ModuleID = ModuleId
-                            objTag.TagID = objTagController.Add(objTag)
-                        End If
+                For Each li As ListItem In lstFinalTags.Items
+                    order = order + 1
 
-                        objTagController.Add(articleID, objTag.TagID)
+                    Dim objTag As TagInfo = objTagController.Get(ModuleId, li.Value)
+
+                    If objTag IsNot Nothing Then
+                        objTagController.Add(articleID, objTag.TagID, order)
                     End If
                 Next
+            Else
+                If (txtTags.Text <> "") Then
+                    Dim tags As String() = txtTags.Text.Split(","c)
+                    For Each tag As String In tags
+                        If (tag <> "") Then
+                            Dim objTag As TagInfo = objTagController.Get(ModuleId, tag)
+
+                            If (objTag Is Nothing) Then
+                                objTag = New TagInfo
+                                objTag.Name = tag
+                                objTag.NameLowered = tag.ToLower()
+                                objTag.ModuleID = ModuleId
+                                objTag.TagID = objTagController.Add(objTag)
+                            End If
+
+                            objTagController.Add(articleID, objTag.TagID)
+                        End If
+                    Next
+                End If
             End If
 
         End Sub
@@ -1517,6 +1597,7 @@ Namespace Ventrian.NewsArticles
 
                     BindStatus()
                     BindCategories()
+                    BindTags()
                     SetVisibility()
                     BindArticle()
                     SetValidationGroup()
@@ -1923,6 +2004,95 @@ Namespace Ventrian.NewsArticles
 
                 End If
 
+            End If
+
+        End Sub
+
+        Private Sub replaceTags_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles replaceTags.Click
+
+            If lstTags.Items.Count > 0 Then
+                lstFinalTags.Items.Clear()
+            End If
+
+            For Each li As ListItem In lstTags.Items
+                If (li.Selected) Then
+                    li.Selected = False
+                    lstFinalTags.Items.Add(li)
+                End If
+            Next
+
+        End Sub
+
+        Private Sub addTags_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles addTags.Click
+
+            For Each li As ListItem In lstTags.Items
+                If (li.Selected) Then
+
+                    li.Selected = False
+                    If Not lstFinalTags.Items.Contains(li) Then
+
+                        lstFinalTags.Items.Add(li)
+
+                    End If
+
+                End If
+            Next
+
+        End Sub
+
+
+        Private Sub cmdUp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdUp.Click
+
+            moveListItem(-1)
+
+        End Sub
+
+        Private Sub cmdDown_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdDown.Click
+
+            moveListItem(1)
+
+        End Sub
+
+        Private Sub moveListItem(direction As Integer)
+
+            Try
+                With Me.lstFinalTags
+                    Dim selectedIndex As Integer = .SelectedIndex
+                    Dim selectedItem As ListItem = .SelectedItem
+                    Dim totalItems As Integer = .Items.Count
+
+                    ' No selected item
+                    If (selectedItem Is Nothing Or selectedIndex < 0) Then
+                        Return
+                    End If
+
+                    ' Calculate New index using direction
+                    Dim newIndex As Integer = selectedIndex + direction
+
+                    '  New Index out of range
+                    If (newIndex < 0 Or newIndex >= totalItems) Then
+                        Return
+                    End If
+
+                    ' Remove old element
+                    .Items.Remove(selectedItem)
+
+                    ' Insert into New position
+                    .Items.Insert(newIndex, selectedItem)
+
+                    ' Restore selection
+                    .SelectedIndex = newIndex
+                End With
+            Catch exc As Exception    'Module failed to load
+                ProcessModuleLoadException(Me, exc)
+            End Try
+
+        End Sub
+
+        Private Sub cmdDeleteTag_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdDeleteTag.Click
+
+            If lstFinalTags.SelectedItem IsNot Nothing Then
+                lstFinalTags.Items.Remove(lstFinalTags.SelectedItem)
             End If
 
         End Sub
