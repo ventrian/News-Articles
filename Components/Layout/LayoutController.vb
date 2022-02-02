@@ -1487,6 +1487,10 @@ Namespace Ventrian.NewsArticles
                                     iPtr = iPtr + 1
                                 End While
                             Else
+                                If (IsNumeric(Request("PageID"))) Then
+                                    _pageId = Convert.ToInt32(Request("PageID"))
+                                End If
+
                                 If (_pageId = Null.NullInteger) Then
                                     _pageId = Pages(objArticle.ArticleID)(0).PageID
                                 End If
@@ -1576,6 +1580,10 @@ Namespace Ventrian.NewsArticles
                                     iPtr = iPtr + 1
                                 End While
                             Else
+                                If (IsNumeric(Request("PageID"))) Then
+                                    _pageId = Convert.ToInt32(Request("PageID"))
+                                End If
+
                                 If (_pageId = Null.NullInteger) Then
                                     _pageId = Pages(objArticle.ArticleID)(0).PageID
                                 End If
@@ -2101,6 +2109,10 @@ Namespace Ventrian.NewsArticles
                             If (Pages(objArticle.ArticleID).Count <= 1) Then
                                 objLink.Enabled = False
                             Else
+                                If (IsNumeric(Request("PageID"))) Then
+                                    _pageId = Convert.ToInt32(Request("PageID"))
+                                End If
+
                                 If (_pageId = Null.NullInteger) Then
                                     _pageId = CType(Pages(objArticle.ArticleID)(0), PageInfo).PageID
                                 End If
@@ -2130,6 +2142,10 @@ Namespace Ventrian.NewsArticles
                             If (Pages(objArticle.ArticleID).Count <= 1) Then
                                 objLink.Enabled = False
                             Else
+                                If (IsNumeric(Request("PageID"))) Then
+                                    _pageId = Convert.ToInt32(Request("PageID"))
+                                End If
+
                                 If (_pageId = Null.NullInteger) Then
                                     _pageId = CType(Pages(objArticle.ArticleID)(0), PageInfo).PageID
                                 End If
