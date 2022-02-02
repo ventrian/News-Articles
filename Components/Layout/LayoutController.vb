@@ -1706,6 +1706,18 @@ Namespace Ventrian.NewsArticles
                                 End If
                             End If
 
+                        Case "IMAGETITLE"
+                            If (objArticle.ImageCount > 0) Then
+                                Dim objImageController As New ImageController
+                                Dim objImages As List(Of ImageInfo) = objImageController.GetImageList(objArticle.ArticleID, Null.NullString())
+
+                                If (objImages.Count > 0) Then
+                                    Dim objLiteral As New Literal
+                                    objLiteral.Text = objImages(0).Title
+                                    objPlaceHolder.Add(objLiteral)
+                                End If
+                            End If
+
                         Case "IMAGECOUNT"
                             Dim objLiteral As New Literal
                             objLiteral.Text = objArticle.ImageCount.ToString()
