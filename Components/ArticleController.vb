@@ -16,6 +16,7 @@ Imports DotNetNuke.Security.Roles
 Imports DotNetNuke.Services.Search
 Imports System.Xml
 Imports System.Security.Cryptography
+Imports DotNetNuke.Common.Internal
 Imports Ventrian.NewsArticles.Components.CustomFields
 Imports DotNetNuke.Services.Search.Entities
 Imports DotNetNuke.Entities.Portals
@@ -37,7 +38,7 @@ Namespace Ventrian.NewsArticles
                 Dim portalSettings As New PortalSettings(ModuleConfiguration.TabID, ModuleConfiguration.PortalID)
                 If (_articleSettings Is Nothing) Then
                     Try
-                        _articleSettings = New ArticleSettings(Common.GetModuleSettings(ModuleConfiguration.ModuleID), PortalSettings, ModuleConfiguration)
+                        _articleSettings = New ArticleSettings(Common.GetModuleSettings(ModuleConfiguration.ModuleID), portalSettings, ModuleConfiguration)
                     Catch
                         Dim objSettings As Hashtable = ModuleConfiguration.ModuleSettings
                         Dim objTabSettings As Hashtable = ModuleConfiguration.TabModuleSettings
@@ -48,7 +49,7 @@ Namespace Ventrian.NewsArticles
                             End If
                         Next
 
-                        _articleSettings = New ArticleSettings(objSettings, PortalSettings, ModuleConfiguration)
+                        _articleSettings = New ArticleSettings(objSettings, portalSettings, ModuleConfiguration)
                         ModuleController.Instance.UpdateModuleSetting(ModuleConfiguration.ModuleID, "ResetArticleSettings", "true")
                     End Try
                 End If
@@ -404,35 +405,20 @@ Namespace Ventrian.NewsArticles
                                 End If
                                 SearchItemCollection.Add(SearchItem)
 
-                                'Dim articleUrl As String
-                                'If objArticle.Url = "" Then
-                                '    Dim pageID As Integer = Null.NullInteger
-
-                                '    If (settings.Contains(ArticleConstants.ENABLE_CORE_SEARCH_SETTING)) Then
-                                '        doSearch = Convert.ToBoolean(settings(ArticleConstants.ENABLE_CORE_SEARCH_SETTING))
-                                '    End If
-                                '    If (Convert.ToBoolean(settings("AlwaysShowPageID"))) Then
-                                '        If (Pages(objArticle.ArticleID).Count > 0) Then
-                                '            pageID = CType(Pages(objArticle.ArticleID)(0), PageInfo).PageID
-                                '        End If
-                                '    End If
-
-                                '    articleUrl = Common.GetArticleLink(objArticle, Tab(modInfo), ArticleSettings(modInfo), IncludeCategory, pageID)
-                                'Else
-                                '    articleUrl = Globals.LinkClick(objArticle.Url, Tab(modInfo).TabID, objArticle.ModuleID, False)
-                                'End If
-                                Dim TabPath As String = modInfo.ParentTab.TabPath.Replace("//", "/")
+                                Dim ps As New PortalSettings(modInfo.PortalID)
+                                ps.PortalAlias = PortalAliasController.Instance.GetPortalAlias(ps.DefaultPortalAlias)
+                                Dim url As String = TestableGlobals.Instance.NavigateURL(modInfo.TabID, ps, "", SearchItem.GUID)
 
                                 Dim item2 As New SearchDocument With {
-                                .Url = TabPath + "?" + SearchItem.GUID,
+                                    .Url = url,
                                     .AuthorUserId = SearchItem.Author,
-            .UniqueKey = SearchItem.SearchKey,
-            .PortalId = modInfo.PortalID,
-            .Title = SearchItem.Title,
-            .Description = SearchItem.Description,
-            .Body = SearchItem.Content,
-            .ModifiedTimeUtc = SearchItem.PubDate
-        }
+                                    .UniqueKey = SearchItem.SearchKey,
+                                    .PortalId = modInfo.PortalID,
+                                    .Title = SearchItem.Title,
+                                    .Description = SearchItem.Description,
+                                    .Body = SearchItem.Content,
+                                    .ModifiedTimeUtc = SearchItem.PubDate
+                                }
                                 list.Add(item2)
                             Next
 
