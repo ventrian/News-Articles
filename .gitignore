@@ -1,2 +1,4 @@
 InstallPackager/
 *.user
+**/obj/**/*.*
+.vs
