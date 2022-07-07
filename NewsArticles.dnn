@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="6.0">
   <packages>
-    <package name="DnnForge - NewsArticles" type="Module" version="00.13.01">
+    <package name="DnnForge - NewsArticles" type="Module" version="00.13.02">
       <friendlyName>News Articles</friendlyName>
       <description>
         <![CDATA[
@@ -860,6 +860,10 @@
               <name>00.13.00.SqlDataProvider</name>
               <version>00.13.00</version>
             </script>
+            <script type="Install">
+              <name>00.13.02.SqlDataProvider</name>
+              <version>00.13.02</version>
+            </script>
             <script type="Uninstall">
               <name>Uninstall.SqlDataProvider</name>
               <version>00.09.06</version>
@@ -868,7 +872,7 @@
         </component>
       </components>
     </package>
-    <package name="DnnForge - LatestArticles" type="Module" version="00.13.01">
+    <package name="DnnForge - LatestArticles" type="Module" version="00.13.02">
       <friendlyName>News Articles Latest</friendlyName>
       <description>Allows you to display a list of the latest articles.</description>
       <iconFile />
@@ -929,7 +933,7 @@
         </component>
       </components>
     </package>
-    <package name="DnnForge - LatestComments" type="Module" version="00.13.01">
+    <package name="DnnForge - LatestComments" type="Module" version="00.13.02">
       <friendlyName>News Articles Comments</friendlyName>
       <description>Allows you to display a list of the latest comments.</description>
       <iconFile />
@@ -990,7 +994,7 @@
         </component>
       </components>
     </package>
-    <package name="DnnForge - NewsArchives" type="Module" version="00.13.01">
+    <package name="DnnForge - NewsArchives" type="Module" version="00.13.02">
       <friendlyName>News Articles Archives</friendlyName>
       <description>Allows you to display a list of articles by month.</description>
       <iconFile />
@@ -1051,7 +1055,7 @@
         </component>
       </components>
     </package>
-    <package name="DnnForge - NewsSearch" type="Module" version="00.13.01">
+    <package name="DnnForge - NewsSearch" type="Module" version="00.13.02">
       <friendlyName>News Articles Search</friendlyName>
       <description>Allows you to display a list of articles by month.</description>
       <iconFile />
