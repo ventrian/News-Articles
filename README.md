@@ -1,9 +1,11 @@
 # News-Articles
-This module was originally created by Scott McCulloch of Ventrian. The module is now out in the open, and mainly maintained  by Stefan Kamphuis, Timo Breumelhof and Peter Schotman of [40FINGERS](https://www.40fingers.net/). \
-We are mainly fixing issues for our clients, so don't expect 40F to fix all issues. \
-Pull request are always welcome. :-) \
-We are currently in the process of converting our clients News Articles modules to [Open Content](https://opencontent.readme.io/) and will stop using and supporting this module in the near future.
+This module was originally created by Scott McCulloch of Ventrian. 
+He made the module open source and put it on GitHub.
+After that the was mainly maintained by [40FINGERS](https://www.40fingers.net/).
+40FINGERS decided to convert their existing clients to [Open Content](https://opencontent.readme.io/) and stopped using and supporting this module as of 2022-10-01.
 
+So there is currently no active development for this module.
+If you want to support the module, please contact Scott.
 
 ## Installation
 
