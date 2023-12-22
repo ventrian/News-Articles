@@ -1,11 +1,11 @@
 # News-Articles
 This module was originally created by Scott McCulloch of Ventrian. 
 He made the module open source and put it on GitHub.
-After that the module was mainly maintained by [40FINGERS](https://www.40fingers.net/).
+After that the was mainly maintained by [40FINGERS](https://www.40fingers.net/).
 40FINGERS decided to convert their existing clients to [Open Content](https://opencontent.readme.io/) and stopped using and supporting this module as of 2022-10-01.
 
-So, there is currently no active development for this module.
-If someone is wiling to support the module, please contact Scott for access rights.
+So there is currently no active development for this module.
+If you want to support the module, please contact Scott.
 
 ## Installation
 

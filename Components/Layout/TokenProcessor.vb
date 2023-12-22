@@ -299,6 +299,12 @@ Namespace Ventrian.NewsArticles
 					objLiteral.Text = GetModuleLink("MyArticles", moduleContext)
 					objPlaceHolder.Add(objLiteral)
 
+				Case "PORTALALIAS"
+				    Dim objLiteral As New Literal
+				    objLiteral.Text = PortalController.Instance.GetCurrentPortalSettings().PortalAlias.HTTPAlias
+				    objPlaceHolder.Add(objLiteral)
+					
+
 				Case "RSSLATESTLINK"
 					Dim objLiteral As New Literal
 					Dim authorIDParam As String = ""
