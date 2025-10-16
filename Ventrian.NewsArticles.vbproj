@@ -18,7 +18,7 @@
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -56,24 +56,29 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CookComputing.XmlRpc, Version=2.1.0.3, Culture=neutral, PublicKeyToken=a7d6e17aa302004d" />
-    <Reference Include="DotNetNuke, Version=8.0.4.226, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="DotNetNuke, Version=10.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Libraries\DotNetNuke.dll</HintPath>
+      <HintPath>..\..\bin\DotNetNuke.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="DotNetNuke.Instrumentation, Version=8.0.4.226, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="DotNetNuke.Abstractions, Version=10.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Libraries\DotNetNuke.Instrumentation.dll</HintPath>
+      <HintPath>..\..\bin\DotNetNuke.Abstractions.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="DotNetNuke.Log4Net, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="DotNetNuke.Instrumentation, Version=10.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Libraries\DotNetNuke.Log4Net.dll</HintPath>
+      <HintPath>..\..\bin\DotNetNuke.Instrumentation.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="DotNetNuke.Web.Client, Version=8.0.4.226, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="DotNetNuke.Log4Net, Version=3.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Libraries\DotNetNuke.Web.Client.dll</HintPath>
+      <HintPath>..\..\bin\DotNetNuke.Log4Net.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DotNetNuke.Web.Client, Version=10.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\DotNetNuke.Web.Client.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="ephtmltopdf, Version=4.0.6.31734, Culture=neutral, PublicKeyToken=5b5f377bc08a4d32, processorArchitecture=MSIL" />

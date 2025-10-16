@@ -1,4 +1,5 @@
-﻿Imports DotNetNuke.Services.Journal
+﻿Imports DotNetNuke.Entities.Modules
+Imports DotNetNuke.Services.Journal
 
 Namespace Ventrian.NewsArticles.Components.Social
 
@@ -16,6 +17,8 @@ Namespace Ventrian.NewsArticles.Components.Social
                 JournalController.Instance.DeleteJournalItemByKey(portalId, objectKey)
             End If
 
+            Dim mi As ModuleInfo = ModuleController.Instance.GetModule(objArticle.ModuleID, tabId, False)
+
             ji = New JournalItem
 
             ji.PortalId = portalId
@@ -32,7 +35,7 @@ Namespace Ventrian.NewsArticles.Components.Social
             ji.SecuritySet = "E,"
             ji.SocialGroupId = journalGroupID
 
-            JournalController.Instance.SaveJournalItem(ji, tabId)
+            JournalController.Instance.SaveJournalItem(ji, mi)
         End Sub
 
         Friend Sub AddCommentToJournal(ByVal objArticle As ArticleInfo, ByVal objComment As CommentInfo, ByVal portalId As Integer, ByVal tabId As Integer, ByVal journalUserId As Integer, ByVal url As String)
@@ -42,6 +45,8 @@ Namespace Ventrian.NewsArticles.Components.Social
             If Not ji Is Nothing Then
                 JournalController.Instance.DeleteJournalItemByKey(portalId, objectKey)
             End If
+
+            Dim mi As ModuleInfo = ModuleController.Instance.GetModule(objArticle.ModuleID, tabId, False)
 
             ji = New JournalItem
 
@@ -58,7 +63,7 @@ Namespace Ventrian.NewsArticles.Components.Social
             ji.ObjectKey = objectKey
             ji.SecuritySet = "E,"
 
-            JournalController.Instance.SaveJournalItem(ji, tabId)
+            JournalController.Instance.SaveJournalItem(ji, mi)
         End Sub
 
         Friend Sub AddRatingToJournal(ByVal objArticle As ArticleInfo, ByVal objRating As RatingInfo, ByVal portalId As Integer, ByVal tabId As Integer, ByVal journalUserId As Integer, ByVal url As String)
@@ -68,6 +73,8 @@ Namespace Ventrian.NewsArticles.Components.Social
             If Not ji Is Nothing Then
                 JournalController.Instance.DeleteJournalItemByKey(portalId, objectKey)
             End If
+
+            Dim mi As ModuleInfo = ModuleController.Instance.GetModule(objArticle.ModuleID, tabId, False)
 
             ji = New JournalItem
 
@@ -84,7 +91,7 @@ Namespace Ventrian.NewsArticles.Components.Social
             ji.ObjectKey = objectKey
             ji.SecuritySet = "E,"
 
-            JournalController.Instance.SaveJournalItem(ji, tabId)
+            JournalController.Instance.SaveJournalItem(ji, mi)
         End Sub
 
 #End Region

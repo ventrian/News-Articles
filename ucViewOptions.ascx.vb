@@ -75,13 +75,16 @@ Namespace Ventrian.NewsArticles
 
             Dim availableRoles As ArrayList = New ArrayList
             Dim roles As IList(Of RoleInfo)
+            Dim allRoles As IList(Of RoleInfo)
             If (drpSecurityRoleGroups.SelectedValue = "-1") Then
                 roles = RoleController.Instance.GetRoles(PortalId)
             Else
-                Dim objRole As New RoleController
-                roles = Common.ToList(Of RoleInfo)(objRole.GetRolesByGroup(PortalId, Convert.ToInt32(drpSecurityRoleGroups.SelectedValue)))
+
+                allRoles = RoleController.Instance.GetRoles(PortalId)
+
+                roles = allRoles.Where(Function(r) r.RoleGroupID = Convert.ToInt32(drpSecurityRoleGroups.SelectedValue)).ToList()
             End If
-            
+
             If Not roles Is Nothing Then
                 For Each Role As RoleInfo In roles
                     availableRoles.Add(New ListItem(Role.RoleName, Role.RoleName))
@@ -608,16 +611,16 @@ Namespace Ventrian.NewsArticles
                 End If
             Else
                 If (Settings.Contains(ArticleConstants.CAPTCHATYPE_SETTING)) Then
-                    selectCaptchaType =  CType(System.Enum.Parse(GetType(CaptchaType), Settings(ArticleConstants.CAPTCHATYPE_SETTING)), CaptchaType)
+                    selectCaptchaType = CType(System.Enum.Parse(GetType(CaptchaType), Settings(ArticleConstants.CAPTCHATYPE_SETTING)), CaptchaType)
                 End If
             End If
             Dim selectedItem As ListItem = drpCaptchaType.Items.FindByValue(selectCaptchaType.ToString())
             drpCaptchaType.SelectedIndex = drpCaptchaType.Items.IndexOf(selectedItem)
-            
+
             If (Settings.Contains(ArticleConstants.RECAPTCHA_SITEKEY_SETTING)) Then
                 txtReCaptchaSiteKey.Text = Settings(ArticleConstants.RECAPTCHA_SITEKEY_SETTING).ToString()
             End If
-            
+
             If (Settings.Contains(ArticleConstants.RECAPTCHA_SECRETKEY_SETTING)) Then
                 txtReCaptchaSecretKey.Text = Settings(ArticleConstants.RECAPTCHA_SECRETKEY_SETTING).ToString()
             End If
