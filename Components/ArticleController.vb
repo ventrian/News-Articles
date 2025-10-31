@@ -6,21 +6,22 @@
 
 Imports System
 Imports System.Data
-
+Imports System.Security.Cryptography
+Imports System.Web.Services
+Imports System.Web.UI.MobileControls
+Imports System.Xml
 Imports DotNetNuke
 Imports DotNetNuke.Common
+Imports DotNetNuke.Common.Internal
 Imports DotNetNuke.Common.Utilities
 Imports DotNetNuke.Entities.Modules
+Imports DotNetNuke.Entities.Portals
 Imports DotNetNuke.Entities.Users
 Imports DotNetNuke.Security.Roles
 Imports DotNetNuke.Services.Search
-Imports System.Xml
-Imports System.Security.Cryptography
-Imports DotNetNuke.Common.Internal
-Imports Ventrian.NewsArticles.Components.CustomFields
 Imports DotNetNuke.Services.Search.Entities
-Imports DotNetNuke.Entities.Portals
 Imports Ventrian.NewsArticles.Base
+Imports Ventrian.NewsArticles.Components.CustomFields
 
 
 
@@ -361,7 +362,7 @@ Namespace Ventrian.NewsArticles
 #Region " Optional Interfaces "
         Public Overrides Function GetModifiedSearchDocuments(ByVal modInfo As ModuleInfo, ByVal beginDateUtc As DateTime) As IList(Of SearchDocument)
             Dim objArticles As List(Of ArticleInfo) = GetArticleList(modInfo.ModuleID)
-            Dim SearchItemCollection As New SearchItemInfoCollection
+            Dim searchDocuments As List(Of SearchDocument) = New List(Of SearchDocument)
             Dim settings As Hashtable = Common.GetModuleSettings(modInfo.ModuleID)
             settings = GetTabModuleSettings(modInfo.TabModuleID, settings)
             Dim list As New List(Of SearchDocument)
@@ -382,7 +383,6 @@ Namespace Ventrian.NewsArticles
                             Dim objPageController As New PageController
                             Dim objPages As ArrayList = objPageController.GetPageList(objArticle.ArticleID)
                             For i As Integer = 0 To objPages.Count - 1
-                                Dim SearchItem As SearchItemInfo
                                 Dim objPage As PageInfo = CType(objPages(i), PageInfo)
                                 Dim pageContent As String = HttpUtility.HtmlDecode(objArticle.Title) + " " + System.Web.HttpUtility.HtmlDecode(objPage.PageText)
 
@@ -398,28 +398,19 @@ Namespace Ventrian.NewsArticles
                                 If (objArticle.Title = objPage.Title) Then
                                     title = objArticle.Title
                                 End If
-                                If (i = 0) Then
-                                    SearchItem = New SearchItemInfo(title, pageDescription, objArticle.AuthorID, objArticle.LastUpdate, modInfo.ModuleID, modInfo.ModuleID.ToString() & "_" & .ArticleID.ToString & "_" & objPage.PageID.ToString, pageContent, "ArticleType=ArticleView&ArticleID=" & .ArticleID.ToString)
-                                Else
-                                    SearchItem = New SearchItemInfo(title, pageDescription, objArticle.AuthorID, objArticle.LastUpdate, modInfo.ModuleID, modInfo.ModuleID.ToString() & "_" & .ArticleID.ToString & "_" & objPage.PageID.ToString, pageContent, "ArticleType=ArticleView&ArticleID=" & .ArticleID.ToString & "&PageID=" + objPage.PageID.ToString())
-                                End If
-                                SearchItemCollection.Add(SearchItem)
 
-                                Dim ps As New PortalSettings(modInfo.PortalID)
-                                ps.PortalAlias = PortalAliasController.Instance.GetPortalAlias(ps.DefaultPortalAlias)
-                                Dim url As String = TestableGlobals.Instance.NavigateURL(modInfo.TabID, ps, "", SearchItem.GUID)
+                                Dim strContent As String = HtmlUtils.Clean(pageContent, False)
 
-                                Dim item2 As New SearchDocument With {
-                                    .Url = url,
-                                    .AuthorUserId = SearchItem.Author,
-                                    .UniqueKey = SearchItem.SearchKey,
+                                Dim searchdoc As New SearchDocument With {
+                                    .AuthorUserId = objArticle.AuthorID,
+                                    .UniqueKey = objArticle.ArticleID,
                                     .PortalId = modInfo.PortalID,
-                                    .Title = SearchItem.Title,
-                                    .Description = SearchItem.Description,
-                                    .Body = SearchItem.Content,
-                                    .ModifiedTimeUtc = SearchItem.PubDate
+                                    .Title = title,
+                                    .Description = objArticle.ArticleText,
+                                    .Body = strContent,
+                                    .ModifiedTimeUtc = objArticle.LastUpdate.ToUniversalTime()
                                 }
-                                list.Add(item2)
+                                list.Add(searchdoc)
                             Next
 
                         End If
@@ -429,90 +420,6 @@ Namespace Ventrian.NewsArticles
             End If
             Return list
         End Function
-        'Public Overrides Function GetModifiedSearchDocuments(ByVal modInfo As ModuleInfo, ByVal beginDateUtc As DateTime) As IList(Of SearchDocument)
-        '    Dim workflowId As Integer = Me.GetWorkflow(modInfo.ModuleID, modInfo.TabID, modInfo.PortalID).Value
-        '    Dim list As New List(Of SearchDocument)
-        '    Dim info As HtmlTextInfo = Me.GetTopHtmlText(modInfo.ModuleID, True, workflowId)
-        '    Dim settings As HtmlModuleSettings = New HtmlModuleSettingsRepository().GetSettings(modInfo)
-        '    If (((Not info Is Nothing) AndAlso (info.LastModifiedOnDate.ToUniversalTime > beginDateUtc)) AndAlso (info.LastModifiedOnDate.ToUniversalTime < DateTime.UtcNow)) Then
-        '        Dim txt As String = HtmlUtils.Clean(info.Content, False)
-        '        Dim str2 As String = If((txt.Length <= settings.SearchDescLength), txt, HtmlUtils.Shorten(txt, settings.SearchDescLength, "..."))
-        '        Dim item As New SearchDocument With {
-        '    .UniqueKey = modInfo.ModuleID.ToString,
-        '    .PortalId = modInfo.PortalID,
-        '    .Title = modInfo.ModuleTitle,
-        '    .Description = str2,
-        '    .Body = txt,
-        '    .ModifiedTimeUtc = info.LastModifiedOnDate.ToUniversalTime
-        '}
-        '        If ((Not modInfo.Terms Is Nothing) AndAlso (modInfo.Terms.Count > 0)) Then
-        '            item.Tags = HtmlTextController.CollectHierarchicalTags(modInfo.Terms)
-        '        End If
-        '        list.Add(item)
-        '    End If
-        '    Return list
-        'End Function
-
-
-        'Public Function GetSearchItems(ByVal ModInfo As DotNetNuke.Entities.Modules.ModuleInfo) As DotNetNuke.Services.Search.SearchItemInfoCollection Implements DotNetNuke.Entities.Modules.ISearchable.GetSearchItems
-
-        '    Dim settings As Hashtable = Common.GetModuleSettings(ModInfo.ModuleID)
-        '    settings = GetTabModuleSettings(ModInfo.TabModuleID, settings)
-
-        '    Dim doSearch As Boolean = False
-
-        '    If (settings.Contains(ArticleConstants.ENABLE_CORE_SEARCH_SETTING)) Then
-        '        doSearch = Convert.ToBoolean(settings(ArticleConstants.ENABLE_CORE_SEARCH_SETTING))
-        '    End If
-
-        '    Dim SearchItemCollection As New SearchItemInfoCollection
-
-        '    If (doSearch) Then
-
-        '        Dim objArticles As List(Of ArticleInfo) = GetArticleList(ModInfo.ModuleID)
-
-        '        For Each objArticle As ArticleInfo In objArticles
-        '            With CType(objArticle, ArticleInfo)
-
-        '                If (objArticle.IsApproved) Then
-
-        '                    Dim objPageController As New PageController
-        '                    Dim objPages As ArrayList = objPageController.GetPageList(objArticle.ArticleID)
-        '                    For i As Integer = 0 To objPages.Count - 1
-        '                        Dim SearchItem As SearchItemInfo
-        '                        Dim objPage As PageInfo = CType(objPages(i), PageInfo)
-        '                        Dim pageContent As String = HttpUtility.HtmlDecode(objArticle.Title) + " " + System.Web.HttpUtility.HtmlDecode(objPage.PageText)
-
-        '                        For Each Item As DictionaryEntry In objArticle.CustomList
-        '                            If (Item.Value.ToString() <> "") Then
-        '                                pageContent = pageContent & vbCrLf & Item.Value.ToString()
-        '                            End If
-        '                        Next
-
-        '                        Dim pageDescription As String = HtmlUtils.Shorten(HtmlUtils.Clean(System.Web.HttpUtility.HtmlDecode(objPage.PageText), False), 100, "...")
-
-        '                        Dim title As String = objArticle.Title & " - " & objPage.Title
-        '                        If (objArticle.Title = objPage.Title) Then
-        '                            title = objArticle.Title
-        '                        End If
-        '                        If (i = 0) Then
-        '                            SearchItem = New SearchItemInfo(title, pageDescription, objArticle.AuthorID, objArticle.LastUpdate, ModInfo.ModuleID, ModInfo.ModuleID.ToString() & "_" & .ArticleID.ToString & "_" & objPage.PageID.ToString, pageContent, "ArticleType=ArticleView&ArticleID=" & .ArticleID.ToString)
-        '                        Else
-        '                            SearchItem = New SearchItemInfo(title, pageDescription, objArticle.AuthorID, objArticle.LastUpdate, ModInfo.ModuleID, ModInfo.ModuleID.ToString() & "_" & .ArticleID.ToString & "_" & objPage.PageID.ToString, pageContent, "ArticleType=ArticleView&ArticleID=" & .ArticleID.ToString & "&PageID=" + objPage.PageID.ToString())
-        '                        End If
-        '                        SearchItemCollection.Add(SearchItem)
-        '                    Next
-
-        '                End If
-
-        '            End With
-        '        Next
-
-        '    End If
-
-        '    Return SearchItemCollection
-
-        'End Function
 
         Public Function ExportModule(ByVal ModuleID As Integer) As String Implements IPortable.ExportModule
 
