@@ -8,56 +8,13 @@ Namespace Ventrian.NewsArticles
 
     Public Class ArchiveInfo
 
-#Region " Private Methods "
+        Public Property Day As Integer
 
-        ' local property declarations
-        Dim _day As Integer
-        Dim _month As Integer
-        Dim _year As Integer
-        Dim _count As Integer
+        Public Property Month As Integer
 
-#End Region
+        Public Property Year As Integer
 
-#Region " Public Properties "
-
-        Public Property Day() As Integer
-            Get
-                Return _day
-            End Get
-            Set(ByVal Value As Integer)
-                _day = Value
-            End Set
-        End Property
-
-        Public Property Month() As Integer
-            Get
-                Return _month
-            End Get
-            Set(ByVal Value As Integer)
-                _month = Value
-            End Set
-        End Property
-
-        Public Property Year() As Integer
-            Get
-                Return _year
-            End Get
-            Set(ByVal Value As Integer)
-                _year = Value
-            End Set
-        End Property
-
-        Public Property Count() As Integer
-            Get
-                Return _count
-            End Get
-            Set(ByVal Value As Integer)
-                _count = Value
-            End Set
-        End Property
-
-#End Region
-
+        Public Property Count As Integer
     End Class
 
 End Namespace

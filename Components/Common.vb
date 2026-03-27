@@ -212,14 +212,14 @@ Namespace Ventrian.NewsArticles
 
                 If (includeCategory) Then
                     If (HttpContext.Current.Request("CategoryID") <> "") Then
-                        strURL = strURL & "&categoryId=" & HttpContext.Current.Request("CategoryID")
+                        strURL = strURL & "&categoryId=" & HttpUtility.UrlEncode(HttpContext.Current.Request("CategoryID"))
                     End If
                 End If
 
                 If (articleSettings.AuthorUserIDFilter) Then
                     If (articleSettings.AuthorUserIDParam <> "") Then
                         If (HttpContext.Current.Request(articleSettings.AuthorUserIDParam) <> "") Then
-                            strURL = strURL & "&" & articleSettings.AuthorUserIDParam & "=" & HttpContext.Current.Request(articleSettings.AuthorUserIDParam)
+                            strURL = strURL & "&" & articleSettings.AuthorUserIDParam & "=" & HttpUtility.UrlEncode(HttpContext.Current.Request(articleSettings.AuthorUserIDParam))
                         End If
                     End If
                 End If
@@ -227,7 +227,7 @@ Namespace Ventrian.NewsArticles
                 If (articleSettings.AuthorUsernameFilter) Then
                     If (articleSettings.AuthorUsernameParam <> "") Then
                         If (HttpContext.Current.Request(articleSettings.AuthorUsernameParam) <> "") Then
-                            strURL = strURL & "&" & articleSettings.AuthorUsernameParam & "=" & HttpContext.Current.Request(articleSettings.AuthorUsernameParam)
+                            strURL = strURL & "&" & articleSettings.AuthorUsernameParam & "=" & HttpUtility.UrlEncode(HttpContext.Current.Request(articleSettings.AuthorUsernameParam))
                         End If
                     End If
                 End If
@@ -261,7 +261,7 @@ Namespace Ventrian.NewsArticles
                     If (articleSettings.AuthorUserIDFilter) Then
                         If (articleSettings.AuthorUserIDParam <> "") Then
                             If (HttpContext.Current.Request(articleSettings.AuthorUserIDParam) <> "") Then
-                                parameters.Add(articleSettings.AuthorUserIDParam & "=" & HttpContext.Current.Request(articleSettings.AuthorUserIDParam))
+                                parameters.Add(articleSettings.AuthorUserIDParam & "=" & HttpUtility.UrlEncode(HttpContext.Current.Request(articleSettings.AuthorUserIDParam)))
                             End If
                         End If
                     End If
@@ -269,7 +269,7 @@ Namespace Ventrian.NewsArticles
                     If (articleSettings.AuthorUsernameFilter) Then
                         If (articleSettings.AuthorUsernameParam <> "") Then
                             If (HttpContext.Current.Request(articleSettings.AuthorUsernameParam) <> "") Then
-                                parameters.Add(articleSettings.AuthorUsernameParam & "=" & HttpContext.Current.Request(articleSettings.AuthorUsernameParam))
+                                parameters.Add(articleSettings.AuthorUsernameParam & "=" & HttpUtility.UrlEncode(HttpContext.Current.Request(articleSettings.AuthorUsernameParam)))
                             End If
                         End If
                     End If
@@ -298,7 +298,7 @@ Namespace Ventrian.NewsArticles
                     If (articleSettings.AuthorUserIDFilter) Then
                         If (articleSettings.AuthorUserIDParam <> "") Then
                             If (HttpContext.Current.Request(articleSettings.AuthorUserIDParam) <> "") Then
-                                parameters.Add(articleSettings.AuthorUserIDParam & "=" & HttpContext.Current.Request(articleSettings.AuthorUserIDParam))
+                                parameters.Add(articleSettings.AuthorUserIDParam & "=" & HttpUtility.UrlEncode(HttpContext.Current.Request(articleSettings.AuthorUserIDParam)))
                             End If
                         End If
                     End If
@@ -306,7 +306,7 @@ Namespace Ventrian.NewsArticles
                     If (articleSettings.AuthorUsernameFilter) Then
                         If (articleSettings.AuthorUsernameParam <> "") Then
                             If (HttpContext.Current.Request(articleSettings.AuthorUsernameParam) <> "") Then
-                                parameters.Add(articleSettings.AuthorUsernameParam & "=" & HttpContext.Current.Request(articleSettings.AuthorUsernameParam))
+                                parameters.Add(articleSettings.AuthorUsernameParam & "=" & HttpUtility.UrlEncode(HttpContext.Current.Request(articleSettings.AuthorUsernameParam)))
                             End If
                         End If
                     End If
@@ -371,7 +371,7 @@ Namespace Ventrian.NewsArticles
                 If (articleSettings.AuthorUserIDFilter) Then
                     If (articleSettings.AuthorUserIDParam <> "") Then
                         If (HttpContext.Current.Request(articleSettings.AuthorUserIDParam) <> "") Then
-                            strURL = strURL & "&" & articleSettings.AuthorUserIDParam & "=" & HttpContext.Current.Request(articleSettings.AuthorUserIDParam)
+                            strURL = strURL & "&" & articleSettings.AuthorUserIDParam & "=" & HttpUtility.UrlEncode(HttpContext.Current.Request(articleSettings.AuthorUserIDParam))
                         End If
                     End If
                 End If
@@ -379,7 +379,7 @@ Namespace Ventrian.NewsArticles
                 If (articleSettings.AuthorUsernameFilter) Then
                     If (articleSettings.AuthorUsernameParam <> "") Then
                         If (HttpContext.Current.Request(articleSettings.AuthorUsernameParam) <> "") Then
-                            strURL = strURL & "&" & articleSettings.AuthorUsernameParam & "=" & HttpContext.Current.Request(articleSettings.AuthorUsernameParam)
+                            strURL = strURL & "&" & articleSettings.AuthorUsernameParam & "=" & HttpUtility.UrlEncode(HttpContext.Current.Request(articleSettings.AuthorUsernameParam))
                         End If
                     End If
                 End If
@@ -413,7 +413,7 @@ Namespace Ventrian.NewsArticles
                     If (articleSettings.AuthorUserIDFilter) Then
                         If (articleSettings.AuthorUserIDParam <> "") Then
                             If (HttpContext.Current.Request(articleSettings.AuthorUserIDParam) <> "") Then
-                                parameters.Add(articleSettings.AuthorUserIDParam & "=" & HttpContext.Current.Request(articleSettings.AuthorUserIDParam))
+                                parameters.Add(articleSettings.AuthorUserIDParam & "=" & HttpUtility.UrlEncode(HttpContext.Current.Request(articleSettings.AuthorUserIDParam)))
                             End If
                         End If
                     End If
@@ -421,7 +421,7 @@ Namespace Ventrian.NewsArticles
                     If (articleSettings.AuthorUsernameFilter) Then
                         If (articleSettings.AuthorUsernameParam <> "") Then
                             If (HttpContext.Current.Request(articleSettings.AuthorUsernameParam) <> "") Then
-                                parameters.Add(articleSettings.AuthorUsernameParam & "=" & HttpContext.Current.Request(articleSettings.AuthorUsernameParam))
+                                parameters.Add(articleSettings.AuthorUsernameParam & "=" & HttpUtility.UrlEncode(HttpContext.Current.Request(articleSettings.AuthorUsernameParam)))
                             End If
                         End If
                     End If
@@ -459,7 +459,7 @@ Namespace Ventrian.NewsArticles
                     If (articleSettings.AuthorUserIDFilter) Then
                         If (articleSettings.AuthorUserIDParam <> "") Then
                             If (HttpContext.Current.Request(articleSettings.AuthorUserIDParam) <> "") Then
-                                parameters.Add(articleSettings.AuthorUserIDParam & "=" & HttpContext.Current.Request(articleSettings.AuthorUserIDParam))
+                                parameters.Add(articleSettings.AuthorUserIDParam & "=" & HttpUtility.UrlEncode(HttpContext.Current.Request(articleSettings.AuthorUserIDParam)))
                             End If
                         End If
                     End If
@@ -467,7 +467,7 @@ Namespace Ventrian.NewsArticles
                     If (articleSettings.AuthorUsernameFilter) Then
                         If (articleSettings.AuthorUsernameParam <> "") Then
                             If (HttpContext.Current.Request(articleSettings.AuthorUsernameParam) <> "") Then
-                                parameters.Add(articleSettings.AuthorUsernameParam & "=" & HttpContext.Current.Request(articleSettings.AuthorUsernameParam))
+                                parameters.Add(articleSettings.AuthorUsernameParam & "=" & HttpUtility.UrlEncode(HttpContext.Current.Request(articleSettings.AuthorUsernameParam)))
                             End If
                         End If
                     End If
@@ -560,7 +560,7 @@ Namespace Ventrian.NewsArticles
                 If (articleSettings.AuthorUserIDFilter) Then
                     If (articleSettings.AuthorUserIDParam <> "") Then
                         If (HttpContext.Current.Request(articleSettings.AuthorUserIDParam) <> "") Then
-                            strURL = strURL & "&" & articleSettings.AuthorUserIDParam & "=" & HttpContext.Current.Request(articleSettings.AuthorUserIDParam)
+                            strURL = strURL & "&" & articleSettings.AuthorUserIDParam & "=" & HttpUtility.UrlEncode(HttpContext.Current.Request(articleSettings.AuthorUserIDParam))
                         End If
                     End If
                 End If
@@ -568,7 +568,7 @@ Namespace Ventrian.NewsArticles
                 If (articleSettings.AuthorUsernameFilter) Then
                     If (articleSettings.AuthorUsernameParam <> "") Then
                         If (HttpContext.Current.Request(articleSettings.AuthorUsernameParam) <> "") Then
-                            strURL = strURL & "&" & articleSettings.AuthorUsernameParam & "=" & HttpContext.Current.Request(articleSettings.AuthorUsernameParam)
+                            strURL = strURL & "&" & articleSettings.AuthorUsernameParam & "=" & HttpUtility.UrlEncode(HttpContext.Current.Request(articleSettings.AuthorUsernameParam))
                         End If
                     End If
                 End If
@@ -617,7 +617,7 @@ Namespace Ventrian.NewsArticles
                 If (articleSettings.AuthorUserIDFilter) Then
                     If (articleSettings.AuthorUserIDParam <> "") Then
                         If (HttpContext.Current.Request(articleSettings.AuthorUserIDParam) <> "") Then
-                            strURL = strURL & "&" & articleSettings.AuthorUserIDParam & "=" & HttpContext.Current.Request(articleSettings.AuthorUserIDParam)
+                            strURL = strURL & "&" & articleSettings.AuthorUserIDParam & "=" & HttpUtility.UrlEncode(HttpContext.Current.Request(articleSettings.AuthorUserIDParam))
                         End If
                     End If
                 End If
@@ -625,7 +625,7 @@ Namespace Ventrian.NewsArticles
                 If (articleSettings.AuthorUsernameFilter) Then
                     If (articleSettings.AuthorUsernameParam <> "") Then
                         If (HttpContext.Current.Request(articleSettings.AuthorUsernameParam) <> "") Then
-                            strURL = strURL & "&" & articleSettings.AuthorUsernameParam & "=" & HttpContext.Current.Request(articleSettings.AuthorUsernameParam)
+                            strURL = strURL & "&" & articleSettings.AuthorUsernameParam & "=" & HttpUtility.UrlEncode(HttpContext.Current.Request(articleSettings.AuthorUsernameParam))
                         End If
                     End If
                 End If
@@ -650,7 +650,7 @@ Namespace Ventrian.NewsArticles
             If (articleSettings.AuthorUserIDFilter) Then
                 If (articleSettings.AuthorUserIDParam <> "") Then
                     If (HttpContext.Current.Request(articleSettings.AuthorUserIDParam) <> "") Then
-                        parameters.Add(articleSettings.AuthorUserIDParam & "=" & HttpContext.Current.Request(articleSettings.AuthorUserIDParam))
+                        parameters.Add(articleSettings.AuthorUserIDParam & "=" & HttpUtility.UrlEncode(HttpContext.Current.Request(articleSettings.AuthorUserIDParam)))
                     End If
                 End If
             End If
@@ -658,7 +658,7 @@ Namespace Ventrian.NewsArticles
             If (articleSettings.AuthorUsernameFilter) Then
                 If (articleSettings.AuthorUsernameParam <> "") Then
                     If (HttpContext.Current.Request(articleSettings.AuthorUsernameParam) <> "") Then
-                        parameters.Add(articleSettings.AuthorUsernameParam & "=" & HttpContext.Current.Request(articleSettings.AuthorUsernameParam))
+                        parameters.Add(articleSettings.AuthorUsernameParam & "=" & HttpUtility.UrlEncode(HttpContext.Current.Request(articleSettings.AuthorUsernameParam)))
                     End If
                 End If
             End If

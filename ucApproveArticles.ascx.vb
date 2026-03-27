@@ -93,13 +93,13 @@ Namespace Ventrian.NewsArticles
 
             If (Request("ctl") <> "") Then
                 If (Request("ctl").ToLower = "approvearticles") Then
-                    params += "ctl=" & Request("ctl") & "&mid=" & ModuleId.ToString()
+                    params += "ctl=" & HttpUtility.UrlEncode(Request("ctl")) & "&mid=" & ModuleId.ToString()
                 End If
             End If
 
             If (Request("articleType") <> "") Then
                 If (Request("articleType").ToString().ToLower = "approvearticles") Then
-                    params += "articleType=" & Request("articleType")
+                    params += "articleType=" & HttpUtility.UrlEncode(Request("articleType"))
                 End If
             End If
 
