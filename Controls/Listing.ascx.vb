@@ -527,7 +527,7 @@ Namespace Ventrian.NewsArticles.Controls
 
             If (Request("articleType") <> "") Then
                 If (Request("articleType").ToString().ToLower = "categoryview" OrElse Request("articleType").ToString().ToLower() = "authorview" OrElse Request("articleType").ToString().ToLower() = "archiveview" OrElse Request("articleType").ToString().ToLower() = "search" OrElse Request("articleType").ToString().ToLower() = "myarticles" OrElse Request("articleType").ToString().ToLower() = "tagview") Then
-                    params += "articleType=" & Request("articleType")
+                    params += "articleType=" & HttpUtility.UrlEncode(Request("articleType"))
                 End If
             End If
 
@@ -541,7 +541,7 @@ Namespace Ventrian.NewsArticles.Controls
             If (ArticleSettings.AuthorUserIDFilter) Then
                 If (ArticleSettings.AuthorUserIDParam <> "") Then
                     If (HttpContext.Current.Request(ArticleSettings.AuthorUserIDParam) <> "") Then
-                        params += "&" & ArticleSettings.AuthorUserIDParam & "=" & HttpContext.Current.Request(ArticleSettings.AuthorUserIDParam)
+                        params += "&" & ArticleSettings.AuthorUserIDParam & "=" & HttpUtility.UrlEncode(HttpContext.Current.Request(ArticleSettings.AuthorUserIDParam))
                         authorSet = True
                     End If
                 End If
@@ -550,7 +550,7 @@ Namespace Ventrian.NewsArticles.Controls
             If (ArticleSettings.AuthorUsernameFilter) Then
                 If (ArticleSettings.AuthorUsernameParam <> "") Then
                     If (HttpContext.Current.Request(ArticleSettings.AuthorUsernameParam) <> "") Then
-                        params += "&" & ArticleSettings.AuthorUsernameParam & "=" & HttpContext.Current.Request(ArticleSettings.AuthorUsernameParam)
+                        params += "&" & ArticleSettings.AuthorUsernameParam & "=" & HttpUtility.UrlEncode(HttpContext.Current.Request(ArticleSettings.AuthorUsernameParam))
                         authorSet = True
                     End If
                 End If
@@ -582,22 +582,22 @@ Namespace Ventrian.NewsArticles.Controls
 
             If (addDynamicFields) Then
                 If (Request("nasort-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                    params += "&nasort-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("nasort-" & ArticleModuleBase.TabModuleId.ToString())
+                    params += "&nasort-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("nasort-" & ArticleModuleBase.TabModuleId.ToString()))
                 End If
                 If (Request("naauth-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                    params += "&naauth-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("naauth-" & ArticleModuleBase.TabModuleId.ToString())
+                    params += "&naauth-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("naauth-" & ArticleModuleBase.TabModuleId.ToString()))
                 End If
                 If (Request("nacat-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                    params += "&nacat-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("nacat-" & ArticleModuleBase.TabModuleId.ToString())
+                    params += "&nacat-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("nacat-" & ArticleModuleBase.TabModuleId.ToString()))
                 End If
                 If (Request("nacust-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                    params += "&nacust-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("nacust-" & ArticleModuleBase.TabModuleId.ToString())
+                    params += "&nacust-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("nacust-" & ArticleModuleBase.TabModuleId.ToString()))
                 End If
                 If (Request("natime-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                    params += "&natime-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("natime-" & ArticleModuleBase.TabModuleId.ToString())
+                    params += "&natime-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("natime-" & ArticleModuleBase.TabModuleId.ToString()))
                 End If
                 If (Request("naaz-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                    params += "&naaz-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("naaz-" & ArticleModuleBase.TabModuleId.ToString())
+                    params += "&naaz-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("naaz-" & ArticleModuleBase.TabModuleId.ToString()))
                 End If
             End If
 
@@ -793,19 +793,19 @@ Namespace Ventrian.NewsArticles.Controls
                                 Next
 
                                 If (Request("nasort-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                                    params.Add("nasort-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("nasort-" & ArticleModuleBase.TabModuleId.ToString()))
+                                    params.Add("nasort-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("nasort-" & ArticleModuleBase.TabModuleId.ToString())))
                                 End If
                                 If (Request("nacust-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                                    params.Add("nacust-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("nacust-" & ArticleModuleBase.TabModuleId.ToString()))
+                                    params.Add("nacust-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("nacust-" & ArticleModuleBase.TabModuleId.ToString())))
                                 End If
                                 If (Request("naauth-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                                    params.Add("naauth-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("naauth-" & ArticleModuleBase.TabModuleId.ToString()))
+                                    params.Add("naauth-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("naauth-" & ArticleModuleBase.TabModuleId.ToString())))
                                 End If
                                 If (Request("nacat-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                                    params.Add("nacat-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("nacat-" & ArticleModuleBase.TabModuleId.ToString()))
+                                    params.Add("nacat-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("nacat-" & ArticleModuleBase.TabModuleId.ToString())))
                                 End If
                                 If (Request("natime-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                                    params.Add("natime-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("natime-" & ArticleModuleBase.TabModuleId.ToString()))
+                                    params.Add("natime-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("natime-" & ArticleModuleBase.TabModuleId.ToString())))
                                 End If
 
                                 If (list = "") Then
@@ -1227,16 +1227,16 @@ Namespace Ventrian.NewsArticles.Controls
                                     objLink.ID = Globals.CreateValidID("Article-Header-" & iPtr.ToString())
                                     params.Add("nasort-" & ArticleModuleBase.TabModuleId.ToString() & "=" & sortValue)
                                     If (Request("naauth-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                                        params.Add("naauth-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("naauth-" & ArticleModuleBase.TabModuleId.ToString()))
+                                        params.Add("naauth-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("naauth-" & ArticleModuleBase.TabModuleId.ToString())))
                                     End If
                                     If (Request("nacat-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                                        params.Add("nacat-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("nacat-" & ArticleModuleBase.TabModuleId.ToString()))
+                                        params.Add("nacat-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("nacat-" & ArticleModuleBase.TabModuleId.ToString())))
                                     End If
                                     If (Request("nacust-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                                        params.Add("nacust-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("nacust-" & ArticleModuleBase.TabModuleId.ToString()))
+                                        params.Add("nacust-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("nacust-" & ArticleModuleBase.TabModuleId.ToString())))
                                     End If
                                     If (Request("natime-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                                        params.Add("natime-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("natime-" & ArticleModuleBase.TabModuleId.ToString()))
+                                        params.Add("natime-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("natime-" & ArticleModuleBase.TabModuleId.ToString())))
                                     End If
                                     objLink.NavigateUrl = NavigateURL(ArticleModuleBase.TabId, "", params.ToArray())
                                     objLink.Text = ArticleModuleBase.GetSharedResource(sortItem & ".Text")
@@ -1271,13 +1271,13 @@ Namespace Ventrian.NewsArticles.Controls
                                     If (drpTime.Items.FindByValue(timeItem) IsNot Nothing) Then
                                         Dim params As New List(Of String)
                                         If (Request("nasort-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                                            params.Add("nasort-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("nasort-" & ArticleModuleBase.TabModuleId.ToString()))
+                                            params.Add("nasort-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("nasort-" & ArticleModuleBase.TabModuleId.ToString())))
                                         End If
                                         If (Request("naauth-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                                            params.Add("naauth-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("naauth-" & ArticleModuleBase.TabModuleId.ToString()))
+                                            params.Add("naauth-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("naauth-" & ArticleModuleBase.TabModuleId.ToString())))
                                         End If
                                         If (Request("nacat-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                                            params.Add("nacat-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("nacat-" & ArticleModuleBase.TabModuleId.ToString()))
+                                            params.Add("nacat-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("nacat-" & ArticleModuleBase.TabModuleId.ToString())))
                                         End If
 
                                         params.Add("natime-" & ArticleModuleBase.TabModuleId.ToString() & "=" & timeItem)
@@ -1403,7 +1403,7 @@ Namespace Ventrian.NewsArticles.Controls
             Next
 
             If (Request("nasort-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                params.Add("nasort-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("nasort-" & ArticleModuleBase.TabModuleId.ToString()))
+                params.Add("nasort-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("nasort-" & ArticleModuleBase.TabModuleId.ToString())))
             End If
 
             Dim drpAuthor As DropDownList = CType(sender, DropDownList)
@@ -1412,24 +1412,24 @@ Namespace Ventrian.NewsArticles.Controls
                 If (drpAuthor.SelectedValue <> "-1") Then
                     params.Add("naauth-" & ArticleModuleBase.TabModuleId.ToString() & "=" & drpAuthor.SelectedValue)
                     If (Request("nacat-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                        params.Add("nacat-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("nacat-" & ArticleModuleBase.TabModuleId.ToString()))
+                        params.Add("nacat-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("nacat-" & ArticleModuleBase.TabModuleId.ToString())))
                     End If
                     If (Request("nacust-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                        params.Add("nacust-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("nacust-" & ArticleModuleBase.TabModuleId.ToString()))
+                        params.Add("nacust-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("nacust-" & ArticleModuleBase.TabModuleId.ToString())))
                     End If
                     If (Request("natime-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                        params.Add("natime-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("natime-" & ArticleModuleBase.TabModuleId.ToString()))
+                        params.Add("natime-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("natime-" & ArticleModuleBase.TabModuleId.ToString())))
                     End If
                     Response.Redirect(NavigateURL(ArticleModuleBase.TabId, "", params.ToArray()), True)
                 Else
                     If (Request("nacat-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                        params.Add("nacat-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("nacat-" & ArticleModuleBase.TabModuleId.ToString()))
+                        params.Add("nacat-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("nacat-" & ArticleModuleBase.TabModuleId.ToString())))
                     End If
                     If (Request("nacust-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                        params.Add("nacust-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("nacust-" & ArticleModuleBase.TabModuleId.ToString()))
+                        params.Add("nacust-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("nacust-" & ArticleModuleBase.TabModuleId.ToString())))
                     End If
                     If (Request("natime-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                        params.Add("natime-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("natime-" & ArticleModuleBase.TabModuleId.ToString()))
+                        params.Add("natime-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("natime-" & ArticleModuleBase.TabModuleId.ToString())))
                     End If
                     Response.Redirect(NavigateURL(ArticleModuleBase.TabId, "", params.ToArray()), True)
                 End If
@@ -1447,7 +1447,7 @@ Namespace Ventrian.NewsArticles.Controls
             Next
 
             If (Request("nasort-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                params.Add("nasort-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("nasort-" & ArticleModuleBase.TabModuleId.ToString()))
+                params.Add("nasort-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("nasort-" & ArticleModuleBase.TabModuleId.ToString())))
             End If
 
             Dim drpCategory As DropDownList = CType(sender, DropDownList)
@@ -1455,25 +1455,25 @@ Namespace Ventrian.NewsArticles.Controls
             If (drpCategory IsNot Nothing) Then
                 If (drpCategory.SelectedValue <> "-1") Then
                     If (Request("naauth-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                        params.Add("naauth-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("naauth-" & ArticleModuleBase.TabModuleId.ToString()))
+                        params.Add("naauth-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("naauth-" & ArticleModuleBase.TabModuleId.ToString())))
                     End If
                     params.Add("nacat-" & ArticleModuleBase.TabModuleId.ToString() & "=" & drpCategory.SelectedValue)
                     If (Request("nacust-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                        params.Add("nacust-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("nacust-" & ArticleModuleBase.TabModuleId.ToString()))
+                        params.Add("nacust-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("nacust-" & ArticleModuleBase.TabModuleId.ToString())))
                     End If
                     If (Request("natime-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                        params.Add("natime-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("natime-" & ArticleModuleBase.TabModuleId.ToString()))
+                        params.Add("natime-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("natime-" & ArticleModuleBase.TabModuleId.ToString())))
                     End If
                     Response.Redirect(NavigateURL(ArticleModuleBase.TabId, "", params.ToArray()), True)
                 Else
                     If (Request("naauth-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                        params.Add("naauth-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("naauth-" & ArticleModuleBase.TabModuleId.ToString()))
+                        params.Add("naauth-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("naauth-" & ArticleModuleBase.TabModuleId.ToString())))
                     End If
                     If (Request("nacust-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                        params.Add("nacust-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("nacust-" & ArticleModuleBase.TabModuleId.ToString()))
+                        params.Add("nacust-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("nacust-" & ArticleModuleBase.TabModuleId.ToString())))
                     End If
                     If (Request("natime-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                        params.Add("natime-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("natime-" & ArticleModuleBase.TabModuleId.ToString()))
+                        params.Add("natime-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("natime-" & ArticleModuleBase.TabModuleId.ToString())))
                     End If
                     Response.Redirect(NavigateURL(ArticleModuleBase.TabId, "", params.ToArray()), True)
                 End If
@@ -1491,7 +1491,7 @@ Namespace Ventrian.NewsArticles.Controls
             Next
 
             If (Request("nasort-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                params.Add("nasort-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("nasort-" & ArticleModuleBase.TabModuleId.ToString()))
+                params.Add("nasort-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("nasort-" & ArticleModuleBase.TabModuleId.ToString())))
             End If
 
             Dim drpCustom As DropDownList = CType(sender, DropDownList)
@@ -1500,24 +1500,24 @@ Namespace Ventrian.NewsArticles.Controls
                 If (drpCustom.SelectedValue <> "-1") Then
                     params.Add("nacust-" & ArticleModuleBase.TabModuleId.ToString() & "=" & drpCustom.Attributes("CustomFieldID") & "-" & drpCustom.SelectedValue)
                     If (Request("naauth-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                        params.Add("naauth-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("naauth-" & ArticleModuleBase.TabModuleId.ToString()))
+                        params.Add("naauth-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("naauth-" & ArticleModuleBase.TabModuleId.ToString())))
                     End If
                     If (Request("nacat-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                        params.Add("nacat-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("nacat-" & ArticleModuleBase.TabModuleId.ToString()))
+                        params.Add("nacat-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("nacat-" & ArticleModuleBase.TabModuleId.ToString())))
                     End If
                     If (Request("natime-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                        params.Add("natime-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("natime-" & ArticleModuleBase.TabModuleId.ToString()))
+                        params.Add("natime-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("natime-" & ArticleModuleBase.TabModuleId.ToString())))
                     End If
                     Response.Redirect(NavigateURL(ArticleModuleBase.TabId, "", params.ToArray()), True)
                 Else
                     If (Request("naauth-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                        params.Add("naauth-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("naauth-" & ArticleModuleBase.TabModuleId.ToString()))
+                        params.Add("naauth-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("naauth-" & ArticleModuleBase.TabModuleId.ToString())))
                     End If
                     If (Request("nacat-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                        params.Add("nacat-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("nacat-" & ArticleModuleBase.TabModuleId.ToString()))
+                        params.Add("nacat-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("nacat-" & ArticleModuleBase.TabModuleId.ToString())))
                     End If
                     If (Request("natime-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                        params.Add("natime-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("natime-" & ArticleModuleBase.TabModuleId.ToString()))
+                        params.Add("natime-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("natime-" & ArticleModuleBase.TabModuleId.ToString())))
                     End If
                     Response.Redirect(NavigateURL(ArticleModuleBase.TabId, "", params.ToArray()), True)
                 End If
@@ -1539,16 +1539,16 @@ Namespace Ventrian.NewsArticles.Controls
             If (drpSort IsNot Nothing) Then
                 params.Add("nasort-" & ArticleModuleBase.TabModuleId.ToString() & "=" & drpSort.SelectedValue)
                 If (Request("naauth-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                    params.Add("naauth-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("naauth-" & ArticleModuleBase.TabModuleId.ToString()))
+                    params.Add("naauth-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("naauth-" & ArticleModuleBase.TabModuleId.ToString())))
                 End If
                 If (Request("nacat-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                    params.Add("nacat-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("nacat-" & ArticleModuleBase.TabModuleId.ToString()))
+                    params.Add("nacat-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("nacat-" & ArticleModuleBase.TabModuleId.ToString())))
                 End If
                 If (Request("nacust-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                    params.Add("nacust-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("nacust-" & ArticleModuleBase.TabModuleId.ToString()))
+                    params.Add("nacust-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("nacust-" & ArticleModuleBase.TabModuleId.ToString())))
                 End If
                 If (Request("natime-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                    params.Add("natime-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("natime-" & ArticleModuleBase.TabModuleId.ToString()))
+                    params.Add("natime-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("natime-" & ArticleModuleBase.TabModuleId.ToString())))
                 End If
                 Response.Redirect(NavigateURL(ArticleModuleBase.TabId, "", params.ToArray()), True)
             End If
@@ -1565,16 +1565,16 @@ Namespace Ventrian.NewsArticles.Controls
             Next
 
             If (Request("nasort-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                params.Add("nasort-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("nasort-" & ArticleModuleBase.TabModuleId.ToString()))
+                params.Add("nasort-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("nasort-" & ArticleModuleBase.TabModuleId.ToString())))
             End If
             If (Request("naauth-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                params.Add("naauth-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("naauth-" & ArticleModuleBase.TabModuleId.ToString()))
+                params.Add("naauth-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("naauth-" & ArticleModuleBase.TabModuleId.ToString())))
             End If
             If (Request("nacat-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                params.Add("nacat-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("nacat-" & ArticleModuleBase.TabModuleId.ToString()))
+                params.Add("nacat-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("nacat-" & ArticleModuleBase.TabModuleId.ToString())))
             End If
             If (Request("nacust-" & ArticleModuleBase.TabModuleId.ToString()) <> "") Then
-                params.Add("nacust-" & ArticleModuleBase.TabModuleId.ToString() & "=" & Request("nacust-" & ArticleModuleBase.TabModuleId.ToString()))
+                params.Add("nacust-" & ArticleModuleBase.TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("nacust-" & ArticleModuleBase.TabModuleId.ToString())))
             End If
 
             Dim drpTime As DropDownList = CType(sender, DropDownList)
