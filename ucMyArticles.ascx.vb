@@ -151,13 +151,13 @@ Namespace Ventrian.NewsArticles
 
             If (Request("ctl") <> "") Then
                 If (Request("ctl").ToLower() = "myarticles") Then
-                    params += "ctl=" & Request("ctl") & "&mid=" & ModuleId.ToString()
+                    params += "ctl=" & HttpUtility.UrlEncode(Request("ctl")) & "&mid=" & ModuleId.ToString()
                 End If
             End If
 
             If (Request("articleType") <> "") Then
                 If (Request("articleType").ToString().ToLower() = "myarticles") Then
-                    params += "articleType=" & Request("articleType")
+                    params += "articleType=" & HttpUtility.UrlEncode(Request("articleType"))
                 End If
             End If
 
@@ -166,7 +166,7 @@ Namespace Ventrian.NewsArticles
             End If
 
             If (Request("ShowAll") <> "") Then
-                params += "&ShowAll=" & Request("ShowAll")
+                params += "&ShowAll=" & HttpUtility.UrlEncode(Request("ShowAll"))
             End If
 
             Return params

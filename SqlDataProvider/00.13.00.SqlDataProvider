@@ -1,0 +1,65 @@
+﻿-- Add SortOrder column to DnnForge_NewsArticles_ArticleTag
+IF (SELECT TOP 1 c.column_id 
+	FROM sys.tables t 
+	JOIN sys.all_columns c ON t.object_id = c.object_id
+	WHERE t.name = 'DnnForge_NewsArticles_ArticleTag' AND c.name = 'DisplayOrder') IS NULL
+BEGIN
+
+	ALTER TABLE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ArticleTag
+	ADD DisplayOrder INT
+
+END
+GO
+
+
+-- Backfill existing article tags
+UPDATE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ArticleTag
+SET DisplayOrder = 0
+WHERE DisplayOrder IS NULL
+GO
+
+-- Add DisplayOrder param to DnnForge_NewsArticles_ArticleTagAdd store procedure
+ALTER PROCEDURE {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ArticleTagAdd
+	@ArticleID int,
+	@TagID int,
+	@DisplayOrder int
+AS
+IF( (SELECT COUNT(*) FROM {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ArticleTag WHERE ArticleID = @ArticleID and TagID = @TagID) = 0 )
+BEGIN
+	INSERT INTO 
+		{databaseOwner}{objectQualifier}DnnForge_NewsArticles_ArticleTag(ArticleID, TagID, DisplayOrder)
+	VALUES(@ArticleID, @TagID, @DisplayOrder) 
+
+	UPDATE
+		{databaseOwner}{objectQualifier}DnnForge_NewsArticles_Tag
+	SET
+		Usages = (select count(*) from {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ArticleTag pt where pt.TagID = @TagID) 
+	WHERE
+		TagID = @TagID
+END
+GO
+
+-- Alter Ventrian_NewsArticles_SplitTags function to order article tags by DisplayOrder field
+ALTER FUNCTION {databaseOwner}{objectQualifier}Ventrian_NewsArticles_SplitTags
+(@ArticleID int)
+RETURNS nvarchar(2000)
+AS
+    BEGIN
+ 
+    DECLARE @p_str nvarchar(2000)
+    SET @p_str = ''
+
+    SELECT @p_str = @p_str + ',' + CAST(t.[Name] AS NVARCHAR(50))
+      FROM {databaseOwner}{objectQualifier}DnnForge_NewsArticles_Tag t, {databaseOwner}{objectQualifier}DnnForge_NewsArticles_ArticleTag at
+     WHERE t.TagID = at.TagID and at.ArticleID = @ArticleID
+	 ORDER BY at.DisplayOrder
+     
+    IF( LEN(@p_str) > 0 ) 
+	BEGIN
+		SELECT @p_str = SUBSTRING(@p_str, 2, (LEN(@p_str)-1)) 
+	END
+
+    RETURN LTRIM(@p_str)
+
+END
+GO

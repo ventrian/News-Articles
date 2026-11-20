@@ -105,7 +105,7 @@ Namespace Ventrian.NewsArticles.Base
             If (ArticleSettings.AuthorUserIDFilter) Then
                 If (ArticleSettings.AuthorUserIDParam <> "") Then
                     If (HttpContext.Current.Request(ArticleSettings.AuthorUserIDParam) <> "") Then
-                        parameters.Add(ArticleSettings.AuthorUserIDParam & "=" & HttpContext.Current.Request(ArticleSettings.AuthorUserIDParam))
+                        parameters.Add(ArticleSettings.AuthorUserIDParam & "=" & HttpUtility.UrlEncode(HttpContext.Current.Request(ArticleSettings.AuthorUserIDParam)))
                     End If
                 End If
             End If
@@ -113,7 +113,7 @@ Namespace Ventrian.NewsArticles.Base
             If (ArticleSettings.AuthorUsernameFilter) Then
                 If (ArticleSettings.AuthorUsernameParam <> "") Then
                     If (HttpContext.Current.Request(ArticleSettings.AuthorUsernameParam) <> "") Then
-                        parameters.Add(ArticleSettings.AuthorUsernameParam & "=" & HttpContext.Current.Request(ArticleSettings.AuthorUsernameParam))
+                        parameters.Add(ArticleSettings.AuthorUsernameParam & "=" & HttpUtility.UrlEncode(HttpContext.Current.Request(ArticleSettings.AuthorUsernameParam)))
                     End If
                 End If
             End If

@@ -71,7 +71,7 @@ Namespace Ventrian.NewsArticles
 					If (moduleContext.ArticleSettings.AuthorUserIDFilter) Then
 						If (moduleContext.ArticleSettings.AuthorUserIDParam <> "") Then
 							If (HttpContext.Current.Request(moduleContext.ArticleSettings.AuthorUserIDParam) <> "") Then
-								parameters.Add(moduleContext.ArticleSettings.AuthorUserIDParam & "=" & HttpContext.Current.Request(moduleContext.ArticleSettings.AuthorUserIDParam))
+								parameters.Add(moduleContext.ArticleSettings.AuthorUserIDParam & "=" & HttpUtility.UrlEncode(HttpContext.Current.Request(moduleContext.ArticleSettings.AuthorUserIDParam)))
 							End If
 						End If
 					End If
@@ -79,7 +79,7 @@ Namespace Ventrian.NewsArticles
 					If (moduleContext.ArticleSettings.AuthorUsernameFilter) Then
 						If (moduleContext.ArticleSettings.AuthorUsernameParam <> "") Then
 							If (HttpContext.Current.Request(moduleContext.ArticleSettings.AuthorUsernameParam) <> "") Then
-								parameters.Add(moduleContext.ArticleSettings.AuthorUsernameParam & "=" & HttpContext.Current.Request(moduleContext.ArticleSettings.AuthorUsernameParam))
+								parameters.Add(moduleContext.ArticleSettings.AuthorUsernameParam & "=" & HttpUtility.UrlEncode(HttpContext.Current.Request(moduleContext.ArticleSettings.AuthorUsernameParam)))
 							End If
 						End If
 					End If
@@ -311,7 +311,7 @@ Namespace Ventrian.NewsArticles
 					If (moduleContext.ArticleSettings.AuthorUserIDFilter) Then
 						If (moduleContext.ArticleSettings.AuthorUserIDParam <> "") Then
 							If (HttpContext.Current.Request(moduleContext.ArticleSettings.AuthorUserIDParam) <> "") Then
-								authorIDParam = "&amp;AuthorID=" & HttpContext.Current.Request(moduleContext.ArticleSettings.AuthorUserIDParam)
+								authorIDParam = "&amp;AuthorID=" & HttpUtility.UrlEncode(HttpContext.Current.Request(moduleContext.ArticleSettings.AuthorUserIDParam))
 							End If
 						End If
 					End If

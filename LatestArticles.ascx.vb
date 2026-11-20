@@ -57,10 +57,10 @@ Namespace Ventrian.NewsArticles
             Get
                 If (_articleSettings Is Nothing) Then
 
-                     Dim objModuleController As New ModuleController
+                    Dim objModuleController As New ModuleController
                     Dim objModule As ModuleInfo = objModuleController.GetModule(_articleModuleID, _articleTabID)
 
-                   _settings = objModule.ModuleSettings
+                    _settings = objModule.ModuleSettings
 
                     If Not (objModule Is Nothing) Then
                         Dim objSettings As Hashtable = objModule.TabModuleSettings
@@ -221,7 +221,8 @@ Namespace Ventrian.NewsArticles
                     Dim categories As New List(Of Integer)
                     categories.Add(Convert.ToInt32(Request("CategoryID")))
                     cats = categories.ToArray()
-                    _rssLink = _rssLink & "&CategoryID=" & Request("CategoryID")
+                    ' TODO XSS
+                    _rssLink = _rssLink & "&CategoryID=" & HttpUtility.UrlEncode(Request("CategoryID"))
                 Else
                     showRelated = False
                 End If
@@ -516,7 +517,7 @@ Namespace Ventrian.NewsArticles
                     Dim param As String = Settings(ArticleConstants.LATEST_ARTICLES_QUERY_STRING_PARAM).ToString()
                     If (param <> "") Then
                         If (Request.QueryString(param) <> "" AndAlso IsNumeric(Request.QueryString(param))) Then
-                            userIDFilter = param & "=" & Request.QueryString(param)
+                            userIDFilter = param & "=" & HttpUtility.UrlEncode(Request.QueryString(param))
                             authorID = Convert.ToInt32(Request(param))
                         End If
                     End If
@@ -530,7 +531,7 @@ Namespace Ventrian.NewsArticles
                     Dim param As String = Settings(ArticleConstants.LATEST_ARTICLES_USERNAME_PARAM).ToString()
                     If (param <> "") Then
                         If (Request.QueryString(param) <> "") Then
-                            usernameFilter = param & "=" & Request.QueryString(param)
+                            usernameFilter = param & "=" & HttpUtility.UrlEncode(Request.QueryString(param))
                             Dim objUser As DotNetNuke.Entities.Users.UserInfo = DotNetNuke.Entities.Users.UserController.GetUserByName(Me.PortalId, Request.QueryString(param))
                             If (objUser IsNot Nothing) Then
                                 authorID = objUser.UserID
@@ -740,19 +741,19 @@ Namespace Ventrian.NewsArticles
                     params.Add(usernameFilter)
                 End If
                 If (Request("lasort-" & TabModuleId.ToString()) <> "") Then
-                    params.Add("lasort-" & TabModuleId.ToString() & "=" & Request("lasort-" & TabModuleId.ToString()))
+                    params.Add("lasort-" & TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("lasort-" & TabModuleId.ToString())))
                 End If
                 If (Request("laauth-" & TabModuleId.ToString()) <> "") Then
-                    params.Add("laauth-" & TabModuleId.ToString() & "=" & Request("laauth-" & TabModuleId.ToString()))
+                    params.Add("laauth-" & TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("laauth-" & TabModuleId.ToString())))
                 End If
                 If (Request("lacat-" & TabModuleId.ToString()) <> "") Then
-                    params.Add("lacat-" & TabModuleId.ToString() & "=" & Request("lacat-" & TabModuleId.ToString()))
+                    params.Add("lacat-" & TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("lacat-" & TabModuleId.ToString())))
                 End If
                 If (Request("lacust-" & TabModuleId.ToString()) <> "") Then
-                    params.Add("lacust-" & TabModuleId.ToString() & "=" & Request("lacust-" & TabModuleId.ToString()))
+                    params.Add("lacust-" & TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("lacust-" & TabModuleId.ToString())))
                 End If
                 If (Request("latime-" & TabModuleId.ToString()) <> "") Then
-                    params.Add("latime-" & TabModuleId.ToString() & "=" & Request("latime-" & TabModuleId.ToString()))
+                    params.Add("latime-" & TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("latime-" & TabModuleId.ToString())))
                 End If
                 For Each item As String In params
                     If (ctlPagingControl.QuerystringParams <> "") Then
@@ -1018,16 +1019,16 @@ Namespace Ventrian.NewsArticles
                                     objLink.ID = Globals.CreateValidID(moduleKey & "-" & iPtr.ToString())
                                     params.Add("lasort-" & TabModuleId.ToString() & "=" & sortValue)
                                     If (Request("laauth-" & TabModuleId.ToString()) <> "") Then
-                                        params.Add("laauth-" & TabModuleId.ToString() & "=" & Request("laauth-" & TabModuleId.ToString()))
+                                        params.Add("laauth-" & TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("laauth-" & TabModuleId.ToString())))
                                     End If
                                     If (Request("lacat-" & TabModuleId.ToString()) <> "") Then
-                                        params.Add("lacat-" & TabModuleId.ToString() & "=" & Request("lacat-" & TabModuleId.ToString()))
+                                        params.Add("lacat-" & TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("lacat-" & TabModuleId.ToString())))
                                     End If
                                     If (Request("lacust-" & TabModuleId.ToString()) <> "") Then
-                                        params.Add("lacust-" & TabModuleId.ToString() & "=" & Request("lacust-" & TabModuleId.ToString()))
+                                        params.Add("lacust-" & TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("lacust-" & TabModuleId.ToString())))
                                     End If
                                     If (Request("latime-" & TabModuleId.ToString()) <> "") Then
-                                        params.Add("latime-" & TabModuleId.ToString() & "=" & Request("latime-" & TabModuleId.ToString()))
+                                        params.Add("latime-" & TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("latime-" & TabModuleId.ToString())))
                                     End If
                                     objLink.NavigateUrl = NavigateURL(Me.TabId, "", params.ToArray())
                                     objLink.Text = Localization.GetString(sortItem & ".Text", Me.LocalResourceFile)
@@ -1062,13 +1063,13 @@ Namespace Ventrian.NewsArticles
                                     If (drpTime.Items.FindByValue(timeItem) IsNot Nothing) Then
                                         Dim params As New List(Of String)
                                         If (Request("lasort-" & TabModuleId.ToString()) <> "") Then
-                                            params.Add("lasort-" & TabModuleId.ToString() & "=" & Request("lasort-" & TabModuleId.ToString()))
+                                            params.Add("lasort-" & TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("lasort-" & TabModuleId.ToString())))
                                         End If
                                         If (Request("laauth-" & TabModuleId.ToString()) <> "") Then
-                                            params.Add("laauth-" & TabModuleId.ToString() & "=" & Request("laauth-" & TabModuleId.ToString()))
+                                            params.Add("laauth-" & TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("laauth-" & TabModuleId.ToString())))
                                         End If
                                         If (Request("lacat-" & TabModuleId.ToString()) <> "") Then
-                                            params.Add("lacat-" & TabModuleId.ToString() & "=" & Request("lacat-" & TabModuleId.ToString()))
+                                            params.Add("lacat-" & TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("lacat-" & TabModuleId.ToString())))
                                         End If
 
                                         params.Add("latime-" & TabModuleId.ToString() & "=" & timeItem)
@@ -1224,13 +1225,13 @@ Namespace Ventrian.NewsArticles
             If (drpSort IsNot Nothing) Then
                 params.Add("lasort-" & TabModuleId.ToString() & "=" & drpSort.SelectedValue)
                 If (Request("laauth-" & TabModuleId.ToString()) <> "") Then
-                    params.Add("laauth-" & TabModuleId.ToString() & "=" & Request("laauth-" & TabModuleId.ToString()))
+                    params.Add("laauth-" & TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("laauth-" & TabModuleId.ToString())))
                 End If
                 If (Request("lacat-" & TabModuleId.ToString()) <> "") Then
-                    params.Add("lacat-" & TabModuleId.ToString() & "=" & Request("lacat-" & TabModuleId.ToString()))
+                    params.Add("lacat-" & TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("lacat-" & TabModuleId.ToString())))
                 End If
                 If (Request("latime-" & TabModuleId.ToString()) <> "") Then
-                    params.Add("latime-" & TabModuleId.ToString() & "=" & Request("latime-" & TabModuleId.ToString()))
+                    params.Add("latime-" & TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("latime-" & TabModuleId.ToString())))
                 End If
                 Response.Redirect(NavigateURL(Me.TabId, "", params.ToArray()), True)
             End If
@@ -1241,7 +1242,7 @@ Namespace Ventrian.NewsArticles
 
             Dim params As New List(Of String)
             If (Request("lasort-" & TabModuleId.ToString()) <> "") Then
-                params.Add("lasort-" & TabModuleId.ToString() & "=" & Request("lasort-" & TabModuleId.ToString()))
+                params.Add("lasort-" & TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("lasort-" & TabModuleId.ToString())))
             End If
 
             Dim drpAuthor As DropDownList = CType(sender, DropDownList)
@@ -1250,24 +1251,24 @@ Namespace Ventrian.NewsArticles
                 If (drpAuthor.SelectedValue <> "-1") Then
                     params.Add("laauth-" & TabModuleId.ToString() & "=" & drpAuthor.SelectedValue)
                     If (Request("lacat-" & TabModuleId.ToString()) <> "") Then
-                        params.Add("lacat-" & TabModuleId.ToString() & "=" & Request("lacat-" & TabModuleId.ToString()))
+                        params.Add("lacat-" & TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("lacat-" & TabModuleId.ToString())))
                     End If
                     If (Request("lacust-" & TabModuleId.ToString()) <> "") Then
-                        params.Add("lacust-" & TabModuleId.ToString() & "=" & Request("lacust-" & TabModuleId.ToString()))
+                        params.Add("lacust-" & TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("lacust-" & TabModuleId.ToString())))
                     End If
                     If (Request("latime-" & TabModuleId.ToString()) <> "") Then
-                        params.Add("latime-" & TabModuleId.ToString() & "=" & Request("latime-" & TabModuleId.ToString()))
+                        params.Add("latime-" & TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("latime-" & TabModuleId.ToString())))
                     End If
                     Response.Redirect(NavigateURL(Me.TabId, "", params.ToArray()), True)
                 Else
                     If (Request("lacat-" & TabModuleId.ToString()) <> "") Then
-                        params.Add("lacat-" & TabModuleId.ToString() & "=" & Request("lacat-" & TabModuleId.ToString()))
+                        params.Add("lacat-" & TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("lacat-" & TabModuleId.ToString())))
                     End If
                     If (Request("lacust-" & TabModuleId.ToString()) <> "") Then
-                        params.Add("lacust-" & TabModuleId.ToString() & "=" & Request("lacust-" & TabModuleId.ToString()))
+                        params.Add("lacust-" & TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("lacust-" & TabModuleId.ToString())))
                     End If
                     If (Request("latime-" & TabModuleId.ToString()) <> "") Then
-                        params.Add("latime-" & TabModuleId.ToString() & "=" & Request("latime-" & TabModuleId.ToString()))
+                        params.Add("latime-" & TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("latime-" & TabModuleId.ToString())))
                     End If
                     Response.Redirect(NavigateURL(Me.TabId, "", params.ToArray()), True)
                 End If
@@ -1279,7 +1280,7 @@ Namespace Ventrian.NewsArticles
 
             Dim params As New List(Of String)
             If (Request("lasort-" & TabModuleId.ToString()) <> "") Then
-                params.Add("lasort-" & TabModuleId.ToString() & "=" & Request("lasort-" & TabModuleId.ToString()))
+                params.Add("lasort-" & TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("lasort-" & TabModuleId.ToString())))
             End If
 
             Dim drpCategory As DropDownList = CType(sender, DropDownList)
@@ -1287,25 +1288,25 @@ Namespace Ventrian.NewsArticles
             If (drpCategory IsNot Nothing) Then
                 If (drpCategory.SelectedValue <> "-1") Then
                     If (Request("laauth-" & TabModuleId.ToString()) <> "") Then
-                        params.Add("laauth-" & TabModuleId.ToString() & "=" & Request("laauth-" & TabModuleId.ToString()))
+                        params.Add("laauth-" & TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("laauth-" & TabModuleId.ToString())))
                     End If
                     params.Add("lacat-" & TabModuleId.ToString() & "=" & drpCategory.SelectedValue)
                     If (Request("lacust-" & TabModuleId.ToString()) <> "") Then
-                        params.Add("lacust-" & TabModuleId.ToString() & "=" & Request("lacust-" & TabModuleId.ToString()))
+                        params.Add("lacust-" & TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("lacust-" & TabModuleId.ToString())))
                     End If
                     If (Request("latime-" & TabModuleId.ToString()) <> "") Then
-                        params.Add("latime-" & TabModuleId.ToString() & "=" & Request("latime-" & TabModuleId.ToString()))
+                        params.Add("latime-" & TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("latime-" & TabModuleId.ToString())))
                     End If
                     Response.Redirect(NavigateURL(Me.TabId, "", params.ToArray()), True)
                 Else
                     If (Request("laauth-" & TabModuleId.ToString()) <> "") Then
-                        params.Add("laauth-" & TabModuleId.ToString() & "=" & Request("laauth-" & TabModuleId.ToString()))
+                        params.Add("laauth-" & TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("laauth-" & TabModuleId.ToString())))
                     End If
                     If (Request("lacust-" & TabModuleId.ToString()) <> "") Then
-                        params.Add("lacust-" & TabModuleId.ToString() & "=" & Request("lacust-" & TabModuleId.ToString()))
+                        params.Add("lacust-" & TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("lacust-" & TabModuleId.ToString())))
                     End If
                     If (Request("latime-" & TabModuleId.ToString()) <> "") Then
-                        params.Add("latime-" & TabModuleId.ToString() & "=" & Request("latime-" & TabModuleId.ToString()))
+                        params.Add("latime-" & TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("latime-" & TabModuleId.ToString())))
                     End If
                     Response.Redirect(NavigateURL(Me.TabId, "", params.ToArray()), True)
                 End If
@@ -1317,7 +1318,7 @@ Namespace Ventrian.NewsArticles
 
             Dim params As New List(Of String)
             If (Request("lasort-" & TabModuleId.ToString()) <> "") Then
-                params.Add("lasort-" & TabModuleId.ToString() & "=" & Request("lasort-" & TabModuleId.ToString()))
+                params.Add("lasort-" & TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("lasort-" & TabModuleId.ToString())))
             End If
 
             Dim drpCustom As DropDownList = CType(sender, DropDownList)
@@ -1326,24 +1327,24 @@ Namespace Ventrian.NewsArticles
                 If (drpCustom.SelectedValue <> "-1") Then
                     params.Add("lacust-" & TabModuleId.ToString() & "=" & drpCustom.Attributes("CustomFieldID") & "-" & drpCustom.SelectedValue)
                     If (Request("laauth-" & TabModuleId.ToString()) <> "") Then
-                        params.Add("laauth-" & TabModuleId.ToString() & "=" & Request("laauth-" & TabModuleId.ToString()))
+                        params.Add("laauth-" & TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("laauth-" & TabModuleId.ToString())))
                     End If
                     If (Request("lacat-" & TabModuleId.ToString()) <> "") Then
-                        params.Add("lacat-" & TabModuleId.ToString() & "=" & Request("lacat-" & TabModuleId.ToString()))
+                        params.Add("lacat-" & TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("lacat-" & TabModuleId.ToString())))
                     End If
                     If (Request("latime-" & TabModuleId.ToString()) <> "") Then
-                        params.Add("latime-" & TabModuleId.ToString() & "=" & Request("latime-" & TabModuleId.ToString()))
+                        params.Add("latime-" & TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("latime-" & TabModuleId.ToString())))
                     End If
                     Response.Redirect(NavigateURL(Me.TabId, "", params.ToArray()), True)
                 Else
                     If (Request("laauth-" & TabModuleId.ToString()) <> "") Then
-                        params.Add("laauth-" & TabModuleId.ToString() & "=" & Request("laauth-" & TabModuleId.ToString()))
+                        params.Add("laauth-" & TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("laauth-" & TabModuleId.ToString())))
                     End If
                     If (Request("lacat-" & TabModuleId.ToString()) <> "") Then
-                        params.Add("lacat-" & TabModuleId.ToString() & "=" & Request("lacat-" & TabModuleId.ToString()))
+                        params.Add("lacat-" & TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("lacat-" & TabModuleId.ToString())))
                     End If
                     If (Request("latime-" & TabModuleId.ToString()) <> "") Then
-                        params.Add("latime-" & TabModuleId.ToString() & "=" & Request("latime-" & TabModuleId.ToString()))
+                        params.Add("latime-" & TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("latime-" & TabModuleId.ToString())))
                     End If
                     Response.Redirect(NavigateURL(Me.TabId, "", params.ToArray()), True)
                 End If
@@ -1355,16 +1356,16 @@ Namespace Ventrian.NewsArticles
 
             Dim params As New List(Of String)
             If (Request("lasort-" & TabModuleId.ToString()) <> "") Then
-                params.Add("lasort-" & TabModuleId.ToString() & "=" & Request("lasort-" & TabModuleId.ToString()))
+                params.Add("lasort-" & TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("lasort-" & TabModuleId.ToString())))
             End If
             If (Request("laauth-" & TabModuleId.ToString()) <> "") Then
-                params.Add("laauth-" & TabModuleId.ToString() & "=" & Request("laauth-" & TabModuleId.ToString()))
+                params.Add("laauth-" & TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("laauth-" & TabModuleId.ToString())))
             End If
             If (Request("lacat-" & TabModuleId.ToString()) <> "") Then
-                params.Add("lacat-" & TabModuleId.ToString() & "=" & Request("lacat-" & TabModuleId.ToString()))
+                params.Add("lacat-" & TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("lacat-" & TabModuleId.ToString())))
             End If
             If (Request("lacust-" & TabModuleId.ToString()) <> "") Then
-                params.Add("lacust-" & TabModuleId.ToString() & "=" & Request("lacust-" & TabModuleId.ToString()))
+                params.Add("lacust-" & TabModuleId.ToString() & "=" & HttpUtility.UrlEncode(Request("lacust-" & TabModuleId.ToString())))
             End If
 
             Dim drpTime As DropDownList = CType(sender, DropDownList)
